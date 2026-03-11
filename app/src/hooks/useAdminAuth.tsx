@@ -1,14 +1,15 @@
 import { useState, useEffect, createContext, useContext } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface AdminAuthContextType {
   isAuthenticated: boolean;
-  login: (password: string) => boolean;
+  login: (password: string) => Promise<boolean>;
   logout: () => void;
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType>({
   isAuthenticated: false,
-  login: () => false,
+  login: async () => false,
   logout: () => {},
 });
 
@@ -25,8 +26,20 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const login = (password: string) => {
+  const login = async (password: string) => {
     if (password === ADMIN_PASSWORD) {
+      // Authenticate with Supabase to bypass RLS
+      const { error } = await supabase.auth.signInWithPassword({
+        email: 'web@ibizamotos.com',
+        password: password
+      });
+
+      if (error) {
+        console.error("Supabase Auth Error:", error);
+        alert("Error de base de datos: Debes crear el usuario Administrador en Supabase para tener permisos (ejecuta el script SQL).");
+        return false;
+      }
+
       setIsAuthenticated(true);
       sessionStorage.setItem('ibiza_admin_auth', 'true');
       return true;
@@ -34,9 +47,10 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     return false;
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem('ibiza_admin_auth');
+    await supabase.auth.signOut();
   };
 
   return (

@@ -20,7 +20,7 @@ export default function AdminLogin() {
     // Small delay for UX
     await new Promise((r) => setTimeout(r, 800));
 
-    if (login(password)) {
+    if (await login(password)) {
       navigate('/admin/dashboard');
     } else {
       setError('Contraseña incorrecta');
