@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" fill="none">
+  <!-- Official Honda H emblem: Red rectangle with white H -->
+  <g transform="translate(10, 10)">
+    <!-- Red outer rectangle with slight rounding -->
+    <rect x="0" y="0" width="140" height="158" rx="12" fill="#CC0000"/>
+    <!-- White H letterform -->
+    <!-- Left vertical bar -->
+    <rect x="18" y="22" width="30" height="114" rx="3" fill="white"/>
+    <!-- Right vertical bar -->
+    <rect x="92" y="22" width="30" height="114" rx="3" fill="white"/>
+    <!-- Horizontal crossbar -->
+    <rect x="18" y="65" width="104" height="28" rx="3" fill="white"/>
+  </g>
+  <!-- HONDA wordmark -->
+  <text x="168" y="118" 
+        font-family="'Arial Black', Arial, sans-serif" 
+        font-weight="900" 
+        font-size="74" 
+        fill="#CC0000"
+        letter-spacing="-2">HONDA</text>
+</svg>

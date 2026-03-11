@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" fill="none">
+  <!-- Official Hero MotoCorp logo style -->
+  <!-- Red geometric emblem -->
+  <g transform="translate(10, 10)">
+    <!-- Outer red shield/hexagon -->
+    <polygon points="80,0 155,45 155,135 80,180 5,135 5,45" fill="#E31837"/>
+    <!-- White geometric H inside -->
+    <!-- Left bar -->
+    <rect x="30" y="50" width="28" height="80" rx="3" fill="white"/>
+    <!-- Right bar -->
+    <rect x="102" y="50" width="28" height="80" rx="3" fill="white"/>
+    <!-- Crossbar -->
+    <rect x="30" y="82" width="100" height="26" rx="3" fill="white"/>
+  </g>
+  <!-- HERO wordmark -->
+  <text x="180" y="123" 
+        font-family="'Arial Black', Arial, sans-serif" 
+        font-weight="900" 
+        font-size="76" 
+        fill="#E31837"
+        letter-spacing="2">HERO</text>
+</svg>

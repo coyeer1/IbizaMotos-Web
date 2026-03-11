@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 180" fill="none">
+  <!-- Official AKT logo: orange/red A with dark background circle -->
+  <g transform="translate(10, 5)">
+    <!-- Dark circular background -->
+    <circle cx="85" cy="88" r="85" fill="#111111"/>
+    <!-- Orange AKT letters inside -->
+    <!-- A shape -->
+    <polygon points="85,15 140,158 118,158 85,58 52,158 30,158" fill="#FF4500"/>
+    <!-- Crossbar on A -->
+    <rect x="48" y="112" width="74" height="18" rx="3" fill="#FF4500"/>
+  </g>
+  <!-- AKT wordmark -->
+  <text x="192" y="118" 
+        font-family="'Arial Black', Arial, sans-serif" 
+        font-weight="900" 
+        font-style="italic"
+        font-size="82" 
+        fill="#FF4500"
+        letter-spacing="4">AKT</text>
+</svg>

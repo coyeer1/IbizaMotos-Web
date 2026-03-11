@@ -1,0 +1,133 @@
+[
+  {
+    "id": "6bf743b4-5ec3-4304-a1a0-ed7f0db80ace",
+    "slug": "suzuki-gsxr-150",
+    "brand": "Suzuki",
+    "model": "GSX-R150",
+    "year": 2024,
+    "price": 9499000,
+    "category": "Urban Sport",
+    "description": "La Suzuki GSX-R150 hereda el legado deportivo de la familia GSX-R. Con un diseño agresivo y tecnología de punta, ofrece un rendimiento excepcional en un paquete ligero y manejable.",
+    "specifications": {
+      "power": "18.9 HP @ 10,500 RPM",
+      "colors": [
+        "Azul Metálico",
+        "Negro",
+        "Rojo"
+      ],
+      "engine": "147.3cc, 4 tiempos, DOHC",
+      "torque": "14 Nm @ 9,000 RPM",
+      "weight": "131 kg",
+      "fuelCapacity": "11 litros",
+      "transmission": "6 velocidades"
+    },
+    "images": [
+      "https://www.suzuki.com.co/sites/default/files/2026-01/GSX%20R150%20ABS%20ROJA.png",
+      "https://www.suzuki.com.co/sites/default/files/2026-01/GSX%20R150%20ABS%20NEGRA.png",
+      "https://suzukimotosneocross.co/wp-content/uploads/2021/02/920GSX-R150-8.jpg"
+    ],
+    "images_by_color": {},
+    "video_url": null,
+    "featured": true,
+    "created_at": "2026-03-10T15:35:50.346152+00:00",
+    "updated_at": "2026-03-10T15:35:50.346152+00:00"
+  },
+  {
+    "id": "d5231496-8fa7-4ecf-abff-f21480f6ffba",
+    "slug": "vento-tornado-250",
+    "brand": "Vento",
+    "model": "Tornado 250",
+    "year": 2024,
+    "price": 12999000,
+    "category": "Enduro",
+    "description": "La Vento Tornado 250 es una motocicleta todo terreno que combina potencia, resistencia y versatilidad. Diseñada para enfrentar cualquier camino, desde las calles de la ciudad hasta los senderos más exigentes.",
+    "specifications": {
+      "power": "18.5 HP @ 8,000 RPM",
+      "colors": [
+        "Negro Mate",
+        "Rojo",
+        "Blanco",
+        "Verde Militar"
+      ],
+      "engine": "250cc, 4 tiempos, monocilíndrico",
+      "torque": "18.5 Nm @ 6,500 RPM",
+      "weight": "145 kg",
+      "fuelCapacity": "12 litros",
+      "transmission": "5 velocidades"
+    },
+    "images": [
+      "https://vento.com.co/wp-content/uploads/colombia-vento-crossmax-200-pro-360-1024x608.jpg",
+      "https://vento.com.co/wp-content/uploads/colombia-m-vento-crossmax-200-pro.jpg"
+    ],
+    "images_by_color": {},
+    "video_url": null,
+    "featured": true,
+    "created_at": "2026-03-10T15:35:50.346152+00:00",
+    "updated_at": "2026-03-10T15:35:50.346152+00:00"
+  },
+  {
+    "id": "0ef14441-811f-447f-b272-23ee5afa377e",
+    "slug": "bajaj-boxer-150",
+    "brand": "Bajaj",
+    "model": "Boxer 150",
+    "year": 2024,
+    "price": 5999000,
+    "category": "City",
+    "description": "La Bajaj Boxer 150 es sinónimo de confiabilidad y economía. Diseñada para el trabajo diario, ofrece durabilidad excepcional y bajo consumo de combustible, siendo la compañera ideal para el día a día.",
+    "specifications": {
+      "power": "12 HP @ 8,000 RPM",
+      "colors": [
+        "Negro",
+        "Rojo",
+        "Azul"
+      ],
+      "engine": "144.8cc, 4 tiempos, DTS-i",
+      "torque": "12.5 Nm @ 5,000 RPM",
+      "weight": "135 kg",
+      "fuelCapacity": "13 litros",
+      "transmission": "5 velocidades"
+    },
+    "images": [
+      "https://diverxamotos.com/wp-content/uploads/2024/03/NS-200-UG-Azul-Antartida.jpg",
+      "https://publimotosmagazine.nyc3.digitaloceanspaces.com/%E2%81%A0publimotos_tienda_production/uploads/2024/02/Extra-Bajaj-Pulsar-NS200-2024-Ya-vienen-los-cambios.webp"
+    ],
+    "images_by_color": {},
+    "video_url": null,
+    "featured": true,
+    "created_at": "2026-03-10T15:35:50.346152+00:00",
+    "updated_at": "2026-03-10T15:35:50.346152+00:00"
+  },
+  {
+    "id": "1bb33f3a-eed5-4384-a950-08280bc2aebc",
+    "slug": "akt-nkd-125",
+    "brand": "AKT",
+    "model": "NKD 125",
+    "year": 2024,
+    "price": 5890000,
+    "category": "City",
+    "description": "La AKT NKD 125 es la motocicleta urbana por excelencia. Con un diseño clásico, mecánica confiable y excelente rendimiento de combustible, es la opción número uno para el trabajo y el transporte diario en la ciudad.",
+    "specifications": {
+      "power": "10.3 HP @ 8,000 RPM",
+      "colors": [
+        "Negro",
+        "Rojo",
+        "Blanco",
+        "Gris"
+      ],
+      "engine": "124cc, 4 tiempos, OHV",
+      "torque": "10.4 Nm @ 6,000 RPM",
+      "weight": "98 kg",
+      "fuelCapacity": "10 litros",
+      "transmission": "5 velocidades"
+    },
+    "images": [
+      "https://aktmotos.com/sites/default/files/2021-12/nkd125-negro.png",
+      "https://aktmotos.com/sites/default/files/2021-12/nkd125-blanco.png"
+    ],
+    "images_by_color": {},
+    "video_url": null,
+    "featured": true,
+    "created_at": "2026-03-10T15:52:30.579286+00:00",
+    "updated_at": "2026-03-10T15:52:30.579286+00:00"
+  }
+]

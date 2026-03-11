@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" fill="none">
+  <!-- Official Bajaj logo: Blue shield/triangle with B -->
+  <g transform="translate(10, 5)">
+    <!-- Outer blue shield shape -->
+    <path d="M75,0 L148,40 L148,120 C148,148 110,168 75,175 C40,168 2,148 2,120 L2,40 Z" fill="#003399"/>
+    <!-- Inner lighter blue area -->
+    <path d="M75,12 L138,48 L138,118 C138,140 106,157 75,163 C44,157 12,140 12,118 L12,48 Z" fill="#0044BB"/>
+    <!-- White B letter -->
+    <text x="75" y="120" 
+          font-family="'Arial Black', Arial, sans-serif"
+          font-weight="900"
+          font-size="90"
+          fill="white"
+          text-anchor="middle"
+          dominant-baseline="middle">B</text>
+  </g>
+  <!-- BAJAJ wordmark -->
+  <text x="175" y="118" 
+        font-family="'Arial Black', Arial, sans-serif" 
+        font-weight="900" 
+        font-size="72" 
+        fill="#003399"
+        letter-spacing="-1">BAJAJ</text>
+</svg>

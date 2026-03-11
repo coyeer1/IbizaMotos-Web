@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" fill="none">
+  <!-- Official Suzuki S Logo (simplified authentic shape) -->
+  <!-- The Suzuki S is formed by two curved trapezoids -->
+  <g transform="translate(20, 20)">
+    <!-- Top half of S - points right to left -->
+    <path d="M140,0 L80,0 C60,0 42,12 35,30 L10,90 C5,105 15,118 30,118 L90,118 L75,160 L20,160 C5,160 0,148 5,133 L30,63 C35,48 25,35 10,35 L0,35 L20,0 Z" fill="#CC0000"/>
+    <!-- Bottom half of S - points left to right -->
+    <path d="M0,160 L60,160 C80,160 98,148 105,130 L130,70 C135,55 125,42 110,42 L50,42 L65,0 L120,0 C135,0 140,12 135,27 L110,97 C105,112 115,125 130,125 L140,125 L120,160 Z" fill="#CC0000"/>
+  </g>
+  <!-- SUZUKI wordmark -->
+  <text x="175" y="125" 
+        font-family="'Arial Black', 'Arial Narrow', sans-serif" 
+        font-weight="900" 
+        font-style="italic"
+        font-size="72" 
+        fill="#CC0000"
+        letter-spacing="-2">SUZUKI</text>
+</svg>
