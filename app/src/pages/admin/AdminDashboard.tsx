@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import type { Motorcycle } from '@/types';
 import { brands, categories } from '@/data/motorcycles';
+import { ImageUploader } from '@/components/ImageUploader';
 
 // ─── Available Colors with visual hex values ───
 const AVAILABLE_COLORS: { name: string; hex: string }[] = [
@@ -417,49 +418,25 @@ function MotoFormModal({
             {activeColorTab === '_general' ? (
               <div>
                 <p className="text-white/20 text-[11px] mb-2">
-                  Imágenes principales de la moto (se muestran cuando no hay color específico seleccionado). Una URL por línea.
+                  Imágenes principales de la moto (se muestran cuando no hay color específico seleccionado).
                 </p>
-                <textarea
-                  value={generalImages}
-                  onChange={(e) => setGeneralImages(e.target.value)}
-                  rows={4}
-                  className={inputCls + " resize-none font-mono text-xs"}
-                  placeholder={"https://ejemplo.com/moto-front.jpg\nhttps://ejemplo.com/moto-side.jpg"}
+                <ImageUploader 
+                  urls={generalImages}
+                  onChange={(newUrls) => setGeneralImages(newUrls)}
                 />
-                {generalImages.split('\n').filter(Boolean).length > 0 && (
-                  <div className="flex gap-2 mt-2 overflow-x-auto pb-2">
-                    {generalImages.split('\n').map(u => u.trim()).filter(Boolean).map((url, i) => (
-                      <div key={i} className="w-16 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                        <img src={url} alt="" className="w-full h-full object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             ) : (
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-4 h-4 rounded-full" style={{ backgroundColor: colorHex(activeColorTab) }} />
                   <p className="text-white/40 text-[11px]">
-                    Imágenes de la moto en color <strong className="text-white/70">{activeColorTab}</strong>. Una URL por línea.
+                    Imágenes de la moto en color <strong className="text-white/70">{activeColorTab}</strong>.
                   </p>
                 </div>
-                <textarea
-                  value={imagesByColor[activeColorTab] || ''}
-                  onChange={(e) => setImagesByColor(prev => ({ ...prev, [activeColorTab]: e.target.value }))}
-                  rows={4}
-                  className={inputCls + " resize-none font-mono text-xs"}
-                  placeholder={`https://ejemplo.com/moto-${activeColorTab.toLowerCase()}-1.jpg\nhttps://ejemplo.com/moto-${activeColorTab.toLowerCase()}-2.jpg`}
+                <ImageUploader 
+                  urls={imagesByColor[activeColorTab] || ''}
+                  onChange={(newUrls) => setImagesByColor(prev => ({ ...prev, [activeColorTab]: newUrls }))}
                 />
-                {(imagesByColor[activeColorTab] || '').split('\n').filter(Boolean).length > 0 && (
-                  <div className="flex gap-2 mt-2 overflow-x-auto pb-2">
-                    {(imagesByColor[activeColorTab] || '').split('\n').map(u => u.trim()).filter(Boolean).map((url, i) => (
-                      <div key={i} className="w-16 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                        <img src={url} alt="" className="w-full h-full object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             )}
           </div>
