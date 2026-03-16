@@ -6,9 +6,12 @@ import MotorcyclePage from '@/pages/MotorcyclePage';
 import BrandPage from '@/pages/BrandPage';
 import AdminLogin from '@/pages/admin/AdminLogin';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
+import BlogPage from '@/pages/BlogPage';
+import FinancingPage from '@/pages/FinancingPage';
 import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
+import { ComparatorProvider } from '@/components/MotoComparator';
 
 function AppContent() {
   const location = useLocation();
@@ -25,6 +28,8 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/marca/:brandId" element={<BrandPage />} />
           <Route path="/moto/:id" element={<MotorcyclePage />} />
+          <Route path="/blog/:id" element={<BlogPage />} />
+          <Route path="/financiamiento" element={<FinancingPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
@@ -43,7 +48,9 @@ function AppContent() {
 function App() {
   return (
     <AdminAuthProvider>
-      <AppContent />
+      <ComparatorProvider>
+        <AppContent />
+      </ComparatorProvider>
     </AdminAuthProvider>
   );
 }

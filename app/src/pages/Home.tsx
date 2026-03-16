@@ -8,6 +8,9 @@ import SpareParts from '@/sections/SpareParts';
 import Services from '@/sections/Services';
 import Testimonials from '@/sections/Testimonials';
 import Locations from '@/sections/Locations';
+import PromosBanner from '@/sections/PromosBanner';
+import FinancingCalculator from '@/sections/FinancingCalculator';
+import Blog from '@/sections/Blog';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -22,23 +25,32 @@ export default function Home() {
             {/* Hero Section with 3D animations */}
             <Hero />
 
+            {/* Promotions Banner — oferta del mes con countdown */}
+            <PromosBanner />
+
             {/* Brands scroll */}
             <Brands onBrandClick={(brand) => {
                 navigate(`/marca/${brand.toLowerCase()}`);
             }} />
 
-            {/* Full Catalog */}
+            {/* Full Catalog — incluye botón comparar */}
             <Catalog
                 onViewDetails={handleViewDetails}
                 selectedBrand={selectedBrand}
                 setSelectedBrand={setSelectedBrand}
             />
 
+            {/* Financing Calculator */}
+            <FinancingCalculator />
+
             {/* Spare Parts */}
             <SpareParts />
 
             {/* Services with appointment booking */}
             <Services />
+
+            {/* Blog / Noticias */}
+            <Blog />
 
             {/* Testimonials */}
             <Testimonials />

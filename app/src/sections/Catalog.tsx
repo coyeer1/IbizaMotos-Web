@@ -1,12 +1,29 @@
 import { useState, useMemo } from 'react';
 import type { Motorcycle } from '@/types';
-import { Search, X, SlidersHorizontal, ArrowRight, Gauge, Zap } from 'lucide-react';
+import { Search, X, SlidersHorizontal, ArrowRight, Gauge, Zap, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
+
+// ─── Cuota estimada (20% inicial, 36 meses, 1.8%/mes) ───────────────────────
+function calcCuota(price: number): string {
+  const principal = price * 0.80;
+  const r = 0.018;
+  const n = 36;
+  const monthly = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  return '$' + new Intl.NumberFormat('es-CO').format(Math.round(monthly));
+}
+
+// ─── Stock badge config ───────────────────────────────────────────────────────
+const stockConfig = {
+  available: { label: 'En stock', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', Icon: CheckCircle2 },
+  limited:   { label: 'Últimas unidades', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30', Icon: AlertCircle },
+  order:     { label: 'Bajo pedido', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30', Icon: Clock },
+} as const;
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { brands, categories } from '@/data/motorcycles';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
 import { motion } from 'framer-motion';
+import { CompareButton } from '@/components/MotoComparator';
 
 interface CatalogProps {
   onViewDetails: (motorcycle: Motorcycle) => void;
@@ -69,10 +86,20 @@ const MotoCard = ({
 
           {/* Top info overlay */}
           <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-start z-20">
-            <span className="text-[10px] font-bold text-white bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg tracking-widest">
-              {motorcycle.year}
-            </span>
-            <div className="flex gap-1.5">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-[10px] font-bold text-white bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg tracking-widest">
+                {motorcycle.year}
+              </span>
+              {motorcycle.stock && (() => {
+                const cfg = stockConfig[motorcycle.stock];
+                return (
+                  <span className={`flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg border backdrop-blur-md ${cfg.color}`}>
+                    <cfg.Icon className="w-2.5 h-2.5" />{cfg.label}
+                  </span>
+                );
+              })()}
+            </div>
+            <div className="flex gap-1.5 items-center">
               {cc && (
                 <span className="flex items-center gap-1 text-[10px] font-semibold text-white bg-black/70 backdrop-blur-md px-2.5 py-1.5 rounded-lg">
                   <Gauge className="w-3 h-3 text-ibiza-red" />{cc}cc
@@ -138,6 +165,9 @@ const MotoCard = ({
               <p className="font-display font-black text-[28px] text-white leading-none tracking-tight group-hover:text-ibiza-red transition-colors duration-500">
                 ${new Intl.NumberFormat('es-CO').format(motorcycle.price)}
               </p>
+              <p className="text-[10px] text-ibiza-gold/70 font-semibold mt-1">
+                o {calcCuota(motorcycle.price)}<span className="text-white/25">/mes · 36 cuotas</span>
+              </p>
             </div>
 
             {/* CTA Arrow */}
@@ -146,6 +176,11 @@ const MotoCard = ({
                 <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
               </div>
             </div>
+          </div>
+
+          {/* Compare button — visible row */}
+          <div className="mt-3 pt-3 border-t border-white/[0.04]" onClick={e => e.stopPropagation()}>
+            <CompareButton motorcycle={motorcycle} asRow />
           </div>
         </div>
 

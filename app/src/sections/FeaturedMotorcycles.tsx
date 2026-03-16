@@ -5,6 +5,14 @@ import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
 
+function calcCuota(price: number): string {
+  const principal = price * 0.80;
+  const r = 0.018;
+  const n = 36;
+  const monthly = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  return '$' + new Intl.NumberFormat('es-CO').format(Math.round(monthly));
+}
+
 const getBrandColor = (brand: string): string => {
   const colors: Record<string, string> = {
     'Suzuki': '#003399',
@@ -109,6 +117,9 @@ const PremiumMotoCard = ({
               <span className="text-xs text-gray-500">Precio desde</span>
               <p className="font-display font-bold text-2xl text-ibiza-red">
                 {formatPrice(motorcycle.price)}
+              </p>
+              <p className="text-[10px] text-ibiza-gold/70 font-semibold mt-0.5">
+                o {calcCuota(motorcycle.price)}<span className="text-gray-600">/mes</span>
               </p>
             </div>
 

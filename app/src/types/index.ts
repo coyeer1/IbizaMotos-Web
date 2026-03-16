@@ -19,6 +19,7 @@ export interface Motorcycle {
   imagesByColor?: Record<string, string[]>;
   videoUrl?: string;
   featured: boolean;
+  stock?: 'available' | 'limited' | 'order';
 }
 
 export interface Brand {

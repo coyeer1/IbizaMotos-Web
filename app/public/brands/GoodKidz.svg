@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" fill="none">
+  <!-- G -->
+  <text x="8" y="82" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" stroke="black" stroke-width="3">G</text>
+  <!-- Eye Left (O) -->
+  <circle cx="82" cy="60" r="26" fill="white" stroke="black" stroke-width="4"/>
+  <circle cx="82" cy="60" r="12" fill="black"/>
+  <circle cx="77" cy="55" r="4" fill="white"/>
+  <!-- Eye Right (O) -->
+  <circle cx="138" cy="60" r="26" fill="white" stroke="black" stroke-width="4"/>
+  <circle cx="138" cy="60" r="12" fill="black"/>
+  <circle cx="133" cy="55" r="4" fill="white"/>
+  <!-- D -->
+  <text x="168" y="82" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white" stroke="black" stroke-width="3">D</text>
+  <!-- Smile mouth shape -->
+  <path d="M18 105 Q110 195 202 105 Q195 170 110 185 Q25 170 18 105 Z" fill="black" stroke="black" stroke-width="2"/>
+  <!-- KiDZ colorful text inside smile -->
+  <text x="30" y="162" font-family="Arial Black, sans-serif" font-size="46" font-weight="900">
+    <tspan fill="#2563EB">K</tspan><tspan fill="#EA580C">i</tspan><tspan fill="#16A34A">D</tspan><tspan fill="#EAB308">Z</tspan>
+  </text>
+</svg>

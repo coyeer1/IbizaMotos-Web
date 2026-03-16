@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { getGeneralWhatsApp } from '@/lib/config';
 
 const navLinks = [
-  { name: 'Inicio', href: '#inicio' },
-  { name: 'Motos', href: '#motos' },
-  { name: 'Repuestos', href: '#repuestos' },
-  { name: 'Servicios', href: '#servicios' },
-  { name: 'Contacto', href: '#contacto' },
+  { name: 'Inicio', href: '#inicio', page: false },
+  { name: 'Motos', href: '#motos', page: false },
+  { name: 'Repuestos', href: '#repuestos', page: false },
+  { name: 'Servicios', href: '#servicios', page: false },
+  { name: 'Financiamiento', href: '/financiamiento', page: true },
+  { name: 'Contacto', href: '#contacto', page: false },
 ];
 
 export default function Navbar() {
@@ -80,21 +81,33 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={`/${link.href}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className={`relative font-medium text-sm transition-colors duration-300 group ${isScrolled || location.pathname !== '/' ? 'text-gray-200 hover:text-ibiza-red' : '!text-white/90 hover:!text-white'
-                    }`}
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.page ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`relative font-medium text-sm transition-colors duration-300 group ${isScrolled || location.pathname !== '/' ? 'text-gray-200 hover:text-ibiza-red' : '!text-white/90 hover:!text-white'
+                      } ${location.pathname === link.href ? 'text-ibiza-red' : ''}`}
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={`/${link.href}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.href);
+                    }}
+                    className={`relative font-medium text-sm transition-colors duration-300 group ${isScrolled || location.pathname !== '/' ? 'text-gray-200 hover:text-ibiza-red' : '!text-white/90 hover:!text-white'
+                      }`}
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                  </a>
+                )
+              )}
             </div>
 
             {/* CTA Button */}
@@ -144,20 +157,32 @@ export default function Navbar() {
               <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" className="h-16 object-contain" />
             </div>
             <div className="flex flex-col gap-4">
-              {navLinks.map((link, index) => (
-                <a
-                  key={link.name}
-                  href={`/${link.href}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
-                  className="text-lg font-display font-semibold text-gray-200 hover:text-ibiza-red transition-colors py-2 border-b border-ibiza-gray-200"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link, index) =>
+                link.page ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-lg font-display font-semibold text-gray-200 hover:text-ibiza-red transition-colors py-2 border-b border-ibiza-gray-200"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={`/${link.href}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.href);
+                    }}
+                    className="text-lg font-display font-semibold text-gray-200 hover:text-ibiza-red transition-colors py-2 border-b border-ibiza-gray-200"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
             </div>
             <div className="mt-8">
               <a

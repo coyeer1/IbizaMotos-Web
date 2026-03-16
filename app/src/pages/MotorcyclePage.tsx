@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, Heart, ChevronLeft, ChevronRight, MessageCircle, User, Phone, MapPin } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
-import { getBuyWhatsApp, getQuoteWhatsApp } from '@/lib/config';
+import { getBuyWhatsApp, getWhatsAppUrl } from '@/lib/config';
+import FinancingCalculator from '@/sections/FinancingCalculator';
 import type { Motorcycle } from '@/types';
 
 // Map de colores para renderizar
@@ -59,6 +62,9 @@ export default function MotorcyclePage() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<'specs' | 'features'>('specs');
+    const [showQuoteModal, setShowQuoteModal] = useState(false);
+    const [quoteForm, setQuoteForm] = useState({ name: '', phone: '', city: '' });
+    const [quoteSubmitted, setQuoteSubmitted] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -97,7 +103,14 @@ export default function MotorcyclePage() {
     const originalPrice = motorcycle.price * 1.05;
 
     const whatsappUrl = getBuyWhatsApp(motorcycle.brand, motorcycle.model, selectedColor);
-    const whatsappQuoteUrl = getQuoteWhatsApp(motorcycle.brand, motorcycle.model);
+
+    const handleQuoteSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
+        window.open(getWhatsAppUrl(msg), '_blank');
+        setQuoteSubmitted(true);
+        setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); }, 2500);
+    };
 
     const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
     const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
@@ -229,11 +242,13 @@ export default function MotorcyclePage() {
                                     🛒 Comprar Ahora
                                 </Button>
                             </a>
-                            <a href={whatsappQuoteUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
-                                <Button variant="outline" className="w-full h-14 border-2 border-white/10 text-white hover:bg-white/5 font-display font-bold text-sm uppercase tracking-wider rounded-2xl transition-all">
-                                    💬 Cotizar
-                                </Button>
-                            </a>
+                            <Button
+                                variant="outline"
+                                onClick={() => setShowQuoteModal(true)}
+                                className="flex-1 h-14 border-2 border-white/10 text-white hover:bg-white/5 font-display font-bold text-sm uppercase tracking-wider rounded-2xl transition-all"
+                            >
+                                💬 Cotizar
+                            </Button>
                         </div>
                     </motion.div>
 
@@ -395,6 +410,18 @@ export default function MotorcyclePage() {
                 </div>
             </section>
 
+            {/* ── FINANCING CALCULATOR ── */}
+            <section className="py-12 border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h3 className="font-display font-black text-2xl md:text-3xl text-white mb-6 text-center">
+                        🧮 Calcula tu financiamiento
+                    </h3>
+                    <div className="max-w-sm mx-auto">
+                        <FinancingCalculator initialPrice={motorcycle.price} compact={true} />
+                    </div>
+                </div>
+            </section>
+
             {/* ── VIDEO SECTION ── */}
             {motorcycle.videoUrl && (
                 <section className="py-16 border-t border-white/5">
@@ -433,14 +460,17 @@ export default function MotorcyclePage() {
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                                     <Button size="lg" className="bg-white text-ibiza-red hover:bg-white/90 font-display font-bold rounded-full px-10 shadow-xl">
-                                        Escribir por WhatsApp
+                                        Comprar por WhatsApp
                                     </Button>
                                 </a>
-                                <a href="tel:+573214567890">
-                                    <Button size="lg" variant="outline" className="border-2 border-white/50 !text-white hover:bg-white/10 font-display font-bold rounded-full px-10">
-                                        Llamar Ahora
-                                    </Button>
-                                </a>
+                                <Button
+                                    size="lg"
+                                    variant="outline"
+                                    onClick={() => setShowQuoteModal(true)}
+                                    className="border-2 border-white/50 !text-white hover:bg-white/10 font-display font-bold rounded-full px-10"
+                                >
+                                    💬 Cotizar ahora
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -471,14 +501,14 @@ export default function MotorcyclePage() {
 
                         {/* Buttons */}
                         <div className="flex gap-3 flex-1 justify-end">
-                            <a href={whatsappQuoteUrl} target="_blank" rel="noopener noreferrer">
-                                <Button
-                                    variant="outline"
-                                    className="h-9 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-ibiza-red text-ibiza-red hover:bg-ibiza-red hover:!text-white font-display font-bold uppercase tracking-wider text-[10px] sm:text-xs transition-all"
-                                >
-                                    Cotizar
-                                </Button>
-                            </a>
+                            <Button
+                                variant="outline"
+                                onClick={() => setShowQuoteModal(true)}
+                                className="h-9 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-ibiza-red text-ibiza-red hover:bg-ibiza-red hover:!text-white font-display font-bold uppercase tracking-wider text-[10px] sm:text-xs transition-all flex items-center gap-1"
+                            >
+                                <MessageCircle className="w-3.5 h-3.5" />
+                                Cotizar
+                            </Button>
                             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                                 <Button
                                     className="h-9 sm:h-11 px-4 sm:px-8 rounded-xl bg-ibiza-red hover:bg-ibiza-red/90 !text-white font-display font-bold uppercase tracking-wider text-[10px] sm:text-xs shadow-[0_0_20px_rgba(227,25,55,0.3)] transition-all"
@@ -490,6 +520,99 @@ export default function MotorcyclePage() {
                     </div>
                 </div>
             </div>
+
+            {/* ── QUOTE MODAL ── */}
+            <AnimatePresence>
+                {showQuoteModal && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setShowQuoteModal(false)}
+                        className="fixed inset-0 z-[80] flex items-end md:items-center justify-center p-0 md:p-4 bg-black/70 backdrop-blur-sm"
+                    >
+                        <motion.div
+                            initial={{ y: 60, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: 60, opacity: 0 }}
+                            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                            onClick={e => e.stopPropagation()}
+                            className="bg-[#0d0d0f] border border-white/10 rounded-t-3xl md:rounded-3xl w-full md:max-w-md shadow-2xl p-6"
+                        >
+                            {/* Header */}
+                            <div className="flex items-center justify-between mb-6">
+                                <div>
+                                    <h3 className="font-display font-bold text-white text-xl">Cotizar esta moto</h3>
+                                    <p className="text-gray-500 text-sm mt-0.5">{motorcycle.brand} {motorcycle.model}{selectedColor ? ` · ${selectedColor}` : ''}</p>
+                                </div>
+                                <button
+                                    onClick={() => setShowQuoteModal(false)}
+                                    className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                                >
+                                    <X className="w-4 h-4" />
+                                </button>
+                            </div>
+
+                            {quoteSubmitted ? (
+                                <div className="text-center py-8">
+                                    <div className="w-16 h-16 bg-ibiza-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <CheckCircle2 className="w-8 h-8 text-ibiza-red" />
+                                    </div>
+                                    <h4 className="font-display font-bold text-white text-lg mb-2">¡Cotización enviada!</h4>
+                                    <p className="text-gray-400 text-sm">Te responderemos por WhatsApp en minutos.</p>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleQuoteSubmit} className="space-y-4">
+                                    <div>
+                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                            <User className="w-3.5 h-3.5 inline mr-1.5" />Tu nombre
+                                        </Label>
+                                        <Input
+                                            required
+                                            value={quoteForm.name}
+                                            onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
+                                            placeholder="Ej: Juan García"
+                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                        />
+                                    </div>
+                                    <div>
+                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                            <Phone className="w-3.5 h-3.5 inline mr-1.5" />Teléfono
+                                        </Label>
+                                        <Input
+                                            required
+                                            type="tel"
+                                            value={quoteForm.phone}
+                                            onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })}
+                                            placeholder="300 123 4567"
+                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                        />
+                                    </div>
+                                    <div>
+                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                            <MapPin className="w-3.5 h-3.5 inline mr-1.5" />Ciudad
+                                        </Label>
+                                        <Input
+                                            value={quoteForm.city}
+                                            onChange={e => setQuoteForm({ ...quoteForm, city: e.target.value })}
+                                            placeholder="Ej: Armenia"
+                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                        />
+                                    </div>
+                                    <Button
+                                        type="submit"
+                                        className="w-full bg-ibiza-red hover:bg-ibiza-red/90 text-white font-display font-bold rounded-2xl h-13 text-base mt-2 group"
+                                    >
+                                        <MessageCircle className="w-5 h-5 mr-2" />
+                                        Enviar cotización por WhatsApp
+                                    </Button>
+                                    <p className="text-[10px] text-gray-600 text-center">Te responderemos en menos de 30 minutos.</p>
+                                </form>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* ── IMAGE LIGHTBOX ── */}
             <AnimatePresence>
