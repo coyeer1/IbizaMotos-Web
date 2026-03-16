@@ -28,8 +28,7 @@
  * ═══════════════════════════════════════════════════════════════
  */
 
-// ← CAMBIA ESTE VALOR por el ID de tu calendario de Google
-var CALENDAR_ID = 'primary'; // o 'taller@ibizamotos.com', etc.
+var CALENDAR_ID = '05aba167a7ac04235a7af0ab5c423c4916354668468d4ace968199e0cc059c3a@group.calendar.google.com';
 
 // Duración en horas por tipo de servicio
 var DURACIONES = {

@@ -239,7 +239,7 @@ export default function AppointmentPage() {
   const serviceInfo = SERVICES.find(s => s.id === selectedService);
 
   // URL para que el CLIENTE agregue el evento a su Google Calendar
-  const clientCalendarUrl = selectedDate ? buildGoogleCalendarUrl({
+  const clientCalendarUrl = selectedDate && selectedTime ? buildGoogleCalendarUrl({
     service:    selectedService,
     appt_date:  formatDateISO(selectedDate),
     appt_time:  selectedTime,
@@ -248,7 +248,7 @@ export default function AppointmentPage() {
     email:      form.email || undefined,
     motorcycle: form.motorcycle || undefined,
     notes:      form.notes || undefined,
-  }) : '';
+  }) : '#';
 
   // ── Pantalla de éxito ────────────────────────────────────────────────────
   if (submitted) {

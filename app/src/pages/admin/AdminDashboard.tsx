@@ -860,6 +860,24 @@ export default function AdminDashboard() {
                 </div>
               );
             })()}
+
+            {/* ── Google Calendar embebido ─────────────────────────────── */}
+            <div className="mt-10">
+              <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5" /> Vista del calendario · citas ibiza
+              </p>
+              <div className="rounded-2xl overflow-hidden border border-white/[0.06]">
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?src=05aba167a7ac04235a7af0ab5c423c4916354668468d4ace968199e0cc059c3a%40group.calendar.google.com&ctz=America%2FBogota&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&mode=WEEK"
+                  style={{ border: 0 }}
+                  width="100%"
+                  height="520"
+                  frameBorder="0"
+                  scrolling="no"
+                  title="Calendario de citas Ibiza Motos"
+                />
+              </div>
+            </div>
           </div>
         )}
 
