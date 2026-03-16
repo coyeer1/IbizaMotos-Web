@@ -8,6 +8,7 @@ import AdminLogin from '@/pages/admin/AdminLogin';
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import BlogPage from '@/pages/BlogPage';
 import FinancingPage from '@/pages/FinancingPage';
+import AppointmentPage from '@/pages/AppointmentPage';
 import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
@@ -30,6 +31,7 @@ function AppContent() {
           <Route path="/moto/:id" element={<MotorcyclePage />} />
           <Route path="/blog/:id" element={<BlogPage />} />
           <Route path="/financiamiento" element={<FinancingPage />} />
+          <Route path="/citas" element={<AppointmentPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>

@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Users, Award, ShieldAlert, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { getWhatsAppUrl } from '@/lib/config';
+import { useNavigate } from 'react-router-dom';
 
 const servicesList = [
   {
@@ -53,44 +50,10 @@ const mechanics = [
 
 export default function Services() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const [showForm, setShowForm] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    motorcycle: '',
-    date: '',
-    details: '',
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Construct WhatsApp message based on the form data
-    const message = `Hola, quiero agendar una cita para el taller.
-Servicio: ${selectedService}
-Nombre: ${formData.name}
-Teléfono: ${formData.phone}
-Moto: ${formData.motorcycle || 'No especificada'}
-Día preferido: ${formData.date || 'No especificado'}`;
-
-    // Open WhatsApp with pre-filled message
-    window.open(getWhatsAppUrl(message), '_blank');
-
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setShowForm(false);
-      setFormData({ name: '', phone: '', motorcycle: '', date: '', details: '' });
-    }, 2500);
-  };
-
-  const openForm = (serviceTitle: string) => {
-    setSelectedService(serviceTitle);
-    setShowForm(true);
-    // Scroll to form if needed
-    document.getElementById('appointment-form')?.scrollIntoView({ behavior: 'smooth' });
+  const goToAppointment = (serviceId: string) => {
+    navigate(`/citas?servicio=${serviceId}`);
   };
 
   return (
@@ -205,13 +168,11 @@ Día preferido: ${formData.date || 'No especificado'}`;
                   </div>
 
                   <div className="flex gap-4 mt-auto">
-                    <Button variant="outline" className="flex-1 bg-transparent border-white/10 text-white hover:bg-white/5 hover:text-white hover:border-white/20 transition-all h-11 text-sm rounded-xl">
-                      Ver Detalles
-                    </Button>
                     <Button
-                      onClick={() => openForm(service.title)}
-                      className="flex-1 bg-ibiza-black border border-ibiza-red/50 text-white hover:bg-ibiza-red hover:border-ibiza-red shadow-[0_0_15px_rgba(255,0,0,0.15)] hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all h-11 text-sm rounded-xl font-semibold"
+                      onClick={() => goToAppointment(service.id)}
+                      className="w-full bg-ibiza-black border border-ibiza-red/50 text-white hover:bg-ibiza-red hover:border-ibiza-red shadow-[0_0_15px_rgba(255,0,0,0.15)] hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all h-11 text-sm rounded-xl font-semibold"
                     >
+                      <Calendar className="w-4 h-4 mr-2" />
                       Agendar Cita
                     </Button>
                   </div>
@@ -316,124 +277,42 @@ Día preferido: ${formData.date || 'No especificado'}`;
             </a>
           </div>
 
-          {/* Quick Appointment */}
+          {/* Quick Appointment CTA */}
           <div
-            className={`bg-gradient-to-br from-ibiza-red to-ibiza-gold rounded-3xl p-8 !text-white opacity-0 animate-slide-up ${isVisible ? '' : ''
-              }`}
+            className={`bg-gradient-to-br from-ibiza-red to-ibiza-gold rounded-3xl p-8 !text-white opacity-0 animate-slide-up flex flex-col justify-between`}
             style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
           >
-            <h3 className="font-display font-bold text-2xl mb-2">Agenda tu cita</h3>
-            <p className="!text-white/80 mb-6">
-              Dinos qué necesitas y te confirmamos la hora. Sin compromiso.
-            </p>
-
-            {!showForm ? (
-              <div className="space-y-3">
-                <Button
-                  onClick={() => openForm('Mantenimiento')}
-                  variant="secondary"
-                  className="w-full bg-ibiza-black/20 hover:bg-ibiza-black/30 !text-white border-0 rounded-xl py-5 justify-start"
-                >
-                  <Wrench className="w-5 h-5 mr-3" />
-                  Necesito mantenimiento
-                </Button>
-                <Button
-                  onClick={() => openForm('Revisión')}
-                  variant="secondary"
-                  className="w-full bg-ibiza-black/20 hover:bg-ibiza-black/30 !text-white border-0 rounded-xl py-5 justify-start"
-                >
-                  <CheckCircle2 className="w-5 h-5 mr-3" />
-                  Quiero una revisión
-                </Button>
-                <Button
-                  onClick={() => openForm('Reparación')}
-                  variant="secondary"
-                  className="w-full bg-ibiza-black/20 hover:bg-ibiza-black/30 !text-white border-0 rounded-xl py-5 justify-start"
-                >
-                  <Calendar className="w-5 h-5 mr-3" />
-                  Tengo un problema
-                </Button>
-              </div>
-            ) : isSubmitted ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-ibiza-black/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 className="w-8 h-8 !text-white" />
-                </div>
-                <h4 className="font-display font-bold text-xl mb-2">¡Listo!</h4>
-                <p className="!text-white/80">
-                  Te llamamos en menos de 30 min para confirmar tu cita.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label className="!text-white/80 text-sm">Servicio</Label>
-                  <Input
-                    value={selectedService}
-                    readOnly
-                    className="bg-ibiza-black/20 border-0 !text-white placeholder:!text-white/50 mt-1"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <Label className="!text-white/80 text-sm">Tu nombre</Label>
-                    <Input
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Ej: Carlos"
-                      className="bg-ibiza-black/20 border-0 !text-white placeholder:!text-white/50 mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Label className="!text-white/80 text-sm">Teléfono</Label>
-                    <Input
-                      required
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="300 123 4567"
-                      className="bg-ibiza-black/20 border-0 !text-white placeholder:!text-white/50 mt-1"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <Label className="!text-white/80 text-sm">Tu moto</Label>
-                  <Input
-                    value={formData.motorcycle}
-                    onChange={(e) => setFormData({ ...formData, motorcycle: e.target.value })}
-                    placeholder="Ej: Vento Tornado 250, 2022"
-                    className="bg-ibiza-black/20 border-0 !text-white placeholder:!text-white/50 mt-1"
-                  />
-                </div>
-                <div>
-                  <Label className="!text-white/80 text-sm">¿Qué día prefieres?</Label>
-                  <Input
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="bg-ibiza-black/20 border-0 !text-white placeholder:!text-white/50 mt-1"
-                  />
-                </div>
-                <div className="flex gap-3 pt-2">
+            <div>
+              <h3 className="font-display font-bold text-2xl mb-2">Agenda tu cita online</h3>
+              <p className="!text-white/80 mb-8">
+                Elige el servicio, la fecha y la hora que mejor te quede. Sin llamadas, sin esperas. Confirmamos en menos de 30 minutos.
+              </p>
+              <div className="space-y-3 mb-8">
+                {[
+                  { id: 'mantenimiento', Icon: Wrench, label: 'Mantenimiento preventivo' },
+                  { id: 'revision', Icon: CheckCircle2, label: 'Revisión general' },
+                  { id: 'frenos', Icon: Star, label: 'Frenos y suspensión' },
+                  { id: 'motor', Icon: Cpu, label: 'Reparación de motor' },
+                ].map(({ id, Icon, label }) => (
                   <Button
-                    type="button"
+                    key={id}
+                    onClick={() => goToAppointment(id)}
                     variant="secondary"
-                    onClick={() => setShowForm(false)}
-                    className="flex-1 bg-ibiza-black/20 hover:bg-ibiza-black/30 !text-white border-0 rounded-full"
+                    className="w-full bg-ibiza-black/20 hover:bg-ibiza-black/40 !text-white border-0 rounded-xl py-5 justify-start transition-all"
                   >
-                    Volver
+                    <Icon className="w-5 h-5 mr-3 shrink-0" />
+                    {label}
                   </Button>
-                  <Button
-                    type="submit"
-                    className="flex-1 bg-ibiza-black text-ibiza-red hover:bg-ibiza-black hover:!text-white font-semibold rounded-full"
-                  >
-                    Solicitar cita
-                  </Button>
-                </div>
-              </form>
-            )}
+                ))}
+              </div>
+            </div>
+            <Button
+              onClick={() => navigate('/citas')}
+              className="w-full bg-ibiza-black text-white hover:bg-ibiza-black/80 font-display font-bold rounded-xl h-12"
+            >
+              <Calendar className="w-4 h-4 mr-2" />
+              Ver disponibilidad completa
+            </Button>
           </div>
         </div>
       </div>

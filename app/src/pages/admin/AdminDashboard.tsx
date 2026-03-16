@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bike, Plus, Pencil, Trash2, LogOut, Search, Save, X, Image as ImageIcon,
-  ChevronDown, AlertCircle, CheckCircle2, Upload, Check, Palette
+  ChevronDown, AlertCircle, CheckCircle2, Upload, Check, Palette,
+  Calendar, Clock, Phone, User, Wrench, ChevronUp, RefreshCw
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
@@ -491,6 +492,79 @@ export default function AdminDashboard() {
   const [editingMoto, setEditingMoto] = useState<Motorcycle | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'inventory' | 'appointments'>('inventory');
+
+  // ─── Citas state ────────────────────────────────────────────────────────────
+  interface Appointment {
+    id: string;
+    created_at: string;
+    name: string;
+    phone: string;
+    email?: string;
+    motorcycle?: string;
+    service: string;
+    appt_date: string;
+    appt_time: string;
+    notes?: string;
+    status: 'pending' | 'confirmed' | 'done' | 'cancelled';
+  }
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [apptLoading, setApptLoading] = useState(false);
+  const [apptFilter, setApptFilter] = useState<'all' | 'pending' | 'confirmed' | 'done' | 'cancelled'>('all');
+
+  const SERVICE_LABELS: Record<string, string> = {
+    mantenimiento: 'Mantenimiento',
+    revision: 'Revisión General',
+    frenos: 'Frenos y Suspensión',
+    motor: 'Reparación Motor',
+  };
+
+  const STATUS_CONFIG = {
+    pending:   { label: 'Pendiente',  color: 'bg-amber-500/20 text-amber-400 border-amber-500/30' },
+    confirmed: { label: 'Confirmada', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
+    done:      { label: 'Completada', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
+    cancelled: { label: 'Cancelada',  color: 'bg-red-500/20 text-red-400 border-red-500/30' },
+  } as const;
+
+  const fetchAppointments = async () => {
+    setApptLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('workshop_appointments')
+        .select('*')
+        .order('appt_date', { ascending: true })
+        .order('appt_time', { ascending: true });
+      if (error) throw error;
+      setAppointments(data || []);
+    } catch (err: any) {
+      showToast('Error cargando citas: ' + err.message, 'error');
+    } finally {
+      setApptLoading(false);
+    }
+  };
+
+  const updateApptStatus = async (id: string, status: Appointment['status']) => {
+    const { error } = await supabase
+      .from('workshop_appointments')
+      .update({ status })
+      .eq('id', id);
+    if (error) {
+      showToast('Error actualizando estado', 'error');
+    } else {
+      setAppointments(prev => prev.map(a => a.id === id ? { ...a, status } : a));
+      showToast('Estado actualizado ✓', 'success');
+    }
+  };
+
+  const deleteAppt = async (id: string) => {
+    const { error } = await supabase.from('workshop_appointments').delete().eq('id', id);
+    if (error) {
+      showToast('Error eliminando cita', 'error');
+    } else {
+      setAppointments(prev => prev.filter(a => a.id !== id));
+      showToast('Cita eliminada ✓', 'success');
+    }
+  };
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -498,6 +572,7 @@ export default function AdminDashboard() {
       return;
     }
     fetchMotos();
+    fetchAppointments();
   }, [isAuthenticated, navigate]);
 
   const fetchMotos = async () => {
@@ -602,6 +677,23 @@ export default function AdminDashboard() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
+
+        {/* ── TABS ── */}
+        <div className="flex gap-1 bg-white/[0.02] border border-white/[0.04] rounded-xl p-1 w-fit mb-8">
+          {([
+            { id: 'inventory', label: '🏍️ Inventario' },
+            { id: 'appointments', label: `📅 Citas${appointments.filter(a => a.status === 'pending').length > 0 ? ` · ${appointments.filter(a => a.status === 'pending').length} nuevas` : ''}` },
+          ] as const).map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === tab.id ? 'bg-ibiza-red text-white shadow-sm' : 'text-white/30 hover:text-white/60'}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         {/* ── STATS CARDS ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
@@ -622,6 +714,129 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
+
+        {/* ══════════════════════════ CITAS TAB ══════════════════════════ */}
+        {activeTab === 'appointments' && (
+          <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+              <h2 className="font-display font-bold text-2xl text-white">Citas del Taller</h2>
+              <div className="flex gap-2 flex-wrap">
+                {(['all','pending','confirmed','done','cancelled'] as const).map(f => (
+                  <button
+                    key={f}
+                    onClick={() => setApptFilter(f)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${apptFilter === f ? 'bg-ibiza-red text-white' : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:text-white/60'}`}
+                  >
+                    {f === 'all' ? 'Todas' : STATUS_CONFIG[f].label}
+                    {f !== 'all' && (
+                      <span className="ml-1.5 opacity-60">
+                        ({appointments.filter(a => a.status === f).length})
+                      </span>
+                    )}
+                  </button>
+                ))}
+                <button
+                  onClick={fetchAppointments}
+                  className="p-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-white/30 hover:text-white transition-colors"
+                  title="Actualizar"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {apptLoading ? (
+              <div className="flex justify-center py-20">
+                <div className="w-10 h-10 border-4 border-ibiza-red/30 border-t-ibiza-red rounded-full animate-spin" />
+              </div>
+            ) : (() => {
+              const filtered = apptFilter === 'all'
+                ? appointments
+                : appointments.filter(a => a.status === apptFilter);
+              return filtered.length === 0 ? (
+                <div className="text-center py-20 bg-white/[0.01] rounded-2xl border border-white/[0.04]">
+                  <Calendar className="w-12 h-12 text-white/10 mx-auto mb-3" />
+                  <p className="text-white/30 text-sm">No hay citas en esta categoría</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {filtered.map(appt => {
+                    const statusCfg = STATUS_CONFIG[appt.status];
+                    return (
+                      <div
+                        key={appt.id}
+                        className="bg-white/[0.02] border border-white/[0.04] rounded-2xl p-5 hover:border-white/[0.08] transition-all"
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                          {/* Date + time badge */}
+                          <div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-xl px-4 py-3 text-center shrink-0 min-w-[90px]">
+                            <p className="font-display font-black text-ibiza-red text-lg leading-none">{appt.appt_date.slice(8)}</p>
+                            <p className="text-white/40 text-[10px] uppercase tracking-wider mt-0.5">
+                              {['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][parseInt(appt.appt_date.slice(5,7)) - 1]}
+                            </p>
+                            <p className="text-white font-bold text-sm mt-1">{appt.appt_time}</p>
+                          </div>
+
+                          {/* Info */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-3 mb-2">
+                              <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${statusCfg.color}`}>
+                                    {statusCfg.label}
+                                  </span>
+                                  <span className="text-white/30 text-[10px]">
+                                    {new Date(appt.created_at).toLocaleDateString('es-CO')}
+                                  </span>
+                                </div>
+                                <p className="font-display font-bold text-white">{appt.name}</p>
+                              </div>
+                            </div>
+
+                            <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-white/40 mb-3">
+                              <span className="flex items-center gap-1"><Phone className="w-3 h-3" />{appt.phone}</span>
+                              {appt.email && <span className="flex items-center gap-1">✉ {appt.email}</span>}
+                              <span className="flex items-center gap-1"><Wrench className="w-3 h-3" />{SERVICE_LABELS[appt.service] || appt.service}</span>
+                              {appt.motorcycle && <span className="flex items-center gap-1"><Bike className="w-3 h-3" />{appt.motorcycle}</span>}
+                            </div>
+
+                            {appt.notes && (
+                              <p className="text-white/30 text-xs bg-white/[0.02] rounded-lg px-3 py-2 border border-white/[0.04] mb-3">
+                                💬 {appt.notes}
+                              </p>
+                            )}
+
+                            {/* Status actions */}
+                            <div className="flex flex-wrap gap-2">
+                              {(['pending','confirmed','done','cancelled'] as const).filter(s => s !== appt.status).map(s => (
+                                <button
+                                  key={s}
+                                  onClick={() => updateApptStatus(appt.id, s)}
+                                  className={`px-3 py-1 rounded-lg text-[11px] font-bold border transition-all hover:opacity-100 opacity-70 ${STATUS_CONFIG[s].color}`}
+                                >
+                                  → {STATUS_CONFIG[s].label}
+                                </button>
+                              ))}
+                              <button
+                                onClick={() => deleteAppt(appt.id)}
+                                className="px-3 py-1 rounded-lg text-[11px] font-bold border border-red-500/20 text-red-400/60 hover:text-red-400 hover:border-red-500/40 transition-all ml-auto"
+                              >
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })()}
+          </div>
+        )}
+
+        {/* ══════════════════════════ INVENTARIO TAB ══════════════════════════ */}
+        {activeTab === 'inventory' && <>
 
         {/* ── ACTIONS BAR ── */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
@@ -738,6 +953,9 @@ export default function AdminDashboard() {
             )}
           </div>
         )}
+
+        </>}
+
       </div>
 
       {/* ── FORM MODAL ── */}
