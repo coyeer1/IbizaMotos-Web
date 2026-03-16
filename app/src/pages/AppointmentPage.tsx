@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
+import { buildGoogleCalendarUrl, notifyAppsScript } from '@/lib/googleCalendar';
 
 // ─── Servicios disponibles ────────────────────────────────────────────────────
 const SERVICES = [
@@ -200,36 +201,65 @@ export default function AppointmentPage() {
     setSubmitting(true);
     setError('');
 
-    const { error: err } = await supabase.from('workshop_appointments').insert({
-      name:       form.name.trim(),
-      phone:      form.phone.trim(),
-      email:      form.email.trim() || null,
-      motorcycle: form.motorcycle.trim() || null,
+    const apptParams = {
       service:    selectedService,
       appt_date:  formatDateISO(selectedDate),
       appt_time:  selectedTime,
-      notes:      form.notes.trim() || null,
+      name:       form.name.trim(),
+      phone:      form.phone.trim(),
+      email:      form.email.trim() || undefined,
+      motorcycle: form.motorcycle.trim() || undefined,
+      notes:      form.notes.trim() || undefined,
+    };
+
+    const { error: err } = await supabase.from('workshop_appointments').insert({
+      name:       apptParams.name,
+      phone:      apptParams.phone,
+      email:      apptParams.email ?? null,
+      motorcycle: apptParams.motorcycle ?? null,
+      service:    apptParams.service,
+      appt_date:  apptParams.appt_date,
+      appt_time:  apptParams.appt_time,
+      notes:      apptParams.notes ?? null,
     });
 
-    setSubmitting(false);
     if (err) {
+      setSubmitting(false);
       setError('Hubo un problema al guardar tu cita. Intenta de nuevo o escríbenos por WhatsApp.');
-    } else {
-      setSubmitted(true);
+      return;
     }
+
+    // Notificar al Google Calendar de la empresa (fire-and-forget)
+    await notifyAppsScript(apptParams);
+
+    setSubmitting(false);
+    setSubmitted(true);
   };
 
   const serviceInfo = SERVICES.find(s => s.id === selectedService);
 
+  // URL para que el CLIENTE agregue el evento a su Google Calendar
+  const clientCalendarUrl = selectedDate ? buildGoogleCalendarUrl({
+    service:    selectedService,
+    appt_date:  formatDateISO(selectedDate),
+    appt_time:  selectedTime,
+    name:       form.name,
+    phone:      form.phone,
+    email:      form.email || undefined,
+    motorcycle: form.motorcycle || undefined,
+    notes:      form.notes || undefined,
+  }) : '';
+
   // ── Pantalla de éxito ────────────────────────────────────────────────────
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[#09090b] flex items-center justify-center px-4 pt-20">
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center px-4 pt-20 pb-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-md w-full text-center"
         >
+          {/* Ícono éxito */}
           <div className="w-24 h-24 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-12 h-12 text-emerald-400" />
           </div>
@@ -240,16 +270,16 @@ export default function AppointmentPage() {
             {' '}a las{' '}
             <span className="text-white font-semibold">{selectedTime}</span>.
             <br /><br />
-            Te contactaremos al <span className="text-ibiza-red font-semibold">{form.phone}</span> para confirmar tu cita.
+            Te contactaremos al <span className="text-ibiza-red font-semibold">{form.phone}</span> para confirmar.
           </p>
 
           {/* Resumen */}
-          <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 text-left mb-8 space-y-2">
+          <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 text-left mb-6 space-y-2">
             {[
               { label: 'Servicio', value: serviceInfo?.label || selectedService },
-              { label: 'Fecha', value: selectedDate ? formatDate(selectedDate) : '' },
-              { label: 'Hora', value: selectedTime },
-              { label: 'Cliente', value: form.name },
+              { label: 'Fecha',    value: selectedDate ? formatDate(selectedDate) : '' },
+              { label: 'Hora',     value: selectedTime },
+              { label: 'Cliente',  value: form.name },
               ...(form.motorcycle ? [{ label: 'Moto', value: form.motorcycle }] : []),
             ].map(({ label, value }) => (
               <div key={label} className="flex justify-between text-sm">
@@ -259,16 +289,37 @@ export default function AppointmentPage() {
             ))}
           </div>
 
+          {/* ── Botón Google Calendar para el CLIENTE ── */}
+          <a
+            href={clientCalendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-100 text-gray-800 font-bold px-6 py-3.5 rounded-2xl mb-3 transition-colors text-sm"
+          >
+            {/* Google "G" logo */}
+            <svg viewBox="0 0 48 48" className="w-5 h-5 shrink-0">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            Agregar a mi Google Calendar
+          </a>
+
           <div className="flex gap-3">
-            <Button onClick={() => navigate('/')} variant="outline" className="flex-1 border-white/10 text-white hover:bg-white/[0.06] rounded-xl">
+            <Button
+              onClick={() => navigate('/')}
+              variant="outline"
+              className="flex-1 border-white/10 text-white hover:bg-white/[0.06] rounded-xl"
+            >
               Volver al inicio
             </Button>
             <Button
               onClick={() => {
-                const msg = `Hola, acabo de agendar una cita en la web. Servicio: ${serviceInfo?.label}, Fecha: ${selectedDate ? formatDate(selectedDate) : ''} a las ${selectedTime}.`;
+                const msg = `Hola, acabo de agendar una cita:\nServicio: ${serviceInfo?.label}\nFecha: ${selectedDate ? formatDate(selectedDate) : ''} a las ${selectedTime}\nNombre: ${form.name}`;
                 window.open(`https://wa.me/573214567890?text=${encodeURIComponent(msg)}`, '_blank');
               }}
-              className="flex-1 bg-[#25D366] hover:bg-[#20b858] text-white rounded-xl"
+              className="flex-1 bg-[#25D366] hover:bg-[#20b858] text-white rounded-xl text-sm"
             >
               Confirmar por WhatsApp
             </Button>
