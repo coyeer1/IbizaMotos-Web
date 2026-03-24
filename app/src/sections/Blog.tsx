@@ -21,7 +21,7 @@ export default function Blog() {
   const displayPosts = showAll ? filtered : filtered.slice(0, 5);
 
   return (
-    <section id="blog" ref={ref} className="py-24 bg-[#09090b] overflow-hidden">
+    <section id="blog" ref={ref} className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -40,7 +40,7 @@ export default function Blog() {
                 Blog & Noticias
               </p>
             </div>
-            <h2 className="font-display font-bold text-4xl md:text-5xl text-white">
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-gray-900">
               TIPS Y <span className="text-ibiza-red">NOVEDADES</span>
             </h2>
           </div>
@@ -63,7 +63,7 @@ export default function Blog() {
               className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all duration-300 ${
                 activeCategory === cat
                   ? 'bg-ibiza-red text-white shadow-[0_0_15px_rgba(227,25,55,0.3)]'
-                  : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:text-white/70 hover:border-white/10'
+                  : 'bg-gray-50 text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
               {cat}
@@ -131,7 +131,7 @@ export default function Blog() {
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
                 onClick={() => navigate(`/blog/${post.id}`)}
-                className="group cursor-pointer bg-white/[0.02] rounded-2xl overflow-hidden border border-white/[0.04] hover:border-ibiza-red/20 hover:bg-white/[0.04] transition-all duration-300"
+                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-ibiza-red/20 hover:bg-gray-50 transition-all duration-300 shadow-sm"
               >
                 {/* Thumbnail */}
                 <div className="relative h-44 overflow-hidden">
@@ -154,7 +154,7 @@ export default function Blog() {
 
                 <div className="p-5">
                   <p className="text-[11px] text-gray-600 mb-2">{post.date}</p>
-                  <h4 className="font-display font-bold text-base text-white leading-snug mb-3 group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
+                  <h4 className="font-display font-bold text-base text-gray-900 leading-snug mb-3 group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
                     {post.title}
                   </h4>
                   <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
@@ -164,7 +164,7 @@ export default function Blog() {
                   <div className="flex items-center justify-between">
                     <div className="flex gap-2">
                       {post.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[9px] text-white/25 bg-white/[0.03] border border-white/[0.05] px-2 py-0.5 rounded-md">
+                        <span key={tag} className="text-[9px] text-gray-400 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-md">
                           {tag}
                         </span>
                       ))}
@@ -189,7 +189,7 @@ export default function Blog() {
           >
             <button
               onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl border border-white/[0.08] text-white/40 text-sm font-bold hover:border-ibiza-red/30 hover:text-ibiza-red transition-all duration-300 group"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl border border-gray-200 text-gray-500 text-sm font-bold hover:border-ibiza-red/30 hover:text-ibiza-red transition-all duration-300 group"
             >
               Ver todos los artículos
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

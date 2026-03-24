@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Motorcycle } from '@/types';
 import Hero from '@/sections/Hero';
 import Brands from '@/sections/Brands';
-import Catalog from '@/sections/Catalog';
+import BrandSelector from '@/sections/BrandSelector';
+import Categories from '@/sections/Categories';
 import SpareParts from '@/sections/SpareParts';
 import Services from '@/sections/Services';
 import Testimonials from '@/sections/Testimonials';
+import HappyCustomers from '@/sections/HappyCustomers';
 import Locations from '@/sections/Locations';
 import PromosBanner from '@/sections/PromosBanner';
 import FinancingCalculator from '@/sections/FinancingCalculator';
@@ -14,31 +14,25 @@ import Blog from '@/sections/Blog';
 
 export default function Home() {
     const navigate = useNavigate();
-    const [selectedBrand, setSelectedBrand] = useState('all');
-
-    const handleViewDetails = (motorcycle: Motorcycle) => {
-        navigate(`/moto/${motorcycle.id}`);
-    };
 
     return (
         <>
-            {/* Hero Section with 3D animations */}
+            {/* Hero Section */}
             <Hero />
 
-            {/* Promotions Banner — oferta del mes con countdown */}
+            {/* Promotions Banner */}
             <PromosBanner />
 
-            {/* Brands scroll */}
+            {/* Brands scroll — logos animados */}
             <Brands onBrandClick={(brand) => {
                 navigate(`/marca/${brand.toLowerCase()}`);
             }} />
 
-            {/* Full Catalog — incluye botón comparar */}
-            <Catalog
-                onViewDetails={handleViewDetails}
-                selectedBrand={selectedBrand}
-                setSelectedBrand={setSelectedBrand}
-            />
+            {/* Categories showcase */}
+            <Categories />
+
+            {/* Brand selector — 1 moto por marca → /marca/:brand */}
+            <BrandSelector />
 
             {/* Financing Calculator */}
             <FinancingCalculator />
@@ -46,14 +40,17 @@ export default function Home() {
             {/* Spare Parts */}
             <SpareParts />
 
-            {/* Services with appointment booking */}
+            {/* Services */}
             <Services />
 
-            {/* Blog / Noticias */}
+            {/* Blog */}
             <Blog />
 
             {/* Testimonials */}
             <Testimonials />
+
+            {/* Clientes Felices */}
+            <HappyCustomers />
 
             {/* Locations / Contact */}
             <Locations />

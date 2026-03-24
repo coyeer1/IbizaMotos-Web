@@ -508,6 +508,8 @@ export default function AdminDashboard() {
     appt_time: string;
     notes?: string;
     status: 'pending' | 'confirmed' | 'done' | 'cancelled';
+    branch_name?: string;
+    branch_address?: string;
   }
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [apptLoading, setApptLoading] = useState(false);
@@ -799,6 +801,7 @@ export default function AdminDashboard() {
                               {appt.email && <span className="flex items-center gap-1">✉ {appt.email}</span>}
                               <span className="flex items-center gap-1"><Wrench className="w-3 h-3" />{SERVICE_LABELS[appt.service] || appt.service}</span>
                               {appt.motorcycle && <span className="flex items-center gap-1"><Bike className="w-3 h-3" />{appt.motorcycle}</span>}
+                              {appt.branch_name && <span className="flex items-center gap-1 text-ibiza-gold/70">📍 {appt.branch_name}</span>}
                             </div>
 
                             {appt.notes && (

@@ -13,9 +13,9 @@ function calcCuota(price: number): string {
 
 // ─── Stock badge config ───────────────────────────────────────────────────────
 const stockConfig = {
-  available: { label: 'En stock', color: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', Icon: CheckCircle2 },
-  limited:   { label: 'Últimas unidades', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30', Icon: AlertCircle },
-  order:     { label: 'Bajo pedido', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30', Icon: Clock },
+  available: { label: 'En stock', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', Icon: CheckCircle2 },
+  limited:   { label: 'Últimas unidades', color: 'bg-amber-50 text-amber-700 border-amber-200', Icon: AlertCircle },
+  order:     { label: 'Bajo pedido', color: 'bg-blue-50 text-blue-700 border-blue-200', Icon: Clock },
 } as const;
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -60,12 +60,12 @@ const MotoCard = ({
       onClick={() => onViewDetails(motorcycle)}
       className="group cursor-pointer"
     >
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-[#141416] to-[#0c0c0e] border border-white/[0.04] h-full flex flex-col transition-all duration-500 hover:border-ibiza-red/30 hover:shadow-[0_0_50px_rgba(227,25,55,0.08)]">
+      <div className="relative rounded-2xl overflow-hidden bg-white border border-gray-100 h-full flex flex-col transition-all duration-500 hover:border-ibiza-red/30 hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] shadow-sm">
 
         {/* ── IMAGE AREA ── */}
-        <div className="relative h-64 overflow-hidden rounded-xl m-3 mb-0">
-          {/* Clean light background for maximum image visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f5] to-[#e8e8e8] rounded-xl" />
+        <div className="relative h-72 overflow-hidden rounded-xl m-3 mb-0">
+          {/* Light background consistent with card */}
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl" />
 
           {/* The motorcycle image — CLEAR and prominent */}
           <div className="absolute inset-0 flex items-center justify-center p-5">
@@ -87,7 +87,7 @@ const MotoCard = ({
           {/* Top info overlay */}
           <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-start z-20">
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-bold text-white bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg tracking-widest">
+              <span className="text-[10px] font-bold text-gray-700 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg tracking-widest shadow-sm">
                 {motorcycle.year}
               </span>
               {motorcycle.stock && (() => {
@@ -101,12 +101,12 @@ const MotoCard = ({
             </div>
             <div className="flex gap-1.5 items-center">
               {cc && (
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-white bg-black/70 backdrop-blur-md px-2.5 py-1.5 rounded-lg">
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-gray-700 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-lg shadow-sm">
                   <Gauge className="w-3 h-3 text-ibiza-red" />{cc}cc
                 </span>
               )}
               {hp && (
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-white bg-black/70 backdrop-blur-md px-2.5 py-1.5 rounded-lg">
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-gray-700 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-lg shadow-sm">
                   <Zap className="w-3 h-3 text-ibiza-gold" />{hp}HP
                 </span>
               )}
@@ -125,14 +125,14 @@ const MotoCard = ({
             <span className="text-[11px] font-bold text-ibiza-red tracking-[0.15em] uppercase">
               {motorcycle.brand}
             </span>
-            <span className="text-white/10">|</span>
-            <span className="text-[11px] text-white/25 tracking-wider uppercase">
+            <span className="text-gray-200">|</span>
+            <span className="text-[11px] text-gray-400 tracking-wider uppercase">
               {motorcycle.category}
             </span>
           </div>
 
           {/* Model Name */}
-          <h3 className="font-display font-bold text-[26px] text-white leading-tight tracking-tight mb-3">
+          <h3 className="font-display font-bold text-[28px] text-gray-900 leading-tight tracking-tight mb-3">
             {motorcycle.model}
           </h3>
 
@@ -143,13 +143,13 @@ const MotoCard = ({
                 {motorcycle.specifications.colors.slice(0, 5).map((color, i) => (
                   <div
                     key={i}
-                    className="w-5 h-5 rounded-full border-2 border-[#0c0c0e]"
+                    className="w-5 h-5 rounded-full border-2 border-white"
                     style={{ backgroundColor: colorMap[color] || '#555', zIndex: 5 - i }}
                     title={color}
                   />
                 ))}
               </div>
-              <span className="text-[10px] text-white/20 font-medium">
+              <span className="text-[10px] text-gray-400 font-medium">
                 {motorcycle.specifications.colors.length} colores
               </span>
             </div>
@@ -161,31 +161,31 @@ const MotoCard = ({
           {/* Price & Action */}
           <div className="flex items-end justify-between pt-4 mt-auto">
             <div>
-              <p className="text-[10px] text-white/20 font-medium tracking-widest uppercase mb-1">Desde</p>
-              <p className="font-display font-black text-[28px] text-white leading-none tracking-tight group-hover:text-ibiza-red transition-colors duration-500">
+              <p className="text-[10px] text-gray-400 font-medium tracking-widest uppercase mb-1">Desde</p>
+              <p className="font-display font-black text-[28px] text-gray-900 leading-none tracking-tight group-hover:text-ibiza-red transition-colors duration-500">
                 ${new Intl.NumberFormat('es-CO').format(motorcycle.price)}
               </p>
-              <p className="text-[10px] text-ibiza-gold/70 font-semibold mt-1">
-                o {calcCuota(motorcycle.price)}<span className="text-white/25">/mes · 36 cuotas</span>
+              <p className="text-[10px] text-ibiza-red/70 font-semibold mt-1">
+                o {calcCuota(motorcycle.price)}<span className="text-gray-400">/mes · 36 cuotas</span>
               </p>
             </div>
 
             {/* CTA Arrow */}
             <div className="relative overflow-hidden">
-              <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center group-hover:bg-ibiza-red group-hover:border-ibiza-red group-hover:shadow-[0_0_25px_rgba(227,25,55,0.4)] transition-all duration-400">
-                <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
+              <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center group-hover:bg-ibiza-red group-hover:border-ibiza-red group-hover:shadow-[0_0_25px_rgba(227,25,55,0.3)] transition-all duration-400">
+                <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" />
               </div>
             </div>
           </div>
 
           {/* Compare button — visible row */}
-          <div className="mt-3 pt-3 border-t border-white/[0.04]" onClick={e => e.stopPropagation()}>
+          <div className="mt-3 pt-3 border-t border-gray-100" onClick={e => e.stopPropagation()}>
             <CompareButton motorcycle={motorcycle} asRow />
           </div>
         </div>
 
         {/* Hover border glow effect */}
-        <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-ibiza-red/20 transition-all duration-500 pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-ibiza-red/30 transition-all duration-500 pointer-events-none" />
       </div>
     </motion.div>
   );
@@ -236,14 +236,14 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
 
   if (loading) {
     return (
-      <section id="catalogo" className="py-24 bg-[#09090b] min-h-[50vh] flex justify-center items-center">
+      <section id="catalogo" className="py-24 bg-gray-50 min-h-[50vh] flex justify-center items-center">
         <div className="text-ibiza-red text-xl animate-pulse font-display font-medium">Cargando inventario...</div>
       </section>
     );
   }
 
   return (
-    <section id="catalogo" className="py-24 bg-[#09090b] min-h-screen relative overflow-hidden" ref={ref}>
+    <section id="catalogo" className="py-24 bg-gray-50 min-h-screen relative overflow-hidden" ref={ref}>
 
       {/* Brand Dynamic Background Watermark */}
       {activeBrandInfo && (
@@ -274,7 +274,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                 initial={{ opacity: 0, y: 30 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="font-display font-bold text-4xl md:text-5xl text-white"
+                className="font-display font-bold text-4xl md:text-5xl text-gray-900"
               >
                 NUESTRAS MOTOS
               </motion.h2>
@@ -284,19 +284,19 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           {/* Search */}
           <div className="flex gap-3">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input
                 type="text"
                 placeholder="Buscar moto..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-3 w-full md:w-72 bg-white/[0.03] border-white/[0.06] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red focus:ring-ibiza-red"
+                className="pl-12 pr-4 py-3 w-full md:w-72 bg-white border-gray-200 text-gray-900 placeholder:text-gray-400 rounded-xl focus:border-ibiza-red focus:ring-ibiza-red"
               />
             </div>
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
-              className={`rounded-xl px-4 border-white/[0.06] text-white/40 bg-white/[0.03] hover:bg-white/[0.06] ${showFilters ? 'bg-ibiza-red !text-white border-ibiza-red hover:bg-ibiza-red' : ''}`}
+              className={`rounded-xl px-4 border-gray-200 text-gray-500 bg-white hover:bg-gray-50 ${showFilters ? 'bg-ibiza-red !text-white border-ibiza-red hover:bg-ibiza-red' : ''}`}
             >
               <SlidersHorizontal className="w-5 h-5" />
             </Button>
@@ -308,8 +308,8 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           <button
             onClick={() => setSelectedBrand('all')}
             className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${selectedBrand === 'all'
-              ? 'bg-ibiza-red text-white shadow-[0_0_20px_rgba(227,25,55,0.3)]'
-              : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:bg-white/[0.06] hover:text-white/50'
+              ? 'bg-ibiza-red text-white shadow-[0_4px_14px_rgba(215,38,61,0.3)]'
+              : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
               }`}
           >
             Todas
@@ -319,11 +319,11 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
               key={brand.id}
               onClick={() => setSelectedBrand(selectedBrand === brand.name ? 'all' : brand.name)}
               className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2.5 ${selectedBrand === brand.name
-                ? 'bg-ibiza-red text-white shadow-[0_0_20px_rgba(227,25,55,0.3)]'
-                : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:bg-white/[0.06] hover:text-white/50'
+                ? 'bg-ibiza-red text-white shadow-[0_4px_14px_rgba(215,38,61,0.3)]'
+                : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
                 }`}
             >
-              <img src={brand.logo} alt={brand.name} className="w-4 h-4 object-contain" style={{ filter: selectedBrand === brand.name ? 'brightness(10)' : 'grayscale(1) brightness(0.5)' }} />
+              <img src={brand.logo} alt={brand.name} className="w-4 h-4 object-contain" style={{ filter: selectedBrand === brand.name ? 'brightness(10)' : 'grayscale(1) brightness(0.3)' }} />
               {brand.name}
             </button>
           ))}
@@ -332,14 +332,14 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
         {/* ── EXTENDED FILTERS ── */}
         {showFilters && (
           <div className="mb-8 animate-slide-down">
-            <div className="bg-white/[0.02] rounded-2xl p-6 border border-white/[0.04]">
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-[10px] font-bold text-white/20 mb-2 tracking-widest uppercase">Categoría</label>
+                  <label className="block text-[10px] font-bold text-gray-400 mb-2 tracking-widest uppercase">Categoría</label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] text-white rounded-xl border border-white/[0.06] focus:border-ibiza-red outline-none text-sm"
+                    className="w-full px-4 py-2.5 bg-white text-gray-900 rounded-xl border border-gray-200 focus:border-ibiza-red outline-none text-sm"
                   >
                     <option value="all">Todas</option>
                     {categories.map((cat) => (
@@ -348,11 +348,11 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold text-white/20 mb-2 tracking-widest uppercase">Ordenar</label>
+                  <label className="block text-[10px] font-bold text-gray-400 mb-2 tracking-widest uppercase">Ordenar</label>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] text-white rounded-xl border border-white/[0.06] focus:border-ibiza-red outline-none text-sm"
+                    className="w-full px-4 py-2.5 bg-white text-gray-900 rounded-xl border border-gray-200 focus:border-ibiza-red outline-none text-sm"
                   >
                     <option value="name">Nombre</option>
                     <option value="price-asc">Menor precio</option>
@@ -373,13 +373,13 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
 
         {/* Results count */}
         <div className="mb-8">
-          <p className="text-white/20 text-sm">
-            Mostrando <span className="font-bold text-white">{filteredMotorcycles.length}</span> motos
+          <p className="text-gray-400 text-sm">
+            Mostrando <span className="font-bold text-gray-900">{filteredMotorcycles.length}</span> motos
           </p>
         </div>
 
         {/* ── CARDS GRID ── */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredMotorcycles.map((motorcycle, index) => (
             <MotoCard
               key={motorcycle.id}
@@ -393,11 +393,11 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
         {/* Empty state */}
         {filteredMotorcycles.length === 0 && (
           <div className="text-center py-20">
-            <div className="w-20 h-20 bg-white/[0.02] rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/[0.04]">
-              <Search className="w-8 h-8 text-white/10" />
+            <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-200">
+              <Search className="w-8 h-8 text-gray-300" />
             </div>
-            <h3 className="font-display font-bold text-xl text-white mb-2">No se encontraron motos</h3>
-            <p className="text-white/30 mb-6 text-sm">Intenta ajustar tus filtros de búsqueda</p>
+            <h3 className="font-display font-bold text-xl text-gray-900 mb-2">No se encontraron motos</h3>
+            <p className="text-gray-400 mb-6 text-sm">Intenta ajustar tus filtros de búsqueda</p>
             <Button onClick={clearFilters} className="bg-ibiza-red text-white hover:bg-ibiza-red/80 rounded-xl px-8">
               Limpiar filtros
             </Button>

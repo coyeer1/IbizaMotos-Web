@@ -37,7 +37,7 @@ const BrandLogo = ({ name, logo, onClick }: BrandLogoProps) => {
       style={{ transitionTimingFunction: 'cubic-bezier(0.23, 1, 0.32, 1)' }}
     >
       <div
-        className="w-32 h-20 rounded-xl flex items-center justify-center bg-ibiza-black shadow-md hover:shadow-xl transition-shadow duration-300 border border-border group-hover:border-ibiza-red/50 p-4"
+        className="w-32 h-20 rounded-xl flex items-center justify-center bg-white shadow-sm hover:shadow-xl transition-shadow duration-300 border border-border group-hover:border-ibiza-red/50 p-4"
       >
         <img
           src={logo}
@@ -57,7 +57,7 @@ export default function Brands({ onBrandClick }: BrandsProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section className="py-16 bg-ibiza-gray-100 overflow-hidden" ref={ref}>
+    <section className="py-16 bg-gray-50 overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <p
           className={`text-center text-gray-500 font-display text-sm tracking-widest uppercase transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
@@ -70,8 +70,8 @@ export default function Brands({ onBrandClick }: BrandsProps) {
       {/* Infinite scroll container */}
       <div className="relative">
         {/* Gradient fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#111] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#111] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
 
         {/* Scrolling row */}
         <div
@@ -101,8 +101,8 @@ export default function Brands({ onBrandClick }: BrandsProps) {
 
       {/* Second row - reverse direction */}
       <div className="relative mt-6">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#111] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#111] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10" />
 
         <div
           className={`flex animate-infinite-scroll-reverse hover:[animation-play-state:paused] transition-opacity duration-800 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'

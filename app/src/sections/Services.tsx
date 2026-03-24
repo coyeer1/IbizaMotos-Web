@@ -57,7 +57,7 @@ export default function Services() {
   };
 
   return (
-    <section id="servicios" className="py-24 bg-ibiza-black relative" ref={ref}>
+    <section id="servicios" className="py-24 bg-gray-50 relative" ref={ref}>
       {/* Container with background image for the new aesthetic */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -187,9 +187,9 @@ export default function Services() {
         {/* Below modernization: Kept the rest of the existing sections */}
 
         {/* Team Section */}
-        <div className="bg-ibiza-gray-100 rounded-3xl p-8 md:p-12 mb-16 border border-white/5">
+        <div className="bg-white rounded-3xl p-8 md:p-12 mb-16 border border-gray-200 shadow-sm">
           <h3
-            className={`font-display font-bold text-2xl text-white mb-8 transition-all duration-600 ${isVisible ? 'opacity-100' : 'opacity-0'
+            className={`font-display font-bold text-2xl text-gray-900 mb-8 transition-all duration-600 ${isVisible ? 'opacity-100' : 'opacity-0'
               }`}
           >
             Quién va a atender tu moto
@@ -209,7 +209,7 @@ export default function Services() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-display font-bold text-white">{mechanic.name}</p>
+                  <p className="font-display font-bold text-gray-900">{mechanic.name}</p>
                   <p className="text-sm text-gray-500">{mechanic.role}</p>
                   <p className="text-xs text-ibiza-red mt-1">
                     {mechanic.exp} · {mechanic.specialty}
@@ -224,7 +224,7 @@ export default function Services() {
         <div id="appointment-form" className="grid lg:grid-cols-2 gap-8">
           {/* Contact Info */}
           <div
-            className={`bg-ibiza-gray-100 rounded-3xl p-8 border border-white/5 !text-white opacity-0 animate-slide-up ${isVisible ? '' : ''
+            className={`bg-white rounded-3xl p-8 border border-gray-200 shadow-sm text-gray-900 opacity-0 animate-slide-up ${isVisible ? '' : ''
               }`}
             style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
           >
@@ -232,35 +232,35 @@ export default function Services() {
 
             <div className="space-y-4 mb-8">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-ibiza-black/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-5 h-5 text-ibiza-gold" />
                 </div>
                 <div>
                   <p className="font-semibold">Taller Principal</p>
-                  <p className="!text-white/70 text-sm">Carrera 23 # 23-45, Armenia</p>
-                  <p className="!text-white/50 text-xs">Entrada por la calle del parque</p>
+                  <p className="text-gray-600 text-sm">Carrera 23 # 23-45, Armenia</p>
+                  <p className="text-gray-500 text-xs">Entrada por la calle del parque</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-ibiza-black/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Clock className="w-5 h-5 text-ibiza-gold" />
                 </div>
                 <div>
                   <p className="font-semibold">Horario de atención</p>
-                  <p className="!text-white/70 text-sm">Lunes a Sábado: 8:00 AM - 6:00 PM</p>
-                  <p className="!text-white/50 text-xs">Domingos: Solo emergencias</p>
+                  <p className="text-gray-600 text-sm">Lunes a Sábado: 8:00 AM - 6:00 PM</p>
+                  <p className="text-gray-500 text-xs">Domingos: Solo emergencias</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-ibiza-black/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5 text-ibiza-gold" />
                 </div>
                 <div>
                   <p className="font-semibold">Llámanos</p>
-                  <p className="!text-white/70 text-sm">(+57) 321 456 7890</p>
-                  <p className="!text-white/50 text-xs">WhatsApp disponible</p>
+                  <p className="text-gray-600 text-sm">(+57) 321 456 7890</p>
+                  <p className="text-gray-500 text-xs">WhatsApp disponible</p>
                 </div>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function Services() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="w-full bg-ibiza-red hover:bg-ibiza-gold hover:text-white !text-white font-display font-semibold rounded-full py-6">
+              <Button className="w-full bg-ibiza-red hover:bg-ibiza-gold hover:text-white text-white font-display font-semibold rounded-full py-6">
                 <Phone className="w-5 h-5 mr-2" />
                 Escribir por WhatsApp
               </Button>

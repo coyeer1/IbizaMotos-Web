@@ -57,12 +57,12 @@ function useCountdown() {
 function CountdownUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center min-w-[52px]">
-      <div className="bg-ibiza-black/50 backdrop-blur-md rounded-xl w-12 h-12 flex items-center justify-center border border-white/10">
-        <span className="font-display font-black text-xl text-white leading-none">
+      <div className="bg-gray-100 backdrop-blur-md rounded-xl w-12 h-12 flex items-center justify-center border border-gray-200">
+        <span className="font-display font-black text-xl text-gray-900 leading-none">
           {String(value).padStart(2, '0')}
         </span>
       </div>
-      <span className="text-[9px] text-white/40 font-bold tracking-widest mt-1 uppercase">{label}</span>
+      <span className="text-[9px] text-gray-500 font-bold tracking-widest mt-1 uppercase">{label}</span>
     </div>
   );
 }
@@ -83,7 +83,7 @@ export default function PromosBanner() {
   const savings = moto.price - discountedPrice;
 
   return (
-    <section ref={ref} className="py-16 bg-[#09090b] overflow-hidden">
+    <section ref={ref} className="py-16 bg-gray-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
@@ -110,7 +110,7 @@ export default function PromosBanner() {
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                   activePromo === i
                     ? 'bg-ibiza-red text-white shadow-[0_0_15px_rgba(227,25,55,0.3)]'
-                    : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:text-white/60'
+                    : 'bg-gray-50 text-gray-400 border border-gray-100 hover:text-gray-600'
                 }`}
               >
                 {mo?.brand} {mo?.model}
@@ -125,16 +125,10 @@ export default function PromosBanner() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative rounded-3xl overflow-hidden border border-ibiza-red/20"
+          className="relative rounded-3xl overflow-hidden border border-gray-200 shadow-sm bg-white"
         >
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-ibiza-black via-[#1a0505] to-ibiza-black" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,_rgba(227,25,55,0.15),_transparent_60%)]" />
-
-          {/* Grid pattern */}
-          <div className="absolute inset-0 opacity-[0.03]"
-            style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-          />
+          {/* Subtle red accent top bar */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-ibiza-red via-red-400 to-ibiza-red" />
 
           <div className="relative grid lg:grid-cols-2 gap-0 min-h-[400px]">
 
@@ -145,7 +139,7 @@ export default function PromosBanner() {
                 <span className="bg-ibiza-red text-white text-[10px] font-black tracking-[0.2em] px-3 py-1.5 rounded-full uppercase">
                   {promo.badge}
                 </span>
-                <span className="bg-white/5 text-ibiza-gold text-[10px] font-bold tracking-widest px-3 py-1.5 rounded-full border border-ibiza-gold/20 uppercase">
+                <span className="bg-amber-50 text-amber-600 text-[10px] font-bold tracking-widest px-3 py-1.5 rounded-full border border-amber-200 uppercase">
                   -{promo.discountPercent}% off
                 </span>
               </div>
@@ -154,19 +148,19 @@ export default function PromosBanner() {
                 <p className="text-ibiza-red font-display font-bold text-sm tracking-widest uppercase mb-2">
                   {moto.brand}
                 </p>
-                <h3 className="font-display font-black text-4xl md:text-5xl text-white leading-tight mb-3">
+                <h3 className="font-display font-black text-4xl md:text-5xl text-gray-900 leading-tight mb-3">
                   {moto.model}
                 </h3>
-                <p className="text-gray-400 text-sm mb-6 max-w-sm">{promo.tagline}</p>
+                <p className="text-gray-500 text-sm mb-6 max-w-sm">{promo.tagline}</p>
 
                 {/* Perks */}
                 <div className="flex flex-wrap gap-2 mb-8">
                   {promo.extraPerks.map((perk, i) => (
                     <span
                       key={i}
-                      className="flex items-center gap-1.5 text-xs text-white/70 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg"
+                      className="flex items-center gap-1.5 text-xs text-gray-600 bg-gray-50 border border-gray-200 px-3 py-1.5 rounded-lg"
                     >
-                      <Tag className="w-3 h-3 text-ibiza-gold" />
+                      <Tag className="w-3 h-3 text-ibiza-red" />
                       {perk}
                     </span>
                   ))}
@@ -175,16 +169,16 @@ export default function PromosBanner() {
                 {/* Pricing */}
                 <div className="flex items-end gap-4 mb-8">
                   <div>
-                    <p className="text-[10px] text-gray-500 tracking-widest uppercase mb-1">Precio especial</p>
-                    <p className="font-display font-black text-4xl text-white leading-none">
+                    <p className="text-[10px] text-gray-400 tracking-widest uppercase mb-1">Precio especial</p>
+                    <p className="font-display font-black text-4xl text-gray-900 leading-none">
                       ${new Intl.NumberFormat('es-CO').format(discountedPrice)}
                     </p>
                   </div>
                   <div className="pb-1">
-                    <p className="text-gray-500 line-through text-lg">
+                    <p className="text-gray-400 line-through text-lg">
                       ${new Intl.NumberFormat('es-CO').format(moto.price)}
                     </p>
-                    <p className="text-ibiza-gold text-xs font-bold">
+                    <p className="text-ibiza-red text-xs font-bold">
                       Ahorras ${new Intl.NumberFormat('es-CO').format(savings)}
                     </p>
                   </div>
@@ -206,7 +200,7 @@ export default function PromosBanner() {
                   >
                     <Button
                       variant="outline"
-                      className="border-white/10 text-white hover:bg-white/5 font-display font-bold rounded-xl px-6 h-12"
+                      className="border-gray-200 text-gray-700 hover:bg-gray-50 font-display font-bold rounded-xl px-6 h-12"
                     >
                       Cotizar
                     </Button>
@@ -224,7 +218,7 @@ export default function PromosBanner() {
                 className="relative w-full max-w-sm mb-8 flex justify-center"
               >
                 {/* Glow */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-8 bg-ibiza-red/30 blur-2xl rounded-full" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-8 bg-ibiza-red/10 blur-2xl rounded-full" />
                 {moto.images?.[0] && (
                   <img
                     src={moto.images[0]}
@@ -238,17 +232,17 @@ export default function PromosBanner() {
               <div className="text-center">
                 <div className="flex items-center gap-2 justify-center mb-3">
                   <Clock className="w-4 h-4 text-ibiza-red" />
-                  <span className="text-xs text-white/40 font-bold tracking-widest uppercase">
+                  <span className="text-xs text-gray-500 font-bold tracking-widest uppercase">
                     Oferta termina en
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CountdownUnit value={d} label="días" />
-                  <span className="text-white/30 font-bold text-xl mb-4">:</span>
+                  <span className="text-gray-400 font-bold text-xl mb-4">:</span>
                   <CountdownUnit value={h} label="horas" />
-                  <span className="text-white/30 font-bold text-xl mb-4">:</span>
+                  <span className="text-gray-400 font-bold text-xl mb-4">:</span>
                   <CountdownUnit value={m} label="min" />
-                  <span className="text-white/30 font-bold text-xl mb-4">:</span>
+                  <span className="text-gray-400 font-bold text-xl mb-4">:</span>
                   <CountdownUnit value={s} label="seg" />
                 </div>
               </div>

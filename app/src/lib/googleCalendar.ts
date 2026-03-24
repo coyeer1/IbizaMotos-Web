@@ -6,14 +6,16 @@
 //     evento automáticamente en el calendario de la empresa
 
 export interface CalendarEventParams {
-  service:    string;    // id: 'mantenimiento', 'revision', etc.
-  appt_date:  string;    // 'YYYY-MM-DD'
-  appt_time:  string;    // 'HH:MM'
-  name:       string;
-  phone:      string;
-  email?:     string;
-  motorcycle?: string;
-  notes?:     string;
+  service:        string;    // id: 'mantenimiento', 'revision', etc.
+  appt_date:      string;    // 'YYYY-MM-DD'
+  appt_time:      string;    // 'HH:MM'
+  name:           string;
+  phone:          string;
+  email?:         string;
+  motorcycle?:    string;
+  notes?:         string;
+  branch_name?:   string;    // Nombre de la sucursal
+  branch_address?: string;   // Dirección de la sucursal
 }
 
 const SERVICE_LABELS: Record<string, string> = {
@@ -65,7 +67,7 @@ export function buildGoogleCalendarUrl(p: CalendarEventParams): string {
     text:     title,
     dates:    `${fmtDT(startUTC)}/${fmtDT(endUTC)}`,
     details:  details,
-    location: 'Carrera 23 #23-45, Armenia, Quindío',
+    location: p.branch_address ?? 'Ibiza Motos, Armenia, Quindío',
   });
 
   return `https://calendar.google.com/calendar/render?${qs.toString()}`;

@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "vite-dev",
+      "name": "Ibiza Motos",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["app/node_modules/vite/bin/vite.js", "--port", "5173"],
+      "runtimeArgs": ["start-dev.js"],
       "port": 5173
     }
   ]

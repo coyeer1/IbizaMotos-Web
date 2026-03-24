@@ -6,24 +6,24 @@
 
 @layer base {
   :root {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 13%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 220 9% 10%;
+    --card: 0 0% 99%;
+    --card-foreground: 220 9% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 10%;
     --primary: 352 73% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 44 93% 63%;
-    --secondary-foreground: 0 0% 13%;
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
     --accent: 352 73% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 352 73% 50%;
     --radius: 0.625rem;
 
@@ -51,7 +51,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   html {
@@ -59,7 +59,10 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -259,11 +262,11 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--ibiza-gray-100);
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -277,7 +280,7 @@
 
 /* Selection color */
 ::selection {
-  background: rgba(215, 38, 61, 0.3);
+  background: rgba(215, 38, 61, 0.15);
   color: var(--ibiza-black);
 }
 

@@ -40,3 +40,26 @@ export function getPartWhatsApp(partName: string): string {
 export function getGeneralWhatsApp(): string {
   return getWhatsAppUrl('Hola, quiero más información sobre sus motos y servicios.');
 }
+
+// ─── Contactos por marca ───────────────────────────────────────────────────────
+// Reemplaza cada número con el WhatsApp real del encargado de esa marca.
+// Formato: código de país + número sin espacios ni guiones (ej: 573001234567)
+export const BRAND_CONTACTS: Record<string, { sales: string; parts: string }> = {
+  Suzuki:      { sales: '573214567890', parts: '573214567890' },
+  Vento:       { sales: '573214567890', parts: '573214567890' },
+  Hero:        { sales: '573214567890', parts: '573214567890' },
+  Honda:       { sales: '573214567890', parts: '573214567890' },
+  Bajaj:       { sales: '573214567890', parts: '573214567890' },
+  AKT:         { sales: '573214567890', parts: '573214567890' },
+  'Good Kidz': { sales: '573214567890', parts: '573214567890' },
+};
+
+export function getBrandSalesWhatsApp(brandName: string): string {
+  const number = BRAND_CONTACTS[brandName]?.sales ?? BUSINESS.whatsappNumber;
+  return `https://wa.me/${number}?text=${encodeURIComponent(`Hola, quiero información sobre motos ${brandName}. ¿Me pueden ayudar?`)}`;
+}
+
+export function getBrandPartsWhatsApp(brandName: string): string {
+  const number = BRAND_CONTACTS[brandName]?.parts ?? BUSINESS.whatsappNumber;
+  return `https://wa.me/${number}?text=${encodeURIComponent(`Hola, necesito repuestos originales de ${brandName}. ¿Tienen disponibilidad?`)}`;
+}

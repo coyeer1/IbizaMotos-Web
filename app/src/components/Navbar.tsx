@@ -56,10 +56,11 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || location.pathname !== '/'
-            ? 'glassmorphism shadow-lg py-2 !bg-ibiza-black/90'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled || location.pathname !== '/'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-2'
             : 'bg-transparent py-4'
-          }`}
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -72,9 +73,9 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2 group"
             >
-              <img 
-                src="/Logo-Ibiza-motos.png" 
-                alt="Ibiza Motos" 
+              <img
+                src="/Logo-Ibiza-motos.png"
+                alt="Ibiza Motos"
                 className={`transition-all duration-300 object-contain ${isScrolled || location.pathname !== '/' ? 'h-12' : 'h-14'}`}
               />
             </a>
@@ -86,8 +87,11 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative font-medium text-sm transition-colors duration-300 group ${isScrolled || location.pathname !== '/' ? 'text-gray-200 hover:text-ibiza-red' : '!text-white/90 hover:!text-white'
-                      } ${location.pathname === link.href ? 'text-ibiza-red' : ''}`}
+                    className={`relative font-medium text-sm transition-colors duration-300 group ${
+                      isScrolled || location.pathname !== '/'
+                        ? 'text-gray-600 hover:text-ibiza-red'
+                        : '!text-white/90 hover:!text-white'
+                    } ${location.pathname === link.href ? '!text-ibiza-red' : ''}`}
                   >
                     {link.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
@@ -100,8 +104,11 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className={`relative font-medium text-sm transition-colors duration-300 group ${isScrolled || location.pathname !== '/' ? 'text-gray-200 hover:text-ibiza-red' : '!text-white/90 hover:!text-white'
-                      }`}
+                    className={`relative font-medium text-sm transition-colors duration-300 group ${
+                      isScrolled || location.pathname !== '/'
+                        ? 'text-gray-600 hover:text-ibiza-red'
+                        : '!text-white/90 hover:!text-white'
+                    }`}
                   >
                     {link.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
@@ -132,9 +139,9 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-white' : '!text-white'}`} />
+                <X className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
               ) : (
-                <Menu className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-white' : '!text-white'}`} />
+                <Menu className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
               )}
             </button>
           </div>
@@ -148,7 +155,7 @@ export default function Navbar() {
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
         <div
-          className={`absolute top-0 right-0 w-80 h-full bg-ibiza-black shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
           <div className="p-6 pt-20">
@@ -163,7 +170,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg font-display font-semibold text-gray-200 hover:text-ibiza-red transition-colors py-2 border-b border-ibiza-gray-200"
+                    className="text-lg font-display font-semibold text-gray-700 hover:text-ibiza-red transition-colors py-2 border-b border-gray-100"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}
@@ -176,7 +183,7 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-lg font-display font-semibold text-gray-200 hover:text-ibiza-red transition-colors py-2 border-b border-ibiza-gray-200"
+                    className="text-lg font-display font-semibold text-gray-700 hover:text-ibiza-red transition-colors py-2 border-b border-gray-100"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}

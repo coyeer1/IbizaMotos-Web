@@ -93,7 +93,7 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-24 bg-[#0a0a0a] overflow-hidden relative" ref={ref}>
+    <section className="py-24 bg-gray-50 overflow-hidden relative" ref={ref}>
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-ibiza-red/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-ibiza-gold/5 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
@@ -114,7 +114,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display font-bold text-4xl md:text-5xl text-white mb-4"
+            className="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-4"
           >
             LO QUE DICEN NUESTROS CLIENTES
           </motion.h2>
@@ -134,7 +134,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="inline-flex items-center gap-4 bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] rounded-2xl px-6 py-4 transition-all duration-300 group"
+            className="inline-flex items-center gap-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 transition-all duration-300 group shadow-sm"
           >
             {/* Google "G" logo */}
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
@@ -147,7 +147,7 @@ export default function Testimonials() {
             </div>
             <div className="text-left">
               <div className="flex items-center gap-2">
-                <span className="font-display font-black text-2xl text-white">{GOOGLE_TOTAL_RATING}</span>
+                <span className="font-display font-black text-2xl text-gray-900">{GOOGLE_TOTAL_RATING}</span>
                 <div className="flex gap-0.5">
                   {[1,2,3,4,5].map(i => (
                     <Star key={i} className={`w-4 h-4 ${i <= Math.floor(GOOGLE_TOTAL_RATING) ? 'fill-ibiza-gold text-ibiza-gold' : 'fill-ibiza-gold/30 text-ibiza-gold/30'}`} />
@@ -155,10 +155,10 @@ export default function Testimonials() {
                 </div>
               </div>
               <p className="text-gray-400 text-xs mt-0.5">
-                <span className="text-white font-semibold">{GOOGLE_TOTAL_REVIEWS} reseñas</span> en Google
+                <span className="text-gray-900 font-semibold">{GOOGLE_TOTAL_REVIEWS} reseñas</span> en Google
               </p>
             </div>
-            <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-white/60 transition-colors ml-2" />
+            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors ml-2" />
           </motion.a>
         </div>
 
@@ -167,13 +167,13 @@ export default function Testimonials() {
           {/* Navigation arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 w-12 h-12 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-ibiza-red hover:border-ibiza-red hover:!text-white transition-all duration-300"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 z-10 w-12 h-12 bg-white backdrop-blur-sm rounded-full border border-gray-200 shadow-sm flex items-center justify-center text-gray-700 hover:bg-ibiza-red hover:border-ibiza-red hover:text-white transition-all duration-300"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 w-12 h-12 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-ibiza-red hover:border-ibiza-red hover:!text-white transition-all duration-300"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 z-10 w-12 h-12 bg-white backdrop-blur-sm rounded-full border border-gray-200 shadow-sm flex items-center justify-center text-gray-700 hover:bg-ibiza-red hover:border-ibiza-red hover:text-white transition-all duration-300"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -189,7 +189,7 @@ export default function Testimonials() {
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute inset-0 preserve-3d"
               >
-                <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-white/10 h-full flex flex-col items-center justify-center text-center relative overflow-hidden">
+                <div className="bg-white backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200 h-full flex flex-col items-center justify-center text-center relative overflow-hidden">
                   {/* Subtle gradient accent */}
                   <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${currentTestimonial.gradient}`} />
                   
@@ -210,7 +210,7 @@ export default function Testimonials() {
                   </div>
 
                   {/* Quote text */}
-                  <p className="text-lg md:text-xl text-white/90 font-medium mb-8 leading-relaxed max-w-2xl">
+                  <p className="text-lg md:text-xl text-gray-700 font-medium mb-8 leading-relaxed max-w-2xl">
                     "{currentTestimonial.text}"
                   </p>
 
@@ -222,7 +222,7 @@ export default function Testimonials() {
                       </span>
                     </div>
                     <div className="text-left">
-                      <p className="font-display font-bold text-white">
+                      <p className="font-display font-bold text-gray-900">
                         {currentTestimonial.name}
                       </p>
                       <p className="text-ibiza-red text-sm font-medium">
@@ -246,7 +246,7 @@ export default function Testimonials() {
                 onClick={() => goToSlide(index)}
                 className={`transition-all duration-300 ${index === currentIndex
                     ? 'w-10 h-3 bg-ibiza-red rounded-full shadow-[0_0_10px_rgba(227,25,55,0.4)]'
-                    : 'w-3 h-3 bg-white/10 rounded-full hover:bg-white/20'
+                    : 'w-3 h-3 bg-gray-300 rounded-full hover:bg-gray-400'
                   }`}
               />
             ))}

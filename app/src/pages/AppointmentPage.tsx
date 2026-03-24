@@ -4,11 +4,45 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, CheckCircle2, Calendar, Clock,
   Wrench, ShieldAlert, Cpu, Search, User, Phone, Mail,
-  Bike, MessageSquare, ChevronLeft, ChevronRight, Loader2
+  Bike, MessageSquare, ChevronLeft, ChevronRight, Loader2, MapPin
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabase';
-import { buildGoogleCalendarUrl, notifyAppsScript } from '@/lib/googleCalendar';
+import { buildGoogleCalendarUrl, notifyAppsScript, type CalendarEventParams } from '@/lib/googleCalendar';
+import { branches } from '@/data/motorcycles';
+
+// ─── WhatsApp admin notification via CallMeBot (no official API) ──────────────
+async function notifyWhatsAppAdmin(p: CalendarEventParams): Promise<void> {
+  const phone  = import.meta.env.VITE_CALLMEBOT_PHONE  as string | undefined;
+  const apikey = import.meta.env.VITE_CALLMEBOT_APIKEY as string | undefined;
+  if (!phone || !apikey) return;
+
+  const SERVICE_SHORT: Record<string, string> = {
+    mantenimiento: 'Mantenimiento',
+    revision:      'Revisión general',
+    frenos:        'Frenos / Suspensión',
+    motor:         'Reparación motor',
+  };
+
+  const lines = [
+    '🏍️ *Nueva cita – Ibiza Motos*',
+    `📋 ${SERVICE_SHORT[p.service] ?? p.service}`,
+    `📅 ${p.appt_date}  ⏰ ${p.appt_time}`,
+    `👤 ${p.name}  📞 ${p.phone}`,
+    p.motorcycle  ? `🏍️ ${p.motorcycle}`  : null,
+    p.branch_name ? `📍 ${p.branch_name}` : null,
+    p.notes       ? `📝 ${p.notes}`       : null,
+  ].filter(Boolean).join('\n');
+
+  try {
+    await fetch(
+      `https://api.callmebot.com/whatsapp.php?phone=${phone}&text=${encodeURIComponent(lines)}&apikey=${apikey}`,
+      { mode: 'no-cors' },
+    );
+  } catch {
+    console.warn('[Ibiza Motos] Notificación WhatsApp falló silenciosamente.');
+  }
+}
 
 // ─── Servicios disponibles ────────────────────────────────────────────────────
 const SERVICES = [
@@ -61,11 +95,12 @@ const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Ago
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 interface FormData {
-  name: string;
-  phone: string;
-  email: string;
+  name:       string;
+  phone:      string;
+  email:      string;
   motorcycle: string;
-  notes: string;
+  notes:      string;
+  branch_id:  string;
 }
 
 // ─── Mini Calendar ────────────────────────────────────────────────────────────
@@ -179,7 +214,7 @@ export default function AppointmentPage() {
   );
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState('');
-  const [form, setForm] = useState<FormData>({ name: '', phone: '', email: '', motorcycle: '', notes: '' });
+  const [form, setForm] = useState<FormData>({ name: '', phone: '', email: '', motorcycle: '', notes: '', branch_id: '' });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -197,30 +232,36 @@ export default function AppointmentPage() {
     `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
   const handleSubmit = async () => {
-    if (!selectedDate || !selectedTime || !form.name || !form.phone) return;
+    if (!selectedDate || !selectedTime || !form.name || !form.phone || !form.branch_id) return;
     setSubmitting(true);
     setError('');
 
-    const apptParams = {
-      service:    selectedService,
-      appt_date:  formatDateISO(selectedDate),
-      appt_time:  selectedTime,
-      name:       form.name.trim(),
-      phone:      form.phone.trim(),
-      email:      form.email.trim() || undefined,
-      motorcycle: form.motorcycle.trim() || undefined,
-      notes:      form.notes.trim() || undefined,
+    const selectedBranch = branches.find(b => b.id === form.branch_id);
+
+    const apptParams: CalendarEventParams = {
+      service:        selectedService,
+      appt_date:      formatDateISO(selectedDate),
+      appt_time:      selectedTime,
+      name:           form.name.trim(),
+      phone:          form.phone.trim(),
+      email:          form.email.trim() || undefined,
+      motorcycle:     form.motorcycle.trim() || undefined,
+      notes:          form.notes.trim() || undefined,
+      branch_name:    selectedBranch?.name,
+      branch_address: selectedBranch?.address,
     };
 
     const { error: err } = await supabase.from('workshop_appointments').insert({
-      name:       apptParams.name,
-      phone:      apptParams.phone,
-      email:      apptParams.email ?? null,
-      motorcycle: apptParams.motorcycle ?? null,
-      service:    apptParams.service,
-      appt_date:  apptParams.appt_date,
-      appt_time:  apptParams.appt_time,
-      notes:      apptParams.notes ?? null,
+      name:           apptParams.name,
+      phone:          apptParams.phone,
+      email:          apptParams.email ?? null,
+      motorcycle:     apptParams.motorcycle ?? null,
+      service:        apptParams.service,
+      appt_date:      apptParams.appt_date,
+      appt_time:      apptParams.appt_time,
+      notes:          apptParams.notes ?? null,
+      branch_name:    apptParams.branch_name ?? null,
+      branch_address: apptParams.branch_address ?? null,
     });
 
     if (err) {
@@ -229,8 +270,11 @@ export default function AppointmentPage() {
       return;
     }
 
-    // Notificar al Google Calendar de la empresa (fire-and-forget)
-    await notifyAppsScript(apptParams);
+    // Notificar al Google Calendar y WhatsApp del admin (fire-and-forget)
+    await Promise.all([
+      notifyAppsScript(apptParams),
+      notifyWhatsAppAdmin(apptParams),
+    ]);
 
     setSubmitting(false);
     setSubmitted(true);
@@ -276,10 +320,11 @@ export default function AppointmentPage() {
           {/* Resumen */}
           <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 text-left mb-6 space-y-2">
             {[
-              { label: 'Servicio', value: serviceInfo?.label || selectedService },
-              { label: 'Fecha',    value: selectedDate ? formatDate(selectedDate) : '' },
-              { label: 'Hora',     value: selectedTime },
-              { label: 'Cliente',  value: form.name },
+              { label: 'Servicio',  value: serviceInfo?.label || selectedService },
+              { label: 'Fecha',     value: selectedDate ? formatDate(selectedDate) : '' },
+              { label: 'Hora',      value: selectedTime },
+              { label: 'Sucursal',  value: branches.find(b => b.id === form.branch_id)?.name || '' },
+              { label: 'Cliente',   value: form.name },
               ...(form.motorcycle ? [{ label: 'Moto', value: form.motorcycle }] : []),
             ].map(({ label, value }) => (
               <div key={label} className="flex justify-between text-sm">
@@ -500,6 +545,37 @@ export default function AppointmentPage() {
                 </div>
               </div>
 
+              {/* Selector de sucursal */}
+              <div className="mb-6">
+                <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5" /> Elige la sucursal *
+                </p>
+                <div className="grid sm:grid-cols-3 gap-3">
+                  {branches.map(branch => (
+                    <button
+                      key={branch.id}
+                      type="button"
+                      onClick={() => setForm(f => ({ ...f, branch_id: branch.id }))}
+                      className={`text-left rounded-xl border p-4 transition-all duration-200 ${
+                        form.branch_id === branch.id
+                          ? 'border-ibiza-red bg-ibiza-red/10 shadow-[0_0_20px_rgba(227,25,55,0.12)]'
+                          : 'border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <MapPin className={`w-4 h-4 mt-0.5 shrink-0 ${form.branch_id === branch.id ? 'text-ibiza-red' : 'text-white/30'}`} />
+                        {form.branch_id === branch.id && (
+                          <CheckCircle2 className="w-4 h-4 text-ibiza-red shrink-0" />
+                        )}
+                      </div>
+                      <p className="font-bold text-white text-sm mb-1">{branch.name}</p>
+                      <p className="text-white/40 text-xs leading-relaxed">{branch.address}</p>
+                      <p className="text-white/25 text-[10px] mt-1">{branch.hours}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Formulario */}
               <div className="space-y-4 mb-8">
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -576,7 +652,7 @@ export default function AppointmentPage() {
               )}
 
               <Button
-                disabled={!form.name || !form.phone || submitting}
+                disabled={!form.name || !form.phone || !form.branch_id || submitting}
                 onClick={handleSubmit}
                 className="w-full bg-ibiza-red hover:bg-ibiza-red/90 text-white font-display font-bold h-14 rounded-2xl text-base disabled:opacity-40 disabled:cursor-not-allowed"
               >

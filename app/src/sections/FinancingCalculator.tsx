@@ -50,16 +50,16 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
   if (compact) {
     // Versión compacta para usar dentro de MotorcyclePage
     return (
-      <div className="bg-white/[0.03] rounded-2xl p-6 border border-white/[0.06] space-y-4">
+      <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 space-y-4">
         <div className="flex items-center gap-2 mb-2">
           <Calculator className="w-5 h-5 text-ibiza-red" />
-          <h4 className="font-display font-bold text-white">Calcula tu cuota</h4>
+          <h4 className="font-display font-bold text-gray-900">Calcula tu cuota</h4>
         </div>
 
         {/* Initial percent */}
         <div>
           <label className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2 block">
-            Cuota inicial: <span className="text-white">{initialPct}% — {formatCOP(results.initial)}</span>
+            Cuota inicial: <span className="text-gray-900">{initialPct}% — {formatCOP(results.initial)}</span>
           </label>
           <input
             type="range" min={10} max={50} step={5}
@@ -67,7 +67,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
             onChange={e => setInitialPct(Number(e.target.value))}
             className="w-full accent-ibiza-red"
           />
-          <div className="flex justify-between text-[10px] text-white/20 mt-1">
+          <div className="flex justify-between text-[10px] text-gray-400 mt-1">
             <span>10%</span><span>30%</span><span>50%</span>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
               <button
                 key={t}
                 onClick={() => setTerm(t)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${term === t ? 'bg-ibiza-red text-white' : 'bg-white/5 text-white/40 hover:text-white/70'}`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${term === t ? 'bg-ibiza-red text-white' : 'bg-gray-200 text-gray-500 hover:text-gray-700'}`}
               >
                 {t}m
               </button>
@@ -91,7 +91,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
         {/* Result */}
         <div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-xl p-4 text-center">
           <p className="text-[10px] text-ibiza-red/70 font-bold tracking-widest uppercase mb-1">Cuota mensual estimada</p>
-          <p className="font-display font-black text-3xl text-white">{formatCOP(results.monthly)}</p>
+          <p className="font-display font-black text-3xl text-gray-900">{formatCOP(results.monthly)}</p>
           <p className="text-[10px] text-gray-500 mt-1">Total a pagar: {formatCOP(results.total)}</p>
         </div>
 
@@ -108,7 +108,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
 
   // Full section version
   return (
-    <section ref={ref} className="py-24 bg-ibiza-black relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-ibiza-red/5 rounded-full blur-[150px] -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-64 h-64 bg-ibiza-gold/5 rounded-full blur-[120px] -translate-y-1/2" />
@@ -130,7 +130,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
               Financiamiento
             </p>
           </div>
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-4">
+          <h2 className="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-4">
             CALCULA TU <span className="text-ibiza-red">CUOTA</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
@@ -145,7 +145,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
             initial={{ opacity: 0, x: -30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="bg-white/[0.02] rounded-3xl p-8 border border-white/[0.05] space-y-8"
+            className="bg-gray-50 rounded-3xl p-8 border border-gray-200 space-y-8"
           >
             {/* Price input */}
             <div>
@@ -158,7 +158,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
                   type="number"
                   value={price}
                   onChange={e => setPrice(Math.max(1000000, Number(e.target.value)))}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] text-white rounded-xl pl-8 pr-4 py-3.5 font-display font-bold text-lg focus:border-ibiza-red outline-none transition-colors"
+                  className="w-full bg-white border border-gray-200 text-gray-900 rounded-xl pl-8 pr-4 py-3.5 font-display font-bold text-lg focus:border-ibiza-red outline-none transition-colors"
                   step={500000}
                   min={1000000}
                 />
@@ -170,7 +170,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
                 onChange={e => setPrice(Number(e.target.value))}
                 className="w-full mt-3 accent-ibiza-red"
               />
-              <div className="flex justify-between text-[10px] text-white/20 mt-1">
+              <div className="flex justify-between text-[10px] text-gray-400 mt-1">
                 <span>$1M</span><span>$10M</span><span>$20M</span>
               </div>
             </div>
@@ -178,14 +178,14 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
             {/* Initial payment */}
             <div>
               <label className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 block">
-                Cuota inicial: <span className="text-white">{initialPct}% — {formatCOP(results.initial)}</span>
+                Cuota inicial: <span className="text-gray-900">{initialPct}% — {formatCOP(results.initial)}</span>
               </label>
               <div className="flex gap-2 flex-wrap mb-3">
                 {INITIAL_OPTIONS.map(pct => (
                   <button
                     key={pct}
                     onClick={() => setInitialPct(pct)}
-                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${initialPct === pct ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : 'bg-white/[0.04] text-white/40 border border-white/[0.08] hover:text-white/70'}`}
+                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${initialPct === pct ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}
                   >
                     {pct}%
                   </button>
@@ -209,7 +209,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
                   <button
                     key={t}
                     onClick={() => setTerm(t)}
-                    className={`py-3 rounded-xl text-sm font-bold transition-all flex flex-col items-center ${term === t ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : 'bg-white/[0.04] text-white/40 border border-white/[0.08] hover:text-white/70'}`}
+                    className={`py-3 rounded-xl text-sm font-bold transition-all flex flex-col items-center ${term === t ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}
                   >
                     <span className="text-base">{t}</span>
                     <span className="text-[9px] tracking-wider">meses</span>
@@ -221,7 +221,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
             {/* Interest rate */}
             <div>
               <label className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 block">
-                Tasa mensual estimada: <span className="text-white">{rate.toFixed(1)}%</span>
+                Tasa mensual estimada: <span className="text-gray-900">{rate.toFixed(1)}%</span>
               </label>
               <input
                 type="range" min={0.5} max={3.5} step={0.1}
@@ -229,7 +229,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
                 onChange={e => setRate(Number(e.target.value))}
                 className="w-full accent-ibiza-red"
               />
-              <div className="flex justify-between text-[10px] text-white/20 mt-1">
+              <div className="flex justify-between text-[10px] text-gray-400 mt-1">
                 <span>0.5% (mín)</span><span>1.8% (típica)</span><span>3.5% (máx)</span>
               </div>
             </div>
@@ -269,12 +269,12 @@ export default function FinancingCalculator({ initialPrice = 8000000, compact = 
                 { icon: <Calendar className="w-5 h-5" />, label: 'Total a pagar', value: formatCOP(results.total), sub: `En ${term} cuotas` },
                 { icon: <Calculator className="w-5 h-5" />, label: 'Total en intereses', value: formatCOP(results.totalInterest), sub: `Tasa ${rate.toFixed(1)}%/mes` },
               ].map((item, i) => (
-                <div key={i} className="bg-white/[0.02] rounded-2xl p-5 border border-white/[0.05]">
+                <div key={i} className="bg-gray-50 rounded-2xl p-5 border border-gray-200">
                   <div className="w-9 h-9 rounded-xl bg-ibiza-red/10 flex items-center justify-center text-ibiza-red mb-3">
                     {item.icon}
                   </div>
                   <p className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-1">{item.label}</p>
-                  <p className="font-display font-bold text-white text-lg leading-tight">{item.value}</p>
+                  <p className="font-display font-bold text-gray-900 text-lg leading-tight">{item.value}</p>
                   <p className="text-[10px] text-gray-600 mt-0.5">{item.sub}</p>
                 </div>
               ))}
