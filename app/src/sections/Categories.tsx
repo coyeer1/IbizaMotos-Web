@@ -221,36 +221,53 @@ function CategoryCard({
       onClick={onNavigate}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-ibiza-red focus-visible:ring-offset-2 rounded-[20px]"
+      className="w-full text-left focus:outline-none rounded-[22px]"
     >
       <div
         style={{
-          borderRadius: '20px',
+          borderRadius: '22px',
           overflow: 'hidden',
-          background: `linear-gradient(175deg, ${cat.bgFrom} 0%, #ffffff 55%)`,
-          transform: hovered ? 'translateY(-10px) scale(1.015)' : 'translateY(0) scale(1)',
-          boxShadow: hovered
-            ? `0 28px 64px ${cat.accent}22, 0 8px 24px rgba(0,0,0,0.10)`
-            : '0 2px 12px rgba(0,0,0,0.06)',
-          transition:
-            'transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.42s ease',
-          minHeight: '440px',
+          background: cat.bgFrom,
+          height: '480px',
           display: 'flex',
           flexDirection: 'column',
+          position: 'relative',
+          transform: hovered ? 'translateY(-12px)' : 'translateY(0)',
+          boxShadow: hovered
+            ? `0 32px 72px ${cat.accent}28, 0 8px 28px rgba(0,0,0,0.12)`
+            : '0 2px 16px rgba(0,0,0,0.07)',
+          transition: 'transform 0.42s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.42s ease',
         }}
       >
-        {/* ── Bike image ── */}
+        {/* ── MOTO — protagonista absoluta (80% de la tarjeta) ── */}
         <div
           style={{
+            flex: 1,
             position: 'relative',
-            flex: '0 0 260px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             overflow: 'hidden',
-            padding: '28px 20px 12px',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            padding: '24px 8px 0',
           }}
         >
+          {/* Glow radial bajo la moto */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-20px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '90%',
+              height: '55%',
+              background: `radial-gradient(ellipse at center bottom, ${cat.accent}28 0%, transparent 65%)`,
+              opacity: hovered ? 1 : 0.3,
+              transition: 'opacity 0.45s ease',
+              pointerEvents: 'none',
+              borderRadius: '50%',
+            }}
+          />
+
           <img
             src={cat.image}
             alt={cat.name}
@@ -259,113 +276,67 @@ function CategoryCard({
               width: '100%',
               height: '100%',
               objectFit: 'contain',
+              objectPosition: 'center bottom',
               transform: hovered
-                ? 'scale(1.12) translateY(-8px)'
+                ? 'scale(1.09) translateY(-10px)'
                 : 'scale(1) translateY(0)',
               filter: hovered
-                ? 'drop-shadow(0 16px 24px rgba(0,0,0,0.22))'
-                : 'drop-shadow(0 4px 8px rgba(0,0,0,0.10))',
+                ? `drop-shadow(0 20px 32px rgba(0,0,0,0.28))`
+                : 'drop-shadow(0 6px 12px rgba(0,0,0,0.12))',
               transition:
-                'transform 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease',
+                'transform 0.48s cubic-bezier(0.34,1.56,0.64,1), filter 0.45s ease',
               userSelect: 'none',
-            }}
-          />
-
-          {/* Radial color glow under bike on hover */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '80%',
-              height: '40%',
-              background: `radial-gradient(ellipse at center, ${cat.accent}20 0%, transparent 70%)`,
-              opacity: hovered ? 1 : 0,
-              transition: 'opacity 0.4s ease',
-              pointerEvents: 'none',
             }}
           />
         </div>
 
-        {/* ── Text content ── */}
-        <div style={{ padding: '4px 24px 26px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-
-          {/* Animated accent bar */}
-          <div
-            style={{
-              height: '3px',
-              borderRadius: '2px',
-              background: cat.accent,
-              width: hovered ? '52px' : '32px',
-              marginBottom: '12px',
-              transition: 'width 0.35s ease',
-            }}
-          />
-
-          {/* Model name (small label) */}
-          <p
-            style={{
-              fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: '#9ca3af',
-              marginBottom: '4px',
-            }}
-          >
-            {cat.model}
-          </p>
-
-          {/* Category name */}
+        {/* ── Bottom strip — solo lo esencial ── */}
+        <div
+          style={{
+            padding: '14px 22px 20px',
+            background: '#ffffff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+          }}
+        >
+          {/* Nombre de categoría */}
           <h3
             style={{
-              fontFamily: 'inherit',
               fontWeight: 900,
-              fontSize: 'clamp(1.6rem, 2.5vw, 2.1rem)',
+              fontSize: 'clamp(1.5rem, 2.2vw, 2rem)',
               lineHeight: 1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
               color: hovered ? cat.accent : '#111827',
               transition: 'color 0.3s ease',
-              marginBottom: '8px',
+              margin: 0,
             }}
           >
             {cat.name}
           </h3>
 
-          {/* Description */}
-          <p
-            style={{
-              fontSize: '13px',
-              color: '#6b7280',
-              lineHeight: 1.55,
-              marginBottom: '18px',
-              flex: 1,
-            }}
-          >
-            {cat.description}
-          </p>
-
-          {/* CTA button */}
+          {/* Botón pill */}
           <div
             style={{
+              flexShrink: 0,
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
-              padding: '10px 20px',
+              gap: '5px',
+              padding: '9px 18px',
               borderRadius: '100px',
               background: cat.accent,
               color: '#fff',
-              fontSize: '13px',
+              fontSize: '12px',
               fontWeight: 700,
-              letterSpacing: '0.01em',
-              transform: hovered ? 'scale(1.05)' : 'scale(1)',
+              letterSpacing: '0.02em',
+              transform: hovered ? 'scale(1.06)' : 'scale(1)',
               transition: 'transform 0.3s ease',
-              alignSelf: 'flex-start',
+              whiteSpace: 'nowrap',
             }}
           >
             Conócelas
-            <ChevronRight style={{ width: '14px', height: '14px' }} />
+            <ChevronRight style={{ width: '13px', height: '13px' }} />
           </div>
         </div>
       </div>
