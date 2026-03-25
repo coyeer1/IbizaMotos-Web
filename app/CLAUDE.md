@@ -122,3 +122,36 @@ Nueva sección entre Testimonials y Locations. Carrusel con:
 
 ### Orden de secciones en Home (`src/pages/Home.tsx`)
 Hero → PromosBanner → Brands → Categories → BrandSelector → FinancingCalculator → SpareParts → Services → Blog → Testimonials → **HappyCustomers** → Locations
+
+### Sección Categorías — carousel AKT-style (`src/sections/Categories.tsx`)
+Rediseñada como carousel horizontal inspirado en aktmotos.com. Puntos clave:
+
+- **5 tarjetas** con imágenes PNG de producto en `/public/categories/` (gixxer.png, nkd.png, burgamn.png, special-110.png, xr.png)
+- Cada categoría define `focalX` y `focalY` (%) + `transform: scale(2.2)` con `transformOrigin` al punto focal → simula zoom al faro delantero de la moto
+- Hover escala a `scale(2.38)` vía `onMouseEnter/onMouseLeave` directos en el `<img>` (no Framer Motion, para máximo rendimiento)
+- Layout: `overflow-x-auto + scroll-snap`, sin scrollbar visible (`no-scrollbar` clase custom en `index.css`)
+- Flechas circulares izquierda/derecha hacen `scrollBy` de exactamente 1 card width + gap
+- Texto y botón "Conócelas" son overlay inferior con gradiente oscuro
+
+**Para ajustar el zoom focal de una moto**: cambiar `focalX`/`focalY` en el array `CATEGORIES`. Valores más altos en X mueven el recorte hacia la derecha de la imagen.
+
+### Calculadora de Financiamiento — selector de financieras (`src/sections/FinancingCalculator.tsx`)
+Rediseñada con selector de 8 entidades financieras reales (datos 2026):
+
+| ID | Tasa mensual | Comisión | Plazo máx |
+|---|---|---|---|
+| `progreser` | 1.83% | 0% | 60 m |
+| `bancobogota` | 1.26% | 0% | 60 m |
+| `sufi` | 1.73% | 0% | 48 m |
+| `brilla` | 1.81% | 0.93% | 48 m |
+| `addi` | 1.83% | 3% | 36 m |
+| `venfi` | 1.80% | 3% | 36 m |
+| `sistecredito` | 1.90% | 10% | 36 m |
+| `crediorbe` | 3.72% | 0% | 24 m |
+
+- `selectedFin` controla tasa, comisión y plazo máximo disponible de manera reactiva
+- La comisión es un cobro único sobre el monto financiado (no sobre el precio total), se muestra separado en los resultados
+- Los plazos se deshabilitan si superan `fin.maxMonths` de la financiera seleccionada
+- El color de la sección (acento, botones, tarjeta resultado) cambia al color de la financiera activa
+- El mensaje de WhatsApp incluye el nombre de la financiera seleccionada
+- La versión `compact` (usada dentro de `MotorcyclePage`) también tiene el selector de financieras
