@@ -9,40 +9,40 @@ const CATEGORIES = [
     name: 'Calle',
     filterCategory: 'City',
     image: '/categories/gixxer.png',
-    focalX: 18, // frente a la izquierda
-    focalY: 62,
+    focalX: 80,
+    focalY: 38,
   },
   {
     slug: 'aventura',
     name: 'Aventura',
     filterCategory: 'Adventure',
     image: '/categories/nkd.png',
-    focalX: 18, // frente a la izquierda
-    focalY: 62,
+    focalX: 80,
+    focalY: 42,
   },
   {
     slug: 'automaticas',
     name: 'Automáticas',
     filterCategory: 'Scooters',
     image: '/categories/burgamn.png',
-    focalX: 78, // frente a la derecha
-    focalY: 62,
+    focalX: 78,
+    focalY: 40,
   },
   {
     slug: 'semi-automaticas',
     name: 'Semi\nautomáticas',
     filterCategory: 'City',
     image: '/categories/special-110.png',
-    focalX: 78, // frente a la derecha
-    focalY: 62,
+    focalX: 80,
+    focalY: 42,
   },
   {
     slug: 'enduro',
     name: 'Enduro',
     filterCategory: 'Enduro',
     image: '/categories/xr.png',
-    focalX: 78, // frente a la derecha
-    focalY: 62,
+    focalX: 75,
+    focalY: 40,
   },
 ];
 
@@ -101,14 +101,14 @@ export default function Categories() {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[350ms] ease-out"
                 style={{
                   objectPosition: `${cat.focalX}% ${cat.focalY}%`,
-                  transform: 'scale(2.1)',
+                  transform: 'scale(2.2)',
                   transformOrigin: `${cat.focalX}% ${cat.focalY}%`,
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLImageElement).style.transform = 'scale(2.28)';
+                  (e.currentTarget as HTMLImageElement).style.transform = 'scale(2.38)';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLImageElement).style.transform = 'scale(2.1)';
+                  (e.currentTarget as HTMLImageElement).style.transform = 'scale(2.2)';
                 }}
               />
 
