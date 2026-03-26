@@ -14,6 +14,7 @@ import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
 import { ComparatorProvider } from '@/components/MotoComparator';
+import ScrollRestorer from '@/components/ScrollRestorer';
 
 function AppContent() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function AppContent() {
       {!isAdminRoute && <Footer />}
 
       {/* Global Utilities */}
+      <ScrollRestorer />
       <Analytics />
       {!isAdminRoute && <WhatsAppFloat />}
     </div>
