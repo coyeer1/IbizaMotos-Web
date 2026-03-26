@@ -30,6 +30,7 @@ interface CatalogProps {
   selectedBrand: string;
   setSelectedBrand: (brand: string) => void;
   hideTitle?: boolean;
+  initialCategory?: string;
 }
 
 const colorMap: Record<string, string> = {
@@ -238,10 +239,10 @@ const MotoCard = ({
   );
 };
 
-export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand, hideTitle }: CatalogProps) {
+export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand, hideTitle, initialCategory }: CatalogProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.05 });
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory || 'all');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000000]);
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState<'price-asc' | 'price-desc' | 'name'>('name');

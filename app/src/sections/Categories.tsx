@@ -86,7 +86,7 @@ export default function Categories() {
           {CATEGORIES.map((cat) => (
             <button
               key={cat.slug}
-              onClick={() => navigate(`/?categoria=${cat.filterCategory}`)}
+              onClick={() => navigate(`/marca/todas?categoria=${encodeURIComponent(cat.filterCategory)}`)}
               className="cat-card group relative flex-shrink-0 snap-start overflow-hidden cursor-pointer transition-all duration-[350ms] ease-out hover:-translate-y-1.5 focus:outline-none"
               style={{
                 width: 'clamp(260px, 20vw, 380px)',

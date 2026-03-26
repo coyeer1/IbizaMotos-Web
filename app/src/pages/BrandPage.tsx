@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Motorcycle } from '@/types';
 import Catalog from '@/sections/Catalog';
 import { brands } from '@/data/motorcycles';
@@ -7,8 +7,11 @@ import { brands } from '@/data/motorcycles';
 export default function BrandPage() {
     const { brandId } = useParams<{ brandId: string }>();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const initialCategory = searchParams.get('categoria') || 'all';
 
     // Convert url parameter to proper brand name (e.g. 'suzuki' to 'Suzuki')
+    // 'todas' = show all brands
     const brandData = brands.find(b => b.name.toLowerCase() === brandId?.toLowerCase());
 
     // We maintain state so Catalog works properly, but initialized to the URL brand
@@ -31,7 +34,7 @@ export default function BrandPage() {
     return (
         <div className="min-h-screen bg-ibiza-black pt-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-4">
-                {brandData && (
+                {brandData ? (
                     <div className="flex items-center gap-6">
                         <div className="w-32 h-20 rounded-xl flex items-center justify-center bg-ibiza-gray-100 p-4 border border-border">
                             <img src={brandData.logo} alt={brandData.name} className="w-full h-full object-contain filter brightness-0 invert opacity-80" />
@@ -40,6 +43,13 @@ export default function BrandPage() {
                             <h1 className="text-4xl font-display font-bold text-white">Catálogo {brandData.name}</h1>
                             <p className="text-gray-400 mt-2">Explora todos los modelos disponibles</p>
                         </div>
+                    </div>
+                ) : (
+                    <div>
+                        <h1 className="text-4xl font-display font-bold text-white">
+                            {initialCategory !== 'all' ? initialCategory : 'Catálogo completo'}
+                        </h1>
+                        <p className="text-gray-400 mt-2">Todas las marcas · Todas las motos</p>
                     </div>
                 )}
             </div>
@@ -50,6 +60,7 @@ export default function BrandPage() {
                 selectedBrand={selectedBrand}
                 setSelectedBrand={setSelectedBrand}
                 hideTitle={true}
+                initialCategory={initialCategory}
             />
         </div>
     );
