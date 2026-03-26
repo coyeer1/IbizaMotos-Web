@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import type { Motorcycle } from '@/types';
 import { Search, X, SlidersHorizontal, ArrowRight, Gauge, Zap, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
@@ -34,9 +34,19 @@ interface CatalogProps {
 
 const colorMap: Record<string, string> = {
   'Negro Mate': '#1a1a1a', 'Negro': '#111', 'Rojo': '#dc2626',
-  'Blanco': '#e5e5e5', 'Azul': '#2563eb', 'Azul Metálico': '#1e40af',
+  'Blanco': '#f5f5f5', 'Azul': '#2563eb', 'Azul Metálico': '#1e40af',
   'Verde': '#16a34a', 'Verde Militar': '#3f4f3a', 'Gris': '#6b7280',
-  'Naranja': '#f97316',
+  'Naranja': '#f97316', 'Amarillo': '#eab308', 'Dorado': '#d97706',
+  'Plateado': '#9ca3af', 'Café': '#92400e', 'Púrpura': '#7c3aed',
+  'Lima': '#84cc16', 'Beige': '#d4b896', 'Neon': '#39ff14',
+  'Rojo/Blanco': '#dc2626', 'Azul/Negro': '#1e40af', 'Negro/Rojo': '#111',
+  'Negro/Azul': '#111', 'Negro/Gris': '#111', 'Gris/Lima': '#6b7280',
+  'Negro/Púrpura': '#111', 'Verde/Negro': '#16a34a', 'Naranja/Negro': '#f97316',
+  'Blanco/Azul': '#f5f5f5', 'Blanco/Negro': '#f5f5f5',
+  'Rojo Passion': '#dc2626', 'Negro Graphite': '#111',
+  'Blanco Perlado': '#f5f5f5', 'Negro Metallic': '#111', 'Gris Glacial': '#9ca3af',
+  'Blanco/Rojo': '#f5f5f5', 'Negro/Gris': '#111', 'Azul/Negro': '#1e40af',
+  'Rojo/Negro': '#dc2626', 'Negro/Lima': '#111', 'Verde Neon': '#39ff14',
 };
 
 // ─── Premium Motorcycle Card ───
@@ -52,6 +62,22 @@ const MotoCard = ({
   const cc = motorcycle.specifications?.engine?.match(/([0-9.]+)\s*cc/i)?.[1] || '';
   const hp = motorcycle.specifications?.power?.match(/([0-9.]+)\s*HP/i)?.[1] || '';
 
+  // Color picker state — default to first color with images, or null
+  const colorKeys = motorcycle.imagesByColor ? Object.keys(motorcycle.imagesByColor) : [];
+  const [selectedColor, setSelectedColor] = useState<string | null>(colorKeys[0] ?? null);
+
+  const activeImage = useMemo(() => {
+    if (selectedColor && motorcycle.imagesByColor?.[selectedColor]?.[0]) {
+      return motorcycle.imagesByColor[selectedColor][0];
+    }
+    return motorcycle.images?.[0] ?? null;
+  }, [selectedColor, motorcycle]);
+
+  const handleColorClick = useCallback((e: React.MouseEvent, color: string) => {
+    e.stopPropagation();
+    setSelectedColor(color);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -64,14 +90,14 @@ const MotoCard = ({
 
         {/* ── IMAGE AREA ── */}
         <div className="relative h-72 overflow-hidden rounded-xl m-3 mb-0">
-          {/* Light background consistent with card */}
+          {/* Light background */}
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl" />
 
-          {/* The motorcycle image — CLEAR and prominent */}
+          {/* The motorcycle image */}
           <div className="absolute inset-0 flex items-center justify-center p-5">
-            {motorcycle.images && motorcycle.images.length > 0 ? (
+            {activeImage ? (
               <img
-                src={motorcycle.images[0]}
+                src={activeImage}
                 alt={motorcycle.model}
                 loading="lazy"
                 decoding="async"
@@ -119,7 +145,7 @@ const MotoCard = ({
 
         {/* ── CONTENT AREA ── */}
         <div className="relative px-5 pb-5 pt-4 flex-1 flex flex-col z-20">
-          
+
           {/* Brand tag */}
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[11px] font-bold text-ibiza-red tracking-[0.15em] uppercase">
@@ -136,14 +162,35 @@ const MotoCard = ({
             {motorcycle.model}
           </h3>
 
-          {/* Color Options */}
-          {motorcycle.specifications?.colors && motorcycle.specifications.colors.length > 0 && (
+          {/* Color Picker — interactive buttons */}
+          {colorKeys.length > 0 ? (
+            <div className="flex items-center gap-2 mb-4" onClick={e => e.stopPropagation()}>
+              <div className="flex gap-1.5">
+                {colorKeys.slice(0, 6).map((color) => (
+                  <button
+                    key={color}
+                    onClick={(e) => handleColorClick(e, color)}
+                    className={`rounded-full transition-all duration-200 flex-shrink-0 ${
+                      selectedColor === color
+                        ? 'w-7 h-7 border-[3px] border-ibiza-red shadow-[0_0_0_1px_white] scale-110'
+                        : 'w-5 h-5 border-2 border-white shadow-sm hover:scale-110 hover:border-gray-300'
+                    }`}
+                    style={{ backgroundColor: colorMap[color] || '#555' }}
+                    title={color}
+                  />
+                ))}
+              </div>
+              {selectedColor && (
+                <span className="text-[10px] text-gray-500 font-medium">{selectedColor}</span>
+              )}
+            </div>
+          ) : motorcycle.specifications?.colors && motorcycle.specifications.colors.length > 0 ? (
             <div className="flex items-center gap-2 mb-4">
               <div className="flex -space-x-1">
                 {motorcycle.specifications.colors.slice(0, 5).map((color, i) => (
                   <div
                     key={i}
-                    className="w-5 h-5 rounded-full border-2 border-white"
+                    className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
                     style={{ backgroundColor: colorMap[color] || '#555', zIndex: 5 - i }}
                     title={color}
                   />
@@ -153,7 +200,7 @@ const MotoCard = ({
                 {motorcycle.specifications.colors.length} colores
               </span>
             </div>
-          )}
+          ) : null}
 
           {/* Spacer */}
           <div className="flex-1" />
