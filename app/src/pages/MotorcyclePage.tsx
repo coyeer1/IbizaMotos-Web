@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
 import { getBuyWhatsApp, getWhatsAppUrl } from '@/lib/config';
-import FinancingCalculator from '@/sections/FinancingCalculator';
+import { Calculator, ArrowRight } from 'lucide-react';
 import type { Motorcycle } from '@/types';
+import { CompareButton } from '@/components/MotoComparator';
 
 // Map de colores para renderizar
 const colorMap: Record<string, string> = {
@@ -80,6 +81,37 @@ export default function MotorcyclePage() {
             }
         }
     }, [id, navigate, motorcycles, loading]);
+
+    // SEO: update page title and meta tags
+    useEffect(() => {
+        if (!motorcycle) return;
+        const title = `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} | Ibiza Motos`;
+        document.title = title;
+
+        const setMeta = (name: string, content: string, prop = false) => {
+            const attr = prop ? 'property' : 'name';
+            let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+            if (!el) {
+                el = document.createElement('meta');
+                el.setAttribute(attr, name);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('content', content);
+        };
+
+        const price = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(motorcycle.price);
+        const desc = `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} - ${price}. ${motorcycle.category}. Disponible en Ibiza Motos, Armenia Quindío.`;
+
+        setMeta('description', desc);
+        setMeta('og:title', title, true);
+        setMeta('og:description', desc, true);
+        if (motorcycle.images?.[0]) setMeta('og:image', motorcycle.images[0], true);
+        setMeta('og:type', 'product', true);
+
+        return () => {
+            document.title = 'Ibiza Motos | El placer en dos ruedas';
+        };
+    }, [motorcycle]);
 
     if (loading || !motorcycle) {
         return (
@@ -154,6 +186,7 @@ export default function MotorcyclePage() {
                     </button>
 
                     <div className="flex items-center gap-3">
+                        {motorcycle && <CompareButton motorcycle={motorcycle} />}
                         <button className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-400 hover:text-ibiza-red hover:border-ibiza-red/30 transition-all">
                             <Heart className="w-5 h-5" />
                         </button>
@@ -212,6 +245,7 @@ export default function MotorcyclePage() {
                         </div>
 
                         {/* Color selector */}
+                        {motorcycle.specifications.colors?.length > 0 && (
                         <div className="mb-8">
                             <p className="text-xs font-bold text-gray-500 tracking-widest uppercase mb-3">
                                 Color: <span className="text-white">{selectedColor}</span>
@@ -234,6 +268,7 @@ export default function MotorcyclePage() {
                                 ))}
                             </div>
                         </div>
+                        )}
 
                         {/* CTA Buttons */}
                         <div className="flex gap-3 w-full">
@@ -410,14 +445,37 @@ export default function MotorcyclePage() {
                 </div>
             </section>
 
-            {/* ── FINANCING CALCULATOR ── */}
-            <section className="py-12 border-t border-white/5">
+            {/* ── FINANCING CTA ── */}
+            <section className="py-14 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h3 className="font-display font-black text-2xl md:text-3xl text-white mb-6 text-center">
-                        🧮 Calcula tu financiamiento
-                    </h3>
-                    <div className="max-w-sm mx-auto">
-                        <FinancingCalculator initialPrice={motorcycle.price} compact={true} />
+                    <div className="max-w-xl mx-auto bg-gradient-to-br from-ibiza-red/10 to-ibiza-red/5 border border-ibiza-red/20 rounded-3xl p-8 text-center">
+                        <div className="w-14 h-14 bg-ibiza-red/15 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                            <Calculator className="w-7 h-7 text-ibiza-red" />
+                        </div>
+                        <h3 className="font-display font-black text-2xl text-white mb-2">
+                            ¿Quieres financiar esta moto?
+                        </h3>
+                        <p className="text-gray-400 text-sm mb-2">
+                            Precio:{' '}
+                            <span className="text-white font-bold">
+                                {'$' + new Intl.NumberFormat('es-CO').format(motorcycle.price)}
+                            </span>
+                        </p>
+                        <p className="text-gray-500 text-xs mb-6">
+                            Simula tu cuota con 8 financieras aliadas — tasa desde 1.26%/mes
+                        </p>
+                        <button
+                            onClick={() =>
+                                navigate(
+                                    `/financiamiento?precio=${motorcycle.price}&moto=${encodeURIComponent(motorcycle.brand + ' ' + motorcycle.model)}`
+                                )
+                            }
+                            className="inline-flex items-center gap-3 bg-ibiza-red hover:bg-red-700 text-white font-display font-bold px-8 py-4 rounded-2xl text-sm active:scale-95 transition-all duration-200 shadow-[0_0_24px_rgba(215,38,61,0.3)] group w-full justify-center"
+                        >
+                            <Calculator className="w-5 h-5" />
+                            Calcular mi cuota
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </button>
                     </div>
                 </div>
             </section>
@@ -455,7 +513,7 @@ export default function MotorcyclePage() {
                                 ¿Te interesa esta {motorcycle.brand}?
                             </h3>
                             <p className="!text-white/90 mb-8 max-w-lg mx-auto text-lg">
-                                Agenda una prueba de manejo o solicita tu cotización personalizada. Sin compromiso.
+                                Solicita tu cotización personalizada y te asesoramos sin compromiso.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

@@ -223,6 +223,8 @@ export default function PromosBanner() {
                   <img
                     src={moto.images[0]}
                     alt={moto.model}
+                    loading="lazy"
+                    decoding="async"
                     className="max-h-56 max-w-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] relative z-10"
                   />
                 )}

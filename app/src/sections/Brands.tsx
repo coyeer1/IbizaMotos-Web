@@ -42,6 +42,8 @@ const BrandLogo = ({ name, logo, onClick }: BrandLogoProps) => {
         <img
           src={logo}
           alt={`Logo ${name}`}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-contain filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
         />
       </div>

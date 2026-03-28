@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 import type { Motorcycle } from '@/types';
 import Catalog from '@/sections/Catalog';
 import { brands } from '@/data/motorcycles';
@@ -33,7 +34,14 @@ export default function BrandPage() {
 
     return (
         <div className="min-h-screen bg-ibiza-black pt-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 mb-4">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-200 mb-6 group"
+                >
+                    <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform duration-200" />
+                    <span className="text-sm font-medium">Volver</span>
+                </button>
                 {brandData ? (
                     <div className="flex items-center gap-6">
                         <div className="w-32 h-20 rounded-xl flex items-center justify-center bg-ibiza-gray-100 p-4 border border-border">

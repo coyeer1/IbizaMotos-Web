@@ -87,7 +87,7 @@ export default function Locations() {
                   <div className="branch-card-inner">
                     {/* Thumbnail image */}
                     <div className="branch-thumbnail-wrapper">
-                      <img src={m.image} alt={branch.name} className="branch-thumbnail-img" />
+                      <img src={m.image} alt={branch.name} loading="lazy" decoding="async" className="branch-thumbnail-img" />
                     </div>
 
                     <div className="branch-card-content">
@@ -145,7 +145,7 @@ export default function Locations() {
                   transition={{ duration: 0.35 }}
                 >
                   <div className="detail-card-cover">
-                    <img src={meta.image} alt={selectedBranch.name} className="detail-cover-img" />
+                    <img src={meta.image} alt={selectedBranch.name} loading="lazy" decoding="async" className="detail-cover-img" />
                     <div className="detail-card-cover-gradient" />
                   </div>
 

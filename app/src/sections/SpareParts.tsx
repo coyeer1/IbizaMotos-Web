@@ -74,6 +74,8 @@ export default function SpareParts() {
                 <img
                   src={brand.logo}
                   alt={brand.name}
+                  loading="lazy"
+                  decoding="async"
                   className="h-8 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                 />
                 <span className="text-sm font-semibold text-gray-500 group-hover:text-gray-900 transition-colors duration-300">

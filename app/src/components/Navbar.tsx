@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { getGeneralWhatsApp } from '@/lib/config';
+import { useSearch } from '@/components/SearchOverlay';
 
 const navLinks = [
   { name: 'Inicio', href: '#inicio', page: false },
@@ -10,6 +11,7 @@ const navLinks = [
   { name: 'Repuestos', href: '#repuestos', page: false },
   { name: 'Servicios', href: '#servicios', page: false },
   { name: 'Financiamiento', href: '/financiamiento', page: true },
+  { name: 'Sucursales', href: '/sucursales', page: true },
   { name: 'Contacto', href: '#contacto', page: false },
 ];
 
@@ -19,6 +21,7 @@ export default function Navbar() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { openSearch } = useSearch();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,6 +122,20 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
+              {/* Search Button */}
+              <button
+                onClick={openSearch}
+                title="Buscar moto (Ctrl+K)"
+                className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 text-sm font-medium ${
+                  isScrolled || location.pathname !== '/'
+                    ? 'border-gray-200 text-gray-500 hover:border-ibiza-red/40 hover:text-ibiza-red bg-gray-50 hover:bg-ibiza-red/5'
+                    : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white bg-white/5 hover:bg-white/10'
+                }`}
+              >
+                <Search className="w-4 h-4" />
+                <span className="hidden lg:inline text-xs">Buscar</span>
+                <kbd className="hidden lg:inline text-[10px] px-1.5 py-0.5 rounded bg-black/10 font-mono">Ctrl K</kbd>
+              </button>
               <a
                 href={getGeneralWhatsApp()}
                 target="_blank"
@@ -132,6 +149,14 @@ export default function Navbar() {
                 </Button>
               </a>
             </div>
+
+            {/* Mobile Search Button */}
+            <button
+              className="md:hidden p-2"
+              onClick={openSearch}
+            >
+              <Search className={`w-5 h-5 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
+            </button>
 
             {/* Mobile Menu Button */}
             <button

@@ -7,9 +7,8 @@ import SpareParts from '@/sections/SpareParts';
 import Services from '@/sections/Services';
 import Testimonials from '@/sections/Testimonials';
 import HappyCustomers from '@/sections/HappyCustomers';
-import Locations from '@/sections/Locations';
 import PromosBanner from '@/sections/PromosBanner';
-import FinancingCalculator from '@/sections/FinancingCalculator';
+import FinancingTeaser from '@/sections/FinancingTeaser';
 import Blog from '@/sections/Blog';
 
 export default function Home() {
@@ -34,8 +33,8 @@ export default function Home() {
             {/* Brand selector — 1 moto por marca → /marca/:brand */}
             <BrandSelector />
 
-            {/* Financing Calculator */}
-            <FinancingCalculator />
+            {/* Financing Teaser → /financiamiento */}
+            <FinancingTeaser />
 
             {/* Spare Parts */}
             <SpareParts />
@@ -52,8 +51,6 @@ export default function Home() {
             {/* Clientes Felices */}
             <HappyCustomers />
 
-            {/* Locations / Contact */}
-            <Locations />
         </>
     );
 }

@@ -1,9 +1,10 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, BarChart2, CheckCircle2, Minus, Plus } from 'lucide-react';
+import { X, ArrowRight, BarChart2, CheckCircle2, Minus, Plus, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import type { Motorcycle } from '@/types';
+import { getBuyWhatsApp } from '@/lib/config';
 
 // ─── Context ───────────────────────────────────────────────────────────────────
 
@@ -117,6 +118,12 @@ function ComparatorBar() {
 
 // ─── Comparison Modal ──────────────────────────────────────────────────────────
 
+const STOCK_LABELS: Record<string, { label: string; color: string; bg: string }> = {
+  available: { label: 'Disponible', color: 'text-emerald-400', bg: 'bg-emerald-400/10 border-emerald-400/20' },
+  limited:   { label: 'Últimas unidades', color: 'text-ibiza-gold', bg: 'bg-ibiza-gold/10 border-ibiza-gold/20' },
+  order:     { label: 'Por encargo', color: 'text-gray-400', bg: 'bg-white/5 border-white/10' },
+};
+
 const SPEC_ROWS: { key: keyof Motorcycle['specifications']; label: string }[] = [
   { key: 'engine', label: 'Motor' },
   { key: 'power', label: 'Potencia' },
@@ -193,7 +200,10 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
               {/* Moto headers */}
               <div className={`grid gap-4 mb-6`} style={{ gridTemplateColumns: `160px repeat(${selected.length}, 1fr)` }}>
                 <div /> {/* empty corner */}
-                {selected.map(moto => (
+                {selected.map(moto => {
+                  const stock = STOCK_LABELS[moto.stock ?? 'available'];
+                  const priceDiff = moto.price - lowestPrice;
+                  return (
                   <div key={moto.id} className="text-center">
                     {/* Image */}
                     <div className="relative h-32 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-2xl mb-3 overflow-hidden flex items-center justify-center p-3 border border-white/[0.06]">
@@ -211,8 +221,17 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
                     <p className="font-display font-black text-ibiza-gold text-lg">
                       ${new Intl.NumberFormat('es-CO').format(moto.price)}
                     </p>
+                    {priceDiff > 0 && (
+                      <p className="text-[10px] text-red-400 font-medium mt-0.5">
+                        +${new Intl.NumberFormat('es-CO').format(priceDiff)} más
+                      </p>
+                    )}
+                    <span className={`inline-flex items-center mt-1.5 px-2 py-0.5 rounded-full text-[9px] font-bold border ${stock.color} ${stock.bg}`}>
+                      {stock.label}
+                    </span>
                   </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Spec rows */}
@@ -297,6 +316,15 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
                       Ver detalles
                       <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
                     </Button>
+                    <a
+                      href={getBuyWhatsApp(moto.brand, moto.model)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-1.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 hover:border-[#25D366]/50 text-[#25D366] font-bold rounded-xl h-10 text-xs transition-all"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      Cotizar
+                    </a>
                   </div>
                 ))}
               </div>

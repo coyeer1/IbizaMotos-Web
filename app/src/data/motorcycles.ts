@@ -27,7 +27,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 CR4",
     year: 2026,
-    price: 5190000,
+    price: 6990000,
     category: 'Enduro',
     description: "La AKT 125 CR4 es una moto enduro de entrada perfecta para quienes quieren iniciar en el mundo del todo terreno. Su motor de 125cc confiable, suspensión de largo recorrido y neumáticos anchos te llevan con seguridad por cualquier camino.",
     specifications: {
@@ -46,7 +46,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 TTR CBS",
     year: 2026,
-    price: 5390000,
+    price: 7790000,
     category: 'Enduro',
     description: "La AKT 125 TTR CBS combina el espíritu trail con la seguridad del sistema CBS. Diseñada para quienes buscan aventura en caminos destapados sin renunciar a la comodidad y la economía de una moto de 125cc.",
     specifications: {
@@ -65,7 +65,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "150 CR4",
     year: 2026,
-    price: 6190000,
+    price: 7590000,
     category: 'Enduro',
     description: "La AKT 150 CR4 sube un escalón en potencia con su motor de 150cc. Cuadro de acero resistente, guardabarros alto y suspensión robusta para que cada salida al campo sea una aventura sin límites.",
     specifications: {
@@ -84,7 +84,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "200 CR4",
     year: 2026,
-    price: 7490000,
+    price: 8690000,
     category: 'Enduro',
     description: "La AKT 200 CR4 es la máquina todo terreno del portafolio AKT. Con 200cc de potencia, suspensión de largo recorrido delantera y trasera, y frenos de disco, está lista para los senderos más exigentes del país.",
     specifications: {
@@ -103,7 +103,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "200 TT ABS",
     year: 2026,
-    price: 8490000,
+    price: 9590000,
     category: 'Enduro',
     description: "La AKT 200 TT ABS es la versión más segura de la familia trail con ABS de serie. Frenos de disco en ambas ruedas con control antibloqueo, suspensión de largo recorrido y motor 200cc SOHC para explorar con confianza.",
     specifications: {
@@ -122,7 +122,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "110 NV CBS",
     year: 2026,
-    price: 3990000,
+    price: 5590000,
     category: 'City',
     description: "La AKT 110 NV CBS es la moto de trabajo por excelencia. Económica, resistente y con sistema CBS para mayor seguridad en los frenos. Su motor de 110cc ofrece el consumo más bajo de la categoría, ideal para recorridos largos en la ciudad.",
     specifications: {
@@ -141,7 +141,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 CHR CBS",
     year: 2026,
-    price: 5490000,
+    price: 5990000,
     category: 'Urban Sport',
     description: "La AKT 125 CHR CBS es una naked urbana con carácter propio. Su diseño agresivo, motor de 125cc con CBS y posición de manejo deportiva la convierten en la opción ideal para los jóvenes que quieren destacar en la ciudad.",
     specifications: {
@@ -160,7 +160,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 NKD CBS",
     year: 2026,
-    price: 5690000,
+    price: 5490000,
     category: 'Urban Sport',
     description: "La AKT 125 NKD CBS es la naked más popular de Colombia. Diseño moderno, farola LED, cuadro de doble cuna reforzado y sistema CBS para un frenado seguro. La combinación perfecta de estilo, practicidad y economía para la ciudad.",
     specifications: {
@@ -190,7 +190,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 NKD CBS Clásica V3",
     year: 2027,
-    price: 5890000,
+    price: 6090000,
     category: 'Urban Sport',
     description: "La AKT 125 NKD CBS Clásica V3 es la edición 2027 con acabados premium. Nuevos colores exclusivos, detalles renovados en el carenado y el mismo motor confiable de 125cc con sistema CBS que la ha hecho la naked más vendida del mercado colombiano.",
     specifications: {
@@ -209,7 +209,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "125 NKD CBS FP",
     year: 2027,
-    price: 5990000,
+    price: 6490000,
     category: 'Urban Sport',
     description: "La AKT 125 NKD CBS FP trae acabados Full Premium para el modelo 2027. Llantas de perfil bajo, tablero digital completo y la misma mecánica probada en miles de kilómetros por las calles colombianas. Una naked lista para el futuro.",
     specifications: {
@@ -228,7 +228,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "250 R",
     year: 2026,
-    price: 10990000,
+    price: 13028504,
     category: 'Urban Sport',
     description: "La AKT 250 R es la naked más poderosa de la marca colombiana. Motor de 250cc monocilíndrico, frenos de disco doble y diseño agresivo que la posiciona como competidora directa de importadas. Más potencia, más estilo, mismo precio accesible.",
     specifications: {
@@ -248,7 +248,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "Dinamic RX 150",
     year: 2026,
-    price: 6490000,
+    price: 9890000,
     category: 'City',
     description: "La AKT Dinamic RX 150 es la moto de trabajo más dinámica del mercado. Con motor de 150cc, freno de disco delantero y diseño deportivo, es la opción perfecta para domiciliarios, mensajeros y quienes necesitan moverse rápido y seguro en la ciudad.",
     specifications: {
@@ -389,7 +389,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "Dynamic Pro",
     year: 2026,
-    price: 6290000,
+    price: 8490000,
     category: 'City',
     description: "La AKT Dynamic Pro está diseñada para el trabajo pesado en la ciudad. Su motor de 150cc robusto y fácil de mantener, chasis resistente y tanque de gran capacidad la convierten en la moto de carga y trabajo más solicitada del Eje Cafetero.",
     specifications: {
@@ -408,7 +408,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "Flex CBS",
     year: 2026,
-    price: 5990000,
+    price: 6290000,
     category: 'City',
     description: "La AKT Flex CBS ofrece la versatilidad que el ciclista colombiano necesita. Compatible con gasolina corriente y extra, sistema CBS para frenos más seguros y motor de 150cc para una potencia equilibrada. La flexibilidad hecha moto.",
     specifications: {
@@ -427,7 +427,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'AKT',
     model: "TT200 ABS Rally",
     year: 2026,
-    price: 9190000,
+    price: 11390000,
     category: 'Enduro',
     description: "La AKT TT200 ABS Rally está inspirada en el mundo del rally. Diseño de competencia, motor 200cc con ABS, guardabarros alto estilo rally y coloración exclusiva deportiva. Para los que sueñan con el Dakar sin salir de Colombia.",
     specifications: {
@@ -474,7 +474,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Address",
     year: 2026,
-    price: 5490000,
+    price: 8490000,
     category: 'Scooters',
     description: "La Suzuki Address es el scooter urbano más eficiente de la gama. Con motor de 110cc de inyección electrónica, bajo consumo y diseño compacto, es la solución perfecta para moverse por la ciudad ahorrando combustible. Ligero, ágil y muy fácil de estacionar.",
     specifications: {
@@ -505,7 +505,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Avenis",
     year: 2026,
-    price: 7490000,
+    price: 9699000,
     category: 'Scooters',
     description: "La Suzuki Avenis es el scooter de nueva generación con alma deportiva. Motor de 125cc con inyección, tablero digital full color, LED en todos los puntos de iluminación y diseño aerodinámico moderno. El scooter que redefine el estilo urbano.",
     specifications: {
@@ -539,7 +539,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "AX4 EIII",
     year: 2026,
-    price: 5490000,
+    price: 5820000,
     category: 'City',
     description: "La Suzuki AX4 EIII es la moto de trabajo confiable que ha ganado la fidelidad de miles de colombianos. Motor de 110cc probado en millones de kilómetros, bajo mantenimiento y gran durabilidad. La Suzuki para quienes exigen lo mejor en economía y resistencia.",
     specifications: {
@@ -570,7 +570,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "AX4 ABS",
     year: 2026,
-    price: 6990000,
+    price: 6309000,
     category: 'City',
     description: "La Suzuki AX4 ABS suma tecnología ABS al clásico de trabajo más querido de Colombia. Frenos más seguros en cualquier superficie, motor 110cc con inyección electrónica y diseño renovado. La evolución natural de la moto de trabajo más vendida del Eje.",
     specifications: {
@@ -601,7 +601,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "BEST 125 FI",
     year: 2026,
-    price: 5290000,
+    price: 10490000,
     category: 'City',
     description: "La Suzuki BEST 125 FI ofrece lo mejor de dos mundos: la confiabilidad legendaria de Suzuki con motor de inyección electrónica de 125cc. Freno de disco delantero, tablero digital y excelente consumo de combustible. La mejor opción en su segmento.",
     specifications: {
@@ -629,7 +629,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Burgman 200 FI",
     year: 2026,
-    price: 14990000,
+    price: 10490000,
     category: 'Scooters',
     description: "La Suzuki Burgman 200 FI es el maxi-scooter premium de la gama. Motor de 200cc con inyección electrónica, gran espacio de almacenamiento, asiento amplio para dos y tecnología ABS. El lujo y la comodidad de un scooter ejecutivo al estilo Suzuki.",
     specifications: {
@@ -667,7 +667,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "V-Strom 650 XT",
     year: 2026,
-    price: 38990000,
+    price: 49850000,
     category: 'Adventure',
     description: "La Suzuki V-Strom 650 XT es la aventurera mediana más equilibrada del mundo. Motor V-Twin de 645cc, suspensión de larga distancia, guardabarros tipo pico de pájaro y modos de conducción para asfalto y off-road. El viaje largo que siempre soñaste, hoy es posible.",
     specifications: {
@@ -700,7 +700,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer 250",
     year: 2026,
-    price: 15880000,
+    price: 15580000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer 250 lleva el espíritu deportivo de las GSX-R a un formato accesible. Motor de 249cc con tecnología SOCS, frenos de disco doble con ABS y diseño inspirado en las motos de circuito. La puerta de entrada al mundo de las deportivas Suzuki.",
     specifications: {
@@ -733,7 +733,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer FI 150 ABS",
     year: 2026,
-    price: 9490000,
+    price: 11190000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer FI 150 ABS es la naked deportiva más popular del segmento 150. Con inyección electrónica, ABS de serie y diseño Gixxer de alto impacto, ofrece rendimiento deportivo real con el consumo de una 150cc. Manejo ágil en ciudad y carretera.",
     specifications: {
@@ -764,7 +764,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer SF 250",
     year: 2026,
-    price: 17490000,
+    price: 16830000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer SF 250 es la versión full-fairing del Gixxer 250. Carenado deportivo completo inspirado en la GSX-R, ABS de serie, motor de 249cc con 26.5 HP y posición semi-carenada. La deportiva 250 más elegante del mercado colombiano.",
     specifications: {
@@ -794,7 +794,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer SF FI 150 ABS",
     year: 2026,
-    price: 10990000,
+    price: 12690000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer SF FI 150 ABS lleva el carenado deportivo completo al segmento 150cc. Motor con inyección electrónica, ABS y diseño full-fairing deportivo que imita las grandes. Para los que quieren el look de una deportiva de gran cilindrada con el bolsillo de una 150.",
     specifications: {
@@ -857,7 +857,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GN125 EIII",
     year: 2026,
-    price: 5490000,
+    price: 6999000,
     category: 'City',
     description: "La Suzuki GN125 EIII es la versión clásica de la moto de trabajo más reconocida. Motor de 124cc confiable, cumple normas Euro III, mantenimiento económico y piezas disponibles en todo el país. La fidelidad a la GN en su versión más accesible.",
     specifications: {
@@ -888,7 +888,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GSX-8R",
     year: 2026,
-    price: 35990000,
+    price: 57690000,
     category: 'Urban Sport',
     description: "La Suzuki GSX-8R es la supersport de mediana cilindrada que más emociones ofrece. Motor bicilíndrico paralelo de 776cc con 83 HP, control de tracción, modos de conducción y frenos Brembo. La evolución deportiva para quienes exigen más de cada curva.",
     specifications: {
@@ -920,7 +920,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GSX-8S",
     year: 2026,
-    price: 35490000,
+    price: 55320000,
     category: 'Urban Sport',
     description: "La Suzuki GSX-8S es la naked que complementa la familia GSX-8. Mismo motor de 776cc del GSX-8R en configuración naked, con manillar alto para mayor comodidad y agilidad urbana sin sacrificar el rendimiento en autopista. El poder sin el carenado.",
     specifications: {
@@ -948,7 +948,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GSX-R1000R",
     year: 2026,
-    price: 79990000,
+    price: 90900000,
     category: 'Urban Sport',
     description: "La Suzuki GSX-R1000R es la reina de la gama. Tecnología directa de MotoGP: Variable Valve Timing, Launch Control, Quick Shift bidireccional y control de tracción IMU de 6 ejes. 202 HP en un chasis de 203 kg. La superbike definitiva de Suzuki.",
     specifications: {
@@ -1004,7 +1004,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GSX-S1000",
     year: 2026,
-    price: 42990000,
+    price: 77990000,
     category: 'Urban Sport',
     description: "La Suzuki GSX-S1000 es la naked que tiene el corazón de la legendaria GSX-R1000. Motor de 999cc con 152 HP, IMU de 6 ejes, control de tracción, frenos Brembo M50 y diseño agresivo con esculpida musculatura. La naked más pura y emocionante de Suzuki.",
     specifications: {
@@ -1036,7 +1036,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "GSX-S150 ABS",
     year: 2026,
-    price: 13990000,
+    price: 12990000,
     category: 'Urban Sport',
     description: "La Suzuki GSX-S150 ABS es la versión naked del GSX-R150, con manillar alto para mayor versatilidad urbana. Motor DOHC de 147cc, frenos ABS de serie y el inconfundible diseño agresivo de la familia GSX-S. Agilidad y potencia en cada semáforo.",
     specifications: {
@@ -1062,7 +1062,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Hayabusa",
     year: 2026,
-    price: 79990000,
+    price: 103500000,
     category: 'Urban Sport',
     description: "La Suzuki Hayabusa es más que una motocicleta, es un ícono de la velocidad y el diseño. Motor de 1,340cc con 190 HP, sistema de gestión electrónica de última generación, carenado aerodinámico perfeccionado en túnel de viento. La Hayabusa: el ave rapaz más rápida del mundo.",
     specifications: {
@@ -1098,7 +1098,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "SV650A",
     year: 2026,
-    price: 27990000,
+    price: 44990000,
     category: 'Urban Sport',
     description: "La Suzuki SV650A es la naked V-Twin que enamora a todos los que la montan. Motor de 645cc V-Twin con 73 HP, sonido característico único y manejo equilibrado para principiantes avanzados y veteranos por igual. El sabor V-Twin más accesible del mercado.",
     specifications: {
@@ -1127,7 +1127,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "V-Strom 1050 DE",
     year: 2026,
-    price: 55990000,
+    price: 81990000,
     category: 'Adventure',
     description: "La Suzuki V-Strom 1050 DE (Dual Explorer) es la aventurera grande con todo lo necesario para explorar el mundo. Motor V-Twin de 1,037cc, suspensión electrónica ajustable, control de tracción de 3 niveles y protecciones integrales. Para los viajeros que no conocen límites.",
     specifications: {
@@ -1159,7 +1159,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "V-Strom 160",
     year: 2026,
-    price: 8990000,
+    price: 13490000,
     category: 'Adventure',
     description: "La Suzuki V-Strom 160 trae el espíritu aventurero V-Strom al segmento de entrada. Motor de 155cc con inyección electrónica, freno ABS de serie, posición de manejo erguida y diseño inspirado en la V-Strom 1000. La aventura comienza ahora.",
     specifications: {
@@ -1190,7 +1190,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "V-Strom 250 SX",
     year: 2027,
-    price: 14990000,
+    price: 20190000,
     category: 'Adventure',
     description: "La Suzuki V-Strom 250 SX es la adventure mediana perfecta para los viajeros modernos. Motor de 249cc con inyección, modo de conducción Off-Road, suspensión de largo recorrido y protecciones laterales integrales. Diseñada para explorar todos los rincones del Eje Cafetero.",
     specifications: {
@@ -1225,7 +1225,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "V-Strom 800 DE",
     year: 2026,
-    price: 45990000,
+    price: 69390000,
     category: 'Adventure',
     description: "La Suzuki V-Strom 800 DE llena el hueco entre la 650 y la 1050 con una propuesta sin compromiso. Motor bicilíndrico de 776cc, suspensión KYB de largo recorrido, modos de conducción On/Off Road y nuevo diseño pico de pájaro más agresivo. La adventure perfecta para carreteras colombianas.",
     specifications: {
@@ -1256,7 +1256,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "XOOM 110",
     year: 2026,
-    price: 4990000,
+    price: 6990000,
     category: 'Scooters',
     description: "La Suzuki XOOM 110 es el scooter de entrada ideal para la movilidad urbana. Diseño moderno y compacto, motor de 110cc eficiente, maletero bajo el asiento y peso muy ligero para maniobrar fácilmente en el tráfico de la ciudad. El scooter más accesible de Suzuki.",
     specifications: {
@@ -1284,7 +1284,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "CB 100",
     year: 2026,
-    price: 4490000,
+    price: 5700000,
     category: 'City',
     description: "La Honda CB 100 es la moto de aprendizaje y trabajo más confiable del mercado. Motor de 99cc con transmisión suave, frenos de disco delantera y diseño clásico que nunca pasa de moda. La primera Honda de miles de colombianos y la más recomendada para iniciar.",
     specifications: {
@@ -1315,7 +1315,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "CB 125F DLX",
     year: 2026,
-    price: 6190000,
+    price: 7150000,
     category: 'City',
     description: "La Honda CB 125F DLX es la versión de lujo de la CB 125F con acabados mejorados. Motor de 124cc con inyección electrónica PGM-FI, freno de disco delantero, suspensión mejorada y nuevo tablero digital. La moto de ciudad con el toque Honda que mereces.",
     specifications: {
@@ -1373,7 +1373,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "CB 300F",
     year: 2026,
-    price: 18490000,
+    price: 17800000,
     category: 'Urban Sport',
     description: "La Honda CB 300F sube el listón con su motor monocilíndrico de 286cc DOHC. Diseño inspirado en la CB1000R, frenos radiales con ABS, suspensión invertida y tablero LCD de alta resolución. Una naked que compite de frente con motos de mayor cilindrada a precio más accesible.",
     specifications: {
@@ -1405,7 +1405,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "DIO LED DLX",
     year: 2026,
-    price: 5990000,
+    price: 7740000,
     category: 'Scooters',
     description: "La Honda DIO LED DLX es el scooter de ciudad con iluminación LED completa y acabados de lujo. Motor de 110cc eficiente con inyección, compartimento bajo el asiento amplio y diseño curvilíneo moderno. Tecnología Honda DLX para los que quieren más en su scooter.",
     specifications: {
@@ -1430,7 +1430,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "DIO LED STD",
     year: 2026,
-    price: 5490000,
+    price: 7590000,
     category: 'Scooters',
     description: "La Honda DIO LED STD es el scooter básico con iluminación LED de alta eficiencia. Ligero, económico y fácil de maniobrar en el tráfico urbano. Motor de 110cc PGM-FI y el respaldo de garantía Honda que da tranquilidad en cada trayecto.",
     specifications: {
@@ -1458,7 +1458,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "Navi",
     year: 2026,
-    price: 4990000,
+    price: 7090000,
     category: 'Rebels',
     description: "La Honda Navi es un híbrido único entre moto y scooter que rompe todos los esquemas. Diseño divertido y personalizable, motor de 109cc suave y económico, sin necesidad de cambiar marchas. La Navi es para los espíritus libres que quieren moverse diferente en la ciudad.",
     specifications: {
@@ -1485,7 +1485,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "Navi Adventure",
     year: 2026,
-    price: 5490000,
+    price: 7440000,
     category: 'Rebels',
     description: "La Honda Navi Adventure es la versión explorer de la divertida Navi. Guarda barros alto, guardapatas extendidos y coloración aventurera para quienes quieren llevar el espíritu Navi más allá de la ciudad. Misma diversión, más carácter.",
     specifications: {
@@ -1510,7 +1510,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "Navi Mix",
     year: 2026,
-    price: 5290000,
+    price: 7390000,
     category: 'Rebels',
     description: "La Honda Navi Mix combina lo mejor del estilo urbano moderno con la practicidad de la Navi. Colores llamativos y combinaciones exclusivas que permiten expresar tu personalidad. El motor de 109cc automático y el diseño único hacen de cada viaje una experiencia diferente.",
     specifications: {
@@ -1538,7 +1538,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "NX 190",
     year: 2026,
-    price: 13490000,
+    price: 14590000,
     category: 'Adventure',
     description: "La Honda NX 190 es la adventure mediana que mezcla la experiencia urbana con la capacidad off-road. Motor de 184cc con inyección, suspensión de largo recorrido, frenos ABS y diseño NX. Para el rider que quiere aventura sin límites en una sola moto.",
     specifications: {
@@ -1567,7 +1567,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "PCX 160 ABS",
     year: 2026,
-    price: 13990000,
+    price: 14800000,
     category: 'Scooters',
     description: "La Honda PCX 160 ABS es el maxi-scooter premium más vendido de su categoría. Motor de 156cc eSP+ con sistema Smart Power, frenos ABS, compartimento de carga enorme bajo el asiento y diseño premium de líneas fluidas. El mejor scooter del mercado, sin discusión.",
     specifications: {
@@ -1602,7 +1602,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "Wave 110S",
     year: 2026,
-    price: 5690000,
+    price: 7199000,
     category: 'City',
     description: "La Honda Wave 110S es la moto de trabajo más icónica de Honda en Colombia. Motor de 109cc PGM-FI de ultra bajo consumo, freno de disco delantero, suspensión trasera mejorada y tablero digital. La confiabilidad Honda en su máxima expresión práctica.",
     specifications: {
@@ -1637,7 +1637,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "XR 150L 2.0",
     year: 2026,
-    price: 9490000,
+    price: 10850000,
     category: 'Enduro',
     description: "La Honda XR 150L 2.0 es la trail de trabajo y aventura más popular del mercado. Motor de 149cc con PGM-FI, suspensión de largo recorrido, frenos de disco en ambas ruedas y guardabarros alto. Perfecta para caminos destapados y uso diario en zonas rurales del Eje Cafetero.",
     specifications: {
@@ -1669,7 +1669,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "XR 190L 2.0",
     year: 2026,
-    price: 10990000,
+    price: 13800000,
     category: 'Enduro',
     description: "La Honda XR 190L 2.0 es la aventurera 190cc más completa del portafolio Honda. Motor de 184cc PGM-FI, frenos de disco doble con ABS, suspensión de largo recorrido y diseño renovado 2.0. La opción perfecta para quienes ya dominan el off-road y quieren más potencia.",
     specifications: {
@@ -1698,7 +1698,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "XR 300L Tornado",
     year: 2026,
-    price: 14990000,
+    price: 30490000,
     category: 'Enduro',
     description: "La Honda XR 300L Tornado es la bestia del segmento enduro Honda. Motor de 299cc de alto rendimiento, suspensión de competencia, frenos Nissin con ABS y diseño Tornado que impone respeto en cualquier terreno. Para los pilotos que van en serio con la aventura.",
     specifications: {
@@ -1730,7 +1730,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Boxer CT 100 ES",
     year: 2026,
-    price: 4190000,
+    price: 6199000,
     category: 'City',
     description: "La Bajaj Boxer CT 100 ES es la moto de trabajo más económica del portafolio Bajaj con arranque eléctrico. Motor de 99cc DTS-Si, bajo consumo de combustible y alta durabilidad. La opción más accesible para quienes necesitan transporte confiable sin gastar de más.",
     specifications: {
@@ -1749,7 +1749,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Boxer CT 100 KS",
     year: 2026,
-    price: 3990000,
+    price: 5899000,
     category: 'City',
     description: "La Bajaj Boxer CT 100 KS es la versión de arranque por pedal, la más económica del portafolio. Motor de 99cc resistente, alta eficiencia de combustible y piezas de fácil consecución en toda Colombia. Para quienes priorizan el precio sin sacrificar la durabilidad Bajaj.",
     specifications: {
@@ -1768,7 +1768,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Boxer CT 125",
     year: 2026,
-    price: 5190000,
+    price: 6899000,
     category: 'City',
     description: "La Bajaj Boxer CT 125 trae 125cc de potencia al clásico Boxer de trabajo. Mayor torque para subidas y cargas, freno de disco delantero, arranque eléctrico y la misma robustez Boxer que se ha ganado la confianza de los trabajadores colombianos durante años.",
     specifications: {
@@ -1787,7 +1787,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Boxer 150X",
     year: 2026,
-    price: 6490000,
+    price: 7499999,
     category: 'City',
     description: "La Bajaj Boxer 150X es el Boxer de trabajo evolucionado para quienes necesitan más potencia. Motor de 149cc DTS-i, freno de disco delantero, suspensión mejorada y diseño más robusto. La moto de carga más potente del portafolio Bajaj, lista para los trabajos más exigentes.",
     specifications: {
@@ -1806,7 +1806,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Discover 125 ST-R",
     year: 2026,
-    price: 5790000,
+    price: 7499000,
     category: 'City',
     description: "La Bajaj Discover 125 ST-R es la moto city sport más equilibrada del segmento. Motor de 124cc DTS-i, freno de disco delantero, panel digital y diseño sport que combina practicidad con estilo. Para quienes quieren más que una moto de trabajo pero sin el presupuesto de una deportiva.",
     specifications: {
@@ -1825,7 +1825,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Dominar 400 Pro Touring",
     year: 2026,
-    price: 21990000,
+    price: 19399000,
     category: 'Adventure',
     description: "La Bajaj Dominar 400 Pro Touring es la aventurera 400 más accesible del mercado. Motor de 373cc con 40 HP, frenos Bybre con ABS dual canal, suspensión USD de 43mm y equipamiento touring completo. Para los viajeros que quieren cubrir kilómetros con estilo y seguridad.",
     specifications: {
@@ -1845,7 +1845,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Dominar 400 Volcano",
     year: 2026,
-    price: 21990000,
+    price: 20399000,
     category: 'Adventure',
     description: "La Bajaj Dominar 400 Volcano es la edición especial con coloración exclusiva de volcán ardiente. Misma mecánica potente de 373cc con 40 HP del Dominar 400 en una presentación visual única y llamativa. Para los que quieren destacarse en la carretera.",
     specifications: {
@@ -1864,7 +1864,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 125 UG",
     year: 2026,
-    price: 6990000,
+    price: 8799000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 125 UG es la naked más asequible de la familia NS. Motor de 124.5cc DTS-i, faros LED, freno de disco delantero y el diseño agresivo de la familia Pulsar NS. La puerta de entrada al mundo Pulsar para los nuevos riders.",
     specifications: {
@@ -1883,7 +1883,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar N 125 FI",
     year: 2026,
-    price: 7390000,
+    price: 7899000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar N 125 FI es la nueva generación de naked 125 con inyección electrónica. Diseño N-Series con faros LED de nueva firma, tablero LCD full y motor de 124.5cc DTS-i con FI. La Pulsar 125 más evolucionada del portafolio.",
     specifications: {
@@ -1902,7 +1902,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar P 150 FI ABS",
     year: 2026,
-    price: 8490000,
+    price: 8799000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar P 150 FI ABS es la Pulsar clásica evolucionada para la era moderna. Motor de 149cc DTS-i con inyección electrónica, ABS de serie, tablero digital y diseño retro-moderno de la familia P. La combinación perfecta de nostalgia Pulsar y tecnología actual.",
     specifications: {
@@ -1921,7 +1921,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar N 160 FI DC",
     year: 2026,
-    price: 9990000,
+    price: 10999000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar N 160 FI DC es la naked 160 con el diseño N más reciente y doble canal de ABS. Motor de 164.82cc DTS-i con FI, frenos de disco doble con ABS en ambas ruedas, Slipper Clutch y el tablero digital más completo de su segmento.",
     specifications: {
@@ -1941,7 +1941,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar N160 Pro",
     year: 2026,
-    price: 10490000,
+    price: 10999000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar N160 Pro es la versión premium de la N 160 con equipamiento de alto nivel. Suspensión delantera USD de 37mm, Slipper Clutch, ABS dual canal y nuevos colores exclusivos Pro. Para los Pulsar riders que quieren lo máximo en un 160cc.",
     specifications: {
@@ -1960,7 +1960,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 160 FI ABS UG2",
     year: 2026,
-    price: 10790000,
+    price: 11799000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 160 FI ABS UG2 trae la segunda generación de la NS 160 con mejoras integrales. Motor de 164.82cc más refinado, nueva suspensión trasera tipo mono shock, ABS de serie y diseño NS actualizado con nuevas aletas de refrigeración. Evolución pura.",
     specifications: {
@@ -1979,7 +1979,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 200 FI ABS UG2",
     year: 2026,
-    price: 13490000,
+    price: 15799999,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 200 FI ABS UG2 es la segunda generación de la naked 200 más popular de Colombia. Motor de 199.5cc con FI y 24.5 HP, frenos Bybre ABS doble canal, Slipper Clutch y nuevos detalles de diseño. La NS 200 que lo tiene todo.",
     specifications: {
@@ -1999,7 +1999,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 200 FI SC",
     year: 2026,
-    price: 12990000,
+    price: 13199000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 200 FI SC es la versión con Single Channel ABS de la NS 200. Misma potencia de 24.5 HP con motor DTS-i de 199.5cc, pero con ABS en la rueda delantera, haciéndola más accesible sin sacrificar seguridad básica. El punto de entrada perfecto a la NS 200.",
     specifications: {
@@ -2018,7 +2018,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar N 250 FI ABS",
     year: 2026,
-    price: 16490000,
+    price: 13799000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar N 250 FI ABS es la naked 250 premium del portafolio Bajaj. Motor de 249cc OHC con 24.5 HP, tablero TFT touch color, Slipper Clutch, frenos de disco Bybre con ABS dual y diseño N-Series de última generación. La Pulsar más completa de la historia.",
     specifications: {
@@ -2038,7 +2038,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar RS 200 ABS",
     year: 2026,
-    price: 15490000,
+    price: 15999000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar RS 200 ABS es la deportiva full-fairing del portafolio Bajaj. Carenado aerodinámico completo, motor de 199.5cc con FI y 24.5 HP, frenos Bybre ABS y posición de manejo deportiva. La RS 200: agresiva por fuera, sofisticada por dentro.",
     specifications: {
@@ -2057,7 +2057,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 400Z",
     year: 2026,
-    price: 21490000,
+    price: 18299000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 400Z es la naked más poderosa que Bajaj ha lanzado. Motor de 373.3cc con 40 HP del Dominar 400, frenos Bybre doble canal ABS, suspensión USD de 43mm y Slipper Clutch. Un 400cc naked accesible que compite con marcas europeas.",
     specifications: {
@@ -2096,7 +2096,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "ECO 100",
     year: 2026,
-    price: 3990000,
+    price: 4990000,
     category: 'City',
     description: "La Hero ECO 100 es la moto de trabajo de más bajo consumo del mercado. Motor de 97cc ultra eficiente, diseño compacto y resistente, ideal para domicilios y uso urbano diario. La economía Hero al máximo: más kilómetros, menos combustible.",
     specifications: {
@@ -2122,7 +2122,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "ECO CW",
     year: 2026,
-    price: 4290000,
+    price: 5690000,
     category: 'City',
     description: "La Hero ECO CW es la versión city-worker de la familia ECO. Tablero renovado, mejorada ergonomía del manillar y suspensión mejorada para el trabajo pesado diario. El motor de 100cc confiable y económico que los trabajadores colombianos han elegido por años.",
     specifications: {
@@ -2156,7 +2156,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "ECO SP",
     year: 2026,
-    price: 4490000,
+    price: 5590000,
     category: 'City',
     description: "La Hero ECO SP es la versión Sport Premium de la familia ECO. Faros LED, freno de disco delantero, tablero digital y acabados mejorados en un paquete ECO de bajo consumo. Más estilo sin sacrificar la economía que caracteriza a la familia ECO de Hero.",
     specifications: {
@@ -2184,7 +2184,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "ECO T 100",
     year: 2026,
-    price: 4690000,
+    price: 5390000,
     category: 'City',
     description: "La Hero ECO T 100 es la evolución total de la familia ECO. Motor de 100cc de última generación con inyección electrónica, tablero digital full, LED en todos los focos y la mejor relación kilómetros/galón del segmento. La moto de trabajo del futuro, hoy.",
     specifications: {
@@ -2244,7 +2244,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "Hunk 150 XT",
     year: 2026,
-    price: 8990000,
+    price: 8590000,
     category: 'Urban Sport',
     description: "La Hero Hunk 150 XT Xtreme es la naked que lleva el estilo deportivo al siguiente nivel. Motor de 149.2cc con FI y 15.2 HP, frenos de disco doble, ABS de canal único y la carrocería más agresiva de la gama Hunk. Para los que miran las motos importadas pero piensan en colombiano.",
     specifications: {
@@ -2272,7 +2272,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "Hunk 160 V2",
     year: 2026,
-    price: 9490000,
+    price: 9390000,
     category: 'Urban Sport',
     description: "La Hero Hunk 160 V2 es la segunda generación de la naked 160 de Hero. Motor de 163cc con FI, 15.3 HP y el refinado diseño V2 con nuevas luces LED de firma y carenados laterales renovados. El equilibrio perfecto entre potencia, estilo y precio en el segmento 160cc.",
     specifications: {
@@ -2302,7 +2302,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "Hunk 160 4V Pro",
     year: 2026,
-    price: 10990000,
+    price: 10740000,
     category: 'Urban Sport',
     description: "La Hero Hunk 160 4V Pro es la versión más avanzada de la familia Hunk con motor de 4 válvulas. Tecnología de 4 válvulas para mayor eficiencia y potencia, suspensión USD delantera, ABS dual canal, tablero TFT y las coloraciones más llamativas de la gama. La naked Hero definitiva.",
     specifications: {
@@ -2334,7 +2334,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "Splendor X Pro",
     year: 2026,
-    price: 6390000,
+    price: 6290000,
     category: 'City',
     description: "La Hero Splendor X Pro es la evolución de la moto más vendida del mundo. Diseño X totalmente renovado, motor de 100cc con inyección electrónica, tablero digital Bluetooth y conectividad con app. La Splendor para la era digital: económica, tecnológica y confiable.",
     specifications: {
@@ -2366,7 +2366,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "X-Blade 160",
     year: 2026,
-    price: 9990000,
+    price: 10190000,
     category: 'Urban Sport',
     description: "La Hero X-Blade 160 es la naked más estilizada del portafolio Hero. Diseño de cuña agresivo inspirado en las supersport japonesas, motor de 163cc con FI, frenos de disco doble y colores exclusivos de edición limitada. La moto para los que quieren diferenciarse de la multitud.",
     specifications: {
@@ -2394,7 +2394,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "XOOM 110",
     year: 2026,
-    price: 5490000,
+    price: 6990000,
     category: 'Scooters',
     description: "La Hero XOOM 110 es el scooter moderno de la gama Hero con motor de inyección. Diseño contemporáneo con colores vivos, motor 110cc eficiente y ligero, maletero bajo el asiento y conectividad Bluetooth con la app Hero. El scooter perfecto para la generación digital.",
     specifications: {
@@ -2422,7 +2422,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "XPulse 200 4V",
     year: 2026,
-    price: 12390000,
+    price: 12290000,
     category: 'Adventure',
     description: "La Hero XPulse 200 4V es la adventure off-road más capaz de Hero. Motor de 199.6cc con 4 válvulas y 19 HP, suspensión de largo recorrido de 190mm delantera, frenos ABS desconectable, tablero TFT con navegación y modos rally. La moto de aventura al alcance de todos.",
     specifications: {
@@ -2452,7 +2452,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "XPulse 200 AD",
     year: 2026,
-    price: 11990000,
+    price: 10490000,
     category: 'Adventure',
     description: "La Hero XPulse 200 AD es la versión All-Directions de la XPulse. Preparada para todo tipo de terreno con neumáticos todo-terreno, motor de 199.6cc y la suspensión de largo recorrido XPulse. La moto adventure urbana perfecta para el Eje Cafetero y sus montañas.",
     specifications: {
@@ -2483,7 +2483,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "XPulse 200 Pro 4V",
     year: 2026,
-    price: 13490000,
+    price: 13190000,
     category: 'Adventure',
     description: "La Hero XPulse 200 Pro 4V es la versión Pro con tablero TFT a color y equipamiento de alta gama. Motor 4V de 19 HP, suspensión ajustable, ABS desconectable para off-road y protecciones integrales. Para los aventureros serios que exigen la mejor tecnología en su moto.",
     specifications: {
@@ -2509,7 +2509,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "XPulse 200 R 4V",
     year: 2026,
-    price: 14990000,
+    price: 13390000,
     category: 'Adventure',
     description: "La Hero XPulse 200 R 4V es la versión Rally más equipada de la gama XPulse. Colores de competencia, doble amortigiguador trasero, depósito auxiliar de combustible y tablero TFT con waypoints de rally. La XPulse que parece salida directamente de una etapa del Dakar.",
     specifications: {
@@ -2528,7 +2528,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Alpina 300 EFI",
     year: 2026,
-    price: 12490000,
+    price: 12990000,
     category: 'Enduro',
     description: "La Vento Alpina 300 EFI es la trail mediana con inyección electrónica de la gama Vento. Motor de 300cc monocilíndrico con FI, suspensión de largo recorrido, frenos de disco doble ABS y diseño retro-adventure de líneas clásicas. La moto para quien valora tradición y rendimiento.",
     specifications: {
@@ -2548,7 +2548,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "CrossMax 200 Pro",
     year: 2026,
-    price: 10490000,
+    price: 7990000,
     category: 'Enduro',
     description: "La Vento CrossMax 200 Pro es la moto todo terreno que ha conquistado los caminos colombianos. Motor de 200cc resistente, suspensión de largo recorrido delantera y trasera, neumáticos anchos de barro y diseño robusto. Para dominar los caminos destapados del Eje Cafetero.",
     specifications: {
@@ -2568,7 +2568,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Falkon 125",
     year: 2026,
-    price: 6990000,
+    price: 5990000,
     category: 'Urban Sport',
     description: "La Vento Falkon 125 es la naked de diseño europeo al precio colombiano. Motor de 125cc de alto rendimiento, faros LED, freno de disco doble y líneas inspiradas en las naked italianas. Para los jóvenes que quieren estilo premium sin el precio importado.",
     specifications: {
@@ -2587,7 +2587,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "GTS 300",
     year: 2026,
-    price: 16990000,
+    price: 10990000,
     category: 'Scooters',
     description: "La Vento GTS 300 es el maxi-scooter de lujo con más espacio de carga del mercado. Motor de 300cc con inyección electrónica, frenos ABS, cajuela enorme para dos cascos y asiento calefactado como opción. El ejecutivo se mueve en GTS 300.",
     specifications: {
@@ -2607,7 +2607,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Lithium 125",
     year: 2026,
-    price: 7490000,
+    price: 3990000,
     category: 'City',
     description: "La Vento Lithium 125 es la naked con diseño naked moderno y motor de 125cc eficiente. Faros LED, frenos de disco en ambas ruedas, tablero digital y el estilo urbano que define a la gama Lithium de Vento. Moderna, práctica y con el respaldo de Vento.",
     specifications: {
@@ -2626,7 +2626,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Presley 200 ABS",
     year: 2026,
-    price: 11990000,
+    price: 5490000,
     category: 'Rebels',
     description: "La Vento Presley 200 ABS es el cruiser que combina el estilo retro americano con la practicidad de una 200cc. Motor de 197cc suave y torquento, posición de manejo relajada de crucero, frenos ABS de serie y diseño inspirado en las grandes cruiser americanas. Para los que van al ritmo de su propia música.",
     specifications: {
@@ -2646,7 +2646,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Rapid 125",
     year: 2026,
-    price: 6490000,
+    price: 4290000,
     category: 'City',
     description: "La Vento Rapid 125 es la moto city de Vento con el perfil más dinámico. Motor de 125cc ágil, freno de disco delantero, suspensión deportiva y diseño de líneas rápidas. Para moverse con estilo por la ciudad sin gastar de más en combustible ni mantenimiento.",
     specifications: {
@@ -2665,7 +2665,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Screamer 250 FI",
     year: 2026,
-    price: 12990000,
+    price: 9990000,
     category: 'Urban Sport',
     description: "La Vento Screamer 250 FI es la deportiva 250 con inyección electrónica de la gama Vento. Motor de 249cc con FI y 25 HP, frenos de disco doble ABS, suspensión invertida y carenado deportivo completo. La deportiva que hace \"screamer\" con el motor y el bolsillo.",
     specifications: {
@@ -2685,7 +2685,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Spirit 125 ZX",
     year: 2026,
-    price: 6990000,
+    price: 4990000,
     category: 'City',
     description: "La Vento Spirit 125 ZX es la moto urbana con espíritu de aventura. Diseño semi-trail, motor de 125cc confiable, guardabarros alto de estilo adventure y posición de manejo ergonómica. Para quienes quieren la practicidad de una city con el carácter de una trail.",
     specifications: {

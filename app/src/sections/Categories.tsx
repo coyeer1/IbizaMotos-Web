@@ -1,8 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// ─── Data (orden exacto del usuario) ─────────────────────────────────────────
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const CATEGORIES = [
   {
     slug: 'calle',
@@ -46,21 +46,87 @@ const CATEGORIES = [
   },
 ];
 
-// ─── Main component ──────────────────────────────────────────────────────────
+const AUTOPLAY_DELAY = 3500;
+
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function Categories() {
   const navigate = useNavigate();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isAutoScrollingRef = useRef(false);
 
-  const scroll = (dir: 'left' | 'right') => {
-    if (!scrollRef.current) return;
+  // ── helpers ──────────────────────────────────────────────────────────────
+  const getCardWidth = useCallback(() => {
+    if (!scrollRef.current) return 300;
     const card = scrollRef.current.querySelector<HTMLElement>('.cat-card');
-    const w = card ? card.offsetWidth + 4 : 320; // card width + gap
-    scrollRef.current.scrollBy({ left: dir === 'right' ? w : -w, behavior: 'smooth' });
-  };
+    return card ? card.offsetWidth + 4 : 300; // offsetWidth + gap (gap-1 = 4px)
+  }, []);
+
+  const scrollToIndex = useCallback((idx: number, smooth = true) => {
+    if (!scrollRef.current) return;
+    isAutoScrollingRef.current = true;
+    scrollRef.current.scrollTo({
+      left: idx * getCardWidth(),
+      behavior: smooth ? 'smooth' : 'instant',
+    });
+    // clear flag after animation
+    setTimeout(() => { isAutoScrollingRef.current = false; }, 600);
+  }, [getCardWidth]);
+
+  const goTo = useCallback((raw: number) => {
+    const n = CATEGORIES.length;
+    const idx = ((raw % n) + n) % n;
+    setActiveIndex(idx);
+    scrollToIndex(idx);
+  }, [scrollToIndex]);
+
+  // ── autoplay ─────────────────────────────────────────────────────────────
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActiveIndex(prev => {
+        const next = (prev + 1) % CATEGORIES.length;
+        scrollToIndex(next);
+        return next;
+      });
+    }, AUTOPLAY_DELAY);
+  }, [scrollToIndex]);
+
+  useEffect(() => {
+    resetTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [resetTimer]);
+
+  // ── sync dots when user swipes manually ──────────────────────────────────
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      if (isAutoScrollingRef.current) return;
+      const w = getCardWidth();
+      const idx = Math.min(
+        Math.round(el.scrollLeft / w),
+        CATEGORIES.length - 1
+      );
+      setActiveIndex(idx);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [getCardWidth]);
+
+  // ── arrow handlers ────────────────────────────────────────────────────────
+  const handlePrev = () => { goTo(activeIndex - 1); resetTimer(); };
+  const handleNext = () => { goTo(activeIndex + 1); resetTimer(); };
+
+  // ── pause autoplay on hover/touch ─────────────────────────────────────────
+  const handleMouseEnter = () => { if (timerRef.current) clearInterval(timerRef.current); };
+  const handleMouseLeave = () => { resetTimer(); };
 
   return (
     <section className="py-14 md:py-20 bg-white">
-      {/* ── Header centrado ── */}
+
+      {/* ── Header ── */}
       <div className="text-center mb-10 md:mb-14 px-6">
         <h2
           className="font-display font-black text-gray-900 tracking-tight leading-none"
@@ -69,7 +135,7 @@ export default function Categories() {
           Nuestras motos Ibiza
         </h2>
         <button
-          onClick={() => navigate('/marca/suzuki')}
+          onClick={() => navigate('/marca/todas')}
           className="mt-5 inline-flex items-center gap-2 px-7 py-3 bg-[#d7263d] text-white rounded-full font-display font-semibold text-sm hover:bg-red-700 active:scale-95 transition-all duration-200"
         >
           Conócelas todas
@@ -77,7 +143,11 @@ export default function Categories() {
       </div>
 
       {/* ── Carousel ── */}
-      <div className="relative">
+      <div
+        className="relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         {/* Track */}
         <div
           ref={scrollRef}
@@ -86,18 +156,22 @@ export default function Categories() {
           {CATEGORIES.map((cat) => (
             <button
               key={cat.slug}
-              onClick={() => navigate(`/marca/todas?categoria=${encodeURIComponent(cat.filterCategory)}`)}
+              onClick={() =>
+                navigate(`/marca/todas?categoria=${encodeURIComponent(cat.filterCategory)}`)
+              }
               className="cat-card group relative flex-shrink-0 snap-start overflow-hidden cursor-pointer transition-all duration-[350ms] ease-out hover:-translate-y-1.5 focus:outline-none"
               style={{
-                width: 'clamp(260px, 20vw, 380px)',
-                height: 'clamp(420px, 38vw, 560px)',
+                width: 'clamp(260px, 82vw, 380px)',
+                height: 'clamp(400px, 72vw, 560px)',
               }}
             >
-              {/* Imagen — zoom al frente de la moto */}
+              {/* Imagen */}
               <img
                 src={cat.image}
                 alt={cat.name}
                 draggable={false}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[350ms] ease-out"
                 style={{
                   objectPosition: `${cat.focalX}% ${cat.focalY}%`,
@@ -112,12 +186,13 @@ export default function Categories() {
                 }}
               />
 
-              {/* Gradiente oscuro inferior */}
+              {/* Gradiente */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
 
-              {/* Texto overlay inferior */}
+              {/* Texto */}
               <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-                <h3 className="font-display font-black text-white leading-tight mb-3 whitespace-pre-line"
+                <h3
+                  className="font-display font-black text-white leading-tight mb-3 whitespace-pre-line"
                   style={{ fontSize: 'clamp(1.4rem, 2.2vw, 2.2rem)' }}
                 >
                   {cat.name}
@@ -130,23 +205,51 @@ export default function Categories() {
           ))}
         </div>
 
-        {/* ── Flecha derecha ── */}
+        {/* ── Flecha izquierda — visible en todos los tamaños ── */}
         <button
-          onClick={() => scroll('right')}
-          aria-label="Siguiente"
-          className="hidden sm:flex absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.15)] items-center justify-center text-gray-700 hover:bg-white hover:shadow-[0_6px_28px_rgba(0,0,0,0.2)] active:scale-90 transition-all duration-200"
+          onClick={handlePrev}
+          aria-label="Anterior"
+          className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 z-10
+                     w-9 h-9 md:w-14 md:h-14 rounded-full
+                     bg-white/90 backdrop-blur-sm
+                     shadow-[0_4px_20px_rgba(0,0,0,0.15)]
+                     flex items-center justify-center
+                     text-gray-700 hover:bg-white hover:shadow-[0_6px_28px_rgba(0,0,0,0.2)]
+                     active:scale-90 transition-all duration-200"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
         </button>
 
-        {/* ── Flecha izquierda ── */}
+        {/* ── Flecha derecha — visible en todos los tamaños ── */}
         <button
-          onClick={() => scroll('left')}
-          aria-label="Anterior"
-          className="hidden sm:flex absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/90 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.15)] items-center justify-center text-gray-700 hover:bg-white hover:shadow-[0_6px_28px_rgba(0,0,0,0.2)] active:scale-90 transition-all duration-200"
+          onClick={handleNext}
+          aria-label="Siguiente"
+          className="absolute right-2 md:right-5 top-1/2 -translate-y-1/2 z-10
+                     w-9 h-9 md:w-14 md:h-14 rounded-full
+                     bg-white/90 backdrop-blur-sm
+                     shadow-[0_4px_20px_rgba(0,0,0,0.15)]
+                     flex items-center justify-center
+                     text-gray-700 hover:bg-white hover:shadow-[0_6px_28px_rgba(0,0,0,0.2)]
+                     active:scale-90 transition-all duration-200"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
         </button>
+
+        {/* ── Dots indicadores ── */}
+        <div className="flex justify-center items-center gap-2 mt-5 px-6">
+          {CATEGORIES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { goTo(i); resetTimer(); }}
+              aria-label={`Ir a ${CATEGORIES[i].name}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? 'w-6 h-2 bg-[#d7263d]'
+                  : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

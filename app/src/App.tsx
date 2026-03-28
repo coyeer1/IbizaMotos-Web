@@ -10,10 +10,12 @@ import BlogPage from '@/pages/BlogPage';
 import FinancingPage from '@/pages/FinancingPage';
 import AppointmentPage from '@/pages/AppointmentPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import SucursalesPage from '@/pages/SucursalesPage';
 import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
 import { ComparatorProvider } from '@/components/MotoComparator';
+import { SearchProvider } from '@/components/SearchOverlay';
 import ScrollRestorer from '@/components/ScrollRestorer';
 
 function AppContent() {
@@ -34,6 +36,7 @@ function AppContent() {
           <Route path="/blog/:id" element={<BlogPage />} />
           <Route path="/financiamiento" element={<FinancingPage />} />
           <Route path="/citas" element={<AppointmentPage />} />
+          <Route path="/sucursales" element={<SucursalesPage />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="*" element={<NotFoundPage />} />
@@ -54,9 +57,11 @@ function AppContent() {
 function App() {
   return (
     <AdminAuthProvider>
-      <ComparatorProvider>
-        <AppContent />
-      </ComparatorProvider>
+      <SearchProvider>
+        <ComparatorProvider>
+          <AppContent />
+        </ComparatorProvider>
+      </SearchProvider>
     </AdminAuthProvider>
   );
 }

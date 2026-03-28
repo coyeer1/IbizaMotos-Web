@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ArrowLeft, CheckCircle2, TrendingUp, Shield,
   MessageCircle, Star, ChevronDown, ChevronUp,
@@ -140,193 +140,38 @@ const DEMO_PRICE = 10000000;
 
 export default function FinancingPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Precio e info de moto preseleccionada (venimos desde /moto/:id)
+  const precioParam = searchParams.get('precio');
+  const motoNombre = searchParams.get('moto');
+  const financieraParam = searchParams.get('financiera') ?? undefined;
+  const initialPrice = precioParam ? parseInt(precioParam, 10) : undefined;
+
+  // Scroll al resultado cuando viene con ?precio= (sin financiera)
+  useEffect(() => {
+    if (initialPrice && !financieraParam) {
+      setTimeout(() => {
+        document.getElementById('resultado')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 800);
+    }
+  }, [initialPrice, financieraParam]);
 
   return (
     <div className="min-h-screen bg-[#09090b]">
 
-      {/* ── HERO ── */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-ibiza-black to-[#09090b] pt-24 pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-ibiza-red/5 to-ibiza-gold/5" />
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-ibiza-red/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-ibiza-gold/10 rounded-full blur-[100px]" />
-
-        {/* Back button */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 relative z-10">
-          <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" /> Volver
-          </button>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase mb-4"
-          >
-            💳 Financiamiento
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-display font-black text-4xl md:text-6xl text-white mb-6 leading-tight"
-          >
-            TU MOTO,<br />
-            <span className="text-ibiza-red">A TU RITMO</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg max-w-2xl mx-auto mb-10"
-          >
-            Trabajamos con las mejores financieras de Colombia para que consigas la tasa más baja
-            y la cuota que se ajusta a tu bolsillo. Sin filas, sin papeleo innecesario.
-          </motion.p>
-
-          {/* Stats bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex flex-wrap justify-center gap-8 bg-white/[0.03] border border-white/[0.06] rounded-2xl px-8 py-5"
-          >
-            {[
-              { value: '8', label: 'Financieras aliadas' },
-              { value: '1.26%', label: 'Tasa mínima mensual' },
-              { value: '60', label: 'Meses máx.' },
-              { value: '24h', label: 'Desembolso rápido' },
-            ].map(({ value, label }) => (
-              <div key={label} className="text-center">
-                <p className="font-display font-black text-3xl text-white">{value}</p>
-                <p className="text-[11px] text-gray-500 font-medium mt-0.5">{label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
+      {/* Back button */}
+      <div className="pt-24 pb-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" /> Volver
+        </button>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-20">
-
-        {/* ── TABLA COMPARATIVA ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <div className="text-center mb-10">
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-3">Compara nuestras financieras</h2>
-            <p className="text-gray-500">Elige la que más te convenga según tasa, plazo y velocidad de aprobación</p>
-          </div>
-
-          {/* Tabla desktop */}
-          <div className="hidden md:block rounded-2xl overflow-hidden border border-white/[0.06]">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-white/[0.04] border-b border-white/[0.06]">
-                  {['Financiera', 'Tasa mensual', 'Tasa anual', 'Plazo', `Cuota est. ${formatCOP(DEMO_PRICE)}`, 'Ventaja clave'].map(h => (
-                    <th key={h} className="text-left text-[10px] font-bold text-white/30 tracking-widest uppercase px-5 py-4">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {financieras.map((f, i) => {
-                  const monthly = calcMonthly(DEMO_PRICE, f.monthlyRate, 36);
-                  const annualRate = (Math.pow(1 + f.monthlyRate / 100, 12) - 1) * 100;
-                  const isBest = f.monthlyRate === Math.min(...financieras.map(x => x.monthlyRate));
-                  return (
-                    <tr
-                      key={f.name}
-                      className={`border-b border-white/[0.04] transition-colors ${isBest ? 'bg-emerald-500/5' : i % 2 === 0 ? 'bg-white/[0.01]' : ''} hover:bg-white/[0.03]`}
-                    >
-                      {/* Financiera */}
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-display font-bold text-xs text-white ${isBest ? 'bg-emerald-500' : 'bg-ibiza-red/20'}`}>
-                            {f.logo}
-                          </div>
-                          <div>
-                            <p className="font-display font-bold text-white text-sm">{f.name}</p>
-                            {f.badge && (
-                              <span className={`text-[9px] font-bold text-white px-2 py-0.5 rounded-full ${f.badgeColor}`}>
-                                {f.badge}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      {/* Tasa mensual */}
-                      <td className="px-5 py-4">
-                        <span className={`font-display font-bold text-lg ${isBest ? 'text-emerald-400' : 'text-white'}`}>
-                          {f.monthlyRate.toFixed(2)}%
-                        </span>
-                        {isBest && <CheckCircle2 className="w-4 h-4 text-emerald-400 inline ml-1" />}
-                      </td>
-                      {/* Tasa anual */}
-                      <td className="px-5 py-4 text-gray-400 text-sm">{annualRate.toFixed(1)}%</td>
-                      {/* Plazo */}
-                      <td className="px-5 py-4 text-gray-400 text-sm">{f.minTerm} – {f.maxTerm} meses</td>
-                      {/* Cuota estimada */}
-                      <td className="px-5 py-4">
-                        <span className="font-display font-bold text-white">{formatCOP(monthly)}</span>
-                        <span className="text-[10px] text-gray-600 block">20% inicial · 36 meses</span>
-                      </td>
-                      {/* Ventaja */}
-                      <td className="px-5 py-4 text-gray-400 text-sm max-w-[200px]">{f.highlight}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Cards mobile */}
-          <div className="md:hidden grid gap-4">
-            {financieras.map((f) => {
-              const monthly = calcMonthly(DEMO_PRICE, f.monthlyRate, 36);
-              const isBest = f.monthlyRate === Math.min(...financieras.map(x => x.monthlyRate));
-              return (
-                <div
-                  key={f.name}
-                  className={`rounded-2xl p-5 border ${isBest ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-white/[0.06] bg-white/[0.02]'}`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-display font-bold text-xs text-white ${isBest ? 'bg-emerald-500' : 'bg-ibiza-red/20'}`}>
-                        {f.logo}
-                      </div>
-                      <div>
-                        <p className="font-display font-bold text-white">{f.name}</p>
-                        {f.badge && (
-                          <span className={`text-[9px] font-bold text-white px-2 py-0.5 rounded-full ${f.badgeColor}`}>
-                            {f.badge}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className={`font-display font-bold text-xl ${isBest ? 'text-emerald-400' : 'text-white'}`}>{f.monthlyRate.toFixed(2)}%</p>
-                      <p className="text-[10px] text-gray-500">mensual</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-gray-400">
-                    <span>{f.minTerm}–{f.maxTerm} meses</span>
-                    <span className="font-bold text-white">{formatCOP(monthly)}<span className="text-gray-600 font-normal">/mes</span></span>
-                  </div>
-                  <p className="text-[11px] text-gray-500 mt-2">{f.highlight}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          <p className="text-[11px] text-gray-600 text-center mt-4">
-            *Cuota estimada para moto de {formatCOP(DEMO_PRICE)} con 20% de inicial a 36 meses. Tasa sujeta a aprobación de la entidad financiera.
-          </p>
-        </motion.div>
 
         {/* ── CALCULADORA ── */}
         <div>
@@ -334,7 +179,31 @@ export default function FinancingPage() {
             <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-3">Simula tu financiamiento</h2>
             <p className="text-gray-500">Ajusta precio, cuota inicial y plazo para ver tu cuota mensual exacta</p>
           </div>
-          <FinancingCalculator />
+
+          {/* Banner "calculando para X moto" */}
+          {motoNombre && initialPrice && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-3xl mx-auto mb-6 flex items-center gap-4 bg-ibiza-red/10 border border-ibiza-red/30 rounded-2xl px-6 py-4"
+            >
+              <div className="w-10 h-10 rounded-xl bg-ibiza-red/20 flex items-center justify-center flex-shrink-0">
+                <span className="text-xl">🏍️</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[11px] text-ibiza-red/70 font-bold tracking-widest uppercase">Calculando para</p>
+                <p className="font-display font-bold text-white truncate">{motoNombre}</p>
+              </div>
+              <p className="font-display font-black text-ibiza-red text-xl flex-shrink-0">
+                {'$' + new Intl.NumberFormat('es-CO').format(initialPrice)}
+              </p>
+            </motion.div>
+          )}
+
+          <FinancingCalculator
+            {...(initialPrice ? { initialPrice } : {})}
+            {...(financieraParam ? { initialFinanciera: financieraParam } : {})}
+          />
         </div>
 
         {/* ── PASOS PARA FINANCIAR ── */}

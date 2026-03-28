@@ -45,10 +45,20 @@ All secrets live in `.env.local` (gitignored). Required vars:
 | `/blog/:id` | `BlogPage` | Blog post detail |
 | `/financiamiento` | `FinancingPage` | Loan calculator |
 | `/citas` | `AppointmentPage` | 4-step appointment booking |
+| `/sucursales` | `SucursalesPage` | 19 branches, filterable by city |
 | `/admin` | `AdminLogin` | Password gate |
 | `/admin/dashboard` | `AdminDashboard` | Protected admin panel |
+| `*` | `NotFoundPage` | 404 fallback |
 
 Admin routes hide the `<Navbar>` and `<Footer>` and the WhatsApp float button.
+
+### Global Providers (App.tsx)
+
+Providers wrap `AppContent` in this order (innermost first):
+`AdminAuthProvider` → `SearchProvider` → `ComparatorProvider`
+
+- `SearchProvider` (from `src/components/SearchOverlay.tsx`) renders `<SearchOverlay />` as a portal and exposes `useSearch()` → `{ open, openSearch, closeSearch }`. Keyboard shortcut: **Ctrl/Cmd+K** opens, **Esc** closes.
+- `ComparatorProvider` (from `src/components/MotoComparator.tsx`) — floating compare drawer.
 
 ### Data Flow
 
@@ -121,7 +131,10 @@ Nueva sección entre Testimonials y Locations. Carrusel con:
 **Fotos reales** en `/public/clientes/cliente1.jpg` … `cliente10.jpg`. Para agregar más fotos: guardar en esa carpeta y añadir entrada al array `customerPhotos` en el componente.
 
 ### Orden de secciones en Home (`src/pages/Home.tsx`)
-Hero → PromosBanner → Brands → Categories → BrandSelector → FinancingCalculator → SpareParts → Services → Blog → Testimonials → **HappyCustomers** → Locations
+Hero → PromosBanner → Brands → Categories → BrandSelector → **FinancingTeaser** → FinancingCalculator → SpareParts → Services → Blog → Testimonials → HappyCustomers → Locations
+
+### FinancingTeaser (`src/sections/FinancingTeaser.tsx`)
+Sección visual previa a la calculadora: muestra 4 stats (tasa mínima, plazo máx, nº financieras, velocidad de desembolso) + tira de logos de las 8 financieras. Cada logo navega a `/financiamiento?financiera=<id>`. El botón CTA navega a `/financiamiento`. No tiene lógica de cálculo — es puramente informativa/captadora.
 
 ### Sección Categorías — carousel AKT-style (`src/sections/Categories.tsx`)
 Rediseñada como carousel horizontal inspirado en aktmotos.com. Puntos clave:
@@ -155,3 +168,20 @@ Rediseñada con selector de 8 entidades financieras reales (datos 2026):
 - El color de la sección (acento, botones, tarjeta resultado) cambia al color de la financiera activa
 - El mensaje de WhatsApp incluye el nombre de la financiera seleccionada
 - La versión `compact` (usada dentro de `MotorcyclePage`) también tiene el selector de financieras
+
+### Página de Sucursales (`src/pages/SucursalesPage.tsx`)
+19 sucursales con datos embebidos en el componente (array `SUCURSALES`). Ciudades: Pereira (4), Dosquebradas (2), Santa Rosa de Cabal (4), Quimbaya (2), Montenegro (1), Viterbo (1), Chinchiná (1), Neiva (4). Cada sucursal tiene: `asesor`, `telefono`, `correo`, `ciudad`, `direccion`, `fotos[]`, `color` de marca, y `placeUrl` (link directo de Google Maps).
+
+- Filtro sticky por ciudad (pills horizontales con scroll)
+- `TarjetaSucursal`: foto principal + miniaturas inline + lightbox al hacer clic
+- `getMapsUrl()` — usa `placeUrl` si existe, sino genera búsqueda por nombre+dirección
+- `getWaUrl()` — genera mensaje de WhatsApp preformateado con marca y dirección
+- Fotos en `/public/sucursales/<id>/foto-*.jpg`; si una sucursal no tiene fotos muestra `<SinFoto>` placeholder
+
+### SearchOverlay (`src/components/SearchOverlay.tsx`)
+Búsqueda global de motos accesible desde la Navbar. Arquitectura:
+- `SearchProvider` — contexto + atajo de teclado + renderiza el overlay
+- `useSearch()` — hook público para abrir/cerrar desde cualquier componente
+- Sin query: muestra las 6 motos `featured` del catálogo
+- Con query: filtra por `model`, `brand`, `category` (hasta 8 resultados)
+- Navegación con ↑↓ + Enter; seleccionar navega a `/moto/:id` y cierra el overlay
