@@ -40,6 +40,15 @@ To add a new model to the price sync, add an entry to `MAPEO` in `actualizar_pre
 - `copiar_fotos.ps1` — copies motorcycle photos to the correct `app/public/moto_images/` subdirectory
 - `renombrar_fotos.ps1` — renames photos to the naming convention used by `motorcycles.ts`
 
+### Vercel Deployment
+
+`vercel.json` (project root) configures the Vercel deployment:
+- `buildCommand`: `cd app && npm run build`
+- `outputDirectory`: `app/dist`
+- `rewrites`: all routes → `/index.html` (SPA fallback)
+
+To deploy: connect the GitHub repo at vercel.com. Every push to `master` triggers a new deployment automatically.
+
 ### Supabase SQL Scripts
 
 Run these in the Supabase SQL editor (one-time setup):

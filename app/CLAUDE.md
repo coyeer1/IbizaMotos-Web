@@ -33,7 +33,7 @@ All secrets live in `.env.local` (gitignored). Required vars:
 - **Tailwind CSS** — custom brand colors: `ibiza-red` (#d7263d), `ibiza-gold` (#f9c846), `ibiza-black` (#000000)
 - **Framer Motion** — page/step transitions; always use `AnimatePresence mode="wait"` for step-based UIs
 - **Supabase** — only used for the appointments table (`workshop_appointments`). Auth uses `signInWithPassword` to bypass RLS (admin only).
-- **React Router v6** — client-side routing with `base: './'` in vite.config.ts (relative paths for deployment)
+- **React Router v6** — client-side routing with `base: '/'` in vite.config.ts (changed from `'./'` for Vercel deployment)
 
 ### Route Map
 
@@ -48,6 +48,7 @@ All secrets live in `.env.local` (gitignored). Required vars:
 | `/sucursales` | `SucursalesPage` | 19 branches, filterable by city |
 | `/admin` | `AdminLogin` | Password gate |
 | `/admin/dashboard` | `AdminDashboard` | Protected admin panel |
+| `/privacidad` | `PrivacyPage` | Política de datos (Ley 1581/2012) |
 | `*` | `NotFoundPage` | 404 fallback |
 
 Admin routes hide the `<Navbar>` and `<Footer>` and the WhatsApp float button.
@@ -73,11 +74,13 @@ Providers wrap `AppContent` in this order (innermost first):
 
 ### Appointment Booking Flow (`/citas`)
 
-4-step wizard managed by local state in `AppointmentPage.tsx`:
-1. **Service selection** — picks from `SERVICES` array
-2. **Date/time selection** — custom calendar, queries Supabase for booked slots
-3. **Client form** — name, phone, email, motorcycle, notes
-4. **Confirmation** — saves to Supabase, fires Apps Script webhook, shows success screen
+3-step wizard managed by local state in `AppointmentPage.tsx`:
+1. **Service selection** — 4 cards, each with its own `accent` color applied on selection
+2. **Date/time selection** — custom `MiniCalendar` + time slot grid; disables Sundays and dates >30 days out
+3. **Client form** — branch `<select>` grouped by city, personal fields, privacy checkbox
+
+`SummaryChips` component renders selected service/date/time as colored chips at the top of steps 2 and 3.
+`StepBar` renders the progress indicator with animated connector lines and check marks.
 
 **Critical**: `clientCalendarUrl` must only be computed when **both** `selectedDate` and `selectedTime` are truthy. Computing it with an empty `selectedTime` causes `buildGoogleCalendarUrl` to produce an Invalid Date → `toISOString()` throws → black screen.
 
@@ -115,7 +118,14 @@ Helpers disponibles:
 - `getBrandBuyWhatsApp(brandName, model, color?)` — para botón "Comprar" en MotorcyclePage; usa el número de ventas de la marca
 
 ### Sección Motos — BrandSelector (`src/sections/BrandSelector.tsx`)
-Los logos de marcas ya **no navegan** a `/marca/:slug`. Ahora cada logo abre WhatsApp del encargado de ventas de esa marca (`getBrandSalesWhatsApp`). Al hover aparece chip verde "Consultar".
+Rediseñado como **slider inmersivo full-bleed** (fondo gris claro, moto a la derecha, contenido a la izquierda). Puntos clave:
+
+- `BRAND_SLIDES` — record con rutas a imágenes dedicadas en `/public/brand-slides/<marca>.jpg|png`. Para cambiar la imagen de una marca, reemplazar el archivo correspondiente.
+- `BRAND_COLORS` — record con color de acento por marca (usado en barra lateral, botón CTA, glow de color, dots de navegación).
+- Autoplay cada 4.5 s con barra de progreso inferior (`progressBar` keyframe en `index.css`).
+- Thumbnails en la parte inferior izquierda: cada uno es un botón con logo de la marca sobre fondo blanco, borde resaltado con el color de la marca activa.
+- Flechas de navegación posicionadas abajo a la derecha (no en los laterales).
+- `featuredImage` ya no se usa; se reemplazó por `slideImage` de `BRAND_SLIDES`.
 
 ### Sección Repuestos — SpareParts (`src/sections/SpareParts.tsx`)
 Se eliminó el catálogo de productos (buscador + tarjetas). La sección ahora muestra **solo logos de marcas** que al hacer clic abren WhatsApp del encargado de repuestos (`getBrandPartsWhatsApp`) + banner CTA al fondo.
@@ -186,3 +196,17 @@ Búsqueda global de motos accesible desde la Navbar. Arquitectura:
 - Sin query: muestra las 6 motos `featured` del catálogo
 - Con query: filtra por `model`, `brand`, `category` (hasta 8 resultados)
 - Navegación con ↑↓ + Enter; seleccionar navega a `/moto/:id` y cierra el overlay
+
+### Reveal (`src/components/Reveal.tsx`)
+Wrapper de scroll-reveal reutilizable basado en Framer Motion `whileInView`. Props: `delay`, `direction` (`up` | `left` | `right` | `fade`), `amount`. Usado en `PrivacyPage` y `FinancingPage`.
+
+### PrivacyPage (`src/pages/PrivacyPage.tsx`)
+Política de tratamiento de datos completa (Ley 1581/2012). Ruta `/privacidad`. Tema oscuro (`bg-[#080808]`), 9 secciones, cada una envuelta en `<Reveal>`. El Footer y los formularios de `AppointmentPage` y `MotorcyclePage` enlazan a esta página.
+
+### Cumplimiento legal
+- **Formularios con consentimiento explícito**: `AppointmentPage` y el modal de cotización en `MotorcyclePage` tienen checkbox requerido antes de enviar (estado `privacyAccepted`).
+- **Disclaimer financiero**: `FinancingCalculator` muestra caja de advertencia prominente aclarando que la simulación no es oferta de crédito y que Ibiza Motos no es entidad financiera.
+
+### Animaciones globales (`src/index.css`)
+Keyframes añadidos: `fadeUp`, `progressBar`. Ambos usados en los sliders de `BrandSelector` y `Categories`.
+Textura de ruido global en `body::after` (opacity 0.028, SVG `feTurbulence`, z-index 9999, pointer-events none).
