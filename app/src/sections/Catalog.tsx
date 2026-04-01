@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import type { Motorcycle } from '@/types';
 import { Search, X, SlidersHorizontal, ArrowRight, Gauge, Zap, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
@@ -66,6 +66,7 @@ const MotoCard = ({
   // Color picker state — solo motos con imagesByColor real
   const colorKeys = motorcycle.imagesByColor ? Object.keys(motorcycle.imagesByColor) : [];
   const [selectedColor, setSelectedColor] = useState<string | null>(colorKeys[0] ?? null);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const activeImage = useMemo(() => {
     if (selectedColor && motorcycle.imagesByColor?.[selectedColor]?.[0]) {
@@ -73,6 +74,8 @@ const MotoCard = ({
     }
     return motorcycle.images?.[0] ?? null;
   }, [selectedColor, motorcycle]);
+
+  useEffect(() => { setImgLoaded(false); }, [activeImage]);
 
   const handleColorClick = useCallback((e: React.MouseEvent, color: string) => {
     e.stopPropagation();
@@ -94,6 +97,13 @@ const MotoCard = ({
           {/* Light background */}
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl" />
 
+          {/* Skeleton */}
+          {!imgLoaded && activeImage && (
+            <div className="absolute inset-0 rounded-xl overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse" />
+            </div>
+          )}
+
           {/* The motorcycle image */}
           <div className="absolute inset-0 flex items-center justify-center p-5">
             {activeImage ? (
@@ -102,7 +112,8 @@ const MotoCard = ({
                 alt={motorcycle.model}
                 loading="lazy"
                 decoding="async"
-                className="max-h-full max-w-full object-contain relative z-10 transition-all duration-700 group-hover:scale-110"
+                onLoad={() => setImgLoaded(true)}
+                className={`max-h-full max-w-full object-contain relative z-10 transition-all duration-700 group-hover:scale-110 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
               />
             ) : (
               <span className="text-black/5 font-display font-black text-7xl uppercase">

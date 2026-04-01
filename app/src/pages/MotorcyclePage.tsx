@@ -548,39 +548,32 @@ export default function MotorcyclePage() {
             <div className="fixed bottom-0 left-0 right-0 z-50">
                 <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
                     <div className="max-w-7xl mx-auto h-16 sm:h-20 px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-6">
-                        {/* Info */}
-                        <div className="hidden lg:flex flex-col flex-1 pl-4 border-l-2 border-ibiza-red">
-                            <h4 className="font-display font-bold text-lg text-white leading-tight">
-                                {motorcycle.brand} {motorcycle.model} <span className="text-gray-500 font-medium text-sm">{motorcycle.year}</span>
+                        {/* Info — visible en todos los tamaños */}
+                        <div className="flex flex-col flex-1 pl-3 sm:pl-4 border-l-2 border-ibiza-red min-w-0">
+                            <h4 className="font-display font-bold text-sm sm:text-lg text-white leading-tight truncate">
+                                {motorcycle.brand} {motorcycle.model}
                             </h4>
-                            <p className="text-[10px] text-gray-500">
-                                *Precios e información sujetos a cambios. No incluye soat ni matrícula.
-                            </p>
-                        </div>
-
-                        {/* Price */}
-                        <div className="flex flex-col items-center flex-1">
-                            <span className="text-[8px] sm:text-[10px] font-bold text-gray-500 tracking-wider">PRECIO</span>
-                            <span className="font-display font-black text-lg sm:text-2xl md:text-3xl text-white leading-none">
+                            <span className="font-display font-black text-base sm:text-2xl md:text-3xl text-ibiza-red leading-none">
                                 {formatPrice(motorcycle.price)}
                             </span>
                         </div>
 
                         {/* Buttons */}
-                        <div className="flex gap-3 flex-1 justify-end">
+                        <div className="flex gap-2 sm:gap-3 shrink-0">
                             <Button
                                 variant="outline"
                                 onClick={() => setShowQuoteModal(true)}
-                                className="h-9 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-ibiza-red text-ibiza-red hover:bg-ibiza-red hover:!text-white font-display font-bold uppercase tracking-wider text-[10px] sm:text-xs transition-all flex items-center gap-1"
+                                className="h-10 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-white/20 text-white/70 hover:bg-white/10 font-bold text-xs transition-all hidden sm:flex items-center gap-1"
                             >
                                 <MessageCircle className="w-3.5 h-3.5" />
                                 Cotizar
                             </Button>
                             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                                 <Button
-                                    className="h-9 sm:h-11 px-4 sm:px-8 rounded-xl bg-ibiza-red hover:bg-ibiza-red/90 !text-white font-display font-bold uppercase tracking-wider text-[10px] sm:text-xs shadow-[0_0_20px_rgba(227,25,55,0.3)] transition-all"
+                                    className="h-10 sm:h-11 px-4 sm:px-8 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] !text-white font-display font-bold uppercase tracking-wider text-xs sm:text-sm shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all flex items-center gap-2"
                                 >
-                                    Comprar
+                                    <MessageCircle className="w-4 h-4" />
+                                    WhatsApp
                                 </Button>
                             </a>
                         </div>
