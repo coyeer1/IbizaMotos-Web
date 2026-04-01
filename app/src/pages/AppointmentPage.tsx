@@ -42,42 +42,50 @@ const SERVICES = [
   {
     id: 'mantenimiento',
     label: 'Mantenimiento Preventivo',
+    code: 'SRV-01',
     desc: 'Cambio de aceite, filtros, ajuste de válvulas y revisión de 15 puntos.',
     price: 'Desde $85.000',
     duration: '1–2 horas',
     Icon: Wrench,
     accent: '#2563eb',
     bg: 'from-blue-600 to-blue-800',
+    image: '/services/mantenimiento.jpg',
   },
   {
     id: 'revision',
     label: 'Revisión General',
+    code: 'SRV-02',
     desc: 'Diagnóstico completo: motor, eléctrica, frenos y presupuesto detallado.',
     price: '$35.000',
     duration: '30–45 min',
     Icon: Search,
     accent: '#059669',
     bg: 'from-emerald-600 to-emerald-800',
+    image: '/services/revision.jpg',
   },
   {
     id: 'frenos',
     label: 'Frenos y Suspensión',
+    code: 'SRV-03',
     desc: 'Cambio de pastillas, rectificación de discos y reparación de horquillas.',
     price: 'Desde $120.000',
     duration: '2–3 horas',
     Icon: ShieldAlert,
     accent: '#d97706',
     bg: 'from-amber-600 to-amber-800',
+    image: '/services/frenos.jpg',
   },
   {
     id: 'motor',
     label: 'Reparación de Motor',
+    code: 'SRV-04',
     desc: 'Desde ajustes menores hasta reconstrucción completa. Trabajo garantizado.',
     price: 'Cotización gratis',
     duration: 'Según diagnóstico',
     Icon: Cpu,
     accent: '#d7263d',
     bg: 'from-ibiza-red to-red-800',
+    image: '/services/motor.jpg',
   },
 ];
 
@@ -389,28 +397,51 @@ export default function AppointmentPage() {
                     <button
                       key={service.id}
                       onClick={() => setSelectedService(service.id)}
-                      className="relative text-left rounded-2xl border p-5 transition-all duration-300 focus:outline-none"
+                      className="relative text-left rounded-2xl overflow-hidden transition-all duration-300 focus:outline-none"
                       style={{
-                        borderColor: sel ? service.accent : 'rgba(255,255,255,0.06)',
-                        background: sel ? `${service.accent}12` : 'rgba(255,255,255,0.02)',
-                        boxShadow: sel ? `0 0 32px ${service.accent}22` : 'none',
+                        border: `1.5px solid ${sel ? service.accent : 'rgba(255,255,255,0.07)'}`,
+                        boxShadow: sel ? `0 0 36px ${service.accent}28` : 'none',
+                        minHeight: 180,
                       }}
                     >
+                      {/* Background image */}
+                      <img
+                        src={service.image}
+                        alt=""
+                        aria-hidden
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+                        style={{ transform: sel ? 'scale(1.06)' : 'scale(1)', opacity: sel ? 0.28 : 0.14 }}
+                      />
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+
+                      {/* Check badge */}
                       {sel && (
-                        <div className="absolute top-3.5 right-3.5 w-6 h-6 rounded-full flex items-center justify-center"
+                        <div className="absolute top-3.5 right-3.5 w-6 h-6 rounded-full flex items-center justify-center z-10"
                           style={{ background: service.accent }}>
                           <Check className="w-3.5 h-3.5 text-white" />
                         </div>
                       )}
-                      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${service.bg} flex items-center justify-center mb-4 shadow-lg`}>
-                        <service.Icon className="w-5 h-5 text-white" />
-                      </div>
-                      <h3 className="font-display font-bold text-white mb-1.5 pr-6">{service.label}</h3>
-                      <p className="text-xs text-gray-500 mb-4 leading-relaxed">{service.desc}</p>
-                      <div className="flex items-center gap-3 text-xs">
-                        <span className="font-bold" style={{ color: service.accent }}>{service.price}</span>
-                        <span className="text-white/20">·</span>
-                        <span className="text-white/40 flex items-center gap-1"><Clock className="w-3 h-3" />{service.duration}</span>
+
+                      {/* Content */}
+                      <div className="relative z-10 p-5">
+                        {/* Code + icon row */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${service.bg} flex items-center justify-center shadow-lg`}>
+                            <service.Icon className="w-4 h-4 text-white" />
+                          </div>
+                          <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: `${service.accent}cc` }}>
+                            {service.code}
+                          </span>
+                        </div>
+                        <h3 className="font-display font-bold text-white mb-1.5 text-base">{service.label}</h3>
+                        <p className="text-xs text-gray-400 mb-4 leading-relaxed">{service.desc}</p>
+                        <div className="flex items-center gap-3 text-xs">
+                          <span className="font-bold" style={{ color: service.accent }}>{service.price}</span>
+                          <span className="text-white/20">·</span>
+                          <span className="text-white/40 flex items-center gap-1"><Clock className="w-3 h-3" />{service.duration}</span>
+                        </div>
                       </div>
                     </button>
                   );
