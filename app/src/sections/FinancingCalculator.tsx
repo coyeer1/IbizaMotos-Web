@@ -381,7 +381,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
             CALCULA TU <span className="text-ibiza-red">CUOTA</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-sm">
-            Elige tu entidad financiera, ajusta la cuota inicial y el plazo. Las tasas son las vigentes 2026.
+            Simulación orientativa. Elige tu entidad, ajusta la cuota inicial y el plazo.
           </p>
         </motion.div>
 
@@ -713,9 +713,19 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>
-            <p className="text-[11px] text-gray-500 text-center">
-              *Cálculo orientativo. Tasas vigentes 2026. Condiciones finales sujetas a aprobación de la entidad financiera.
-            </p>
+            {/* Disclaimer legal */}
+            <div className="mt-4 bg-gray-50 border border-gray-200 rounded-xl p-4 text-[11px] text-gray-500 leading-relaxed">
+              <p className="font-bold text-gray-600 mb-1">⚠️ Simulación informativa — no es una oferta de crédito</p>
+              <p>
+                Los valores mostrados son <strong>estimados con fines ilustrativos</strong> y no constituyen una oferta,
+                promesa ni compromiso de crédito. Las tasas, plazos y condiciones finales son determinados
+                exclusivamente por cada entidad financiera al momento de la solicitud formal, y pueden diferir
+                de los valores aquí calculados. <strong>Ibiza Motos del Eje Cafetero no es una entidad financiera</strong>,
+                no otorga créditos directamente y no garantiza la aprobación ni las condiciones de ningún producto financiero.
+                Las tasas indicadas corresponden a información pública disponible a la fecha de publicación y pueden
+                cambiar sin previo aviso.
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>

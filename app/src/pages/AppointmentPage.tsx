@@ -218,6 +218,7 @@ export default function AppointmentPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const steps = [
     { n: 1, label: 'Servicio' },
@@ -651,8 +652,25 @@ export default function AppointmentPage() {
                 </p>
               )}
 
+              {/* Checkbox consentimiento */}
+              <label className="flex items-start gap-2.5 cursor-pointer mb-2">
+                <input
+                  type="checkbox"
+                  checked={privacyAccepted}
+                  onChange={e => setPrivacyAccepted(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/10 accent-ibiza-red cursor-pointer shrink-0"
+                />
+                <span className="text-[11px] text-white/40 leading-relaxed">
+                  He leído y acepto la{' '}
+                  <a href="/privacidad" target="_blank" className="text-white/60 underline hover:text-white transition-colors">
+                    política de tratamiento de datos personales
+                  </a>
+                  {' '}de Ibiza Motos (Ley 1581/2012).
+                </span>
+              </label>
+
               <Button
-                disabled={!form.name || !form.phone || !form.branch_id || submitting}
+                disabled={!form.name || !form.phone || !form.branch_id || submitting || !privacyAccepted}
                 onClick={handleSubmit}
                 className="w-full bg-ibiza-red hover:bg-ibiza-red/90 text-white font-display font-bold h-14 rounded-2xl text-base disabled:opacity-40 disabled:cursor-not-allowed"
               >

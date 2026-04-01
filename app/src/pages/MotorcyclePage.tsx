@@ -66,6 +66,7 @@ export default function MotorcyclePage() {
     const [showQuoteModal, setShowQuoteModal] = useState(false);
     const [quoteForm, setQuoteForm] = useState({ name: '', phone: '', city: '' });
     const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+    const [quotePrivacyAccepted, setQuotePrivacyAccepted] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -145,7 +146,7 @@ export default function MotorcyclePage() {
         const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
         window.open(getWhatsAppUrl(msg), '_blank');
         setQuoteSubmitted(true);
-        setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); }, 2500);
+        setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); setQuotePrivacyAccepted(false); }, 2500);
     };
 
     const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -659,20 +660,31 @@ export default function MotorcyclePage() {
                                             className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
                                         />
                                     </div>
+                                    {/* Checkbox consentimiento */}
+                                    <label className="flex items-start gap-2.5 cursor-pointer group/check">
+                                        <input
+                                            type="checkbox"
+                                            checked={quotePrivacyAccepted}
+                                            onChange={e => setQuotePrivacyAccepted(e.target.checked)}
+                                            className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/10 accent-ibiza-red cursor-pointer shrink-0"
+                                        />
+                                        <span className="text-[11px] text-gray-500 leading-relaxed group/check:text-gray-400">
+                                            He leído y acepto la{' '}
+                                            <a href="/privacidad" target="_blank" className="text-gray-400 underline hover:text-white transition-colors">
+                                                política de tratamiento de datos personales
+                                            </a>
+                                            {' '}de Ibiza Motos (Ley 1581/2012).
+                                        </span>
+                                    </label>
+
                                     <Button
                                         type="submit"
-                                        className="w-full bg-ibiza-red hover:bg-ibiza-red/90 text-white font-display font-bold rounded-2xl h-13 text-base mt-2 group"
+                                        disabled={!quotePrivacyAccepted}
+                                        className="w-full bg-ibiza-red hover:bg-ibiza-red/90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-display font-bold rounded-2xl h-13 text-base mt-1 group"
                                     >
                                         <MessageCircle className="w-5 h-5 mr-2" />
                                         Enviar cotización por WhatsApp
                                     </Button>
-                                    <p className="text-[10px] text-gray-600 text-center">
-                                        Al enviar, aceptas nuestra{' '}
-                                        <a href="/privacidad" target="_blank" className="text-gray-500 underline hover:text-white transition-colors">
-                                            política de tratamiento de datos
-                                        </a>
-                                        {' '}(Ley 1581/2012).
-                                    </p>
                                 </form>
                             )}
                         </motion.div>
