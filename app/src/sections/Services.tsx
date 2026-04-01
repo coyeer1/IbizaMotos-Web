@@ -57,7 +57,10 @@ export default function Services() {
   };
 
   return (
-    <section id="servicios" className="py-24 bg-gray-50 relative" ref={ref}>
+    <section id="servicios" className="py-24 bg-gray-50 relative overflow-hidden" ref={ref}>
+      {/* Decorative blobs */}
+      <div className="absolute top-1/4 -right-32 w-[500px] h-[500px] bg-ibiza-red/6 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-32 w-[400px] h-[400px] bg-ibiza-red/4 rounded-full blur-[130px] pointer-events-none" />
       {/* Container with background image for the new aesthetic */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

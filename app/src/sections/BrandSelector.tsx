@@ -6,8 +6,12 @@ export default function BrandSelector() {
   const navigate = useNavigate();
 
   return (
-    <section id="motos" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+    <section id="motos" className="py-20 bg-white relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-ibiza-red/8 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-ibiza-red/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
 
         {/* Header */}
         <div className="mb-12 text-center">
