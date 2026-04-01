@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ArrowLeft, CheckCircle2, TrendingUp, Shield,
@@ -222,8 +223,8 @@ export default function FinancingPage() {
               { step: '02', icon: <Shield className="w-6 h-6" />, title: 'Presentas documentos', desc: 'Cédula, ingresos y extractos. Nosotros gestionamos el crédito con la financiera que más te convenga.' },
               { step: '03', icon: <CheckCircle2 className="w-6 h-6" />, title: 'Aprobación rápida', desc: 'En 24-72 horas tienes respuesta. En algunos casos como ADDI, en minutos.' },
               { step: '04', icon: <Star className="w-6 h-6" />, title: '¡Retiras tu moto!', desc: 'Firmás el contrato, pagás la cuota inicial y te vas en tu moto nueva ese mismo día.' },
-            ].map(({ step, icon, title, desc }) => (
-              <div key={step} className="relative bg-white/[0.02] rounded-2xl p-6 border border-white/[0.05] text-center">
+            ].map(({ step, icon, title, desc }, i) => (
+              <Reveal key={step} delay={i * 0.1}><div className="relative bg-white/[0.02] rounded-2xl p-6 border border-white/[0.05] text-center">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-ibiza-red text-white font-display font-black text-sm w-8 h-8 rounded-full flex items-center justify-center">
                   {step}
                 </div>
@@ -232,7 +233,7 @@ export default function FinancingPage() {
                 </div>
                 <h3 className="font-display font-bold text-white mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-              </div>
+              </div></Reveal>
             ))}
           </div>
         </motion.div>

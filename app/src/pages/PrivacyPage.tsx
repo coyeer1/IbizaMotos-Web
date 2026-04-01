@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
+import Reveal from '@/components/Reveal';
 
 const LAST_UPDATE = '1 de abril de 2026';
 const RESPONSIBLE  = 'Ibiza Motos del Eje Cafetero S.A.S.';
@@ -47,7 +48,7 @@ export default function PrivacyPage() {
         <div className="space-y-10 text-white/70 leading-relaxed text-[15px]">
 
           {/* 1 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">1. Responsable del tratamiento</h2>
             <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 space-y-1 text-sm">
               <p><span className="text-white/40">Razón social:</span> <span className="text-white">{RESPONSIBLE}</span></p>
@@ -56,20 +57,20 @@ export default function PrivacyPage() {
               <p><span className="text-white/40">Correo:</span> <span className="text-white">{EMAIL}</span></p>
               <p><span className="text-white/40">Teléfono:</span> <span className="text-white">{PHONE}</span></p>
             </div>
-          </section>
+          </section></Reveal>
 
           {/* 2 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">2. Marco legal</h2>
             <p>
               La presente política se expide en cumplimiento de la <strong className="text-white">Ley 1581 de 2012</strong> (Protección de
               Datos Personales), el <strong className="text-white">Decreto 1377 de 2013</strong> y las instrucciones impartidas por
               la Superintendencia de Industria y Comercio (SIC).
             </p>
-          </section>
+          </section></Reveal>
 
           {/* 3 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">3. Datos que recolectamos</h2>
             <p className="mb-3">A través de los formularios del sitio web podemos recolectar:</p>
             <ul className="list-disc list-inside space-y-1.5 pl-2">
@@ -83,10 +84,10 @@ export default function PrivacyPage() {
               No recolectamos datos sensibles (datos financieros, médicos, biométricos, etc.)
               a través de este sitio web.
             </p>
-          </section>
+          </section></Reveal>
 
           {/* 4 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">4. Finalidad del tratamiento</h2>
             <p className="mb-3">Sus datos serán utilizados para:</p>
             <ul className="list-disc list-inside space-y-1.5 pl-2">
@@ -96,10 +97,10 @@ export default function PrivacyPage() {
               <li>Enviar información sobre productos, promociones y novedades (solo si usted lo autoriza)</li>
               <li>Cumplir obligaciones legales y contractuales</li>
             </ul>
-          </section>
+          </section></Reveal>
 
           {/* 5 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">5. Almacenamiento y seguridad</h2>
             <p>
               Los datos recolectados a través del formulario de citas son almacenados en{' '}
@@ -107,10 +108,10 @@ export default function PrivacyPage() {
               No vendemos, cedemos ni compartimos sus datos personales con terceros, salvo
               que sea requerido por autoridad competente o para la prestación del servicio contratado.
             </p>
-          </section>
+          </section></Reveal>
 
           {/* 6 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">6. Derechos del titular</h2>
             <p className="mb-3">
               De conformidad con el artículo 8 de la Ley 1581 de 2012, usted tiene derecho a:
@@ -122,10 +123,10 @@ export default function PrivacyPage() {
               <li><strong className="text-white">Revocar la autorización</strong> para el tratamiento de sus datos</li>
               <li><strong className="text-white">Presentar quejas</strong> ante la SIC por infracciones a la ley</li>
             </ul>
-          </section>
+          </section></Reveal>
 
           {/* 7 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">7. Cómo ejercer sus derechos</h2>
             <p>
               Para ejercer cualquiera de sus derechos, puede enviarnos un correo a{' '}
@@ -133,10 +134,10 @@ export default function PrivacyPage() {
               indicando su nombre completo, número de identificación, descripción de la solicitud y
               número de contacto. Daremos respuesta en un plazo máximo de <strong className="text-white">10 días hábiles</strong>.
             </p>
-          </section>
+          </section></Reveal>
 
           {/* 8 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">8. Transferencias internacionales</h2>
             <p>
               Sus datos pueden ser procesados en servidores ubicados fuera de Colombia como parte
@@ -144,20 +145,20 @@ export default function PrivacyPage() {
               Estos proveedores cuentan con políticas de privacidad y seguridad equivalentes a los
               estándares exigidos por la legislación colombiana.
             </p>
-          </section>
+          </section></Reveal>
 
           {/* 9 */}
-          <section>
+          <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">9. Vigencia</h2>
             <p>
               Esta política entra en vigor el {LAST_UPDATE} y permanecerá vigente mientras
               {' '}{RESPONSIBLE} desarrolle sus actividades comerciales. Nos reservamos el derecho
               de actualizarla. Cualquier cambio sustancial será comunicado a través del sitio web.
             </p>
-          </section>
+          </section></Reveal>
 
           {/* Contact CTA */}
-          <div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-2xl p-6 mt-4">
+          <Reveal delay={0.05}><div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-2xl p-6 mt-4">
             <p className="text-white font-semibold mb-1">¿Tiene preguntas sobre esta política?</p>
             <p className="text-white/60 text-sm mb-3">Escríbanos y le respondemos en menos de 24 horas.</p>
             <a
@@ -166,7 +167,7 @@ export default function PrivacyPage() {
             >
               {EMAIL}
             </a>
-          </div>
+          </div></Reveal>
 
         </div>
       </div>
