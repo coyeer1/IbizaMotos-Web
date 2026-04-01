@@ -37,8 +37,14 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "119 kg",
       fuelCapacity: "6 litros",
+      colors: ["Negro", "Gris"],
     },
-    images: ["/moto_images/125-cr4/descarga (3).png","/moto_images/125-cr4/descarga.png"],
+    images: ["/moto_images/125-cr4/125-cr4negro.png"],
+    imagesByColor: {
+      "Negro": ["/moto_images/125-cr4/125-cr4negro.png"],
+      "Gris": ["/moto_images/125-cr4/125-cr4gris.png"],
+    },
+    videoUrl: "https://youtu.be/SOibUI_X2sM",
     stock: 'available',
   },
   {
@@ -56,8 +62,17 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "121 kg",
       fuelCapacity: "6 litros",
+      colors: ["Blanco","Negro"],
     },
-    images: ["/moto_images/125-ttr-cbs/descarga (1).png","/moto_images/125-ttr-cbs/descarga.png"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/125-ttr-cbs/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/125-ttr-cbs/descarga (1).png"
+          ]
+    },
+    images: ["/moto_images/125-ttr-cbs/descarga.png"],
     stock: 'available',
   },
   {
@@ -75,8 +90,17 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "127 kg",
       fuelCapacity: "8 litros",
+      colors: ["Negro","Gris"],
     },
-    images: ["/moto_images/150-cr4/descarga (1).png","/moto_images/150-cr4/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/150-cr4/descarga.png"
+          ],
+          "Gris": [
+                "/moto_images/150-cr4/descarga (1).png"
+          ]
+    },
+    images: ["/moto_images/150-cr4/descarga.png"],
     stock: 'available',
   },
   {
@@ -94,8 +118,18 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "135 kg",
       fuelCapacity: "10 litros",
+      colors: ["Gris","Negro"],
     },
-    images: ["/moto_images/200-cr4/descarga (1).png","/moto_images/200-cr4/descarga (2).png","/moto_images/200-cr4/descarga.png"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/200-cr4/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/200-cr4/descarga (1).png",
+                "/moto_images/200-cr4/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/200-cr4/descarga.png"],
     stock: 'available',
   },
   {
@@ -113,8 +147,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "138 kg",
       fuelCapacity: "10 litros",
+      colors: ["Blanco","Negro","Amarillo"],
     },
-    images: ["/moto_images/200-tt-abs/descarga (1).png","/moto_images/200-tt-abs/descarga (2).png","/moto_images/200-tt-abs/descarga.png"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/200-tt-abs/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/200-tt-abs/descarga (1).png"
+          ],
+          "Amarillo": [
+                "/moto_images/200-tt-abs/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/200-tt-abs/descarga.png"],
     stock: 'available',
   },
   {
@@ -132,8 +178,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "4 velocidades",
       weight: "108 kg",
       fuelCapacity: "9.5 litros",
+      colors: ["Negro","Negro/Azul","Gris"],
     },
-    images: ["/moto_images/ak-110-nv-cbs/descarga (1).png","/moto_images/ak-110-nv-cbs/descarga (2).png","/moto_images/ak-110-nv-cbs/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/ak-110-nv-cbs/descarga.png"
+          ],
+          "Negro/Azul": [
+                "/moto_images/ak-110-nv-cbs/descarga (1).png"
+          ],
+          "Gris": [
+                "/moto_images/ak-110-nv-cbs/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/ak-110-nv-cbs/descarga.png"],
     stock: 'available',
   },
   {
@@ -151,8 +209,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "118 kg",
       fuelCapacity: "9 litros",
+      colors: ["Rojo","Negro","Azul"],
     },
-    images: ["/moto_images/ak125chr-cbs/descarga (1).png","/moto_images/ak125chr-cbs/descarga (2).png","/moto_images/ak125chr-cbs/descarga.png"],
+    imagesByColor: {
+          "Rojo": [
+                "/moto_images/ak125chr-cbs/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/ak125chr-cbs/descarga (1).png"
+          ],
+          "Azul": [
+                "/moto_images/ak125chr-cbs/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/ak125chr-cbs/descarga.png"],
     stock: 'available',
   },
   {
@@ -200,6 +270,12 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "116 kg",
       fuelCapacity: "9 litros",
+      colors: ["Negro"],
+    },
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.png"
+          ]
     },
     images: ["/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.png"],
     stock: 'available',
@@ -219,6 +295,12 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "116 kg",
       fuelCapacity: "9 litros",
+      colors: ["Negro"],
+    },
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).png"
+          ]
     },
     images: ["/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).png"],
     stock: 'available',
@@ -238,8 +320,17 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "148 kg",
       fuelCapacity: "14 litros",
+      colors: ["Gris","Negro"],
     },
-    images: ["/moto_images/akt-250-r/descarga (3).png","/moto_images/akt-250-r/descarga.png"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/akt-250-r/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/akt-250-r/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/akt-250-r/descarga.png"],
     featured: true,
     stock: 'available',
   },
@@ -258,18 +349,30 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "128 kg",
       fuelCapacity: "12 litros",
+      colors: ["Blanco","Gris","Negro"],
     },
-    images: ["/moto_images/dinamic-rx-150/descarga (1).png","/moto_images/dinamic-rx-150/descarga (3).png","/moto_images/dinamic-rx-150/descarga.png"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/dinamic-rx-150/descarga.png"
+          ],
+          "Gris": [
+                "/moto_images/dinamic-rx-150/descarga (1).png"
+          ],
+          "Negro": [
+                "/moto_images/dinamic-rx-150/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/dinamic-rx-150/descarga.png"],
     stock: 'available',
   },
   {
     id: '13',
-    brand: 'AKT',
+    brand: 'Suzuki',
     model: "DR 150 ABS",
     year: 2026,
-    price: 7190000,
+    price: 10630000,
     category: 'Enduro',
-    description: "La AKT DR 150 ABS es la moto de aventura urbana con frenos ABS de serie. Su diseño dual sport te lleva por la ciudad y el campo con igual destreza. Motor de 150cc, neumáticos mixtos y posición de manejo erguida para mayor control en todo terreno.",
+    description: "La Suzuki DR 150 ABS es la moto de aventura urbana con frenos ABS de serie. Su diseño dual sport te lleva por la ciudad y el campo con igual destreza. Motor de 150cc, neumáticos mixtos y posición de manejo erguida para mayor control en todo terreno.",
     specifications: {
       engine: "149cc, 4 tiempos, SOHC",
       power: "12.5 HP @ 7,500 RPM",
@@ -294,16 +397,17 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.png"],
+    videoUrl: 'https://www.youtube.com/embed/7YMT196COhI?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '14',
-    brand: 'AKT',
+    brand: 'Suzuki',
     model: "DR 150 FI ABS",
     year: 2026,
-    price: 7590000,
+    price: 11999000,
     category: 'Enduro',
-    description: "La AKT DR 150 FI ABS da el siguiente paso con inyección electrónica de combustible. Mayor eficiencia en consumo, arranque fácil a cualquier temperatura y frenos ABS para la máxima seguridad. La dual sport más completa del segmento 150cc en Colombia.",
+    description: "La Suzuki DR 150 FI ABS da el siguiente paso con inyección electrónica de combustible. Mayor eficiencia en consumo, arranque fácil a cualquier temperatura y frenos ABS para la máxima seguridad. La dual sport más completa del segmento 150cc en Colombia.",
     specifications: {
       engine: "149cc, 4 tiempos, FI (inyección electrónica)",
       power: "13 HP @ 8,000 RPM",
@@ -328,16 +432,17 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.png"],
+    videoUrl: 'https://www.youtube.com/embed/RhFji0P6KfM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '15',
-    brand: 'AKT',
+    brand: 'Suzuki',
     model: "DR Z4S",
     year: 2026,
-    price: 11990000,
+    price: 50000000,
     category: 'Enduro',
-    description: "La AKT DR Z4S es la moto enduro 250cc más completa de la marca. Suspensión invertida de competencia, frenos de disco con pinzas de 2 pistones, motor 250cc con inyección y ABS. Para los que lo quieren todo en una sola máquina.",
+    description: "La Suzuki DR-Z4S es la enduro 400cc totalmente renovada. Motor DOHC de 398cc con inyección electrónica, modos de manejo, control de tracción y ABS desconectable. Suspensión invertida de largo recorrido y llantas de enduro para dominar cualquier terreno.",
     specifications: {
       engine: "249cc, 4 tiempos, FI (inyección electrónica)",
       power: "22 HP @ 8,500 RPM",
@@ -354,16 +459,17 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dr-z4s/DR-Z4S-AMARILLA (1).png"],
+    videoUrl: 'https://www.youtube.com/embed/SJMU68aWL0k?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '16',
-    brand: 'AKT',
+    brand: 'Suzuki',
     model: "DR Z4SM",
     year: 2026,
-    price: 12490000,
+    price: 50000000,
     category: 'Enduro',
-    description: "La AKT DR Z4SM es la versión supermoto del DR Z4. Llantas de perfil bajo de supermoto, suspensión de mayor firmeza y geometría ajustada para el asfalto. La diversión del enduro con el comportamiento de una deportiva en carretera.",
+    description: "La Suzuki DR-Z4SM es la versión supermoto del DR-Z4. Llantas de 17 pulgadas, suspensión de mayor firmeza y geometría ajustada para el asfalto. Motor 398cc DOHC con SIRS: modos de manejo, control de tracción y ABS desconectable.",
     specifications: {
       engine: "249cc, 4 tiempos, FI (inyección electrónica)",
       power: "22 HP @ 8,500 RPM",
@@ -382,6 +488,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dr-z4sm/DR-Z4SM-AZUL.png"],
+    videoUrl: 'https://www.youtube.com/embed/SkmWOpKOiwk?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -399,8 +506,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "126 kg",
       fuelCapacity: "13 litros",
+      colors: ["Gris","Negro"],
     },
-    images: ["/moto_images/dynamic-pro/descarga (1).png","/moto_images/dynamic-pro/descarga (2).png","/moto_images/dynamic-pro/descarga.png"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/dynamic-pro/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/dynamic-pro/descarga (1).png",
+                "/moto_images/dynamic-pro/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/dynamic-pro/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/LY8bOpfC9SU?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -418,8 +536,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "124 kg",
       fuelCapacity: "12 litros",
+      colors: ["Gris","Negro"],
     },
-    images: ["/moto_images/flex-cbs/descarga (1).png","/moto_images/flex-cbs/descarga (3).png","/moto_images/flex-cbs/descarga.png"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/flex-cbs/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/flex-cbs/descarga (1).png",
+                "/moto_images/flex-cbs/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/flex-cbs/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/L8YQo9ii4Jw?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -437,18 +566,25 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "136 kg",
       fuelCapacity: "10 litros",
+      colors: ["Verde"],
+    },
+    imagesByColor: {
+          "Verde": [
+                "/moto_images/tt200-abs-rally/descarga (3).png"
+          ]
     },
     images: ["/moto_images/tt200-abs-rally/descarga (3).png"],
+    videoUrl: 'https://www.youtube.com/embed/b41U6816Uk8?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '20',
-    brand: 'AKT',
+    brand: 'Suzuki',
     model: "Vivar Cool EIII",
     year: 2026,
-    price: 4490000,
+    price: 7400000,
     category: 'Scooters',
-    description: "La AKT Vivar Cool EIII es el scooter económico ideal para la ciudad. Diseño moderno con maletero bajo el asiento, motor de 109cc suave y eficiente, cumple con normas Euro III para mayor respeto al medio ambiente. El compañero ideal para el uso diario.",
+    description: "La Suzuki Vivar Cool EIII es el scooter económico ideal para la ciudad. Diseño moderno con maletero bajo el asiento, motor de 113cc suave y eficiente, cumple con normas Euro III para mayor respeto al medio ambiente. El compañero ideal para el uso diario.",
     specifications: {
       engine: "109.7cc, 4 tiempos, monocilíndrico",
       power: "7.8 HP @ 7,500 RPM",
@@ -498,6 +634,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/address/ADDRESS-NEGRA.png"],
+    videoUrl: 'https://www.youtube.com/embed/VfOQCTuKG6U?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -532,6 +669,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/avenis/AVENIS AMARILLA.png"],
+    videoUrl: 'https://www.youtube.com/embed/lFKu1lm9C3U?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -563,6 +701,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/ax4-eiii/ax4 azul.png"],
+    videoUrl: 'https://www.youtube.com/embed/DRaUPwcUHSQ?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -594,6 +733,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/ax4-abs/AX4 ABS AZUL.png"],
+    videoUrl: 'https://www.youtube.com/embed/EL46sFlp908?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -660,6 +800,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/burgman-fi/BURGMAN BLANCA.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/-q2io-oPk_A?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -757,6 +898,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-NEGRA-2026.png"],
+    videoUrl: 'https://www.youtube.com/embed/C_NG5Wsm6uo?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -787,6 +929,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL (1).png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/6B1f9X1snCM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -818,6 +961,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.png"],
+    videoUrl: 'https://www.youtube.com/embed/NaxspJ4Tj_E?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -850,6 +994,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.png"],
+    videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -881,6 +1026,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.png"],
+    videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -913,6 +1059,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/gsx-8r/GSX-8R-BLANCA_0.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/T00Pe0xoWEY?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -941,6 +1088,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gsx-8s/GSX-8S.png"],
+    videoUrl: 'https://www.youtube.com/embed/kxlj-VVsq5k?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -967,6 +1115,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/gsx-r1000r/GSX R1000R AZUL.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/2jgwrVs3Z9I?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -1029,6 +1178,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/gsx-s1000/GSX S1000 AZUL.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/p-X-z-LcVPc?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -1055,6 +1205,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).png"],
+    videoUrl: 'https://www.youtube.com/embed/BOq5yTibCwg?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1120,6 +1271,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/sv650a/SV650 NEGRA.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/IoibhsER2X4?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1152,6 +1304,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/uD6jYjvofmg?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -1183,6 +1336,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/v-strom-160/V-STROM 160 AMARILLA.png"],
+    videoUrl: 'https://www.youtube.com/embed/hYWGNIsuMRM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1218,6 +1372,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/JYRYcnJcvQU?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1249,11 +1404,12 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.png"],
+    videoUrl: 'https://www.youtube.com/embed/L9f_VKbniMI?autoplay=0&rel=0',
     stock: 'order',
   },
   {
     id: '46',
-    brand: 'Suzuki',
+    brand: 'Hero',
     model: "XOOM 110",
     year: 2026,
     price: 6990000,
@@ -1277,6 +1433,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/xoom-110/xoom110DiagAzul.png"],
+    videoUrl: 'https://www.youtube.com/embed/62VTzVS3AWg?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1308,6 +1465,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/cb-100/honda-cb-100-azul.webp"],
+    videoUrl: 'https://www.youtube.com/embed/PqH4Ge1_OCs?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1336,6 +1494,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/cb-125f-dlx/honda-cb125f-20-std-negro1.webp"],
+    videoUrl: 'https://www.youtube.com/embed/b89snBN5c_U?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1398,6 +1557,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/cb-300f/Nueva-CB-300F-azul-mate.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/JZ7qMC5PRrc?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1423,6 +1583,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dio-led-dlx/nueva-dio-dlx-gris.webp"],
+    videoUrl: 'https://www.youtube.com/embed/gpEVU98QGw0?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1451,6 +1612,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dio-led-std/nueva-dio-std-azul.webp"],
+    videoUrl: 'https://www.youtube.com/embed/gpEVU98QGw0?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1478,6 +1640,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/navi/navi-rojo-b.webp"],
+    videoUrl: 'https://www.youtube.com/embed/4PyndO5AAdA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1503,6 +1666,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/navi-adventure/Navi_Lateral_Derecha_Cafe2.webp"],
+    videoUrl: 'https://www.youtube.com/embed/4PyndO5AAdA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1531,6 +1695,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/navi-mix/navi-mix-negro.webp"],
+    videoUrl: 'https://www.youtube.com/embed/5lZLKD8VQjg?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1560,6 +1725,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/nx-190/honda-nx190-negro-nueva.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/QsWsRU7ZbyA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1595,6 +1761,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/pcx-160-abs/Azul-8194f.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/XUpspro5NmA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1630,6 +1797,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/wave-110s-2026/nueva-honda-wave-110-blanca.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/OXisb-5x1ys?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1662,6 +1830,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/xr-150l-20/XR150L-20-blanco-version.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/XgLalUe0xfA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1698,7 +1867,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "XR 300L Tornado",
     year: 2026,
-    price: 30490000,
+    price: 33090000,
     category: 'Enduro',
     description: "La Honda XR 300L Tornado es la bestia del segmento enduro Honda. Motor de 299cc de alto rendimiento, suspensión de competencia, frenos Nissin con ABS y diseño Tornado que impone respeto en cualquier terreno. Para los pilotos que van en serio con la aventura.",
     specifications: {
@@ -1723,6 +1892,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/xr-300l-tornado/blanco-honda-x300l-7ebd1.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/B88kn8I0v8I?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1740,8 +1910,21 @@ export const motorcycles: Motorcycle[] = [
       transmission: "4 velocidades",
       weight: "111 kg",
       fuelCapacity: "11 litros",
+      colors: ["Negro","Verde"],
     },
-    images: ["/moto_images/boxer-ct-100-es/descarga (1).png","/moto_images/boxer-ct-100-es/descarga (2).png","/moto_images/boxer-ct-100-es/descarga (3).png","/moto_images/boxer-ct-100-es/descarga (5).png","/moto_images/boxer-ct-100-es/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/boxer-ct-100-es/descarga.png",
+                "/moto_images/boxer-ct-100-es/descarga (1).png",
+                "/moto_images/boxer-ct-100-es/descarga (2).png",
+                "/moto_images/boxer-ct-100-es/descarga (3).png"
+          ],
+          "Verde": [
+                "/moto_images/boxer-ct-100-es/descarga (5).png"
+          ]
+    },
+    images: ["/moto_images/boxer-ct-100-es/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/dbEsT3zL-_A?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1759,8 +1942,21 @@ export const motorcycles: Motorcycle[] = [
       transmission: "4 velocidades",
       weight: "109 kg",
       fuelCapacity: "11 litros",
+      colors: ["Negro","Gris"],
     },
-    images: ["/moto_images/boxer-ct-100-ks/descarga (1).png","/moto_images/boxer-ct-100-ks/descarga (2).png","/moto_images/boxer-ct-100-ks/descarga (3).png","/moto_images/boxer-ct-100-ks/descarga (4).png","/moto_images/boxer-ct-100-ks/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/boxer-ct-100-ks/descarga.png",
+                "/moto_images/boxer-ct-100-ks/descarga (1).png",
+                "/moto_images/boxer-ct-100-ks/descarga (2).png",
+                "/moto_images/boxer-ct-100-ks/descarga (3).png"
+          ],
+          "Gris": [
+                "/moto_images/boxer-ct-100-ks/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/boxer-ct-100-ks/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/dbEsT3zL-_A?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1778,8 +1974,22 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "122 kg",
       fuelCapacity: "12 litros",
+      colors: ["Negro","Verde","Blanco"],
     },
-    images: ["/moto_images/boxer-ct-125/descarga (1).png","/moto_images/boxer-ct-125/descarga (2).png","/moto_images/boxer-ct-125/descarga (4).png","/moto_images/boxer-ct-125/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/boxer-ct-125/descarga.png",
+                "/moto_images/boxer-ct-125/descarga (2).png"
+          ],
+          "Verde": [
+                "/moto_images/boxer-ct-125/descarga (1).png"
+          ],
+          "Blanco": [
+                "/moto_images/boxer-ct-125/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/boxer-ct-125/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/Xj8WbNVFFrw?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1797,8 +2007,21 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "135 kg",
       fuelCapacity: "13 litros",
+      colors: ["Negro","Verde","Azul"],
     },
-    images: ["/moto_images/boxer-150x/descarga (1).png","/moto_images/boxer-150x/descarga (2).png","/moto_images/boxer-150x/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/boxer-150x/descarga.png"
+          ],
+          "Verde": [
+                "/moto_images/boxer-150x/descarga (1).png"
+          ],
+          "Azul": [
+                "/moto_images/boxer-150x/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/boxer-150x/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/qi_zZGb5RtU?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1816,8 +2039,22 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "120 kg",
       fuelCapacity: "8 litros",
+      colors: ["Azul","Negro","Verde"],
     },
-    images: ["/moto_images/discover-125-st-r/descarga (1).png","/moto_images/discover-125-st-r/descarga (2).png","/moto_images/discover-125-st-r/descarga (3).png","/moto_images/discover-125-st-r/descarga.png"],
+    imagesByColor: {
+          "Azul": [
+                "/moto_images/discover-125-st-r/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/discover-125-st-r/descarga (1).png",
+                "/moto_images/discover-125-st-r/descarga (3).png"
+          ],
+          "Verde": [
+                "/moto_images/discover-125-st-r/descarga (2).png"
+          ]
+    },
+    images: ["/moto_images/discover-125-st-r/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/bspcnWvQa4w?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1835,9 +2072,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "187 kg",
       fuelCapacity: "13 litros",
+      colors: ["Negro","Azul"],
     },
-    images: ["/moto_images/dominar-400-pro-touring/descarga (4).png","/moto_images/dominar-400-pro-touring/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/dominar-400-pro-touring/descarga.png"
+          ],
+          "Azul": [
+                "/moto_images/dominar-400-pro-touring/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/dominar-400-pro-touring/descarga.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/Ic1JxpXFGQA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1855,8 +2102,15 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "187 kg",
       fuelCapacity: "13 litros",
+      colors: ["Gris"],
+    },
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/dominar-400-volcano/descarga (1).png"
+          ]
     },
     images: ["/moto_images/dominar-400-volcano/descarga (1).png"],
+    videoUrl: 'https://www.youtube.com/embed/HE9G6c2H5C0?autoplay=0&rel=0',
     stock: 'limited',
   },
   {
@@ -1874,8 +2128,21 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "142 kg",
       fuelCapacity: "12 litros",
+      colors: ["Gris","Azul","Rojo"],
     },
-    images: ["/moto_images/pulsar-ns-125-ug/descarga (1).png","/moto_images/pulsar-ns-125-ug/descarga (4).png","/moto_images/pulsar-ns-125-ug/descarga.png"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/pulsar-ns-125-ug/descarga.png"
+          ],
+          "Azul": [
+                "/moto_images/pulsar-ns-125-ug/descarga (1).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-ns-125-ug/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-ns-125-ug/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/1wQnLsKi-Ow?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1893,8 +2160,24 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "141 kg",
       fuelCapacity: "12 litros",
+      colors: ["Verde","Rojo","Azul","Blanco"],
     },
-    images: ["/moto_images/pulsar-n-125-fi/descarga (1).png","/moto_images/pulsar-n-125-fi/descarga (2).png","/moto_images/pulsar-n-125-fi/descarga (3).png","/moto_images/pulsar-n-125-fi/descarga.png"],
+    imagesByColor: {
+          "Verde": [
+                "/moto_images/pulsar-n-125-fi/descarga.png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-n-125-fi/descarga (1).png"
+          ],
+          "Azul": [
+                "/moto_images/pulsar-n-125-fi/descarga (2).png"
+          ],
+          "Blanco": [
+                "/moto_images/pulsar-n-125-fi/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-n-125-fi/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/ZUReXPc6WcM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1912,8 +2195,21 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "143 kg",
       fuelCapacity: "12 litros",
+      colors: ["Azul","Negro","Rojo"],
     },
-    images: ["/moto_images/pulsar-p-150-fi-abs/descarga (1).png","/moto_images/pulsar-p-150-fi-abs/descarga (3).png","/moto_images/pulsar-p-150-fi-abs/descarga.png"],
+    imagesByColor: {
+          "Azul": [
+                "/moto_images/pulsar-p-150-fi-abs/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/pulsar-p-150-fi-abs/descarga (1).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-p-150-fi-abs/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-p-150-fi-abs/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/ARJkO-i33nA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1931,9 +2227,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "155 kg",
       fuelCapacity: "14 litros",
+      colors: ["Plateado"],
     },
-    images: ["/moto_images/pulsar-n-160-fi-dc/1.webp","/moto_images/pulsar-n-160-fi-dc/2.webp","/moto_images/pulsar-n-160-fi-dc/3.webp","/moto_images/pulsar-n-160-fi-dc/4.webp","/moto_images/pulsar-n-160-fi-dc/frontal-bajaj-pulsar-n160-galgo-colombia__1_.webp"],
+    imagesByColor: {
+          "Plateado": [
+                "/moto_images/pulsar-n-160-fi-dc/1.webp",
+                "/moto_images/pulsar-n-160-fi-dc/2.webp",
+                "/moto_images/pulsar-n-160-fi-dc/3.webp",
+                "/moto_images/pulsar-n-160-fi-dc/4.webp",
+                "/moto_images/pulsar-n-160-fi-dc/frontal-bajaj-pulsar-n160-galgo-colombia__1_.webp"
+          ]
+    },
+    images: ["/moto_images/pulsar-n-160-fi-dc/1.webp"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/ARJkO-i33nA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1951,8 +2258,22 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "153 kg",
       fuelCapacity: "14 litros",
+      colors: ["Azul","Gris","Negro"],
     },
-    images: ["/moto_images/pulsar-n160-pro/descarga (1).png","/moto_images/pulsar-n160-pro/descarga (2).png","/moto_images/pulsar-n160-pro/descarga (4).png","/moto_images/pulsar-n160-pro/descarga.png"],
+    imagesByColor: {
+          "Azul": [
+                "/moto_images/pulsar-n160-pro/descarga.png"
+          ],
+          "Gris": [
+                "/moto_images/pulsar-n160-pro/descarga (1).png"
+          ],
+          "Negro": [
+                "/moto_images/pulsar-n160-pro/descarga (2).png",
+                "/moto_images/pulsar-n160-pro/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-n160-pro/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/aQl7kii9LiM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1970,8 +2291,24 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "154 kg",
       fuelCapacity: "14 litros",
+      colors: ["Negro","Gris","Rojo","Azul"],
     },
-    images: ["/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (1).png","/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (2).png","/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (3).png","/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.png"
+          ],
+          "Gris": [
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (1).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (2).png"
+          ],
+          "Azul": [
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1989,9 +2326,25 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "160 kg",
       fuelCapacity: "12 litros",
+      colors: ["Negro","Azul","Rojo","Gris"],
     },
-    images: ["/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (1).png","/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (2).png","/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (4).png","/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.png"
+          ],
+          "Azul": [
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (1).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (2).png"
+          ],
+          "Gris": [
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (4).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2009,8 +2362,24 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "158 kg",
       fuelCapacity: "12 litros",
+      colors: ["Negro","Gris","Azul","Rojo"],
     },
-    images: ["/moto_images/pulsar-ns-200-fi-sc/descarga (1).png","/moto_images/pulsar-ns-200-fi-sc/descarga (2).png","/moto_images/pulsar-ns-200-fi-sc/descarga (3).png","/moto_images/pulsar-ns-200-fi-sc/descarga.png"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/pulsar-ns-200-fi-sc/descarga.png"
+          ],
+          "Gris": [
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (1).png"
+          ],
+          "Azul": [
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (2).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-ns-200-fi-sc/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2028,9 +2397,16 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "162 kg",
       fuelCapacity: "14 litros",
+      colors: ["Negro"],
+    },
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/pulsar-n-250-fi-abs/descarga.png"
+          ]
     },
     images: ["/moto_images/pulsar-n-250-fi-abs/descarga.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/ujswfjm3W20?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2048,8 +2424,17 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "165 kg",
       fuelCapacity: "13 litros",
+      colors: ["Gris"],
     },
-    images: ["/moto_images/pulsar-rs-200-abs/01.webp","/moto_images/pulsar-rs-200-abs/04.webp","/moto_images/pulsar-rs-200-abs/07.webp"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/pulsar-rs-200-abs/01.webp",
+                "/moto_images/pulsar-rs-200-abs/04.webp",
+                "/moto_images/pulsar-rs-200-abs/07.webp"
+          ]
+    },
+    images: ["/moto_images/pulsar-rs-200-abs/01.webp"],
+    videoUrl: 'https://www.youtube.com/embed/sUcYl2UHDKM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2067,17 +2452,33 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "170 kg",
       fuelCapacity: "13 litros",
+      colors: ["Blanco","Negro","Rojo","Gris"],
     },
-    images: ["/moto_images/pulsar-ns-400z/descarga (1).png","/moto_images/pulsar-ns-400z/descarga (2).png","/moto_images/pulsar-ns-400z/descarga (3).png","/moto_images/pulsar-ns-400z/descarga.png"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/pulsar-ns-400z/descarga.png"
+          ],
+          "Negro": [
+                "/moto_images/pulsar-ns-400z/descarga (1).png"
+          ],
+          "Rojo": [
+                "/moto_images/pulsar-ns-400z/descarga (2).png"
+          ],
+          "Gris": [
+                "/moto_images/pulsar-ns-400z/descarga (3).png"
+          ]
+    },
+    images: ["/moto_images/pulsar-ns-400z/descarga.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/BXWuM0uvy7A?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '80',
-    brand: 'Bajaj',
+    brand: 'AKT',
     model: "RE Auto TUK TUK",
     year: 2026,
-    price: 28990000,
+    price: 16490000,
     category: 'City',
     description: "El Bajaj RE Auto TUK TUK es el tricimoto de trabajo más conocido del mundo. Motor de 200cc con inyección electrónica, cabina cerrada para pasajeros, capacidad de carga de 300 kg y construcción ultra resistente. La solución de movilidad y trabajo en uno para el Eje Cafetero.",
     specifications: {
@@ -2087,8 +2488,15 @@ export const motorcycles: Motorcycle[] = [
       transmission: "4 velocidades + reversa",
       weight: "435 kg",
       fuelCapacity: "8 litros",
+      colors: ["Blanco"],
+    },
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/tuk-tuk/descarga.png"
+          ]
     },
     images: ["/moto_images/tuk-tuk/descarga.png"],
+    videoUrl: 'https://www.youtube.com/embed/arJJxESfbhc?autoplay=0&rel=0',
     stock: 'order',
   },
   {
@@ -2115,6 +2523,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/eco-100/ECO-100-globito.png"],
+    videoUrl: 'https://www.youtube.com/embed/sl-NwXLptMM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2149,6 +2558,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/eco-cw/eco-cw-negro-gris-motored-hero.webp"],
+    videoUrl: 'https://www.youtube.com/embed/FZKFjML8dIg?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2177,6 +2587,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/eco-sp/eco-sp-negro-gris-motored-hero.webp"],
+    videoUrl: 'https://www.youtube.com/embed/FZKFjML8dIg?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2206,6 +2617,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/eco-t-100/EcoT_NegraAzul.png"],
+    videoUrl: 'https://www.youtube.com/embed/sl-NwXLptMM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2237,6 +2649,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/hunk-125r/hunk125R-Black.png"],
+    videoUrl: 'https://www.youtube.com/embed/1dcTMAQcqH4?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2265,6 +2678,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/hunk-150-xt/HUNK150Xtec_Black.png"],
+    videoUrl: 'https://www.youtube.com/embed/l1FuZwUvWps?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2295,6 +2709,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/hunk-160-v2/hunk160 negra amarilla.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/P7DvtUQmztw?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2327,6 +2742,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/P7DvtUQmztw?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2359,11 +2775,12 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/splendor/Splendor_Xpro_GrisLima.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/VqIUR-6RIBs?autoplay=0&rel=0',
     stock: 'available',
   },
   {
     id: '90',
-    brand: 'Hero',
+    brand: 'Honda',
     model: "X-Blade 160",
     year: 2026,
     price: 10190000,
@@ -2387,6 +2804,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/x-blade-160/xblade160-beige.webp"],
+    videoUrl: 'https://www.youtube.com/embed/hUg-EF3KBPk?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2476,6 +2894,7 @@ export const motorcycles: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.png"],
+    videoUrl: 'https://www.youtube.com/embed/Kr-aVQlfzps?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2502,6 +2921,7 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.png"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/1sAAz_I9_FA?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2519,8 +2939,15 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "160 kg",
       fuelCapacity: "15 litros",
+      colors: ["Blanco"],
+    },
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/xpulse-200-r-4v/xpulseRallyColor.png"
+          ]
     },
     images: ["/moto_images/xpulse-200-r-4v/xpulseRallyColor.png"],
+    videoUrl: 'https://www.youtube.com/embed/8QsLHrLmCQg?autoplay=0&rel=0',
     stock: 'limited',
   },
   {
@@ -2538,9 +2965,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "168 kg",
       fuelCapacity: "16 litros",
+      colors: ["Gris"],
     },
-    images: ["/moto_images/alpina-300-efi/vento-alpina-300-02.jpg","/moto_images/alpina-300-efi/vento-alpina-300-06.jpg","/moto_images/alpina-300-efi/vento-alpina-300-10.jpg","/moto_images/alpina-300-efi/vento-alpina-300-14.jpg","/moto_images/alpina-300-efi/vento-alpina-300-16.jpg"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/alpina-300-efi/vento-alpina-300-02.jpg",
+                "/moto_images/alpina-300-efi/vento-alpina-300-06.jpg",
+                "/moto_images/alpina-300-efi/vento-alpina-300-10.jpg",
+                "/moto_images/alpina-300-efi/vento-alpina-300-14.jpg",
+                "/moto_images/alpina-300-efi/vento-alpina-300-16.jpg"
+          ]
+    },
+    images: ["/moto_images/alpina-300-efi/vento-alpina-300-02.jpg"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/Ni2JSDHyB24?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2558,9 +2996,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "148 kg",
       fuelCapacity: "12 litros",
+      colors: ["Negro"],
     },
-    images: ["/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.jpg","/moto_images/crossmax-200/GAL-CROSSMAX200PRO-02-1024x819.jpg","/moto_images/crossmax-200/GAL-CROSSMAX200PRO-04-1024x819.jpg","/moto_images/crossmax-200/colombia-vento-crossmax-200-pro-360-1024x608.jpg"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.jpg",
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-02-1024x819.jpg",
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-04-1024x819.jpg",
+                "/moto_images/crossmax-200/colombia-vento-crossmax-200-pro-360-1024x608.jpg"
+          ]
+    },
+    images: ["/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.jpg"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/2uQtcyIjkfk?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2578,8 +3026,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "128 kg",
       fuelCapacity: "12 litros",
+      colors: ["Blanco"],
     },
-    images: ["/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.jpg","/moto_images/falkon-125/GAL-VENTO-FALKON-220-03-1024x819.jpg","/moto_images/falkon-125/GAL-VENTO-FALKON-220-04-1024x819.jpg","/moto_images/falkon-125/GAL-VENTO-FALKON-220-06-1024x819.jpg","/moto_images/falkon-125/GAL-VENTO-FALKON-220-08-1024x819.jpg"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.jpg",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-03-1024x819.jpg",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-04-1024x819.jpg",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-06-1024x819.jpg",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-08-1024x819.jpg"
+          ]
+    },
+    images: ["/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.jpg"],
+    videoUrl: 'https://www.youtube.com/embed/r2TuNNk2vis?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2597,9 +3056,20 @@ export const motorcycles: Motorcycle[] = [
       transmission: "Automática (CVT)",
       weight: "195 kg",
       fuelCapacity: "11 litros",
+      colors: ["Gris"],
     },
-    images: ["/moto_images/gts-300/vento-gts-300-cajuela-02.jpg","/moto_images/gts-300/vento-gts-300-cajuela-08.jpg","/moto_images/gts-300/vento-gts-300-cajuela-10.jpg","/moto_images/gts-300/vento-gts-300-cajuela-13.jpg","/moto_images/gts-300/vento-gts-300-cajuela-16.jpg"],
+    imagesByColor: {
+          "Gris": [
+                "/moto_images/gts-300/vento-gts-300-cajuela-02.jpg",
+                "/moto_images/gts-300/vento-gts-300-cajuela-08.jpg",
+                "/moto_images/gts-300/vento-gts-300-cajuela-10.jpg",
+                "/moto_images/gts-300/vento-gts-300-cajuela-13.jpg",
+                "/moto_images/gts-300/vento-gts-300-cajuela-16.jpg"
+          ]
+    },
+    images: ["/moto_images/gts-300/vento-gts-300-cajuela-02.jpg"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/ipB3pT6JxP4?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2617,8 +3087,17 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "128 kg",
       fuelCapacity: "12 litros",
+      colors: ["Negro"],
     },
-    images: ["/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.jpg","/moto_images/lithium-125/VENTO-LITHIUM-125-4-02.jpg","/moto_images/lithium-125/VENTO-LITHIUM-125-4-08.jpg"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.jpg",
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-02.jpg",
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-08.jpg"
+          ]
+    },
+    images: ["/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.jpg"],
+    videoUrl: 'https://www.youtube.com/embed/X30DijdUbDM?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2636,9 +3115,22 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "172 kg",
       fuelCapacity: "14 litros",
+      colors: ["Negro","Gris"],
     },
-    images: ["/moto_images/presley-200-abs/vento-latam-presley-200-01.jpg","/moto_images/presley-200-abs/vento-latam-presley-200-02.jpg","/moto_images/presley-200-abs/vento-latam-presley-200-05.jpg","/moto_images/presley-200-abs/vento-latam-presley-200-08.jpg","/moto_images/presley-200-abs/vento-latam-presley-200-13.jpg"],
+    imagesByColor: {
+          "Negro": [
+                "/moto_images/presley-200-abs/vento-latam-presley-200-01.jpg",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-02.jpg",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-08.jpg",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-13.jpg"
+          ],
+          "Gris": [
+                "/moto_images/presley-200-abs/vento-latam-presley-200-05.jpg"
+          ]
+    },
+    images: ["/moto_images/presley-200-abs/vento-latam-presley-200-01.jpg"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/pjcop5Blhlo?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2656,8 +3148,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "124 kg",
       fuelCapacity: "12 litros",
+      colors: ["Rojo"],
     },
-    images: ["/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.jpg","/moto_images/rapid-125/GAL-RAPID-125-02-1024x819.jpg","/moto_images/rapid-125/GAL-RAPID-125-04-1024x819.jpg","/moto_images/rapid-125/GAL-RAPID-125-05-1024x819.jpg","/moto_images/rapid-125/GAL-RAPID-125-07-1024x819.jpg"],
+    imagesByColor: {
+          "Rojo": [
+                "/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.jpg",
+                "/moto_images/rapid-125/GAL-RAPID-125-02-1024x819.jpg",
+                "/moto_images/rapid-125/GAL-RAPID-125-04-1024x819.jpg",
+                "/moto_images/rapid-125/GAL-RAPID-125-05-1024x819.jpg",
+                "/moto_images/rapid-125/GAL-RAPID-125-07-1024x819.jpg"
+          ]
+    },
+    images: ["/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.jpg"],
+    videoUrl: 'https://www.youtube.com/embed/47PHlOdGJW4?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2675,9 +3178,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "6 velocidades",
       weight: "165 kg",
       fuelCapacity: "14 litros",
+      colors: ["Azul"],
     },
-    images: ["/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.jpg","/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-09.jpg","/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-12.jpg","/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-16.jpg"],
+    imagesByColor: {
+          "Azul": [
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.jpg",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-09.jpg",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-12.jpg",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-16.jpg"
+          ]
+    },
+    images: ["/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.jpg"],
     featured: true,
+    videoUrl: 'https://www.youtube.com/embed/pzKI_zOdiX8?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2695,8 +3208,19 @@ export const motorcycles: Motorcycle[] = [
       transmission: "5 velocidades",
       weight: "128 kg",
       fuelCapacity: "12 litros",
+      colors: ["Blanco"],
     },
-    images: ["/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.jpg","/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-03-1024x819.jpg","/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-05-1024x819.jpg","/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-06-1024x819.jpg","/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-07-1024x819.jpg"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.jpg",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-03-1024x819.jpg",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-05-1024x819.jpg",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-06-1024x819.jpg",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-07-1024x819.jpg"
+          ]
+    },
+    images: ["/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.jpg"],
+    videoUrl: 'https://www.youtube.com/embed/2JtirEvbtb0?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -2714,8 +3238,24 @@ export const motorcycles: Motorcycle[] = [
       transmission: "Automática / 3 velocidades",
       weight: "45 kg",
       fuelCapacity: "2 litros",
+      colors: ["Blanco","Naranja","Rojo","Azul"],
     },
-    images: ["/moto_images/motos-nios/KB57 60CC 4T.jpg","/moto_images/motos-nios/KB57 60CC 4T2.jpg","/moto_images/motos-nios/MOTO 60CC 2T 1E.jpg","/moto_images/motos-nios/MOTO 60CC 2T 1E2.jpg","/moto_images/motos-nios/MOTO 60CC 2T 1E3.jpg"],
+    imagesByColor: {
+          "Blanco": [
+                "/moto_images/motos-nios/KB57 60CC 4T.jpg"
+          ],
+          "Naranja": [
+                "/moto_images/motos-nios/KB57 60CC 4T2.jpg",
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E3.jpg"
+          ],
+          "Rojo": [
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E.jpg"
+          ],
+          "Azul": [
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E2.jpg"
+          ]
+    },
+    images: ["/moto_images/motos-nios/KB57 60CC 4T.jpg"],
     stock: 'available',
   },
 ];

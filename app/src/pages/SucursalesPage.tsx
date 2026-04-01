@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, X, ChevronLeft, ChevronRight, Store, Navigation } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { MapPin, Phone, Mail, X, ChevronLeft, ChevronRight, Store, Navigation, Map, Search } from 'lucide-react';
 
 // ─── Datos reales de las 19 sucursales ────────────────────────────────────────
 interface Sucursal {
@@ -14,7 +17,9 @@ interface Sucursal {
   direccion: string;
   fotos: string[];
   color: string;
-  placeUrl?: string; // Link directo de Google Maps (opcional — si no hay, usa búsqueda)
+  lat: number;
+  lng: number;
+  placeUrl?: string;
 }
 
 const SUCURSALES: Sucursal[] = [
@@ -32,6 +37,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/1/foto-sala-3.jpg',
     ],
     color: '#1a73e8',
+    lat: 4.815230, lng: -75.699683,
     placeUrl: 'https://maps.app.goo.gl/zEkCHqbfjjEcfvvSA',
   },
   {
@@ -46,6 +52,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/2/foto-sala-2.jpg',
     ],
     color: '#cc0000',
+    lat: 4.815440, lng: -75.700313,
     placeUrl: 'https://maps.app.goo.gl/XVx4D95gzgi7hFuN9',
   },
   {
@@ -58,6 +65,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/3/foto-sala-1.jpg',
     ],
     color: '#e65c00',
+    lat: 4.815726, lng: -75.700176,
     placeUrl: 'https://maps.app.goo.gl/rSawM96UUb2HPNG29',
   },
   {
@@ -73,6 +81,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/4/foto-sala-3.jpg',
     ],
     color: '#8b0000',
+    lat: 4.815606, lng: -75.700032,
     placeUrl: 'https://maps.app.goo.gl/4fMMKW8z8Fyv6y2i8',
   },
   // ── Dosquebradas ─────────────────────────────────────────────────────────────
@@ -86,6 +95,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/5/foto-fachada-2.jpg',
     ],
     color: '#e65c00',
+    lat: 4.828440, lng: -75.680520,
     placeUrl: 'https://maps.app.goo.gl/oh8zia1YXvxauVMN6',
   },
   {
@@ -98,6 +108,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/6/foto-fachada-2.jpg',
     ],
     color: '#8b0000',
+    lat: 4.836115, lng: -75.669980,
     placeUrl: 'https://maps.app.goo.gl/tWyQbkaZo1uwKvmf8',
   },
   // ── Santa Rosa de Cabal ──────────────────────────────────────────────────────
@@ -111,6 +122,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/7/foto-fachada-2.jpg',
     ],
     color: '#1a73e8',
+    lat: 4.868862, lng: -75.622172,
     placeUrl: 'https://maps.app.goo.gl/ACroSXEKb1eskv818',
   },
   {
@@ -123,6 +135,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/8/foto-fachada-2.jpg',
     ],
     color: '#e65c00',
+    lat: 4.868254, lng: -75.621712,
     placeUrl: 'https://maps.app.goo.gl/VDHEMxcyC7cA2Kb87',
   },
   {
@@ -135,6 +148,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/9/foto-fachada-2.jpg',
     ],
     color: '#8b0000',
+    lat: 4.867045, lng: -75.622271,
     placeUrl: 'https://maps.app.goo.gl/LauQQRqCLCiVA6qG8',
   },
   {
@@ -147,6 +161,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/10/foto-fachada-2.jpg',
     ],
     color: '#cc0000',
+    lat: 4.868254, lng: -75.621712,
     placeUrl: 'https://maps.app.goo.gl/VDHEMxcyC7cA2Kb87',
   },
   // ── Quimbaya ─────────────────────────────────────────────────────────────────
@@ -159,6 +174,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/11/foto-fachada-2.jpg',
     ],
     color: '#e65c00',
+    lat: 4.623015, lng: -75.765215,
     placeUrl: 'https://maps.app.goo.gl/ow9YCC3hZHhQ7mPv7',
   },
   {
@@ -170,6 +186,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/12/foto-fachada-2.jpg',
     ],
     color: '#cc0000',
+    lat: 4.622387, lng: -75.765433,
     placeUrl: 'https://maps.app.goo.gl/eUuxhtrCnetLpuR2A',
   },
   // ── Montenegro ───────────────────────────────────────────────────────────────
@@ -183,6 +200,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/13/foto-fachada-2.jpg',
     ],
     color: '#e65c00',
+    lat: 4.565374, lng: -75.751789,
     placeUrl: 'https://maps.app.goo.gl/3nzhi6wcycHpDCrMA',
   },
   // ── Viterbo ──────────────────────────────────────────────────────────────────
@@ -196,6 +214,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/14/foto-fachada-2.jpg',
     ],
     color: '#e65c00',
+    lat: 5.064854, lng: -75.870363,
     placeUrl: 'https://maps.app.goo.gl/3oAhR8LZSgPp6dKm7',
   },
   // ── Chinchiná ────────────────────────────────────────────────────────────────
@@ -209,6 +228,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/15/foto-fachada-2-(1).jpg',
     ],
     color: '#1a73e8',
+    lat: 4.987730, lng: -75.607175,
     placeUrl: 'https://maps.app.goo.gl/wUvxtXAiHoyxwMKo6',
   },
   // ── Neiva ────────────────────────────────────────────────────────────────────
@@ -222,6 +242,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/16/foto-fachada-2.jpg',
     ],
     color: '#cc0000',
+    lat: 2.930939, lng: -75.290289,
     placeUrl: 'https://maps.app.goo.gl/sTs1q4j5cA2XtMGG7',
   },
   {
@@ -234,6 +255,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/17/foto-fachada-2.jpg',
     ],
     color: '#006633',
+    lat: 2.930734, lng: -75.290286,
     placeUrl: 'https://maps.app.goo.gl/byTk4yT5NnZgzFz59',
   },
   {
@@ -246,6 +268,7 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/18/foto-fachada-2.jpg',
     ],
     color: '#003399',
+    lat: 2.924088, lng: -75.290836,
     placeUrl: 'https://maps.app.goo.gl/hbtFi61wzHdMEUTcA',
   },
   {
@@ -258,11 +281,25 @@ const SUCURSALES: Sucursal[] = [
       '/sucursales/19/foto-sala-1.jpg',
     ],
     color: '#cc0000',
+    lat: 2.924856, lng: -75.285825,
     placeUrl: 'https://maps.app.goo.gl/qPP7ZQv7Mjd9kDuk7',
   },
 ];
 
 const CIUDADES = Array.from(new Set(SUCURSALES.map(s => s.ciudad)));
+
+// Vista por ciudad: [lat, lng, zoom]
+const CITY_VIEWS: Record<string, [number, number, number]> = {
+  'Todas':               [4.35, -75.72, 8],
+  'Pereira':             [4.8154, -75.6999, 17],
+  'Dosquebradas':        [4.8323, -75.6753, 14],
+  'Santa Rosa de Cabal': [4.8680, -75.6221, 16],
+  'Quimbaya':            [4.6227, -75.7653, 16],
+  'Montenegro':          [4.5654, -75.7518, 15],
+  'Viterbo':             [5.0649, -75.8704, 15],
+  'Chinchiná':           [4.9877, -75.6072, 15],
+  'Neiva':               [2.9277, -75.2893, 14],
+};
 
 function getMapsUrl(s: Sucursal) {
   if (s.placeUrl) return s.placeUrl;
@@ -418,7 +455,6 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
 
           {/* Botones */}
           <div className="mt-auto flex flex-col gap-2 pt-1">
-            {/* Cómo llegar */}
             <a
               href={getMapsUrl(s)}
               target="_blank"
@@ -429,7 +465,6 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
               Cómo llegar
             </a>
 
-            {/* WhatsApp */}
             <a
               href={getWaUrl(s)}
               target="_blank"
@@ -453,14 +488,150 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
   );
 }
 
+// ─── Marcador personalizado ───────────────────────────────────────────────────
+const BRAND_ABBREV: Record<string, string> = {
+  Suzuki: 'Su', Honda: 'Ho', AKT: 'AK', Hero: 'He',
+  Vento: 'Ve', Bajaj: 'Bj', 'Good Kidz': 'GK',
+};
+
+function createPin(color: string, marca: string) {
+  const abbrev = BRAND_ABBREV[marca] ?? marca.slice(0, 2);
+  return L.divIcon({
+    className: '',
+    html: `
+      <svg width="34" height="46" viewBox="0 0 34 46" xmlns="http://www.w3.org/2000/svg"
+        style="filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))">
+        <path d="M17 1C8.163 1 1 8.163 1 17c0 12.5 16 28 16 28S33 29.5 33 17C33 8.163 25.837 1 17 1z"
+          fill="${color}" stroke="white" stroke-width="2"/>
+        <text x="17" y="16.5" text-anchor="middle" dominant-baseline="central"
+          font-family="'Arial Black', Arial, sans-serif" font-weight="900"
+          font-size="11" fill="white" letter-spacing="0.3">${abbrev}</text>
+      </svg>`,
+    iconSize: [34, 46],
+    iconAnchor: [17, 46],
+    popupAnchor: [0, -48],
+  });
+}
+
+// ─── FlyTo al cambiar ciudad ──────────────────────────────────────────────────
+function FlyToHandler({ ciudad }: { ciudad: string }) {
+  const map = useMap();
+  useEffect(() => {
+    const view = CITY_VIEWS[ciudad] ?? CITY_VIEWS['Todas'];
+    map.flyTo([view[0], view[1]], view[2], { duration: 1.0 });
+  }, [ciudad, map]);
+  return null;
+}
+
+// ─── Mapa de sucursales ───────────────────────────────────────────────────────
+function MapaSucursales({ sucursales, ciudadActiva }: { sucursales: Sucursal[]; ciudadActiva: string }) {
+  const initialView = CITY_VIEWS['Todas'];
+
+  return (
+    <MapContainer
+      center={[initialView[0], initialView[1]]}
+      zoom={initialView[2]}
+      scrollWheelZoom={true}
+      className="w-full h-full"
+      style={{ zIndex: 0 }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <FlyToHandler ciudad={ciudadActiva} />
+      {sucursales.map(s => (
+        <Marker key={s.id} position={[s.lat, s.lng]} icon={createPin(s.color, s.marca)}>
+          <Popup minWidth={220} maxWidth={260}>
+            <div className="font-sans">
+              {/* Foto */}
+              {s.fotos.length > 0 && (
+                <img
+                  src={s.fotos[0]}
+                  alt={s.marca}
+                  style={{ width: '100%', height: '110px', objectFit: 'cover', borderRadius: '6px', marginBottom: '8px' }}
+                />
+              )}
+              {/* Marca badge */}
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '2px 10px',
+                  borderRadius: '999px',
+                  backgroundColor: s.color,
+                  color: 'white',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  marginBottom: '4px',
+                }}
+              >
+                {s.marca}
+              </span>
+              <div style={{ fontWeight: 700, fontSize: '13px', color: '#111', lineHeight: 1.3, marginBottom: '2px' }}>
+                {s.asesor}
+              </div>
+              <div style={{ fontSize: '12px', color: '#555', marginBottom: '8px' }}>
+                {s.direccion}, {s.ciudad}
+              </div>
+              {/* Botones */}
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <a
+                  href={getMapsUrl(s)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: 1, textAlign: 'center', padding: '5px 0',
+                    border: '1.5px solid #d1d5db', borderRadius: '8px',
+                    fontSize: '12px', fontWeight: 600, color: '#374151',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Cómo llegar
+                </a>
+                <a
+                  href={getWaUrl(s)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    flex: 1, textAlign: 'center', padding: '5px 0',
+                    backgroundColor: '#25D366', borderRadius: '8px',
+                    fontSize: '12px', fontWeight: 600, color: 'white',
+                    textDecoration: 'none',
+                  }}
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+    </MapContainer>
+  );
+}
+
 // ─── Página principal ─────────────────────────────────────────────────────────
 export default function SucursalesPage() {
   const [ciudadActiva, setCiudadActiva] = useState<string>('Todas');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const ciudadesFiltro = ['Todas', ...CIUDADES];
-  const sucursalesFiltradas = ciudadActiva === 'Todas'
-    ? SUCURSALES
-    : SUCURSALES.filter(s => s.ciudad === ciudadActiva);
+
+  const sucursalesFiltradas = useMemo(() => {
+    let result = ciudadActiva === 'Todas'
+      ? SUCURSALES
+      : SUCURSALES.filter(s => s.ciudad === ciudadActiva);
+    const q = searchQuery.trim().toLowerCase();
+    if (q) {
+      result = result.filter(s =>
+        s.asesor.toLowerCase().includes(q) ||
+        s.marca.toLowerCase().includes(q) ||
+        s.ciudad.toLowerCase().includes(q) ||
+        s.direccion.toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [ciudadActiva, searchQuery]);
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
@@ -479,6 +650,28 @@ export default function SucursalesPage() {
             Encuentra el más cercano a ti.
           </p>
         </motion.div>
+      </div>
+
+      {/* Buscador */}
+      <div className="bg-white border-b border-gray-100 px-4 py-4">
+        <div className="max-w-xl mx-auto relative">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Buscar por ciudad, marca o asesor…"
+            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-ibiza-red/30 focus:border-ibiza-red transition-all"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Filtro por ciudad */}
@@ -521,10 +714,40 @@ export default function SucursalesPage() {
           </motion.div>
         </AnimatePresence>
 
-        <p className="text-center text-gray-400 text-sm mt-10">
-          {sucursalesFiltradas.length} sucursal{sucursalesFiltradas.length !== 1 ? 'es' : ''} en{' '}
-          {ciudadActiva === 'Todas' ? 'toda la red' : ciudadActiva}
-        </p>
+        {sucursalesFiltradas.length === 0 ? (
+          <div className="text-center py-16 text-gray-400">
+            <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
+            <p className="font-medium">Sin resultados para "{searchQuery}"</p>
+            <button onClick={() => setSearchQuery('')} className="mt-2 text-ibiza-red text-sm hover:underline">
+              Limpiar búsqueda
+            </button>
+          </div>
+        ) : (
+          <p className="text-center text-gray-400 text-sm mt-10">
+            {sucursalesFiltradas.length} sucursal{sucursalesFiltradas.length !== 1 ? 'es' : ''}{' '}
+            {searchQuery ? `con "${searchQuery}"` : ciudadActiva === 'Todas' ? 'en toda la red' : `en ${ciudadActiva}`}
+          </p>
+        )}
+      </div>
+
+      {/* ── Mapa ── */}
+      <div className="border-t border-gray-200">
+        {/* Header del mapa */}
+        <div className="bg-ibiza-black py-8 px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <Map className="w-5 h-5 text-ibiza-gold" />
+            <span className="text-ibiza-gold font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
+          </div>
+          <h2 className="font-display font-black text-2xl md:text-3xl text-white">
+            Encuéntranos en el <span className="text-ibiza-red">mapa</span>
+          </h2>
+          <p className="text-gray-400 text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
+        </div>
+
+        {/* Contenedor del mapa */}
+        <div className="w-full h-[350px] md:h-[500px] lg:h-[600px]">
+          <MapaSucursales sucursales={sucursalesFiltradas} ciudadActiva={ciudadActiva} />
+        </div>
       </div>
     </div>
   );

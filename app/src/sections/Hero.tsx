@@ -269,7 +269,7 @@ export default function Hero() {
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
-                className={`flex-1 text-left px-5 py-5 transition-all duration-300 border-t-2 relative overflow-hidden ${
+                className={`flex-1 text-left px-3 sm:px-5 py-3 sm:py-5 transition-all duration-300 border-t-2 relative overflow-hidden ${
                   i === currentSlide
                     ? 'border-t-white'
                     : 'border-t-transparent hover:border-t-white/30'

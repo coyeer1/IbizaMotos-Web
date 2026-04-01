@@ -180,10 +180,10 @@ export default function Navbar() {
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
         <div
-          className={`absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          className={`absolute top-0 right-0 w-[min(320px,85vw)] h-full bg-white shadow-2xl transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
-          <div className="p-6 pt-20">
+          <div className="p-4 sm:p-6 pt-20">
             {/* Logo in mobile menu */}
             <div className="mb-8 flex justify-center">
               <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" className="h-16 object-contain" />

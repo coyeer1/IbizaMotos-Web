@@ -107,11 +107,12 @@ The dashboard has tabs: **Citas** (appointments from Supabase) | **Motos** (stat
 ## Cambios recientes (marzo 2026)
 
 ### WhatsApp por marca (`src/lib/config.ts`)
-Se agregó `BRAND_CONTACTS` — un objeto con número de WhatsApp para ventas (`sales`) y repuestos (`parts`) por cada marca. **Los números actuales son placeholders** — deben reemplazarse con los números reales de cada encargado.
+`BRAND_CONTACTS` — objeto con número de WhatsApp real para ventas (`sales`) y repuestos (`parts`) por cada marca. Los números están asignados a asesores específicos (Kevin Hinestroza / Suzuki, Kelly Ramírez / Honda, Laura Correa / AKT, etc.).
 
 Helpers disponibles:
-- `getBrandSalesWhatsApp(brandName)` — para sección Motos
+- `getBrandSalesWhatsApp(brandName)` — para sección Motos / BrandSelector
 - `getBrandPartsWhatsApp(brandName)` — para sección Repuestos
+- `getBrandBuyWhatsApp(brandName, model, color?)` — para botón "Comprar" en MotorcyclePage; usa el número de ventas de la marca
 
 ### Sección Motos — BrandSelector (`src/sections/BrandSelector.tsx`)
 Los logos de marcas ya **no navegan** a `/marca/:slug`. Ahora cada logo abre WhatsApp del encargado de ventas de esa marca (`getBrandSalesWhatsApp`). Al hover aparece chip verde "Consultar".

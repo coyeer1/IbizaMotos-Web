@@ -63,7 +63,7 @@ const MotoCard = ({
   const cc = motorcycle.specifications?.engine?.match(/([0-9.]+)\s*cc/i)?.[1] || '';
   const hp = motorcycle.specifications?.power?.match(/([0-9.]+)\s*HP/i)?.[1] || '';
 
-  // Color picker state — default to first color with images, or null
+  // Color picker state — solo motos con imagesByColor real
   const colorKeys = motorcycle.imagesByColor ? Object.keys(motorcycle.imagesByColor) : [];
   const [selectedColor, setSelectedColor] = useState<string | null>(colorKeys[0] ?? null);
 
@@ -163,8 +163,8 @@ const MotoCard = ({
             {motorcycle.model}
           </h3>
 
-          {/* Color Picker — interactive buttons */}
-          {colorKeys.length > 0 ? (
+          {/* Color Picker — interactive buttons for all motos */}
+          {colorKeys.length > 0 && (
             <div className="flex items-center gap-2 mb-4" onClick={e => e.stopPropagation()}>
               <div className="flex gap-1.5">
                 {colorKeys.slice(0, 6).map((color) => (
@@ -180,28 +180,17 @@ const MotoCard = ({
                     title={color}
                   />
                 ))}
+                {colorKeys.length > 6 && (
+                  <span className="text-[10px] text-gray-400 font-medium self-center ml-1">
+                    +{colorKeys.length - 6}
+                  </span>
+                )}
               </div>
               {selectedColor && (
                 <span className="text-[10px] text-gray-500 font-medium">{selectedColor}</span>
               )}
             </div>
-          ) : motorcycle.specifications?.colors && motorcycle.specifications.colors.length > 0 ? (
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex -space-x-1">
-                {motorcycle.specifications.colors.slice(0, 5).map((color, i) => (
-                  <div
-                    key={i}
-                    className="w-5 h-5 rounded-full border-2 border-white shadow-sm"
-                    style={{ backgroundColor: colorMap[color] || '#555', zIndex: 5 - i }}
-                    title={color}
-                  />
-                ))}
-              </div>
-              <span className="text-[10px] text-gray-400 font-medium">
-                {motorcycle.specifications.colors.length} colores
-              </span>
-            </div>
-          ) : null}
+          )}
 
           {/* Spacer */}
           <div className="flex-1" />

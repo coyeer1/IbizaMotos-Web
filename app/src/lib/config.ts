@@ -54,6 +54,12 @@ export const BRAND_CONTACTS: Record<string, { sales: string; parts: string }> = 
   'Good Kidz': { sales: '573052884546', parts: '573052884546' }, // Línea general
 };
 
+export function getBrandBuyWhatsApp(brandName: string, model: string, color?: string): string {
+  const number = BRAND_CONTACTS[brandName]?.sales ?? BUSINESS.whatsappNumber;
+  const colorText = color ? ` color ${color}` : '';
+  return `https://wa.me/${number}?text=${encodeURIComponent(`Hola, estoy interesado en comprar la ${brandName} ${model}${colorText}. ¿Cuál es el proceso?`)}`;
+}
+
 export function getBrandSalesWhatsApp(brandName: string): string {
   const number = BRAND_CONTACTS[brandName]?.sales ?? BUSINESS.whatsappNumber;
   return `https://wa.me/${number}?text=${encodeURIComponent(`Hola, quiero información sobre motos ${brandName}. ¿Me pueden ayudar?`)}`;

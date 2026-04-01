@@ -100,7 +100,7 @@ export default function FinancingTeaser() {
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.35, delay: 0.3 + i * 0.05 }}
                 className="flex items-center justify-center bg-white border border-gray-200 rounded-xl px-4 py-3 hover:border-ibiza-red/40 hover:shadow-md cursor-pointer transition-all duration-200"
-                style={{ minWidth: 80 }}
+                style={{ minWidth: 'clamp(60px, 15vw, 80px)' }}
                 onClick={() => navigate(`/financiamiento?financiera=${f.id}`)}
                 title={`Financiar con ${f.name}`}
               >

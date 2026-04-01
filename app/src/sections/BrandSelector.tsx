@@ -39,7 +39,7 @@ export default function BrandSelector() {
                 alt={brand.name}
                 loading="lazy"
                 decoding="async"
-                className="h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                className="h-10 w-auto max-w-full object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
               />
             </motion.div>
           ))}

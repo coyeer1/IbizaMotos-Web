@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { posts, categoryStyles } from '@/data/blogPosts';
 import { Button } from '@/components/ui/button';
+import { getWhatsAppUrl } from '@/lib/config';
 
 function renderBody(paragraph: string, index: number) {
   const parts = paragraph.split(/\*\*(.*?)\*\*/g);
@@ -149,7 +150,7 @@ export default function BlogPage() {
               <p className="text-gray-400 text-sm">Nuestros asesores están disponibles en WhatsApp para ayudarte.</p>
             </div>
             <a
-              href="https://wa.me/573001234567"
+              href={getWhatsAppUrl(`Hola, leí el artículo "${post.title}" y tengo una consulta.`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20b858] text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors shrink-0"

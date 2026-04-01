@@ -232,7 +232,7 @@ function CompactCalculator({ initialPrice }: { initialPrice: number }) {
       {/* Financiera pills */}
       <div>
         <p className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-2.5">Financiera</p>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {FINANCIERAS.map(fin => {
             const active = selectedFin.id === fin.id;
             return (
@@ -428,7 +428,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
                   initial={{ opacity: 0, y: 16 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
-                  className="relative flex flex-col items-center p-4 rounded-2xl border-2 transition-all duration-300 overflow-hidden group cursor-pointer"
+                  className="relative flex flex-col items-center p-2 sm:p-4 rounded-2xl border-2 transition-all duration-300 overflow-hidden group cursor-pointer"
                   style={{
                     borderColor: isSelected ? fin.color : '#e5e7eb',
                     background: isSelected ? fin.bg : '#fafafa',
@@ -614,7 +614,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
               <label className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 block">
                 Plazo de financiamiento
               </label>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                 {TERMS.map(t => {
                   const disabled = t > selectedFin.maxMonths;
                   const active = term === t && !disabled;

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
-import { getBuyWhatsApp, getWhatsAppUrl } from '@/lib/config';
+import { getBrandBuyWhatsApp, getWhatsAppUrl } from '@/lib/config';
 import { Calculator, ArrowRight } from 'lucide-react';
 import type { Motorcycle } from '@/types';
 import { CompareButton } from '@/components/MotoComparator';
@@ -134,7 +134,11 @@ export default function MotorcyclePage() {
 
     const originalPrice = motorcycle.price * 1.05;
 
-    const whatsappUrl = getBuyWhatsApp(motorcycle.brand, motorcycle.model, selectedColor);
+    const whatsappUrl = getBrandBuyWhatsApp(motorcycle.brand, motorcycle.model, selectedColor);
+
+    const videoId = motorcycle.videoUrl
+        ? (motorcycle.videoUrl.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]+)/) || [])[1] ?? ''
+        : '';
 
     const handleQuoteSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -167,6 +171,39 @@ export default function MotorcyclePage() {
 
     return (
         <div className="min-h-screen bg-[#080808] relative pb-32">
+
+            {/* ── VIDEO HERO ── */}
+            {videoId && (
+                <section className="relative w-full h-[60vh] md:h-screen overflow-hidden">
+                    <iframe
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1`}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                        style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', pointerEvents: 'none' }}
+                        frameBorder="0"
+                        allow="autoplay; encrypted-media; fullscreen"
+                    />
+                    {/* Gradiente superior e inferior */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#080808] pointer-events-none" />
+                    {/* Texto overlay inferior */}
+                    <div className="absolute bottom-10 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
+                        <span className="text-[10px] text-ibiza-red font-bold tracking-[0.3em] uppercase block mb-1">{motorcycle.brand}</span>
+                        <h2 className="font-display font-black text-5xl md:text-8xl text-white uppercase leading-none tracking-tight drop-shadow-2xl">
+                            {motorcycle.model}
+                        </h2>
+                    </div>
+                    {/* Botón volver */}
+                    <div className="absolute top-6 left-4 sm:left-8 z-10">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="flex items-center text-white/70 hover:text-white text-sm bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-white/20 transition-all"
+                        >
+                            <ArrowLeft className="w-4 h-4 mr-2" />
+                            Volver
+                        </button>
+                    </div>
+                </section>
+            )}
+
             {/* ── HERO SECTION ── */}
             <section className="relative w-full min-h-[60vh] md:min-h-[85vh] flex flex-col overflow-hidden">
                 {/* Background glow effects */}
@@ -244,26 +281,24 @@ export default function MotorcyclePage() {
                             </span>
                         </div>
 
-                        {/* Color selector */}
-                        {motorcycle.specifications.colors?.length > 0 && (
+                        {/* Color selector — solo si hay imagesByColor real */}
+                        {motorcycle.imagesByColor && motorcycle.specifications.colors?.length > 0 && (
                         <div className="mb-8">
                             <p className="text-xs font-bold text-gray-500 tracking-widest uppercase mb-3">
                                 Color: <span className="text-white">{selectedColor}</span>
                             </p>
-                            <div className="flex gap-3">
+                            <div className="flex gap-3 flex-wrap">
                                 {motorcycle.specifications.colors.map((color) => (
                                     <button
                                         key={color}
-                                        onClick={() => {
-                                            setSelectedColor(color);
-                                            setCurrentImageIndex(0);
-                                        }}
-                                        className={`w-10 h-10 rounded-full transition-all duration-300 ${selectedColor === color
-                                            ? 'ring-2 ring-ibiza-red ring-offset-2 ring-offset-[#080808] scale-110'
-                                            : 'border border-white/20 hover:scale-105'
-                                            }`}
-                                        style={{ backgroundColor: colorMap[color] || '#ddd' }}
+                                        onClick={() => { setSelectedColor(color); setCurrentImageIndex(0); }}
                                         title={color}
+                                        className={`w-10 h-10 rounded-full transition-all duration-300 ${
+                                            selectedColor === color
+                                                ? 'ring-2 ring-ibiza-red ring-offset-2 ring-offset-[#080808] scale-110'
+                                                : 'border border-white/20 hover:scale-105 hover:border-white/40'
+                                        }`}
+                                        style={{ backgroundColor: colorMap[color] || '#888' }}
                                     />
                                 ))}
                             </div>
@@ -334,7 +369,7 @@ export default function MotorcyclePage() {
                                 )}
                             </div>
 
-                            {/* Thumbnail strip */}
+                            {/* Thumbnail strip — solo si el color actual tiene múltiples ángulos */}
                             {images.length > 1 && (
                                 <div className="flex gap-3 mt-4 justify-center">
                                     {images.map((img, idx) => (
@@ -346,11 +381,7 @@ export default function MotorcyclePage() {
                                                 : 'border-white/10 opacity-50 hover:opacity-80 hover:border-white/20'
                                                 }`}
                                         >
-                                            <img
-                                                src={img}
-                                                alt={`Vista ${idx + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
+                                            <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-cover" />
                                         </button>
                                     ))}
                                 </div>
@@ -363,7 +394,7 @@ export default function MotorcyclePage() {
             {/* ── SPECS SECTION ── */}
             <section className="bg-[#080808] py-16 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
+
                     {/* Tab selector */}
                     <div className="flex gap-2 mb-12 justify-center">
                         <button
@@ -480,28 +511,6 @@ export default function MotorcyclePage() {
                 </div>
             </section>
 
-            {/* ── VIDEO SECTION ── */}
-            {motorcycle.videoUrl && (
-                <section className="py-16 border-t border-white/5">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h3 className="font-display font-black text-3xl md:text-4xl text-white mb-8 text-center">
-                            🎬 En Acción
-                        </h3>
-                        <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
-                            <iframe
-                                width="100%"
-                                height="500"
-                                src={getYouTubeEmbedUrl(motorcycle.videoUrl || '')}
-                                title="YouTube video player"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="block"
-                            />
-                        </div>
-                    </div>
-                </section>
-            )}
 
             {/* ── CTA BANNER ── */}
             <section className="py-16 border-t border-white/5">
