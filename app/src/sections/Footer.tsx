@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Send, MapPin, Phone, Mail, ChevronRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -268,14 +269,14 @@ export default function Footer() {
               © {new Date().getFullYear()} Ibiza Motos del Eje Cafetero. Todos los derechos reservados.
             </p>
             <div className="flex gap-6 text-xs">
-              <a href="#" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/privacidad" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Política de privacidad
-              </a>
-              <a href="#" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
+              </Link>
+              <Link to="/privacidad" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Términos de servicio
-              </a>
+              </Link>
             </div>
           </div>
         </div>

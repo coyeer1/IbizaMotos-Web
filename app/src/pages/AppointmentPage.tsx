@@ -664,7 +664,12 @@ export default function AppointmentPage() {
               </Button>
 
               <p className="text-[11px] text-white/20 text-center mt-4">
-                Al confirmar, aceptas que te contactemos al número indicado para verificar la cita.
+                Al confirmar, aceptas que te contactemos para verificar la cita y autorizas el tratamiento de tus datos
+                según nuestra{' '}
+                <a href="/privacidad" target="_blank" className="underline hover:text-white/40 transition-colors">
+                  política de privacidad
+                </a>
+                {' '}(Ley 1581/2012).
               </p>
             </motion.div>
           )}

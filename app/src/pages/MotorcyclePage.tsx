@@ -666,7 +666,13 @@ export default function MotorcyclePage() {
                                         <MessageCircle className="w-5 h-5 mr-2" />
                                         Enviar cotización por WhatsApp
                                     </Button>
-                                    <p className="text-[10px] text-gray-600 text-center">Te responderemos en menos de 30 minutos.</p>
+                                    <p className="text-[10px] text-gray-600 text-center">
+                                        Al enviar, aceptas nuestra{' '}
+                                        <a href="/privacidad" target="_blank" className="text-gray-500 underline hover:text-white transition-colors">
+                                            política de tratamiento de datos
+                                        </a>
+                                        {' '}(Ley 1581/2012).
+                                    </p>
                                 </form>
                             )}
                         </motion.div>
