@@ -4,6 +4,7 @@ import { ArrowRight, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
+import { motion } from 'framer-motion';
 
 function calcCuota(price: number): string {
   const principal = price * 0.80;
@@ -47,9 +48,12 @@ const PremiumMotoCard = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="group opacity-0 animate-scale-in"
-      style={{ animationDelay: `${index * 0.12}s`, animationFillMode: 'forwards' }}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
+      className="group relative"
     >
       <div
         ref={cardRef}
@@ -136,7 +140,7 @@ const PremiumMotoCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

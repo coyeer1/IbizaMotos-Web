@@ -8,6 +8,7 @@ import {
 import { posts, categoryStyles } from '@/data/blogPosts';
 import { Button } from '@/components/ui/button';
 import { getWhatsAppUrl } from '@/lib/config';
+import { useBlogMetrics } from '@/hooks/useBlogMetrics';
 
 function renderBody(paragraph: string, index: number) {
   const parts = paragraph.split(/\*\*(.*?)\*\*/g);
@@ -32,9 +33,17 @@ export default function BlogPage() {
   const otherPosts = posts.filter(p => p.id !== post?.id && !related.includes(p)).slice(0, 2 - related.length);
   const suggestions = [...related, ...otherPosts].slice(0, 3);
 
+  const { metrics, recordView, recordLike } = useBlogMetrics();
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
-  }, [id]);
+    if (post) {
+      recordView(post.id);
+    }
+  }, [id, post, recordView]);
+
+  const viewCount = post ? post.views + (metrics[post.id]?.views_count || 0) : 0;
+  const likeCount = post ? post.likes + (metrics[post.id]?.likes_count || 0) : 0;
 
   if (!post) {
     return (
@@ -68,15 +77,19 @@ export default function BlogPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-[#09090b]" />
 
-        {/* Back button */}
-        <div className="absolute top-6 left-0 right-0 max-w-4xl mx-auto px-4 sm:px-6">
+        {/* Enhanced Navigation Bar inside the Hero */}
+        <div className="absolute top-0 left-0 right-0 p-6 z-50 flex items-center justify-between">
           <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors bg-black/40 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full"
+            onClick={() => navigate('/#blog')}
+            className="group flex items-center gap-2 text-sm text-white/80 hover:text-white transition-all bg-black/40 hover:bg-black/60 backdrop-blur-md border border-white/10 px-5 py-2.5 rounded-full shadow-lg"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Volver
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-semibold tracking-wide">Volver al Blog</span>
           </button>
+          
+          <div className="flex items-center gap-2">
+            <span className="text-white/50 text-xs font-bold uppercase tracking-widest hidden sm:block">Ibiza Motos</span>
+          </div>
         </div>
 
         {/* Category badge over image */}
@@ -100,7 +113,7 @@ export default function BlogPage() {
             <span className="w-1 h-1 rounded-full bg-gray-700" />
             <span>{post.date}</span>
             <span className="w-1 h-1 rounded-full bg-gray-700" />
-            <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{post.views.toLocaleString()} vistas</span>
+            <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{viewCount.toLocaleString()} vistas</span>
           </div>
 
           {/* Title */}
@@ -127,11 +140,16 @@ export default function BlogPage() {
             ))}
             <div className="ml-auto flex items-center gap-4">
               <button
-                onClick={() => setLiked(l => !l)}
-                className={`flex items-center gap-1.5 text-sm font-bold transition-colors ${liked ? 'text-ibiza-red' : 'text-white/30 hover:text-ibiza-red'}`}
+                onClick={() => {
+                  if (!liked && post) {
+                    setLiked(true);
+                    recordLike(post.id);
+                  }
+                }}
+                className={`flex items-center gap-1.5 text-sm font-bold transition-colors ${liked ? 'text-ibiza-red cursor-default' : 'text-white/30 hover:text-ibiza-red'}`}
               >
                 <Heart className={`w-5 h-5 transition-all ${liked ? 'fill-ibiza-red scale-110' : ''}`} />
-                {post.likes + (liked ? 1 : 0)}
+                {likeCount}
               </button>
               <button
                 onClick={handleShare}

@@ -4,6 +4,7 @@ import { BookOpen, Clock, ArrowRight, Eye, Heart, ChevronRight } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { posts, categoryStyles } from '@/data/blogPosts';
+import { useBlogMetrics } from '@/hooks/useBlogMetrics';
 
 const CATEGORIES = ['Todos', 'Mantenimiento', 'Compra Inteligente', 'Seguridad', 'Tendencias', 'Técnica'];
 
@@ -19,6 +20,11 @@ export default function Blog() {
 
   const featured = posts.find(p => p.featured)!;
   const displayPosts = showAll ? filtered : filtered.slice(0, 5);
+
+  const { metrics } = useBlogMetrics();
+
+  const getViewCount = (post: any) => post.views + (metrics[post.id]?.views_count || 0);
+  const getLikeCount = (post: any) => post.likes + (metrics[post.id]?.likes_count || 0);
 
   return (
     <section id="blog" ref={ref} className="py-24 bg-white overflow-hidden relative">
@@ -89,15 +95,15 @@ export default function Blog() {
             onClick={() => navigate(`/blog/${featured.id}`)}
             className="group cursor-pointer mb-8"
           >
-            <div className="relative rounded-3xl overflow-hidden h-64 md:h-96">
+            <div className="relative rounded-[2rem] overflow-hidden h-[28rem] md:h-[36rem] shadow-2xl shadow-ibiza-red/10 ring-1 ring-gray-900/5 group-hover:shadow-ibiza-red/20 transition-all duration-500">
               <img
                 src={featured.image}
                 alt={featured.title}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" />
 
               <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
                 <div className="flex items-center gap-3 mb-3">
@@ -109,14 +115,14 @@ export default function Blog() {
                   </span>
                 </div>
 
-                <h3 className="font-display font-black text-2xl md:text-4xl text-white leading-tight mb-3 max-w-2xl group-hover:text-ibiza-gold transition-colors duration-300">
+                <h3 className="font-display font-black text-3xl md:text-5xl text-white leading-[1.1] mb-5 max-w-2xl group-hover:text-white transition-colors duration-300 drop-shadow-sm">
                   {featured.title}
                 </h3>
 
                 <div className="flex items-center gap-4 text-xs text-white/50">
                   <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{featured.readTime}</span>
-                  <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{featured.views.toLocaleString()} vistas</span>
-                  <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" />{featured.likes}</span>
+                  <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{getViewCount(featured).toLocaleString()} vistas</span>
+                  <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" />{getLikeCount(featured)}</span>
                   <span className="ml-auto flex items-center gap-1.5 text-white font-bold text-sm group-hover:gap-3 transition-all">
                     Leer artículo <ChevronRight className="w-4 h-4" />
                   </span>
@@ -133,14 +139,14 @@ export default function Blog() {
             .map((post, i) => (
               <motion.article
                 key={post.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
+                transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
                 onClick={() => navigate(`/blog/${post.id}`)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-ibiza-red/20 hover:bg-gray-50 transition-all duration-300 shadow-sm"
+                className="group cursor-pointer bg-white rounded-3xl p-3 border border-gray-100 hover:border-ibiza-red/20 hover:shadow-2xl hover:shadow-ibiza-red/5 hover:-translate-y-2 transition-all duration-500"
               >
                 {/* Thumbnail */}
-                <div className="relative h-44 overflow-hidden">
+                <div className="relative h-48 md:h-52 overflow-hidden rounded-2xl mb-5">
                   <img
                     src={post.image}
                     alt={post.title}
@@ -160,26 +166,28 @@ export default function Blog() {
                   </div>
                 </div>
 
-                <div className="p-5">
-                  <p className="text-[11px] text-gray-600 mb-2">{post.date}</p>
-                  <h4 className="font-display font-bold text-base text-gray-900 leading-snug mb-3 group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
+                <div className="px-3 pb-3">
+                  <div className="flex items-center gap-3 mb-3">
+                    <p className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">{post.date}</p>
+                  </div>
+                  <h4 className="font-display font-bold text-lg text-gray-900 leading-snug mb-3 group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
                     {post.title}
                   </h4>
                   <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
                     {post.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
                     <div className="flex gap-2">
                       {post.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[9px] text-gray-400 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-md">
+                        <span key={tag} className="text-[10px] uppercase tracking-wide font-semibold text-gray-500 bg-gray-50 border border-gray-200/60 px-2 py-1 rounded-md">
                           {tag}
                         </span>
                       ))}
                     </div>
                     <div className="flex items-center gap-3 text-[10px] text-gray-600">
-                      <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{post.views >= 1000 ? `${(post.views/1000).toFixed(1)}k` : post.views}</span>
-                      <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{post.likes}</span>
+                      <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{getViewCount(post) >= 1000 ? `${(getViewCount(post)/1000).toFixed(1)}k` : getViewCount(post)}</span>
+                      <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{getLikeCount(post)}</span>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -127,7 +128,13 @@ export default function Categories() {
     <section className="py-14 md:py-20 bg-white">
 
       {/* ── Header ── */}
-      <div className="text-center mb-10 md:mb-14 px-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center mb-10 md:mb-14 px-6"
+      >
         <h2
           className="font-display font-black text-gray-900 tracking-tight leading-none"
           style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)' }}
@@ -136,14 +143,18 @@ export default function Categories() {
         </h2>
         <button
           onClick={() => navigate('/marca/todas')}
-          className="mt-5 inline-flex items-center gap-2 px-7 py-3 bg-[#d7263d] text-white rounded-full font-display font-semibold text-sm hover:bg-red-700 active:scale-95 transition-all duration-200"
+          className="mt-5 inline-flex items-center gap-2 px-7 py-3 bg-[#d7263d] text-white rounded-full font-display font-semibold text-sm hover:bg-red-700 hover:shadow-lg hover:shadow-red-500/30 active:scale-95 transition-all duration-200"
         >
           Conócelas todas
         </button>
-      </div>
+      </motion.div>
 
       {/* ── Carousel ── */}
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
         className="relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -187,7 +198,7 @@ export default function Categories() {
               />
 
               {/* Gradiente */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
 
               {/* Texto */}
               <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
@@ -250,7 +261,7 @@ export default function Categories() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

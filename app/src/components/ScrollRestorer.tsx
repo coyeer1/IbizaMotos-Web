@@ -29,24 +29,31 @@ export default function ScrollRestorer() {
     };
   }, [location.key]);
 
-  // Restaurar posición al VOLVER (POP = botón atrás/adelante)
+  // Restaurar posición al VOLVER (POP) o ir arriba al AVANZAR (PUSH/REPLACE)
   useLayoutEffect(() => {
-    if (navType !== 'POP') return;
-
-    const key = `scroll::${location.key}`;
-    const saved = sessionStorage.getItem(key);
-    if (!saved) return;
-
-    const y = parseInt(saved, 10);
-    // Doble RAF: asegura que el DOM ya terminó de renderizarse
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => {
-        window.scrollTo({ top: y, behavior: 'instant' });
+    if (navType === 'POP') {
+      const key = `scroll::${location.key}`;
+      const saved = sessionStorage.getItem(key);
+      if (saved) {
+        const y = parseInt(saved, 10);
+        // Doble RAF: asegura que el DOM ya terminó de renderizarse
+        const raf1 = requestAnimationFrame(() => {
+          const raf2 = requestAnimationFrame(() => {
+            window.scrollTo({ top: y, behavior: 'instant' });
+          });
+          return () => cancelAnimationFrame(raf2);
+        });
+        return () => cancelAnimationFrame(raf1);
+      }
+    } else {
+      // Si es PUSH o REPLACE, siempre al top
+      window.scrollTo(0, 0);
+      // Fallback para navegadores rebeldes
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
       });
-      return () => cancelAnimationFrame(raf2);
-    });
-    return () => cancelAnimationFrame(raf1);
-  }, [location.key, navType]);
+    }
+  }, [location.pathname, location.key, navType]);
 
   return null;
 }

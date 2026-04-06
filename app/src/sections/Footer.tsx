@@ -117,7 +117,7 @@ export default function Footer() {
               />
             </div>
             
-            <p className="!text-white/60 mb-6 leading-relaxed text-sm">
+            <p className="!text-white/80 mb-6 leading-relaxed text-sm">
               Tu pasión sobre dos ruedas. Somos el concesionario líder en el Eje Cafetero, 
               ofreciendo las mejores motocicletas y servicio técnico especializado.
             </p>
@@ -159,7 +159,7 @@ export default function Footer() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="!text-white/60 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
+                    className="!text-white/80 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
                   >
                     <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-ibiza-red" />
                     {link.name}
@@ -189,7 +189,7 @@ export default function Footer() {
                       e.preventDefault();
                       scrollToSection('#catalogo');
                     }}
-                    className="!text-white/60 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
+                    className="!text-white/80 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
                   >
                     <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-ibiza-red" />
                     {brand.name}
@@ -211,15 +211,15 @@ export default function Footer() {
               Contacto
             </h3>
             <ul className="space-y-4 mb-8">
-              <li className="flex items-start gap-3 !text-white/60 text-sm">
+              <li className="flex items-start gap-3 !text-white/80 text-sm">
                 <MapPin className="w-5 h-5 text-ibiza-red flex-shrink-0 mt-0.5" />
                 <span>Carrera 23 # 23-45, Armenia, Quindío</span>
               </li>
-              <li className="flex items-center gap-3 !text-white/60 text-sm">
+              <li className="flex items-center gap-3 !text-white/80 text-sm">
                 <Phone className="w-5 h-5 text-ibiza-red flex-shrink-0" />
                 <a href="tel:+573214567890" className="hover:text-white transition-colors">(+57) 321 456 7890</a>
               </li>
-              <li className="flex items-center gap-3 !text-white/60 text-sm">
+              <li className="flex items-center gap-3 !text-white/80 text-sm">
                 <Mail className="w-5 h-5 text-ibiza-red flex-shrink-0" />
                 <a href="mailto:info@ibizamotos.com" className="hover:text-white transition-colors">info@ibizamotos.com</a>
               </li>
@@ -228,7 +228,7 @@ export default function Footer() {
             {/* Newsletter */}
             <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
               <h4 className="font-display font-semibold text-sm mb-2">📬 Newsletter</h4>
-              <p className="text-white/40 text-xs mb-3">Recibe ofertas exclusivas y novedades</p>
+              <p className="text-white/60 text-xs mb-3">Recibe ofertas exclusivas y novedades</p>
               {isSubscribed ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -244,7 +244,7 @@ export default function Footer() {
                     placeholder="Tu correo electrónico"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-ibiza-black/50 border-white/10 !text-white placeholder:!text-white/30 rounded-xl text-sm"
+                    className="bg-ibiza-black/50 border-white/10 !text-white placeholder:!text-white/50 rounded-xl text-sm"
                     required
                   />
                   <Button
@@ -265,15 +265,15 @@ export default function Footer() {
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="!text-white/30 text-xs text-center md:text-left">
+            <p className="!text-white/50 text-xs text-center md:text-left">
               © {new Date().getFullYear()} Ibiza Motos del Eje Cafetero. Todos los derechos reservados.
             </p>
             <div className="flex gap-6 text-xs">
-              <Link to="/privacidad" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/privacidad" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Política de privacidad
               </Link>
-              <Link to="/privacidad" className="!text-white/30 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/privacidad" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Términos de servicio
               </Link>

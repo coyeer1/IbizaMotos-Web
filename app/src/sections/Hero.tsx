@@ -110,19 +110,7 @@ export default function Hero() {
   return (
     <section id="inicio" className="relative h-screen w-full overflow-hidden bg-gray-900">
 
-      {/* ── Fallback image (shown while video loads or is missing) ── */}
-      <AnimatePresence mode="sync">
-        <motion.img
-          key={`img-${currentSlide}`}
-          src={fallbackImages[currentSlide]}
-          alt=""
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </AnimatePresence>
+      {/* ── Removed Fallback image to avoid ugly flash before video loads ── */}
 
       {/* ── Video Background (replaces image when available) ── */}
       <AnimatePresence mode="sync">
@@ -220,10 +208,10 @@ export default function Hero() {
               >
                 <a href="#motos">
                   <button
-                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-display font-semibold text-sm text-white transition-all duration-300 hover:scale-105 hover:brightness-110 active:scale-100"
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-display font-semibold text-sm text-white border border-transparent transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:brightness-110 shadow-xl active:scale-95"
                     style={{
                       background: slide.accent,
-                      boxShadow: `0 8px 28px ${slide.accent}55`,
+                      boxShadow: `0 12px 35px ${slide.accent}66`,
                     }}
                   >
                     {slide.cta}

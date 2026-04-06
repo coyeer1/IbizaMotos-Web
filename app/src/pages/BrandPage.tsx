@@ -11,22 +11,18 @@ export default function BrandPage() {
     const [searchParams] = useSearchParams();
     const initialCategory = searchParams.get('categoria') || 'all';
 
-    // Convert url parameter to proper brand name (e.g. 'suzuki' to 'Suzuki')
-    // 'todas' = show all brands
-    const brandData = brands.find(b => b.name.toLowerCase() === brandId?.toLowerCase());
-
-    // We maintain state so Catalog works properly, but initialized to the URL brand
-    const [selectedBrand, setSelectedBrand] = useState<string>(brandData?.name || 'all');
+    // We maintain state so Catalog works properly
+    const [selectedBrand, setSelectedBrand] = useState<string>('all');
 
     useEffect(() => {
-        if (brandData) {
-            setSelectedBrand(brandData.name);
-        } else {
-            // If brand not found, fallback to all
-            setSelectedBrand('all');
-        }
+        // Sync URL param to state on mount or param change
+        const found = brands.find(b => b.name.toLowerCase() === brandId?.toLowerCase());
+        setSelectedBrand(found ? found.name : 'all');
         window.scrollTo(0, 0);
-    }, [brandData]);
+    }, [brandId]);
+
+    // Active brand based on CURRENT selection (syncs with Pills click in Catalog)
+    const activeBrandData = brands.find(b => b.name === selectedBrand);
 
     const handleViewDetails = (motorcycle: Motorcycle) => {
         navigate(`/moto/${motorcycle.id}`);
@@ -42,13 +38,13 @@ export default function BrandPage() {
                     <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform duration-200" />
                     <span className="text-sm font-medium">Volver</span>
                 </button>
-                {brandData ? (
+                {activeBrandData ? (
                     <div className="flex items-center gap-6">
-                        <div className="w-32 h-20 rounded-xl flex items-center justify-center bg-ibiza-gray-100 p-4 border border-border">
-                            <img src={brandData.logo} alt={brandData.name} className="w-full h-full object-contain filter brightness-0 invert opacity-80" />
+                        <div className="w-32 h-20 rounded-xl flex items-center justify-center bg-white p-4 border border-white/10 shadow-sm">
+                            <img src={activeBrandData.logo} alt={activeBrandData.name} className="w-full h-full object-contain" />
                         </div>
                         <div>
-                            <h1 className="text-4xl font-display font-bold text-white">Catálogo {brandData.name}</h1>
+                            <h1 className="text-4xl font-display font-bold text-white">Catálogo {activeBrandData.name}</h1>
                             <p className="text-gray-400 mt-2">Explora todos los modelos disponibles</p>
                         </div>
                     </div>

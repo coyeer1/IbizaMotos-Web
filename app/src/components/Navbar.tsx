@@ -7,7 +7,8 @@ import { useSearch } from '@/components/SearchOverlay';
 
 const navLinks = [
   { name: 'Inicio', href: '#inicio', page: false },
-  { name: 'Motos', href: '#motos', page: false },
+  { name: 'Catálogo', href: '/marca/todas', page: true },
+  { name: 'Marcas', href: '#motos', page: false },
   { name: 'Repuestos', href: '#repuestos', page: false },
   { name: 'Servicios', href: '#servicios', page: false },
   { name: 'Financiamiento', href: '/financiamiento', page: true },
@@ -84,7 +85,7 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) =>
                 link.page ? (
                   <Link
@@ -121,7 +122,7 @@ export default function Navbar() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-4">
               {/* Search Button */}
               <button
                 onClick={openSearch}
@@ -133,8 +134,8 @@ export default function Navbar() {
                 }`}
               >
                 <Search className="w-4 h-4" />
-                <span className="hidden lg:inline text-xs">Buscar</span>
-                <kbd className="hidden lg:inline text-[10px] px-1.5 py-0.5 rounded bg-black/10 font-mono">Ctrl K</kbd>
+                <span className="hidden xl:inline text-xs">Buscar</span>
+                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 rounded bg-black/10 font-mono">Ctrl K</kbd>
               </button>
               <a
                 href={getGeneralWhatsApp()}
@@ -152,7 +153,7 @@ export default function Navbar() {
 
             {/* Mobile Search Button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2"
               onClick={openSearch}
             >
               <Search className={`w-5 h-5 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
@@ -160,7 +161,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -175,7 +176,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />

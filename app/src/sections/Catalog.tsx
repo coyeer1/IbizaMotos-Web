@@ -85,15 +85,16 @@ const MotoCard = ({
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "50px" }}
+      transition={{ duration: 0.4, delay: (index % 8) * 0.05 }}
       onClick={() => onViewDetails(motorcycle)}
       className="group cursor-pointer"
     >
       <div className="relative rounded-2xl overflow-hidden bg-white border border-gray-100 h-full flex flex-col transition-all duration-500 hover:border-ibiza-red/30 hover:shadow-[0_8px_40px_rgba(0,0,0,0.10)] shadow-sm">
 
         {/* ── IMAGE AREA ── */}
-        <div className="relative h-72 overflow-hidden rounded-xl m-3 mb-0">
+        <div className="relative h-72 overflow-hidden rounded-[14px] m-4 mb-0">
           {/* Light background */}
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl" />
 
@@ -156,7 +157,7 @@ const MotoCard = ({
         </div>
 
         {/* ── CONTENT AREA ── */}
-        <div className="relative px-5 pb-5 pt-4 flex-1 flex flex-col z-20">
+        <div className="relative px-6 pb-6 pt-5 flex-1 flex flex-col z-20">
 
           {/* Brand tag */}
           <div className="flex items-center gap-2 mb-2">
@@ -207,7 +208,7 @@ const MotoCard = ({
           <div className="flex-1" />
 
           {/* Price & Action */}
-          <div className="flex items-end justify-between pt-4 mt-auto">
+          <div className="flex items-end justify-between pt-5 mt-auto">
             <div>
               <p className="text-[10px] text-gray-400 font-medium tracking-widest uppercase mb-1">Desde</p>
               <p className="font-display font-black text-[28px] text-gray-900 leading-none tracking-tight group-hover:text-ibiza-red transition-colors duration-500">
@@ -371,7 +372,11 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                 : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
                 }`}
             >
-              <img src={brand.logo} alt={brand.name} className="w-4 h-4 object-contain" style={{ filter: selectedBrand === brand.name ? 'brightness(10)' : 'grayscale(1) brightness(0.3)' }} />
+              <img src={brand.logo} alt={brand.name} className="w-4 h-4 object-contain rounded-[2px]" style={{
+                opacity: selectedBrand === brand.name ? 1 : 0.6,
+                filter: selectedBrand === brand.name ? 'none' : 'grayscale(1)',
+                mixBlendMode: 'multiply'
+              }} />
               {brand.name}
             </button>
           ))}
