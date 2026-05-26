@@ -1,55 +1,76 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { getBrandSalesWhatsApp } from '@/lib/config';
 
-// Each slide can have its own video (placeholder: /hero-video.mp4 until real videos are added)
-const slides = [
+interface Slide {
+  id: number;
+  brand: string;
+  model: string;
+  headline: string;
+  subline: string;
+  description: string;
+  price: string;
+  fromMonth: string;
+  accent: string;
+  image: string;
+  motoSlug: string;
+}
+
+const slides: Slide[] = [
   {
     id: 1,
-    brand: 'Vento',
-    model: 'Tornado 250',
-    headline: 'DOMINA EL ASFALTO',
-    description: 'Potencia y estilo en cada curva. La compañera perfecta para tu próxima aventura.',
-    cta: 'Descúbrela Ahora',
-    price: 'Desde $12.999.000',
-    accent: '#FF6B00',
-    video: '/hero-video.mp4',
+    brand: 'Bajaj',
+    model: 'Dominar 400 Volcano',
+    headline: 'NACIDA PARA LA RUTA',
+    subline: 'Tour grande, motor 4 válvulas, frenos Bybre. Tu próxima aventura empieza acá.',
+    description: 'En Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya y Neiva.',
+    price: '$22.990.000',
+    fromMonth: '$465.000/mes',
+    accent: '#003399',
+    image: '/moto_images/dominar-400-volcano/dominar-400-volcano.png',
+    motoSlug: 'dominar-400-volcano',
   },
   {
     id: 2,
-    brand: 'Suzuki',
-    model: 'GSX-R150 ABS',
-    headline: 'LA CIUDAD ES TUYA',
-    description: 'Agilidad urbana con alma de campeón. Diseño deportivo que roba miradas.',
-    cta: 'Conócela Aquí',
-    price: 'Desde $14.990.000',
-    accent: '#E53E3E',
-    video: '/hero-video.mp4',
+    brand: 'Honda',
+    model: 'CB 300F',
+    headline: 'PRESTIGIO HONDA',
+    subline: 'Naked deportiva, motor 286cc, tecnología Honda en cada vibración.',
+    description: 'Tu Honda con financiación inmediata vía Progreser, Banco de Bogotá o SUFI.',
+    price: '$18.490.000',
+    fromMonth: '$390.000/mes',
+    accent: '#cc0000',
+    image: '/moto_images/cb-300f/Nueva-CB-300F-rojo.webp',
+    motoSlug: 'cb-300f',
   },
   {
     id: 3,
-    brand: 'Bajaj',
-    model: 'Boxer 150',
-    headline: 'TU PRIMER VIAJE',
-    description: 'Confianza, durabilidad y economía. La moto que te lleva más lejos.',
-    cta: 'Empieza Hoy',
-    price: 'Desde $5.999.000',
-    accent: '#3182CE',
-    video: '/hero-video.mp4',
+    brand: 'Suzuki',
+    model: 'Gixxer SF 250',
+    headline: 'SPORT DE VERDAD',
+    subline: 'Carenado completo, motor 250cc refrigerado por aceite, ABS en ambas ruedas.',
+    description: 'Atendida por Kevin Hinestroza y nuestro equipo Suzuki certificado.',
+    price: '$19.990.000',
+    fromMonth: '$420.000/mes',
+    accent: '#1a73e8',
+    image: '/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL.png',
+    motoSlug: 'gixxer-sf-250',
   },
 ];
 
 export default function Hero() {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const SLIDE_DURATION = 7000; // ms
+  const SLIDE_DURATION = 7000;
 
   const slide = slides[currentSlide];
 
-  // Progress bar per slide
   useEffect(() => {
     setProgress(0);
     if (progressTimerRef.current) clearInterval(progressTimerRef.current);
@@ -62,7 +83,6 @@ export default function Hero() {
     };
   }, [currentSlide]);
 
-  // Auto-play
   useEffect(() => {
     if (!isAutoPlaying) return;
     const timer = setInterval(() => {
@@ -100,40 +120,55 @@ export default function Hero() {
     resetAutoPlay();
   };
 
-  // Fallback images per slide (used when video file is missing)
-  const fallbackImages = [
-    'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=1920',
-    'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=1920',
-    'https://images.unsplash.com/photo-1508357941062-537798998e6b?auto=format&fit=crop&q=80&w=1920',
-  ];
-
   return (
     <section id="inicio" className="relative h-screen w-full overflow-hidden bg-gray-900">
+      {/* Preload de imágenes para evitar parpadeo entre slides */}
+      {slides.map((s) => (
+        <link key={s.id} rel="preload" as="image" href={s.image} />
+      ))}
 
-      {/* ── Removed Fallback image to avoid ugly flash before video loads ── */}
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800" />
 
-      {/* ── Video Background (replaces image when available) ── */}
+      {/* Imagen con efecto Ken Burns */}
       <AnimatePresence mode="sync">
-        <motion.video
-          key={`video-${currentSlide}`}
-          src={slide.video}
-          autoPlay
-          loop
-          muted
-          playsInline
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
+        <motion.div
+          key={`image-${currentSlide}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+          transition={{ duration: 1.0, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <div
+            className="absolute inset-0 ken-burns"
+            style={{
+              backgroundImage: `url('${slide.image}')`,
+              backgroundSize: 'contain',
+              backgroundPosition: 'right center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          />
+        </motion.div>
       </AnimatePresence>
 
-      {/* ── Gradient overlays for text readability ── */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/15 z-[1]" />
+      {/* Acento de color por slide */}
+      <motion.div
+        key={`accent-${currentSlide}`}
+        className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.18 }}
+        transition={{ duration: 1.2 }}
+        style={{
+          background: `radial-gradient(circle at 80% 50%, ${slide.accent}, transparent 60%)`,
+        }}
+      />
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent z-[1]" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 z-[1]" />
 
-      {/* ── Slide Content ── */}
+      {/* Slide Content */}
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
           <AnimatePresence mode="wait">
@@ -143,27 +178,27 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-2xl"
+              className="max-w-xl"
             >
-              {/* Brand tag */}
+              {/* Eyebrow: badge marca */}
               <motion.div
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="inline-flex items-center gap-2 mb-6"
+                className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm"
               >
                 <div
                   className="w-1.5 h-1.5 rounded-full"
                   style={{ background: slide.accent }}
                 />
                 <span
-                  className="text-xs font-display font-semibold tracking-[0.25em] uppercase"
+                  className="text-[10px] font-display font-semibold tracking-[0.25em] uppercase"
                   style={{ color: slide.accent }}
                 >
                   {slide.brand}
                 </span>
-                <span className="text-white/30 text-xs">—</span>
-                <span className="text-white/50 text-xs font-display tracking-widest uppercase">
+                <span className="text-white/30 text-[10px]">·</span>
+                <span className="text-white/60 text-[10px] font-display tracking-widest uppercase">
                   {slide.model}
                 </span>
               </motion.div>
@@ -173,67 +208,89 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-black text-white leading-[0.95] tracking-tight mb-5"
-                style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
+                className="font-display font-black !text-white leading-[0.95] tracking-tight mb-4"
+                style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)' }}
               >
                 {slide.headline}
               </motion.h1>
 
-              {/* Description */}
+              {/* Subline */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="text-white/85 text-base md:text-lg leading-relaxed mb-2 font-medium"
+              >
+                {slide.subline}
+              </motion.p>
+
+              {/* Disponibilidad / contexto local */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35, duration: 0.5 }}
-                className="text-white/55 text-base md:text-lg leading-relaxed max-w-md mb-6"
+                className="text-white/55 text-sm md:text-base leading-relaxed mb-6"
               >
                 {slide.description}
               </motion.p>
 
-              {/* Price */}
-              <motion.p
+              {/* Precio */}
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.45, duration: 0.4 }}
-                className="font-display font-bold text-white text-2xl md:text-3xl mb-8"
+                className="mb-7"
               >
-                {slide.price}
-              </motion.p>
+                <p className="text-white/40 text-xs font-display tracking-widest uppercase mb-1">
+                  Desde
+                </p>
+                <div className="flex items-end gap-4 flex-wrap">
+                  <p className="font-display font-black !text-white text-3xl md:text-4xl leading-none">
+                    {slide.price}
+                  </p>
+                  <p className="text-white/60 text-sm">
+                    o <span className="text-white font-semibold">{slide.fromMonth}</span>
+                  </p>
+                </div>
+              </motion.div>
 
               {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55, duration: 0.5 }}
-                className="flex flex-wrap gap-4"
+                className="flex flex-wrap gap-3"
               >
-                <a href="#motos">
-                  <button
-                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-display font-semibold text-sm text-white border border-transparent transition-all duration-300 hover:scale-[1.03] hover:border-white/30 hover:brightness-110 shadow-xl active:scale-95"
-                    style={{
-                      background: slide.accent,
-                      boxShadow: `0 12px 35px ${slide.accent}66`,
-                    }}
-                  >
-                    {slide.cta}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </a>
                 <a
-                  href="https://wa.me/573052884546"
+                  href={getBrandSalesWhatsApp(slide.brand)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <button className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-display font-semibold text-sm text-white/80 border border-white/20 backdrop-blur-sm hover:bg-white/10 hover:text-white transition-all duration-300">
-                    Contactar
+                  <button
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-display font-bold text-sm !text-white border border-transparent transition-all duration-300 hover:scale-[1.03] hover:brightness-110 shadow-xl active:scale-95"
+                    style={{
+                      background: '#25D366',
+                      boxShadow: `0 12px 35px rgba(37, 211, 102, 0.45)`,
+                    }}
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Cotizar por WhatsApp
                   </button>
                 </a>
+                <button
+                  onClick={() => navigate(`/marca/${slide.brand.toLowerCase()}`)}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-display font-semibold text-sm !text-white/85 border border-white/20 backdrop-blur-sm hover:bg-white/10 hover:!text-white transition-all duration-300"
+                >
+                  Ver {slide.brand}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </motion.div>
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
-      {/* ── Navigation Arrows ── */}
+      {/* Arrows */}
       <button
         onClick={prevSlide}
         aria-label="Slide anterior"
@@ -249,7 +306,7 @@ export default function Hero() {
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      {/* ── Bottom: Slide tabs with model names ── */}
+      {/* Bottom tabs */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-end gap-0 border-t border-white/10">
@@ -263,7 +320,6 @@ export default function Hero() {
                     : 'border-t-transparent hover:border-t-white/30'
                 }`}
               >
-                {/* Progress bar for active slide */}
                 {i === currentSlide && (
                   <div className="absolute top-0 left-0 h-[2px] bg-white/20 w-full">
                     <motion.div
@@ -274,14 +330,14 @@ export default function Hero() {
                   </div>
                 )}
                 <span
-                  className={`block text-[10px] font-display font-semibold tracking-[0.2em] uppercase mb-1 transition-colors duration-300`}
+                  className="block text-[10px] font-display font-semibold tracking-[0.2em] uppercase mb-1 transition-colors duration-300"
                   style={{ color: i === currentSlide ? s.accent : 'rgba(255,255,255,0.3)' }}
                 >
                   {s.brand}
                 </span>
                 <span
                   className={`block text-sm font-display font-bold transition-colors duration-300 ${
-                    i === currentSlide ? 'text-white' : 'text-white/40'
+                    i === currentSlide ? '!text-white' : '!text-white/40'
                   }`}
                 >
                   {s.model}
@@ -292,7 +348,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Scroll indicator ── */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

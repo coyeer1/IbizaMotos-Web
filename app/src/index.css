@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ken Burns effect — zoom + pan suave para hero imágenes */
+@keyframes ken-burns-zoom {
+  0%   { transform: scale(1.0)  translate(0, 0); }
+  100% { transform: scale(1.12) translate(-2%, -1%); }
+}
+.ken-burns {
+  animation: ken-burns-zoom 8s ease-out forwards;
+  will-change: transform;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

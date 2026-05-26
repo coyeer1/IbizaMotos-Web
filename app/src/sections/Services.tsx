@@ -1,4 +1,4 @@
-import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Users, Award, ShieldAlert, Cpu } from 'lucide-react';
+import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Award, ShieldAlert, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useNavigate } from 'react-router-dom';
@@ -40,12 +40,6 @@ const servicesList = [
     includes: ['Desde un ajuste menor hasta una reconstrucción completa. Trabajo garantizado.'],
     Icon: Cpu,
   },
-];
-
-const mechanics = [
-  { name: 'Javier', role: 'Jefe de Taller', exp: '15 años', specialty: 'Motores 4T' },
-  { name: 'Andrés', role: 'Técnico Senior', exp: '8 años', specialty: 'Sistemas de inyección' },
-  { name: 'Luis', role: 'Técnico', exp: '5 años', specialty: 'Eléctrica y electrónica' },
 ];
 
 export default function Services() {
@@ -90,36 +84,33 @@ export default function Services() {
                 </h2>
 
                 <p className={`text-gray-300 text-lg leading-relaxed transition-all duration-600 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  Tres mecánicos, más de 25 años de experiencia combinada.
-                  No vendemos lo que no necesitas. Diagnóstico honesto, precio justo.
+                  Talleres autorizados Suzuki, Honda, Bajaj, AKT, Hero y Vento en toda
+                  la red. Repuestos originales, diagnóstico honesto y precio justo.
                 </p>
               </div>
 
-              {/* Stats / Badges */}
+              {/* Stats / Badges — datos verificables */}
               <div className={`flex flex-wrap lg:flex-nowrap gap-6 xl:gap-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-                {/* Stat 1 */}
                 <div className="flex flex-col items-center group">
                   <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
-                    <Users className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">3</span>
+                    <MapPin className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
+                    <span className="font-display font-bold text-2xl">19</span>
                   </div>
-                  <span className="text-sm text-gray-400 font-medium">Mecánicos</span>
+                  <span className="text-sm text-gray-400 font-medium">Sucursales</span>
                 </div>
-                {/* Stat 2 */}
                 <div className="flex flex-col items-center group">
                   <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
                     <Award className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">25<span className="text-ibiza-red text-xl">+</span></span>
+                    <span className="font-display font-bold text-2xl">6</span>
                   </div>
-                  <span className="text-sm text-gray-400 font-medium">Años exp.</span>
+                  <span className="text-sm text-gray-400 font-medium">Marcas</span>
                 </div>
-                {/* Stat 3 */}
                 <div className="flex flex-col items-center group">
                   <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
                     <Star className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">4.9</span>
+                    <span className="font-display font-bold text-2xl">8</span>
                   </div>
-                  <span className="text-sm text-gray-400 font-medium">Rating</span>
+                  <span className="text-sm text-gray-400 font-medium">Ciudades</span>
                 </div>
               </div>
 
@@ -188,40 +179,6 @@ export default function Services() {
 
 
         {/* Below modernization: Kept the rest of the existing sections */}
-
-        {/* Team Section */}
-        <div className="bg-white rounded-3xl p-8 md:p-12 mb-16 border border-gray-200 shadow-sm">
-          <h3
-            className={`font-display font-bold text-2xl text-gray-900 mb-8 transition-all duration-600 ${isVisible ? 'opacity-100' : 'opacity-0'
-              }`}
-          >
-            Quién va a atender tu moto
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {mechanics.map((mechanic, index) => (
-              <div
-                key={mechanic.name}
-                className={`flex items-center gap-4 opacity-0 animate-slide-up ${isVisible ? '' : ''
-                  }`}
-                style={{ animationDelay: `${0.5 + index * 0.1}s`, animationFillMode: 'forwards' }}
-              >
-                <div className="w-16 h-16 bg-gradient-ibiza rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <span className="!text-white font-display font-bold text-2xl">
-                    {mechanic.name.charAt(0)}
-                  </span>
-                </div>
-                <div>
-                  <p className="font-display font-bold text-gray-900">{mechanic.name}</p>
-                  <p className="text-sm text-gray-500">{mechanic.role}</p>
-                  <p className="text-xs text-ibiza-red mt-1">
-                    {mechanic.exp} · {mechanic.specialty}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* CTA Section */}
         <div id="appointment-form" className="grid lg:grid-cols-2 gap-8">

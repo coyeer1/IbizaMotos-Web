@@ -11,7 +11,6 @@ const FinancingTeaser = lazy(() => import('@/sections/FinancingTeaser'));
 const SpareParts      = lazy(() => import('@/sections/SpareParts'));
 const Services        = lazy(() => import('@/sections/Services'));
 const Blog            = lazy(() => import('@/sections/Blog'));
-const Testimonials    = lazy(() => import('@/sections/Testimonials'));
 const HappyCustomers  = lazy(() => import('@/sections/HappyCustomers'));
 
 function ScrollProgress() {
@@ -68,9 +67,6 @@ export default function Home() {
 
                 {/* Blog */}
                 <Blog />
-
-                {/* Testimonials */}
-                <Testimonials />
 
                 {/* Clientes Felices */}
                 <HappyCustomers />
