@@ -219,7 +219,7 @@ export default function Hero() {
                   </button>
                 </a>
                 <a
-                  href="https://wa.me/573214567890"
+                  href="https://wa.me/573052884546"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

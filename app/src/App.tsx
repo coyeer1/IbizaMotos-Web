@@ -20,7 +20,9 @@ const SucursalesPage  = lazy(() => import('@/pages/SucursalesPage'));
 const AdminLogin      = lazy(() => import('@/pages/admin/AdminLogin'));
 const AdminDashboard  = lazy(() => import('@/pages/admin/AdminDashboard'));
 const NotFoundPage    = lazy(() => import('@/pages/NotFoundPage'));
-const PrivacyPage     = lazy(() => import('@/pages/PrivacyPage'));
+const PrivacyPage      = lazy(() => import('@/pages/PrivacyPage'));
+const TermsPage        = lazy(() => import('@/pages/TermsPage'));
+const DataDeletionPage = lazy(() => import('@/pages/DataDeletionPage'));
 
 // Spinner minimalista mientras carga la página
 function PageLoader() {
@@ -50,6 +52,8 @@ function AppContent() {
             <Route path="/citas"           element={<AppointmentPage />} />
             <Route path="/sucursales"      element={<SucursalesPage />} />
             <Route path="/privacidad"      element={<PrivacyPage />} />
+            <Route path="/terminos"        element={<TermsPage />} />
+            <Route path="/eliminacion-datos" element={<DataDeletionPage />} />
             <Route path="/admin"           element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="*"               element={<NotFoundPage />} />

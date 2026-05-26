@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
 import Reveal from '@/components/Reveal';
 
-const LAST_UPDATE = '1 de abril de 2026';
-const RESPONSIBLE  = 'Ibiza Motos del Eje Cafetero S.A.S.';
-const NIT          = 'NIT. 901.XXX.XXX-X'; // reemplazar con NIT real
-const ADDRESS      = 'Carrera 23 # 23-45, Armenia, Quindío, Colombia';
-const EMAIL        = 'info@ibizamotos.com';
-const PHONE        = '(+57) 321 456 7890';
+const LAST_UPDATE = '26 de mayo de 2026';
+const RESPONSIBLE  = 'Ibiza Motos S.A.S.';
+const NIT          = 'NIT 901.197.563-9';
+const ADDRESS      = 'Cra 7 #25-41 Parque Lago Uribe, Pereira, Risaralda, Colombia';
+const EMAIL        = 'ibizachat321@gmail.com';
+const PHONE        = '+57 305 288 4546';
 
 export default function PrivacyPage() {
   useEffect(() => {

@@ -118,8 +118,8 @@ export default function Footer() {
             </div>
             
             <p className="!text-white/80 mb-6 leading-relaxed text-sm">
-              Tu pasión sobre dos ruedas. Somos el concesionario líder en el Eje Cafetero, 
-              ofreciendo las mejores motocicletas y servicio técnico especializado.
+              19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
+              Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento.
             </p>
 
             {/* Social links */}
@@ -213,15 +213,15 @@ export default function Footer() {
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3 !text-white/80 text-sm">
                 <MapPin className="w-5 h-5 text-ibiza-red flex-shrink-0 mt-0.5" />
-                <span>Carrera 23 # 23-45, Armenia, Quindío</span>
+                <span>Cra 7 #25-41 Parque Lago Uribe, Pereira</span>
               </li>
               <li className="flex items-center gap-3 !text-white/80 text-sm">
                 <Phone className="w-5 h-5 text-ibiza-red flex-shrink-0" />
-                <a href="tel:+573214567890" className="hover:text-white transition-colors">(+57) 321 456 7890</a>
+                <a href="tel:+573052884546" className="hover:text-white transition-colors">(+57) 305 288 4546</a>
               </li>
               <li className="flex items-center gap-3 !text-white/80 text-sm">
                 <Mail className="w-5 h-5 text-ibiza-red flex-shrink-0" />
-                <a href="mailto:info@ibizamotos.com" className="hover:text-white transition-colors">info@ibizamotos.com</a>
+                <a href="mailto:ibizachat321@gmail.com" className="hover:text-white transition-colors">ibizachat321@gmail.com</a>
               </li>
             </ul>
 
@@ -273,9 +273,13 @@ export default function Footer() {
                 <ExternalLink className="w-3 h-3" />
                 Política de privacidad
               </Link>
-              <Link to="/privacidad" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/terminos" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Términos de servicio
+              </Link>
+              <Link to="/eliminacion-datos" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
+                <ExternalLink className="w-3 h-3" />
+                Eliminar mis datos
               </Link>
             </div>
           </div>

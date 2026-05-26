@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '@/sections/Hero';
-import Brands from '@/sections/Brands';
-import BrandSelector from '@/sections/BrandSelector';
-import Categories from '@/sections/Categories';
-import SpareParts from '@/sections/SpareParts';
-import Services from '@/sections/Services';
-import Testimonials from '@/sections/Testimonials';
-import HappyCustomers from '@/sections/HappyCustomers';
-import PromosBanner from '@/sections/PromosBanner';
-import FinancingTeaser from '@/sections/FinancingTeaser';
-import Blog from '@/sections/Blog';
+
+// Secciones below-the-fold — se descargan solo cuando el usuario llega a ellas
+const Brands          = lazy(() => import('@/sections/Brands'));
+const PromosBanner    = lazy(() => import('@/sections/PromosBanner'));
+const Categories      = lazy(() => import('@/sections/Categories'));
+const BrandSelector   = lazy(() => import('@/sections/BrandSelector'));
+const FinancingTeaser = lazy(() => import('@/sections/FinancingTeaser'));
+const SpareParts      = lazy(() => import('@/sections/SpareParts'));
+const Services        = lazy(() => import('@/sections/Services'));
+const Blog            = lazy(() => import('@/sections/Blog'));
+const Testimonials    = lazy(() => import('@/sections/Testimonials'));
+const HappyCustomers  = lazy(() => import('@/sections/HappyCustomers'));
 
 function ScrollProgress() {
     const [progress, setProgress] = useState(0);
@@ -37,41 +39,42 @@ export default function Home() {
         <>
             <ScrollProgress />
 
-            {/* Hero Section */}
+            {/* Hero — carga inmediata (above the fold) */}
             <Hero />
 
-            {/* Promotions Banner */}
-            <PromosBanner />
+            <Suspense fallback={null}>
+                {/* Promotions Banner */}
+                <PromosBanner />
 
-            {/* Brands scroll — logos animados */}
-            <Brands onBrandClick={(brand) => {
-                navigate(`/marca/${brand.toLowerCase()}`);
-            }} />
+                {/* Brands scroll — logos animados */}
+                <Brands onBrandClick={(brand) => {
+                    navigate(`/marca/${brand.toLowerCase()}`);
+                }} />
 
-            {/* Categories showcase */}
-            <Categories />
+                {/* Categories showcase */}
+                <Categories />
 
-            {/* Brand selector — 1 moto por marca → /marca/:brand */}
-            <BrandSelector />
+                {/* Brand selector — 1 moto por marca → /marca/:brand */}
+                <BrandSelector />
 
-            {/* Financing Teaser → /financiamiento */}
-            <FinancingTeaser />
+                {/* Financing Teaser → /financiamiento */}
+                <FinancingTeaser />
 
-            {/* Spare Parts */}
-            <SpareParts />
+                {/* Spare Parts */}
+                <SpareParts />
 
-            {/* Services */}
-            <Services />
+                {/* Services */}
+                <Services />
 
-            {/* Blog */}
-            <Blog />
+                {/* Blog */}
+                <Blog />
 
-            {/* Testimonials */}
-            <Testimonials />
+                {/* Testimonials */}
+                <Testimonials />
 
-            {/* Clientes Felices */}
-            <HappyCustomers />
-
+                {/* Clientes Felices */}
+                <HappyCustomers />
+            </Suspense>
         </>
     );
 }

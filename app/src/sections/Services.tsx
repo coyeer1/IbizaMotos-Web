@@ -239,9 +239,9 @@ export default function Services() {
                   <MapPin className="w-5 h-5 text-ibiza-gold" />
                 </div>
                 <div>
-                  <p className="font-semibold">Taller Principal</p>
-                  <p className="text-gray-600 text-sm">Carrera 23 # 23-45, Armenia</p>
-                  <p className="text-gray-500 text-xs">Entrada por la calle del parque</p>
+                  <p className="font-semibold">Sede Principal</p>
+                  <p className="text-gray-600 text-sm">Cra 7 #25-41 Parque Lago Uribe, Pereira</p>
+                  <p className="text-gray-500 text-xs">Risaralda · Eje Cafetero</p>
                 </div>
               </div>
 
@@ -262,14 +262,14 @@ export default function Services() {
                 </div>
                 <div>
                   <p className="font-semibold">Llámanos</p>
-                  <p className="text-gray-600 text-sm">(+57) 321 456 7890</p>
+                  <p className="text-gray-600 text-sm">(+57) 305 288 4546</p>
                   <p className="text-gray-500 text-xs">WhatsApp disponible</p>
                 </div>
               </div>
             </div>
 
             <a
-              href="https://wa.me/573214567890?text=Hola, quiero agendar una cita para el taller"
+              href="https://wa.me/573052884546?text=Hola, quiero agendar una cita para el taller"
               target="_blank"
               rel="noopener noreferrer"
             >

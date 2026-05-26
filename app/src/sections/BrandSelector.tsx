@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { MessageCircle, ChevronLeft, ChevronRight, ArrowRight, Play, X } from 'lucide-react';
 import { brands, motorcycles as allMotos } from '@/data/motorcycles';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 
@@ -24,11 +24,73 @@ const BRAND_SLIDES: Record<string, string> = {
   'Good Kidz': '/brand-slides/goodkidz.jpg',
 };
 
+// YouTube video IDs para cada marca — cámbialos por el que prefieras
+const BRAND_VIDEOS: Record<string, string> = {
+  'Suzuki':    'MCgD4bWbpNY', // Suzuki Way of Life! Brand Movie
+  'Hero':      'BFIwQyhOLEg', // Hero MotoCorp – We Ride
+  'AKT':       'jFfn_czsK6s', // Historia AKT – La marca colombiana
+  'Vento':     'fV7GSt4MB9g', // Catálogo Vento
+  'Honda':     'Ium-algvybU', // Honda oficial
+  'Bajaj':     '4T3RPI3xvmY', // Bajaj oficial
+  'Good Kidz': 'CWXcKx-hPAo', // Mini Motos para Niños (cambiar si encuentran oficial)
+};
+
 const AUTOPLAY_DELAY = 4500;
+
+function VideoModal({ videoId, brandName, color, onClose }: {
+  videoId: string;
+  brandName: string;
+  color: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div
+          className="flex items-center justify-between px-5 py-3"
+          style={{ background: color }}
+        >
+          <span className="text-white font-bold tracking-wide text-sm uppercase">{brandName}</span>
+          <button
+            onClick={onClose}
+            className="text-white/80 hover:text-white transition-colors"
+            aria-label="Cerrar video"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        {/* Video 16:9 */}
+        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+          <iframe
+            className="absolute inset-0 w-full h-full"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+            title={`Video ${brandName}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function BrandSelector() {
   const navigate = useNavigate();
   const [active, setActive] = useState(0);
+  const [videoOpen, setVideoOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isPaused = useRef(false);
 
@@ -62,6 +124,16 @@ export default function BrandSelector() {
   const brand = brandData[active];
   const color = BRAND_COLORS[brand.name] ?? '#d7263d';
   const waUrl = getBrandSalesWhatsApp(brand.name);
+  const videoId = BRAND_VIDEOS[brand.name] ?? null;
+
+  const openVideo = () => {
+    isPaused.current = true;
+    setVideoOpen(true);
+  };
+  const closeVideo = () => {
+    isPaused.current = false;
+    setVideoOpen(false);
+  };
 
   return (
     <section
@@ -169,7 +241,7 @@ export default function BrandSelector() {
         </p>
 
         {/* CTAs */}
-        <div className="flex items-center gap-3 pointer-events-auto">
+        <div className="flex items-center gap-3 pointer-events-auto flex-wrap">
           <button
             onClick={() => navigate(`/marca/${brand.id}`)}
             className="flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-200 active:scale-95 shadow-md"
@@ -186,6 +258,28 @@ export default function BrandSelector() {
             <MessageCircle className="w-4 h-4" />
             Consultar
           </a>
+          {videoId && (
+            <button
+              key={`video-${active}`}
+              onClick={openVideo}
+              className="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full border-2 transition-all duration-200 active:scale-95 hover:text-white animate-[fadeUp_0.55s_ease_forwards]"
+              style={{
+                borderColor: color,
+                color: color,
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = color;
+                (e.currentTarget as HTMLButtonElement).style.color = '#fff';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
+                (e.currentTarget as HTMLButtonElement).style.color = color;
+              }}
+            >
+              <Play className="w-4 h-4 fill-current" />
+              Ver video
+            </button>
+          )}
         </div>
       </div>
 
@@ -244,6 +338,16 @@ export default function BrandSelector() {
           style={{ background: color }}
         />
       </div>
+
+      {/* ── Video modal ── */}
+      {videoOpen && videoId && (
+        <VideoModal
+          videoId={videoId}
+          brandName={brand.name}
+          color={color}
+          onClose={closeVideo}
+        />
+      )}
     </section>
   );
 }
