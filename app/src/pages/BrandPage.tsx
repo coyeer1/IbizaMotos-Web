@@ -126,11 +126,11 @@ export default function BrandPage() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="absolute top-6 right-6 sm:right-10 z-20"
                 >
-                    <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-5 py-3">
+                    <div className="bg-white rounded-2xl px-5 py-3 shadow-xl">
                         <img
                             src={activeBrandData.logo}
                             alt={activeBrandData.name}
-                            className="h-8 sm:h-10 object-contain filter brightness-0 invert"
+                            className="h-8 sm:h-10 object-contain"
                         />
                     </div>
                 </motion.div>
@@ -221,13 +221,13 @@ export default function BrandPage() {
                         ].map((stat) => (
                             <div key={stat.label} className="flex flex-col sm:flex-row items-center justify-center gap-3 py-5 px-4 text-center sm:text-left">
                                 <div
-                                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                                    style={{ backgroundColor: `rgba(${theme.glowRgb}, 0.15)`, color: theme.primary }}
+                                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white shadow-lg"
+                                    style={{ backgroundColor: theme.primary }}
                                 >
                                     {stat.icon}
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-gray-500 tracking-widest uppercase">{stat.label}</p>
+                                    <p className="text-[10px] font-bold text-white/50 tracking-widest uppercase">{stat.label}</p>
                                     <p className="font-display font-bold text-white text-base sm:text-lg">{stat.value}</p>
                                 </div>
                             </div>
@@ -251,13 +251,12 @@ export default function BrandPage() {
                         <div className="flex flex-col lg:flex-row items-center gap-12">
                             {/* Logo grande */}
                             <div
-                                className="w-48 h-32 lg:w-56 lg:h-36 rounded-3xl flex items-center justify-center shrink-0 border border-white/5"
-                                style={{ backgroundColor: `rgba(${theme.glowRgb}, 0.08)` }}
+                                className="w-48 h-32 lg:w-56 lg:h-36 rounded-3xl flex items-center justify-center shrink-0 bg-white shadow-2xl p-6"
                             >
                                 <img
                                     src={activeBrandData.logo}
                                     alt={activeBrandData.name}
-                                    className="w-3/4 h-3/4 object-contain filter brightness-0 invert"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
                             {/* Texto */}
@@ -322,8 +321,8 @@ export default function BrandPage() {
                                         className="group relative flex flex-col items-center gap-3 p-5 rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1"
                                         style={{ backgroundColor: `rgba(${bTheme.glowRgb}, 0.05)` }}
                                     >
-                                        <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/15 transition-all">
-                                            <img src={brand.logo} alt={brand.name} className="w-10 h-10 object-contain filter brightness-0 invert" />
+                                        <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center transition-all shadow-md p-2">
+                                            <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
                                         </div>
                                         <div className="text-center">
                                             <p className="font-display font-bold text-white text-sm">{brand.name}</p>

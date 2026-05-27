@@ -155,13 +155,13 @@ const MotoCard = ({
           {/* Top info overlay */}
           <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-start z-20">
             <div className="flex flex-col gap-1.5">
-              <span className={`text-[10px] font-bold px-3 py-1.5 rounded-lg tracking-widest shadow-sm backdrop-blur-md ${dk ? 'text-white/80 bg-white/10' : 'text-gray-700 bg-white/90'}`}>
+              <span className="flex items-center gap-1 text-[10px] font-bold px-3 py-1.5 rounded-lg tracking-widest shadow-md bg-white text-gray-900 border border-gray-200">
                 {motorcycle.year}
               </span>
               {motorcycle.stock && (() => {
                 const cfg = stockConfig[motorcycle.stock];
                 return (
-                  <span className={`flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg border backdrop-blur-md ${cfg.color}`}>
+                  <span className={`flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg border shadow-sm ${cfg.color}`}>
                     <cfg.Icon className="w-2.5 h-2.5" />{cfg.label}
                   </span>
                 );
@@ -169,12 +169,12 @@ const MotoCard = ({
             </div>
             <div className="flex gap-1.5 items-center">
               {cc && (
-                <span className={`flex items-center gap-1 text-[10px] font-semibold px-2.5 py-1.5 rounded-lg shadow-sm backdrop-blur-md ${dk ? 'text-white/70 bg-white/10' : 'text-gray-700 bg-white/90'}`}>
-                  <Gauge className="w-3 h-3" style={dk ? { color: dk.primary } : { color: '#d7263d' }} />{cc}cc
+                <span className="flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-md bg-white text-gray-900 border border-gray-200">
+                  <Gauge className="w-3 h-3" style={{ color: dk ? dk.primary : '#d7263d' }} />{cc}cc
                 </span>
               )}
               {hp && (
-                <span className={`flex items-center gap-1 text-[10px] font-semibold px-2.5 py-1.5 rounded-lg shadow-sm backdrop-blur-md ${dk ? 'text-white/70 bg-white/10' : 'text-gray-700 bg-white/90'}`}>
+                <span className="flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-md bg-white text-gray-900 border border-gray-200">
                   <Zap className="w-3 h-3 text-ibiza-gold" />{hp}HP
                 </span>
               )}
