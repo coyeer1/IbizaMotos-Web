@@ -233,18 +233,25 @@ export default function HappyCustomers() {
                 {/* Photo */}
                 <button
                   onClick={() => setLightbox(currentIndex)}
-                  className="relative h-72 md:h-[460px] overflow-hidden group bg-gray-100"
+                  className="relative h-80 md:h-[520px] overflow-hidden group bg-gradient-to-br from-gray-100 to-gray-200"
                   aria-label="Ver foto en grande"
                 >
+                  {/* Foto borrosa de fondo (mismo src) para llenar el espacio sin distorsión */}
+                  <img
+                    src={current.src}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40"
+                  />
+                  {/* Foto real centrada y completa */}
                   <img
                     src={current.src}
                     alt={`${current.name} con ${current.motorcycle} en ${current.city}`}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="relative w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.02] z-10"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-display font-bold text-gray-900 shadow-md">
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-display font-bold text-gray-900 shadow-md z-20">
                     📸 Foto entrega
                   </div>
                 </button>
