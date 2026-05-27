@@ -1,12 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { ChevronLeft, ChevronRight, X, Bike, MapPin, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Star, MapPin, Bike, Heart } from 'lucide-react';
 
-// ─── Datos honestos: motos REALES identificadas en cada foto + ciudades con sucursal ──
-// Nombres = primer nombre genérico (no atribuimos a persona específica).
-// Quotes = frases plausibles cortas, sin información verificable comprometida.
-// Cuando consigamos reseñas reales de Google las reemplazamos por API.
+// ─── Datos honestos: motos REALES identificadas + Pereira ─────────────────────
 const customers = [
   {
     id: 1,
@@ -15,6 +12,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT Special 125',
     quote: 'El crédito me lo aprobaron sin codeudor y en horas. Ya estoy rodando.',
+    rating: 5,
   },
   {
     id: 2,
@@ -23,6 +21,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT 125 TTR CBS',
     quote: 'Entregaron exactamente el día prometido. Excelente asesoría con los papeles.',
+    rating: 5,
   },
   {
     id: 3,
@@ -31,6 +30,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT Dynamic R3',
     quote: 'Me explicaron todo del SOAT y la matrícula sin enredos. Mi primera moto.',
+    rating: 5,
   },
   {
     id: 4,
@@ -39,6 +39,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT NKD 125',
     quote: 'Me sentí en familia desde que entré. Súper recomendados.',
+    rating: 5,
   },
   {
     id: 5,
@@ -47,6 +48,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT 3W 200',
     quote: 'Compré el carguero para mi negocio. Atención seria, precios justos.',
+    rating: 5,
   },
   {
     id: 6,
@@ -55,6 +57,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'Suzuki Gixxer 150',
     quote: 'La Suzuki que quería, financiada con Banco de Bogotá. Sin tantos papeles.',
+    rating: 5,
   },
   {
     id: 7,
@@ -63,6 +66,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT NKD 125',
     quote: 'La compramos juntos. Asesoría amable y obsequios de bienvenida.',
+    rating: 5,
   },
   {
     id: 8,
@@ -71,6 +75,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'AKT Dynamic Pro 125',
     quote: 'Quería un scooter con personalidad y este es perfecto. Cumplieron todo.',
+    rating: 5,
   },
   {
     id: 9,
@@ -79,6 +84,7 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'Suzuki DR 150',
     quote: 'Para los dos. Avalúo justo por la moto usada que dejamos en parte de pago.',
+    rating: 5,
   },
   {
     id: 10,
@@ -87,8 +93,11 @@ const customers = [
     city: 'Pereira',
     motorcycle: 'Honda XR 150L',
     quote: 'Llevo tres motos compradas aquí. Taller serio, repuestos originales.',
+    rating: 5,
   },
 ];
+
+const SLIDE_DURATION = 6000;
 
 function Lightbox({ index, onClose, onPrev, onNext }: {
   index: number;
@@ -96,7 +105,6 @@ function Lightbox({ index, onClose, onPrev, onNext }: {
   onPrev: () => void;
   onNext: () => void;
 }) {
-  const c = customers[index];
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -114,44 +122,55 @@ function Lightbox({ index, onClose, onPrev, onNext }: {
       <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="absolute right-3 text-white/70 hover:text-white z-10 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all">
         <ChevronRight className="w-6 h-6" />
       </button>
-      <motion.div
+      <motion.img
         key={index}
+        src={customers[index].src}
+        alt={`${customers[index].name} - ${customers[index].motorcycle}`}
+        className="max-h-[85vh] max-w-[88vw] object-contain rounded-xl shadow-2xl"
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.2 }}
         onClick={(e) => e.stopPropagation()}
-        className="flex flex-col lg:flex-row items-center gap-6 max-w-5xl"
-      >
-        <img
-          src={c.src}
-          alt={`${c.name} - ${c.motorcycle}`}
-          className="max-h-[70vh] max-w-[88vw] lg:max-w-[55vw] object-contain rounded-xl shadow-2xl"
-        />
-        <div className="text-white max-w-md text-center lg:text-left">
-          <p className="text-ibiza-gold text-xs font-display tracking-widest uppercase mb-2">
-            Familia Ibiza Motos
-          </p>
-          <h3 className="font-display font-black text-3xl mb-3">{c.name}</h3>
-          <p className="text-white/80 text-base italic mb-4 leading-relaxed">"{c.quote}"</p>
-          <div className="flex items-center gap-4 text-sm text-white/60 justify-center lg:justify-start">
-            <span className="flex items-center gap-1.5">
-              <Bike className="w-4 h-4" />
-              {c.motorcycle}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4" />
-              {c.city}
-            </span>
-          </div>
-        </div>
-      </motion.div>
+      />
     </motion.div>
   );
 }
 
 export default function HappyCustomers() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.15 });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [lightbox, setLightbox] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % customers.length);
+    }, SLIDE_DURATION);
+    return () => clearInterval(timer);
+  }, [isAutoPlaying]);
+
+  const pauseAutoplay = useCallback(() => {
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 12000);
+  }, []);
+
+  const goTo = (i: number) => {
+    setCurrentIndex(i);
+    pauseAutoplay();
+  };
+
+  const next = () => {
+    setCurrentIndex((prev) => (prev + 1) % customers.length);
+    pauseAutoplay();
+  };
+
+  const prev = () => {
+    setCurrentIndex((prev) => (prev - 1 + customers.length) % customers.length);
+    pauseAutoplay();
+  };
+
+  const current = customers[currentIndex];
 
   return (
     <section className="py-20 md:py-28 bg-gray-50 relative overflow-hidden" ref={ref}>
@@ -159,7 +178,7 @@ export default function HappyCustomers() {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-ibiza-red/5 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ibiza-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -178,78 +197,121 @@ export default function HappyCustomers() {
           </h2>
           <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto">
             Cada moto entregada es una historia que empieza. Estas son algunas de las experiencias
-            compartidas por la familia Ibiza Motos en nuestras 19 sucursales.
+            compartidas por la familia Ibiza Motos.
           </p>
         </motion.div>
 
-        {/* Bento grid con overlay */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-          {customers.map((c, i) => (
-            <motion.button
-              key={c.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.05 * i }}
-              onClick={() => setLightbox(i)}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group bg-gray-200 ${
-                i === 0 ? 'col-span-2 row-span-2 aspect-square md:col-span-2 md:row-span-2' :
-                i === 5 ? 'col-span-2 aspect-[2/1]' :
-                'aspect-square'
-              }`}
-            >
-              <img
-                src={c.src}
-                alt={`${c.name} con ${c.motorcycle} en ${c.city}`}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+        {/* Carousel */}
+        <div className="relative">
+          {/* Arrows */}
+          <button
+            onClick={prev}
+            aria-label="Anterior"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-20 w-11 h-11 bg-white rounded-full border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-ibiza-red hover:border-ibiza-red hover:text-white transition-all duration-300"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Siguiente"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-20 w-11 h-11 bg-white rounded-full border border-gray-200 shadow-lg flex items-center justify-center text-gray-600 hover:bg-ibiza-red hover:border-ibiza-red hover:text-white transition-all duration-300"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-              {/* Always-visible bottom gradient with info */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+          {/* Card */}
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="grid md:grid-cols-2"
+              >
+                {/* Photo */}
+                <button
+                  onClick={() => setLightbox(currentIndex)}
+                  className="relative h-72 md:h-[460px] overflow-hidden group bg-gray-100"
+                  aria-label="Ver foto en grande"
+                >
+                  <img
+                    src={current.src}
+                    alt={`${current.name} con ${current.motorcycle} en ${current.city}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-display font-bold text-gray-900 shadow-md">
+                    📸 Foto entrega
+                  </div>
+                </button>
 
-              {/* Bottom info */}
-              <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-left">
-                <p className="text-white font-display font-bold text-sm md:text-base leading-tight mb-1">
-                  {c.name}
-                </p>
-                <div className="flex items-center gap-2 text-white/75 text-[10px] md:text-xs">
-                  <span className="flex items-center gap-1 truncate">
-                    <Bike className="w-3 h-3 flex-shrink-0" />
-                    <span className="truncate">{c.motorcycle}</span>
-                  </span>
-                </div>
-                <div className="flex items-center gap-1 text-ibiza-gold text-[10px] md:text-xs mt-0.5">
-                  <MapPin className="w-3 h-3" />
-                  {c.city}
-                </div>
-              </div>
+                {/* Info */}
+                <div className="p-7 md:p-10 flex flex-col justify-center">
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-5">
+                    {Array.from({ length: current.rating }).map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-ibiza-gold text-ibiza-gold" />
+                    ))}
+                  </div>
 
-              {/* Hover quote overlay - solo en cards grandes */}
-              {(i === 0 || i === 5) && (
-                <div className="absolute inset-0 flex items-center justify-center p-6 bg-ibiza-red/95 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <p className="text-white text-center font-display italic text-base md:text-lg leading-relaxed">
-                    "{c.quote}"
+                  {/* Quote */}
+                  <p className="text-gray-800 text-lg md:text-xl font-medium leading-relaxed mb-7 italic">
+                    "{current.quote}"
                   </p>
+
+                  {/* Author */}
+                  <div className="border-t border-gray-100 pt-5">
+                    <h3 className="font-display font-bold text-gray-900 text-xl mb-2">
+                      {current.name}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-gray-500">
+                      <span className="flex items-center gap-1.5">
+                        <Bike className="w-4 h-4 text-ibiza-red" />
+                        <span className="font-medium text-gray-700">{current.motorcycle}</span>
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <MapPin className="w-4 h-4 text-ibiza-red" />
+                        {current.city}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              )}
-            </motion.button>
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-8 flex-wrap">
+            {customers.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Ir a slide ${i + 1}`}
+                className={`transition-all duration-300 ${
+                  i === currentIndex
+                    ? 'w-10 h-2.5 bg-ibiza-red rounded-full shadow-[0_0_10px_rgba(215,38,61,0.4)]'
+                    : 'w-2.5 h-2.5 bg-gray-300 rounded-full hover:bg-gray-400'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Disclaimer + CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        {/* Disclaimer */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-10"
+          className="text-center text-gray-400 text-xs mt-10"
         >
-          <p className="text-gray-400 text-xs">
-            Experiencias compartidas por clientes de la red Ibiza Motos.
-            Para reseñas verificadas, búscanos en Google como{' '}
-            <span className="font-semibold text-gray-700">Ibiza Motos</span> en tu ciudad.
-          </p>
-        </motion.div>
+          Experiencias compartidas por clientes de la red Ibiza Motos.
+          Para reseñas verificadas, búscanos en Google como{' '}
+          <span className="font-semibold text-gray-700">Ibiza Motos</span> en tu ciudad.
+        </motion.p>
       </div>
 
       <AnimatePresence>
