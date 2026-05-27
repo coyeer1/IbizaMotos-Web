@@ -1,13 +1,13 @@
 import type { Motorcycle, Brand, Category, Testimonial, Service, Branch, SparePart } from '@/types';
 
 export const brands: Brand[] = [
-  { id: '1', name: 'Suzuki', logo: '/brands/suzuki.svg', slug: 'suzuki' },
-  { id: '2', name: 'Vento', logo: '/brands/vento.svg', slug: 'vento' },
-  { id: '3', name: 'Hero', logo: '/brands/hero.svg', slug: 'hero' },
-  { id: '4', name: 'Honda', logo: '/brands/honda.svg', slug: 'honda' },
-  { id: '5', name: 'Bajaj', logo: '/brands/bajaj.svg', slug: 'bajaj' },
-  { id: '6', name: 'AKT', logo: '/brands/akt.svg', slug: 'akt' },
-  { id: '7', name: 'Good Kidz', logo: '/brands/GoodKidz.svg', slug: 'good-kidz' },
+  { id: '1', name: 'Suzuki', logo: '/brands/Suzuki.png', slug: 'suzuki' },
+  { id: '2', name: 'Vento', logo: '/brands/Vento.png', slug: 'vento' },
+  { id: '3', name: 'Hero', logo: '/brands/Hero.png', slug: 'hero' },
+  { id: '4', name: 'Honda', logo: '/brands/Honda.png', slug: 'honda' },
+  { id: '5', name: 'Bajaj', logo: '/brands/Bajaj.png', slug: 'bajaj' },
+  { id: '6', name: 'AKT', logo: '/brands/AKT.png', slug: 'akt' },
+  { id: '7', name: 'Good Kidz', logo: '/brands/GoodKidz.png', slug: 'good-kidz' },
 ];
 
 export const categories: Category[] = [
