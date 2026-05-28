@@ -167,6 +167,21 @@ export default function MotorcyclePage() {
         { label: 'CAPACIDAD', value: motorcycle.specifications.fuelCapacity, icon: specIcons['CAPACIDAD'] },
     ];
 
+    // Números clave extraídos para la banda destacada
+    const pick = (re: RegExp, src: string) => { const m = src.match(re); return m ? m[1] : null; };
+    const keyStats = [
+        { value: pick(/([\d.]+)\s*cc/i, motorcycle.specifications.engine), unit: 'cc', label: 'Cilindraje' },
+        { value: pick(/([\d.]+)\s*HP/i, motorcycle.specifications.power), unit: 'HP', label: 'Potencia' },
+        { value: pick(/(\d+)\s*vel/i, motorcycle.specifications.transmission), unit: 'vel', label: 'Marchas' },
+        { value: pick(/([\d.]+)\s*kg/i, motorcycle.specifications.weight), unit: 'kg', label: 'Peso' },
+    ].filter(s => s.value);
+
+    // Cuota estimada (36 meses, 1.26% E.M.) para el bloque de financiación
+    const fMeses = 36, fTasa = 0.0126;
+    const cuotaEstimada = Math.round(
+        (motorcycle.price * (fTasa * Math.pow(1 + fTasa, fMeses))) / (Math.pow(1 + fTasa, fMeses) - 1)
+    );
+
     return (
         <div className="min-h-screen relative pb-32" style={{ backgroundColor: brandBg }}>
 
@@ -448,48 +463,54 @@ export default function MotorcyclePage() {
                         </div>
                     </motion.div>
 
-                    {/* Specs destacadas: motor + potencia */}
-                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                        {specs.slice(0, 2).map((spec, idx) => (
-                            <motion.div
-                                key={spec.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-60px' }}
-                                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                                className="relative overflow-hidden rounded-2xl p-7 border"
-                                style={{ borderColor: `rgba(${brandGlow}, 0.25)`, background: `linear-gradient(135deg, rgba(${brandGlow}, 0.14) 0%, transparent 70%)` }}
-                            >
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: brandColor }}>
-                                        {spec.icon}
+                    {/* Banda de números clave */}
+                    {keyStats.length > 0 && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-60px' }}
+                            transition={{ duration: 0.5 }}
+                            className="relative overflow-hidden rounded-3xl border mb-5"
+                            style={{ borderColor: `rgba(${brandGlow}, 0.22)`, background: `linear-gradient(135deg, rgba(${brandGlow}, 0.16) 0%, rgba(${brandGlow}, 0.02) 55%, transparent 100%)` }}
+                        >
+                            {/* Glow decorativo */}
+                            <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full blur-[110px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.25)` }} />
+                            <div className={`relative grid ${keyStats.length === 4 ? 'grid-cols-2 md:grid-cols-4' : keyStats.length === 3 ? 'grid-cols-3' : 'grid-cols-2'} divide-x divide-white/[0.06]`}>
+                                {keyStats.map((s) => (
+                                    <div key={s.label} className="px-4 py-8 sm:py-10 text-center">
+                                        <p className="font-display font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2.4rem, 6vw, 4.25rem)' }}>
+                                            <span style={{ fontVariantNumeric: 'tabular-nums' }}>{s.value}</span>
+                                            <span className="text-base sm:text-xl align-top ml-1 font-bold" style={{ color: brandColor }}>{s.unit}</span>
+                                        </p>
+                                        <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-white/45 mt-3">{s.label}</p>
                                     </div>
-                                    <span className="text-[11px] font-bold text-white/50 tracking-widest uppercase">{spec.label}</span>
-                                </div>
-                                <p className="font-display font-black text-white text-2xl md:text-3xl leading-tight">{spec.value}</p>
-                            </motion.div>
-                        ))}
-                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
 
-                    {/* Resto de specs */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {specs.slice(2).map((spec, idx) => (
-                            <motion.div
+                    {/* Datasheet completo */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-50px' }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="rounded-2xl border border-white/[0.07] overflow-hidden"
+                    >
+                        {specs.map((spec, i) => (
+                            <div
                                 key={spec.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-60px' }}
-                                transition={{ duration: 0.4, delay: idx * 0.06 }}
-                                className="bg-white/[0.03] rounded-2xl p-5 border border-white/5 hover:border-white/15 transition-all duration-300"
+                                className="flex items-center justify-between gap-4 px-5 sm:px-7 py-4 sm:py-5 border-b border-white/[0.05] last:border-b-0 transition-colors hover:bg-white/[0.02]"
+                                style={{ backgroundColor: i % 2 === 0 ? 'rgba(255,255,255,0.018)' : 'transparent' }}
                             >
-                                <div className="flex items-center gap-2.5 mb-3">
-                                    <span style={{ color: brandColor }}>{spec.icon}</span>
-                                    <span className="text-[10px] font-bold text-gray-500 tracking-widest uppercase">{spec.label}</span>
+                                <div className="flex items-center gap-3 min-w-0">
+                                    <span className="shrink-0" style={{ color: brandColor }}>{spec.icon}</span>
+                                    <span className="text-[11px] sm:text-xs font-bold text-gray-500 tracking-wider uppercase">{spec.label}</span>
                                 </div>
-                                <p className="font-display font-bold text-white text-base md:text-lg">{spec.value}</p>
-                            </motion.div>
+                                <span className="font-display font-bold text-white text-sm sm:text-lg text-right">{spec.value}</span>
+                            </div>
                         ))}
-                    </div>
+                    </motion.div>
 
                     {/* Respaldo del concesionario (honesto, igual para todas) */}
                     <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -521,39 +542,60 @@ export default function MotorcyclePage() {
             {/* ── FINANCING CTA ── */}
             <section className="py-14 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div
-                        className="max-w-xl mx-auto rounded-3xl p-8 text-center border"
-                        style={{ background: `linear-gradient(135deg, rgba(${brandGlow}, 0.1) 0%, rgba(${brandGlow}, 0.05) 100%)`, borderColor: `rgba(${brandGlow}, 0.2)` }}
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-60px' }}
+                        transition={{ duration: 0.5 }}
+                        className="relative overflow-hidden rounded-3xl border"
+                        style={{ borderColor: `rgba(${brandGlow}, 0.22)`, background: `linear-gradient(115deg, rgba(${brandGlow}, 0.16) 0%, rgba(${brandGlow}, 0.04) 45%, transparent 100%)` }}
                     >
-                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: `rgba(${brandGlow}, 0.15)` }}>
-                            <Calculator className="w-7 h-7" style={{ color: brandColor }} />
+                        {/* Glow */}
+                        <div className="absolute -left-16 -bottom-20 w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.22)` }} />
+
+                        <div className="relative grid md:grid-cols-2 gap-8 items-center p-7 sm:p-10">
+                            {/* Izquierda: cuota gigante */}
+                            <div>
+                                <span className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full border mb-5" style={{ color: brandColor, borderColor: `rgba(${brandGlow}, 0.3)`, backgroundColor: `rgba(${brandGlow}, 0.1)` }}>
+                                    <Calculator className="w-3.5 h-3.5" /> Llévatela a cuotas
+                                </span>
+                                <p className="text-white/55 text-sm font-semibold tracking-wide uppercase mb-1">Cuota desde</p>
+                                <p className="font-display font-black text-white leading-none mb-2" style={{ fontSize: 'clamp(3rem, 9vw, 5.5rem)' }}>
+                                    <span className="text-2xl sm:text-3xl align-top mr-1" style={{ color: brandColor }}>$</span>
+                                    <span style={{ fontVariantNumeric: 'tabular-nums' }}>{new Intl.NumberFormat('es-CO').format(cuotaEstimada)}</span>
+                                    <span className="text-lg sm:text-2xl text-white/50 font-bold ml-2">/mes</span>
+                                </p>
+                                <p className="text-gray-500 text-xs leading-relaxed max-w-sm">
+                                    Estimado a {fMeses} meses · tasa desde 1.26% E.M. sobre {'$' + new Intl.NumberFormat('es-CO').format(motorcycle.price)}. Valor sujeto a aprobación de crédito.
+                                </p>
+                            </div>
+
+                            {/* Derecha: trust + CTA */}
+                            <div className="md:border-l md:border-white/10 md:pl-8">
+                                <div className="space-y-3 mb-6">
+                                    {['8 financieras aliadas (Progreser, Banco de Bogotá, Brilla…)', 'Respuesta en menos de 24 horas', 'Cuota inicial flexible · sin codeudor en muchos casos'].map((t) => (
+                                        <div key={t} className="flex items-start gap-2.5">
+                                            <CheckCircle2 className="w-4 h-4 shrink-0 mt-1" style={{ color: brandColor }} />
+                                            <span className="text-gray-300 text-sm">{t}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button
+                                    onClick={() =>
+                                        navigate(
+                                            `/financiamiento?precio=${motorcycle.price}&moto=${encodeURIComponent(motorcycle.brand + ' ' + motorcycle.model)}`
+                                        )
+                                    }
+                                    className="inline-flex items-center justify-center gap-3 w-full text-white font-display font-bold px-8 py-4 rounded-2xl text-sm uppercase tracking-wider active:scale-[0.98] transition-all duration-200 group"
+                                    style={{ backgroundColor: brandColor, boxShadow: `0 0 28px rgba(${brandGlow}, 0.35)` }}
+                                >
+                                    <Calculator className="w-5 h-5" />
+                                    Simular mi crédito
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </div>
                         </div>
-                        <h3 className="font-display font-black text-2xl text-white mb-2">
-                            ¿Quieres financiar esta moto?
-                        </h3>
-                        <p className="text-gray-400 text-sm mb-2">
-                            Precio:{' '}
-                            <span className="text-white font-bold">
-                                {'$' + new Intl.NumberFormat('es-CO').format(motorcycle.price)}
-                            </span>
-                        </p>
-                        <p className="text-gray-500 text-xs mb-6">
-                            Simula tu cuota con 8 financieras aliadas — tasa desde 1.26%/mes
-                        </p>
-                        <button
-                            onClick={() =>
-                                navigate(
-                                    `/financiamiento?precio=${motorcycle.price}&moto=${encodeURIComponent(motorcycle.brand + ' ' + motorcycle.model)}`
-                                )
-                            }
-                            className="inline-flex items-center gap-3 text-white font-display font-bold px-8 py-4 rounded-2xl text-sm active:scale-95 transition-all duration-200 group w-full justify-center"
-                            style={{ backgroundColor: brandColor, boxShadow: `0 0 24px rgba(${brandGlow}, 0.3)` }}
-                        >
-                            <Calculator className="w-5 h-5" />
-                            Calcular mi cuota
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
