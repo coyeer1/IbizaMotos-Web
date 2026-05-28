@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -26,6 +27,39 @@
 @media (prefers-reduced-motion: reduce) {
   .bike-float { animation: none; }
   .ken-burns  { animation: none; }
+}
+
+/* ─── Hero light (Home) — animaciones CSS puras ───────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes heroImgIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes heroImgOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-30px); }
+}
+@keyframes heroTextOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+.hero-img-in  { animation: heroImgIn 0.42s ease-out both; }
+.hero-img-out { animation: heroImgOut 0.25s ease-in both; }
+.hero-text-out { animation: heroTextOut 0.2s ease-in both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-img-in, .hero-img-out, .hero-text-out { animation: none; }
 }
 
 @layer base {

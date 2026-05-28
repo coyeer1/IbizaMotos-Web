@@ -1,6 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '@/sections/Hero';
+import Reveal from '@/components/Reveal';
 
 // Secciones below-the-fold — se descargan solo cuando el usuario llega a ellas
 const Brands          = lazy(() => import('@/sections/Brands'));
@@ -46,30 +47,32 @@ export default function Home() {
                 <PromosBanner />
 
                 {/* Brands scroll — logos animados */}
-                <Brands onBrandClick={(brand) => {
-                    navigate(`/marca/${brand.toLowerCase()}`);
-                }} />
+                <Reveal>
+                    <Brands onBrandClick={(brand) => {
+                        navigate(`/marca/${brand.toLowerCase()}`);
+                    }} />
+                </Reveal>
 
                 {/* Categories showcase */}
-                <Categories />
+                <Reveal><Categories /></Reveal>
 
                 {/* Brand selector — 1 moto por marca → /marca/:brand */}
-                <BrandSelector />
+                <Reveal><BrandSelector /></Reveal>
 
                 {/* Financing Teaser → /financiamiento */}
-                <FinancingTeaser />
+                <Reveal><FinancingTeaser /></Reveal>
 
                 {/* Spare Parts */}
-                <SpareParts />
+                <Reveal><SpareParts /></Reveal>
 
                 {/* Services */}
-                <Services />
+                <Reveal><Services /></Reveal>
 
                 {/* Blog */}
-                <Blog />
+                <Reveal><Blog /></Reveal>
 
                 {/* Clientes Felices */}
-                <HappyCustomers />
+                <Reveal><HappyCustomers /></Reveal>
             </Suspense>
         </>
     );

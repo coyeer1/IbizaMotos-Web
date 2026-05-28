@@ -21,6 +21,9 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const location = useLocation();
+  // Navbar siempre en modo claro/opaco (texto oscuro). El Home ahora tiene
+  // hero blanco, así que no usamos el modo transparente con texto blanco.
+  const lightNav = true || isScrolled;
   const navigate = useNavigate();
   const { openSearch } = useSearch();
 
@@ -70,7 +73,7 @@ export default function Navbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled || location.pathname !== '/'
+          lightNav
             ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-2'
             : 'bg-transparent py-4'
         }`}
@@ -89,7 +92,7 @@ export default function Navbar() {
               <img
                 src="/Logo-Ibiza-motos.png"
                 alt="Ibiza Motos"
-                className={`transition-all duration-300 object-contain ${isScrolled || location.pathname !== '/' ? 'h-12' : 'h-14'}`}
+                className={`transition-all duration-300 object-contain ${lightNav ? 'h-12' : 'h-14'}`}
               />
             </a>
 
@@ -101,7 +104,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.href}
                     className={`relative font-medium text-sm transition-colors duration-300 group ${
-                      isScrolled || location.pathname !== '/'
+                      lightNav
                         ? 'text-gray-600 hover:text-ibiza-red'
                         : '!text-white/90 hover:!text-white'
                     } ${location.pathname === link.href ? '!text-ibiza-red' : ''}`}
@@ -118,7 +121,7 @@ export default function Navbar() {
                       scrollToSection(link.href);
                     }}
                     className={`relative font-medium text-sm transition-colors duration-300 group ${
-                      isScrolled || location.pathname !== '/'
+                      lightNav
                         ? 'text-gray-600 hover:text-ibiza-red'
                         : '!text-white/90 hover:!text-white'
                     }`}
@@ -137,7 +140,7 @@ export default function Navbar() {
                 onClick={openSearch}
                 title="Buscar moto (Ctrl+K)"
                 className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 text-sm font-medium ${
-                  isScrolled || location.pathname !== '/'
+                  lightNav
                     ? 'border-gray-200 text-gray-500 hover:border-ibiza-red/40 hover:text-ibiza-red bg-gray-50 hover:bg-ibiza-red/5'
                     : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white bg-white/5 hover:bg-white/10'
                 }`}
@@ -165,7 +168,7 @@ export default function Navbar() {
               className="lg:hidden p-2"
               onClick={openSearch}
             >
-              <Search className={`w-5 h-5 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
+              <Search className={`w-5 h-5 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
             </button>
 
             {/* Mobile Menu Button */}
@@ -174,9 +177,9 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
+                <X className={`w-6 h-6 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
               ) : (
-                <Menu className={`w-6 h-6 ${isScrolled || location.pathname !== '/' ? 'text-gray-700' : '!text-white'}`} />
+                <Menu className={`w-6 h-6 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
               )}
             </button>
           </div>

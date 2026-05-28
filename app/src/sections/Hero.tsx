@@ -1,402 +1,284 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle, MapPin, BadgeCheck, Clock } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 import { motorcycles } from '@/data/motorcycles';
 
-// Precio y cuota tomados del catálogo (fuente única) para que el hero
-// siempre coincida con la ficha de cada moto.
-const fmtCOP = (n: number) =>
-  new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
-const cuotaMensual = (precio: number) =>
-  Math.round((precio * (0.0126 * Math.pow(1.0126, 36))) / (Math.pow(1.0126, 36) - 1));
+// ─── Tokens del hero (no afectan al resto del sitio) ───────────────────────
+const T = {
+  text: '#000000',
+  muted: '#999999',
+  border: '#e8e8e8',
+  pill: '#f5f5f5',
+  red: '#E31937',
+  display: "'Bebas Neue', sans-serif",
+  body: "'DM Sans', sans-serif",
+};
 
-interface Slide {
-  id: number;
+interface HeroSlide {
   brand: string;
-  model: string;
-  headline: string;
-  subline: string;
-  description: string;
-  price: string;
-  fromMonth: string;
-  accent: string;
-  image: string;
-  motoSlug: string;
+  model: string;        // debe coincidir con el catálogo para tomar el precio real
+  headline: string[];   // 3 líneas
+  tagline: string;
+  specs: string[];      // máx 3
+  image: string;        // WebP optimizado, fondo transparente
 }
 
-const slides: Slide[] = [
+const SLIDES: HeroSlide[] = [
   {
-    id: 1,
     brand: 'Bajaj',
     model: 'Dominar 400 Volcano',
-    headline: 'NACIDA PARA LA RUTA',
-    subline: 'Tour grande, motor 4 válvulas, frenos Bybre. Tu próxima aventura empieza acá.',
-    description: 'En Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya y Neiva.',
-    price: '$22.990.000',
-    fromMonth: '$465.000/mes',
-    accent: '#003399',
-    image: '/moto_images/dominar-400-volcano/dominar-400-volcano.png',
-    motoSlug: 'dominar-400-volcano',
+    headline: ['NACIDA', 'PARA LA', 'RUTA'],
+    tagline: 'Touring de verdad: motor DOHC de 373cc, frenos Bybre y autonomía para comerte la carretera.',
+    specs: ['373 cc', '40 HP', '6 vel · ABS'],
+    image: '/moto_images/dominar-400-volcano/dominar-400-volcano.webp',
   },
   {
-    id: 2,
     brand: 'Honda',
     model: 'CB 300F',
-    headline: 'PRESTIGIO HONDA',
-    subline: 'Naked deportiva, motor 286cc, tecnología Honda en cada vibración.',
-    description: 'Tu Honda con financiación inmediata vía Progreser, Banco de Bogotá o SUFI.',
-    price: '$18.490.000',
-    fromMonth: '$390.000/mes',
-    accent: '#cc0000',
+    headline: ['PRESTIGIO', 'EN CADA', 'CURVA'],
+    tagline: 'Naked deportiva de 286cc con la confiabilidad Honda. Hecha para la ciudad y la ruta.',
+    specs: ['286 cc', '26.6 HP', '6 vel'],
     image: '/moto_images/cb-300f/Nueva-CB-300F-rojo.webp',
-    motoSlug: 'cb-300f',
   },
   {
-    id: 3,
     brand: 'Suzuki',
     model: 'Gixxer SF 250',
-    headline: 'SPORT DE VERDAD',
-    subline: 'Carenado completo, motor 250cc refrigerado por aceite, ABS en ambas ruedas.',
-    description: 'Concesionario Suzuki autorizado en el Eje Cafetero, con servicio técnico y repuestos originales.',
-    price: '$19.990.000',
-    fromMonth: '$420.000/mes',
-    accent: '#1a73e8',
-    image: '/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL.png',
-    motoSlug: 'gixxer-sf-250',
+    headline: ['SPORT', 'DE PURA', 'RAZA'],
+    tagline: 'Carenado completo, motor 250cc refrigerado por aceite y ABS. Adrenalina con sello Suzuki.',
+    specs: ['249 cc', '26.5 HP', '6 vel'],
+    image: '/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL.webp',
   },
 ];
 
+const fmtCOP = (n: number) =>
+  new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+const cuotaMensual = (p: number) =>
+  Math.round((p * (0.0126 * Math.pow(1.0126, 36))) / (Math.pow(1.0126, 36) - 1));
+
 export default function Hero() {
   const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const progressTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const SLIDE_DURATION = 7000;
+  const [idx, setIdx] = useState(0);
+  const [phase, setPhase] = useState<'in' | 'out'>('in');
+  const [isPaused, setIsPaused] = useState(false);
+  const swapTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const slide = slides[currentSlide];
+  const slide = SLIDES[idx];
+  const moto = motorcycles.find((m) => m.model === slide.model);
+  const price = moto ? fmtCOP(moto.price) : '';
+  const monthly = moto ? `${fmtCOP(cuotaMensual(moto.price))}/mes` : '';
 
-  // Precio real desde el catálogo (fallback al hardcodeado si no se encuentra)
-  const motoData = motorcycles.find((m) => m.model === slide.model);
-  const displayPrice = motoData ? fmtCOP(motoData.price) : slide.price;
-  const displayCuota = motoData ? `${fmtCOP(cuotaMensual(motoData.price))}/mes` : slide.fromMonth;
-
-  useEffect(() => {
-    setProgress(0);
-    if (progressTimerRef.current) clearInterval(progressTimerRef.current);
-    const step = 100 / (SLIDE_DURATION / 50);
-    progressTimerRef.current = setInterval(() => {
-      setProgress((p) => Math.min(p + step, 100));
-    }, 50);
-    return () => {
-      if (progressTimerRef.current) clearInterval(progressTimerRef.current);
-    };
-  }, [currentSlide]);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, SLIDE_DURATION);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying, currentSlide]);
-
-  useEffect(() => {
-    return () => {
-      if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
-      if (progressTimerRef.current) clearInterval(progressTimerRef.current);
-    };
+  // Cambio de slide: sale el actual (out), luego entra el nuevo (in)
+  const goTo = useCallback((next: number) => {
+    setPhase('out');
+    if (swapTimer.current) clearTimeout(swapTimer.current);
+    swapTimer.current = setTimeout(() => {
+      setIdx(next);
+      setPhase('in');
+    }, 250);
   }, []);
 
-  const resetAutoPlay = useCallback(() => {
-    setIsAutoPlaying(false);
-    if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
-    autoPlayTimerRef.current = setTimeout(() => setIsAutoPlaying(true), 12000);
-  }, []);
+  // Auto-advance cada 6s (pausa al pasar el mouse por la moto)
+  useEffect(() => {
+    if (isPaused) return;
+    const t = setTimeout(() => goTo((idx + 1) % SLIDES.length), 6000);
+    return () => clearTimeout(t);
+  }, [idx, isPaused, goTo]);
 
-  const goToSlide = (index: number) => {
-    if (index === currentSlide) return;
-    setCurrentSlide(index);
-    resetAutoPlay();
-  };
+  useEffect(() => () => { if (swapTimer.current) clearTimeout(swapTimer.current); }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    resetAutoPlay();
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    resetAutoPlay();
-  };
+  // delay helper para el stagger de entrada
+  const anim = (delayMs: number, dur = 0.4, name = 'fadeUp') =>
+    ({ animation: `${name} ${dur}s both`, animationDelay: `${delayMs}ms` } as React.CSSProperties);
 
   return (
-    <section id="inicio" className="relative h-screen w-full overflow-hidden bg-gray-900">
-      {/* Preload de imágenes para evitar parpadeo entre slides */}
-      {slides.map((s) => (
-        <link key={s.id} rel="preload" as="image" href={s.image} />
-      ))}
+    <section
+      id="inicio"
+      className="relative w-full overflow-hidden bg-white"
+      style={{ fontFamily: T.body, minHeight: '100svh', color: T.text }}
+    >
+      <div className="relative h-full min-h-[100svh] grid grid-cols-1 lg:grid-cols-2">
 
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800" />
+        {/* ── COLUMNA IZQUIERDA — contenido ── */}
+        <div className="order-2 lg:order-1 flex flex-col justify-center px-6 sm:px-10 lg:pl-20 lg:pr-10 pb-10 lg:pb-0 pt-2 lg:pt-0">
+          {/* keyed por idx → re-ejecuta el stagger en cada cambio */}
+          <div key={idx} className={phase === 'out' ? 'hero-text-out' : ''} style={{ maxWidth: 520 }}>
 
-      {/* Imagen con efecto Ken Burns */}
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={`image-${currentSlide}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.0, ease: 'easeInOut' }}
-          className="absolute inset-0"
+            {/* Brand chip */}
+            <span
+              className="inline-block uppercase"
+              style={{
+                ...anim(0),
+                fontSize: 11,
+                letterSpacing: '0.15em',
+                border: `1px solid ${T.border}`,
+                borderRadius: 20,
+                padding: '4px 14px',
+                color: '#888',
+              }}
+            >
+              {slide.brand}
+            </span>
+
+            {/* Nombre del modelo */}
+            <p style={{ ...anim(80), fontSize: 14, color: '#aaa', fontWeight: 400, marginTop: 14 }}>
+              {slide.model}
+            </p>
+
+            {/* Headline 3 líneas */}
+            <h1 style={{ marginTop: 8 }}>
+              {slide.headline.map((line, i) => (
+                <span
+                  key={i}
+                  className="block"
+                  style={{
+                    ...anim(140 + i * 60, 0.5),
+                    fontFamily: T.display,
+                    fontSize: 'clamp(56px, 8vw, 90px)',
+                    lineHeight: 0.92,
+                    letterSpacing: '-1px',
+                    color: T.text,
+                  }}
+                >
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            {/* Tagline */}
+            <p
+              style={{
+                ...anim(330),
+                fontSize: 15,
+                color: '#666',
+                fontWeight: 300,
+                maxWidth: 320,
+                lineHeight: 1.65,
+                marginTop: 20,
+              }}
+            >
+              {slide.tagline}
+            </p>
+
+            {/* Specs pills */}
+            <div className="flex flex-wrap" style={{ ...anim(390), gap: 8, marginTop: 18 }}>
+              {slide.specs.map((s) => (
+                <span
+                  key={s}
+                  style={{
+                    background: T.pill,
+                    borderRadius: 6,
+                    padding: '5px 13px',
+                    fontSize: 12,
+                    color: '#555',
+                    fontWeight: 500,
+                  }}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            {/* Precio */}
+            <div style={{ ...anim(440), marginTop: 28 }}>
+              <p style={{ fontSize: 10, letterSpacing: '0.25em', color: '#bbb' }}>DESDE</p>
+              <p style={{ fontSize: 34, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>{price}</p>
+              <p style={{ fontSize: 13, color: '#aaa', marginTop: 2 }}>o {monthly}</p>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap" style={{ ...anim(490), gap: 12, marginTop: 28 }}>
+              <a href={getBrandSalesWhatsApp(slide.brand)} target="_blank" rel="noopener noreferrer">
+                <button
+                  className="transition-transform duration-200 hover:scale-[1.02] active:scale-95"
+                  style={{
+                    background: '#000',
+                    color: '#fff',
+                    borderRadius: 8,
+                    padding: '13px 26px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                  }}
+                >
+                  Cotizar por WhatsApp
+                </button>
+              </a>
+              <button
+                onClick={() => navigate(`/marca/${slide.brand.toLowerCase()}`)}
+                className="transition-colors duration-200 hover:bg-black hover:text-white"
+                style={{
+                  background: 'transparent',
+                  color: '#000',
+                  border: '1px solid #d0d0d0',
+                  borderRadius: 8,
+                  padding: '13px 26px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                }}
+              >
+                Ver modelos →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* ── COLUMNA DERECHA — moto ── */}
+        <div
+          className="order-1 lg:order-2 relative flex flex-col items-center justify-center pt-24 lg:pt-0 px-4"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          <div
-            className="absolute inset-0 ken-burns"
+          <img
+            key={idx}
+            src={slide.image}
+            alt={`${slide.brand} ${slide.model}`}
+            className={phase === 'out' ? 'hero-img-out' : 'hero-img-in'}
             style={{
-              backgroundImage: `url('${slide.image}')`,
-              backgroundSize: 'contain',
-              backgroundPosition: 'right center',
-              backgroundRepeat: 'no-repeat',
+              width: '90%',
+              maxWidth: 580,
+              maxHeight: '52svh',
+              objectFit: 'contain',
+              objectPosition: 'center',
+              display: 'block',
+              margin: '0 auto',
             }}
           />
-        </motion.div>
-      </AnimatePresence>
 
-      {/* Acento de color por slide */}
-      <motion.div
-        key={`accent-${currentSlide}`}
-        className="absolute inset-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.18 }}
-        transition={{ duration: 1.2 }}
-        style={{
-          background: `radial-gradient(circle at 80% 50%, ${slide.accent}, transparent 60%)`,
-        }}
-      />
-
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 z-[1]" />
-
-      {/* Slide Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`content-${currentSlide}`}
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-xl"
-            >
-              {/* Eyebrow: badge marca */}
-              <motion.div
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1, duration: 0.5 }}
-                className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm"
-              >
-                <div
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: slide.accent }}
-                />
-                <span
-                  className="text-[10px] font-display font-semibold tracking-[0.25em] uppercase"
-                  style={{ color: slide.accent }}
-                >
-                  {slide.brand}
-                </span>
-                <span className="text-white/30 text-[10px]">·</span>
-                <span className="text-white/60 text-[10px] font-display tracking-widest uppercase">
-                  {slide.model}
-                </span>
-              </motion.div>
-
-              {/* Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-black !text-white leading-[0.95] tracking-tight mb-4"
-                style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)' }}
-              >
-                {slide.headline}
-              </motion.h1>
-
-              {/* Subline */}
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-white/85 text-base md:text-lg leading-relaxed mb-2 font-medium"
-              >
-                {slide.subline}
-              </motion.p>
-
-              {/* Disponibilidad / contexto local */}
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35, duration: 0.5 }}
-                className="text-white/55 text-sm md:text-base leading-relaxed mb-6"
-              >
-                {slide.description}
-              </motion.p>
-
-              {/* Precio */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.45, duration: 0.4 }}
-                className="mb-7"
-              >
-                <p className="text-white/40 text-xs font-display tracking-widest uppercase mb-1">
-                  Desde
-                </p>
-                <div className="flex items-end gap-4 flex-wrap">
-                  <p className="font-display font-black !text-white text-3xl md:text-4xl leading-none">
-                    {displayPrice}
-                  </p>
-                  <p className="text-white/60 text-sm">
-                    o <span className="text-white font-semibold">{displayCuota}</span>
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* CTAs */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.55, duration: 0.5 }}
-                className="flex flex-wrap gap-3"
-              >
-                <a
-                  href={getBrandSalesWhatsApp(slide.brand)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button
-                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-display font-bold text-sm !text-white border border-transparent transition-all duration-300 hover:scale-[1.03] hover:brightness-110 shadow-xl active:scale-95"
-                    style={{
-                      background: '#25D366',
-                      boxShadow: `0 12px 35px rgba(37, 211, 102, 0.45)`,
-                    }}
-                  >
-                    <MessageCircle className="w-4 h-4" />
-                    Cotizar por WhatsApp
-                  </button>
-                </a>
-                <button
-                  onClick={() => navigate(`/marca/${slide.brand.toLowerCase()}`)}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-display font-semibold text-sm !text-white/85 border border-white/20 backdrop-blur-sm hover:bg-white/10 hover:!text-white transition-all duration-300"
-                >
-                  Ver {slide.brand}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </motion.div>
-
-              {/* Señales de confianza */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-7"
-              >
-                {[
-                  { icon: <MapPin className="w-3.5 h-3.5" />, label: '19 sucursales' },
-                  { icon: <BadgeCheck className="w-3.5 h-3.5" />, label: '6 marcas oficiales' },
-                  { icon: <Clock className="w-3.5 h-3.5" />, label: 'Crédito en 24h' },
-                ].map((item, i) => (
-                  <div key={item.label} className="flex items-center gap-2">
-                    {i > 0 && <span className="w-px h-4 bg-white/15 -ml-2.5 mr-0.5 hidden sm:block" />}
-                    <span className="text-[#25D366]">{item.icon}</span>
-                    <span className="text-white/75 text-xs sm:text-sm font-medium">{item.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Arrows */}
-      <button
-        onClick={prevSlide}
-        aria-label="Slide anterior"
-        className="absolute left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={nextSlide}
-        aria-label="Slide siguiente"
-        className="absolute right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-
-      {/* Bottom tabs */}
-      <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="flex items-end gap-0 border-t border-white/10">
-            {slides.map((s, i) => (
+          {/* Selector de modelos */}
+          <div className="flex justify-center" style={{ marginTop: 28, gap: 28, animation: 'fadeIn 0.4s both', animationDelay: '600ms' }}>
+            {SLIDES.map((s, i) => (
               <button
-                key={i}
-                onClick={() => goToSlide(i)}
-                className={`flex-1 text-left px-3 sm:px-5 py-3 sm:py-5 transition-all duration-300 border-t-2 relative overflow-hidden ${
-                  i === currentSlide
-                    ? 'border-t-white'
-                    : 'border-t-transparent hover:border-t-white/30'
-                }`}
+                key={s.model}
+                onClick={() => i !== idx && goTo(i)}
+                style={{
+                  fontFamily: T.body,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                  paddingBottom: 4,
+                  color: i === idx ? '#000' : '#bbb',
+                  fontWeight: i === idx ? 600 : 400,
+                  borderBottom: i === idx ? '2px solid #000' : '2px solid transparent',
+                  transition: 'color 0.2s',
+                }}
               >
-                {i === currentSlide && (
-                  <div className="absolute top-0 left-0 h-[2px] bg-white/20 w-full">
-                    <motion.div
-                      className="h-full bg-white"
-                      style={{ width: `${progress}%` }}
-                      transition={{ ease: 'linear' }}
-                    />
-                  </div>
-                )}
-                <span
-                  className="block text-[10px] font-display font-semibold tracking-[0.2em] uppercase mb-1 transition-colors duration-300"
-                  style={{ color: i === currentSlide ? s.accent : 'rgba(255,255,255,0.3)' }}
-                >
-                  {s.brand}
-                </span>
-                <span
-                  className={`block text-sm font-display font-bold transition-colors duration-300 ${
-                    i === currentSlide ? '!text-white' : '!text-white/40'
-                  }`}
-                >
-                  {s.model}
-                </span>
+                {s.brand}
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-28 right-8 z-20 hidden lg:flex flex-col items-center gap-2"
+      {/* ── FRANJA INFERIOR — señales de confianza ── */}
+      <div
+        className="hidden lg:flex absolute bottom-0 left-0 right-0 items-center"
+        style={{ borderTop: `1px solid #f0f0f0`, padding: '16px 80px', gap: 40 }}
       >
-        <span className="text-white/25 text-[9px] font-display tracking-[0.25em] uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity }}
-          className="w-[18px] h-7 border border-white/15 rounded-full flex justify-center pt-1.5"
-        >
-          <div className="w-0.5 h-1.5 bg-white/40 rounded-full" />
-        </motion.div>
-      </motion.div>
+        {['19 sucursales', '6 marcas oficiales', 'Crédito en 24h'].map((item, i) => (
+          <span key={item} className="flex items-center" style={{ gap: 40 }}>
+            {i > 0 && <span style={{ width: 1, height: 14, background: '#e0e0e0', marginRight: 40 }} />}
+            <span style={{ fontSize: 12, color: '#aaa' }}>{item}</span>
+          </span>
+        ))}
+      </div>
     </section>
   );
 }
