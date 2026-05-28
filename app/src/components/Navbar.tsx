@@ -47,13 +47,22 @@ export default function Navbar() {
 
   useEffect(() => {
     if (location.pathname === '/' && location.state?.targetSection) {
-      setTimeout(() => {
-        const element = document.querySelector(location.state.targetSection);
+      const target = location.state.targetSection as string;
+      let tries = 0;
+      let timer: ReturnType<typeof setTimeout>;
+      // Polling: las secciones del Home son lazy (Suspense), pueden no
+      // existir aún cuando llegamos. Reintentamos hasta que aparezcan.
+      const tryScroll = () => {
+        const element = document.querySelector(target);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
+          window.history.replaceState({}, '');
+        } else if (tries++ < 40) {
+          timer = setTimeout(tryScroll, 100);
         }
-      }, 100);
-      window.history.replaceState({}, '')
+      };
+      timer = setTimeout(tryScroll, 120);
+      return () => clearTimeout(timer);
     }
   }, [location]);
 
