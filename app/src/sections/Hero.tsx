@@ -1,8 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle, MapPin, BadgeCheck, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { getBrandSalesWhatsApp } from '@/lib/config';
+import { motorcycles } from '@/data/motorcycles';
+
+// Precio y cuota tomados del catálogo (fuente única) para que el hero
+// siempre coincida con la ficha de cada moto.
+const fmtCOP = (n: number) =>
+  new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+const cuotaMensual = (precio: number) =>
+  Math.round((precio * (0.0126 * Math.pow(1.0126, 36))) / (Math.pow(1.0126, 36) - 1));
 
 interface Slide {
   id: number;
@@ -51,7 +59,7 @@ const slides: Slide[] = [
     model: 'Gixxer SF 250',
     headline: 'SPORT DE VERDAD',
     subline: 'Carenado completo, motor 250cc refrigerado por aceite, ABS en ambas ruedas.',
-    description: 'Atendida por Kevin Hinestroza y nuestro equipo Suzuki certificado.',
+    description: 'Concesionario Suzuki autorizado en el Eje Cafetero, con servicio técnico y repuestos originales.',
     price: '$19.990.000',
     fromMonth: '$420.000/mes',
     accent: '#1a73e8',
@@ -70,6 +78,11 @@ export default function Hero() {
   const SLIDE_DURATION = 7000;
 
   const slide = slides[currentSlide];
+
+  // Precio real desde el catálogo (fallback al hardcodeado si no se encuentra)
+  const motoData = motorcycles.find((m) => m.model === slide.model);
+  const displayPrice = motoData ? fmtCOP(motoData.price) : slide.price;
+  const displayCuota = motoData ? `${fmtCOP(cuotaMensual(motoData.price))}/mes` : slide.fromMonth;
 
   useEffect(() => {
     setProgress(0);
@@ -246,10 +259,10 @@ export default function Hero() {
                 </p>
                 <div className="flex items-end gap-4 flex-wrap">
                   <p className="font-display font-black !text-white text-3xl md:text-4xl leading-none">
-                    {slide.price}
+                    {displayPrice}
                   </p>
                   <p className="text-white/60 text-sm">
-                    o <span className="text-white font-semibold">{slide.fromMonth}</span>
+                    o <span className="text-white font-semibold">{displayCuota}</span>
                   </p>
                 </div>
               </motion.div>
@@ -284,6 +297,26 @@ export default function Hero() {
                   Ver {slide.brand}
                   <ArrowRight className="w-4 h-4" />
                 </button>
+              </motion.div>
+
+              {/* Señales de confianza */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-7"
+              >
+                {[
+                  { icon: <MapPin className="w-3.5 h-3.5" />, label: '19 sucursales' },
+                  { icon: <BadgeCheck className="w-3.5 h-3.5" />, label: '6 marcas oficiales' },
+                  { icon: <Clock className="w-3.5 h-3.5" />, label: 'Crédito en 24h' },
+                ].map((item, i) => (
+                  <div key={item.label} className="flex items-center gap-2">
+                    {i > 0 && <span className="w-px h-4 bg-white/15 -ml-2.5 mr-0.5 hidden sm:block" />}
+                    <span className="text-[#25D366]">{item.icon}</span>
+                    <span className="text-white/75 text-xs sm:text-sm font-medium">{item.label}</span>
+                  </div>
+                ))}
               </motion.div>
             </motion.div>
           </AnimatePresence>

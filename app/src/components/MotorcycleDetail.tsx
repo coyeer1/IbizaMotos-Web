@@ -194,7 +194,7 @@ export default function MotorcycleDetail({ motorcycle, isOpen, onClose }: Motorc
   };
 
   const whatsappMessage = `Hola, estoy interesado en la ${motorcycle.brand} ${motorcycle.model}. ¿Podrían darme más información?`;
-  const whatsappUrl = `https://wa.me/573214567890?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = `https://wa.me/573052884546?text=${encodeURIComponent(whatsappMessage)}`;
 
   if (!isOpen) return null;
 

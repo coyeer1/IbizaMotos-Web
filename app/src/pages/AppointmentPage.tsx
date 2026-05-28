@@ -289,7 +289,7 @@ export default function AppointmentPage() {
               </button>
               <button onClick={() => {
                 const msg = `Hola, acabo de agendar una cita:\nServicio: ${serviceInfo?.label}\nFecha: ${selectedDate ? formatDate(selectedDate) : ''} a las ${selectedTime}\nNombre: ${form.name}`;
-                window.open(`https://wa.me/573214567890?text=${encodeURIComponent(msg)}`, '_blank');
+                window.open(`https://wa.me/573052884546?text=${encodeURIComponent(msg)}`, '_blank');
               }} className="flex-1 bg-[#25D366] text-white font-black py-3 text-sm uppercase border-2 border-[#25D366] hover:bg-[#1db954] transition-colors">
                 WhatsApp
               </button>

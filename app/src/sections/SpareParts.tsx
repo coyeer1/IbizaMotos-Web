@@ -3,7 +3,7 @@ import { Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { brands } from '@/data/motorcycles';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { getBrandPartsWhatsApp } from '@/lib/config';
+import { getBrandPartsWhatsApp, getWhatsAppUrl } from '@/lib/config';
 
 export default function SpareParts() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -106,7 +106,7 @@ export default function SpareParts() {
               Contamos con un amplio catálogo. Contáctanos y te ayudamos a encontrar exactamente lo que buscas.
             </p>
             <a
-              href="https://wa.me/573214567890?text=Hola, busco un repuesto específico"
+              href={getWhatsAppUrl('Hola, busco un repuesto específico')}
               target="_blank"
               rel="noopener noreferrer"
             >
