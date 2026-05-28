@@ -1,7 +1,22 @@
 import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Award, ShieldAlert, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { useNavigate } from 'react-router-dom';
+
+// ─── Tokens (alineados con el hero) ───────────────────────────────────────
+const T = {
+  text: '#000000',
+  muted: '#999999',
+  border: '#e8e8e8',
+  hairline: '#f0f0f0',
+  pill: '#f5f5f5',
+  red: '#E31937',
+  display: "'Bebas Neue', sans-serif",
+  body: "'DM Sans', sans-serif",
+};
+
+// helper para el stagger de entrada interno
+const anim = (delayMs: number, dur = 0.5, name = 'fadeUp') =>
+  ({ animation: `${name} ${dur}s both`, animationDelay: `${delayMs}ms` } as React.CSSProperties);
 
 const servicesList = [
   {
@@ -42,8 +57,13 @@ const servicesList = [
   },
 ];
 
+const stats = [
+  { Icon: MapPin, value: '19', label: 'Sucursales' },
+  { Icon: Award, value: '6', label: 'Marcas' },
+  { Icon: Star, value: '8', label: 'Ciudades' },
+];
+
 export default function Services() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const navigate = useNavigate();
 
   const goToAppointment = (serviceId: string) => {
@@ -51,178 +71,207 @@ export default function Services() {
   };
 
   return (
-    <section id="servicios" className="py-24 bg-gray-50 relative overflow-hidden" ref={ref}>
-      {/* Decorative blobs */}
-      <div className="absolute top-1/4 -right-32 w-[500px] h-[500px] bg-ibiza-red/6 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-32 w-[400px] h-[400px] bg-ibiza-red/4 rounded-full blur-[130px] pointer-events-none" />
-      {/* Container with background image for the new aesthetic */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section
+      id="servicios"
+      className="py-24 bg-white"
+      style={{ fontFamily: T.body, color: T.text }}
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
 
-        {/* Modernized Service Section */}
-        <div className="relative rounded-[2.5rem] overflow-hidden mb-24 border border-white/10 shadow-2xl">
-          {/* Background Image & Overlay */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-60 mix-blend-overlay" />
-          <div className="absolute inset-0 bg-gradient-to-r from-ibiza-black via-ibiza-black/70 to-ibiza-black/30" />
+        {/* ── Encabezado editorial ── */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
+          <div className="max-w-xl">
+            {/* Eyebrow */}
+            <span
+              className="inline-block uppercase"
+              style={{
+                ...anim(0),
+                fontSize: 11,
+                letterSpacing: '0.15em',
+                color: '#999',
+                fontWeight: 500,
+              }}
+            >
+              Taller Mecánico
+            </span>
 
-          <div className="relative p-8 md:p-12 lg:p-16">
+            <h2
+              style={{
+                ...anim(80, 0.55),
+                fontFamily: T.display,
+                fontSize: 'clamp(44px, 6vw, 68px)',
+                lineHeight: 0.95,
+                letterSpacing: '-1px',
+                marginTop: 12,
+                color: T.text,
+              }}
+            >
+              Servicio <span style={{ color: T.red }}>Técnico</span>
+            </h2>
 
-            {/* Header Area */}
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
+            <p
+              style={{
+                ...anim(160),
+                fontSize: 15,
+                color: '#666',
+                fontWeight: 300,
+                lineHeight: 1.7,
+                maxWidth: 440,
+                marginTop: 18,
+              }}
+            >
+              Talleres autorizados Suzuki, Honda, Bajaj, AKT, Hero y Vento en toda
+              la red. Repuestos originales, diagnóstico honesto y precio justo.
+            </p>
+          </div>
 
-              <div className="max-w-xl">
-                <div className={`mb-6 flex items-center gap-3 transition-all duration-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <div className="w-8 h-8 rounded-lg bg-ibiza-red flex items-center justify-center">
-                    <Wrench className="w-4 h-4 text-white" />
-                  </div>
-                  <p className="text-gray-400 font-display font-semibold text-sm tracking-widest uppercase">
-                    Taller Mecánico
-                  </p>
-                </div>
-
-                <h2 className={`font-display font-bold text-5xl md:text-6xl text-white mb-6 uppercase transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <span className="text-ibiza-red">Servicio</span> Técnico
-                </h2>
-
-                <p className={`text-gray-300 text-lg leading-relaxed transition-all duration-600 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                  Talleres autorizados Suzuki, Honda, Bajaj, AKT, Hero y Vento en toda
-                  la red. Repuestos originales, diagnóstico honesto y precio justo.
-                </p>
-              </div>
-
-              {/* Stats / Badges — datos verificables */}
-              <div className={`flex flex-wrap lg:flex-nowrap gap-6 xl:gap-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-                <div className="flex flex-col items-center group">
-                  <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
-                    <MapPin className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">19</span>
-                  </div>
-                  <span className="text-sm text-gray-400 font-medium">Sucursales</span>
-                </div>
-                <div className="flex flex-col items-center group">
-                  <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
-                    <Award className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">6</span>
-                  </div>
-                  <span className="text-sm text-gray-400 font-medium">Marcas</span>
-                </div>
-                <div className="flex flex-col items-center group">
-                  <div className="w-24 h-24 rounded-full border border-ibiza-red/40 bg-ibiza-black/40 backdrop-blur-md flex flex-col items-center justify-center text-white mb-3 group-hover:border-ibiza-red group-hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all duration-500">
-                    <Star className="w-6 h-6 text-gray-400 group-hover:text-ibiza-red mb-1 transition-colors" />
-                    <span className="font-display font-bold text-2xl">8</span>
-                  </div>
-                  <span className="text-sm text-gray-400 font-medium">Ciudades</span>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Service Cards Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
-              {servicesList.map((service, index) => (
+          {/* Stats — datos verificables, light */}
+          <div className="flex flex-wrap lg:flex-nowrap gap-4 sm:gap-6" style={anim(240)}>
+            {stats.map(({ Icon, value, label }, i) => (
+              <div
+                key={label}
+                className="group flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1"
+                style={anim(280 + i * 60)}
+              >
                 <div
-                  key={service.id}
-                  className={`group bg-ibiza-black/60 backdrop-blur-lg border border-white/5 rounded-2xl p-6 hover:border-ibiza-red/30 hover:bg-ibiza-black/80 transition-all duration-500 flex flex-col justify-between opacity-0 animate-slide-up ${isVisible ? '' : ''}`}
-                  style={{ animationDelay: `${0.4 + index * 0.1}s`, animationFillMode: 'forwards' }}
+                  className="flex flex-col items-center justify-center transition-colors duration-200 group-hover:border-[#E31937]"
+                  style={{
+                    width: 92,
+                    height: 92,
+                    borderRadius: 999,
+                    border: `1px solid ${T.border}`,
+                    background: T.pill,
+                    marginBottom: 10,
+                  }}
                 >
-                  <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-display font-bold text-white group-hover:text-white transition-colors">
-                        {service.title}
-                      </h3>
-                      <service.Icon className="w-6 h-6 text-gray-500 group-hover:text-white transition-colors" />
-                    </div>
-
-                    <p className="text-sm text-gray-400 mb-5 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <div className="flex items-center gap-6 text-sm mb-6">
-                      <span className="text-ibiza-red font-semibold">
-                        {service.price}
-                      </span>
-                      <div className="flex items-center gap-1.5 text-gray-400">
-                        <Clock className="w-4 h-4" />
-                        <span>{service.time}</span>
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <p className="text-[10px] font-semibold tracking-widest text-gray-500 mb-3 uppercase">
-                        Incluye:
-                      </p>
-                      <ul className="flex flex-wrap gap-x-4 gap-y-2">
-                        {service.includes.map((item, i) => (
-                          <li key={i} className="flex items-center gap-2 text-xs text-gray-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-ibiza-red" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 mt-auto">
-                    <Button
-                      onClick={() => goToAppointment(service.id)}
-                      className="w-full bg-ibiza-black border border-ibiza-red/50 text-white hover:bg-ibiza-red hover:border-ibiza-red shadow-[0_0_15px_rgba(255,0,0,0.15)] hover:shadow-[0_0_20px_rgba(255,0,0,0.3)] transition-all h-11 text-sm rounded-xl font-semibold"
-                    >
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Agendar Cita
-                    </Button>
-                  </div>
+                  <Icon className="w-5 h-5 mb-1 text-[#bbb] transition-colors duration-200 group-hover:text-[#E31937]" />
+                  <span style={{ fontFamily: T.display, fontSize: 30, lineHeight: 1, color: T.text }}>
+                    {value}
+                  </span>
                 </div>
-              ))}
-            </div>
-
+                <span style={{ fontSize: 12, color: '#999', fontWeight: 500 }}>{label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
+        {/* ── Grid de servicios — tarjetas light editorial ── */}
+        <div className="grid md:grid-cols-2 gap-6 mb-24">
+          {servicesList.map((service, index) => (
+            <div
+              key={service.id}
+              className="group flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.12)]"
+              style={{
+                ...anim(index * 80),
+                background: '#fff',
+                border: `1px solid ${T.border}`,
+                borderRadius: 14,
+                padding: 28,
+              }}
+            >
+              <div>
+                <div className="flex justify-between items-start mb-3">
+                  <h3
+                    style={{
+                      fontFamily: T.display,
+                      fontSize: 26,
+                      lineHeight: 1.05,
+                      letterSpacing: '-0.3px',
+                      color: T.text,
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <service.Icon className="w-5 h-5 text-[#bbb] transition-colors duration-200 group-hover:text-[#E31937] shrink-0 ml-3" />
+                </div>
 
-        {/* Below modernization: Kept the rest of the existing sections */}
+                <p style={{ fontSize: 14, color: '#666', fontWeight: 300, lineHeight: 1.65, marginBottom: 18 }}>
+                  {service.description}
+                </p>
 
-        {/* CTA Section */}
-        <div id="appointment-form" className="grid lg:grid-cols-2 gap-8">
-          {/* Contact Info */}
+                <div className="flex items-center gap-5 mb-6">
+                  <span style={{ color: T.red, fontWeight: 600, fontSize: 14 }}>{service.price}</span>
+                  <span className="flex items-center gap-1.5" style={{ color: '#999', fontSize: 13 }}>
+                    <Clock className="w-3.5 h-3.5" />
+                    {service.time}
+                  </span>
+                </div>
+
+                <div className="mb-6">
+                  <p
+                    className="uppercase"
+                    style={{ fontSize: 10, letterSpacing: '0.15em', color: '#aaa', fontWeight: 600, marginBottom: 12 }}
+                  >
+                    Incluye
+                  </p>
+                  <ul className="flex flex-wrap gap-x-4 gap-y-2">
+                    {service.includes.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2" style={{ fontSize: 12, color: '#555' }}>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#E31937] shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <Button
+                onClick={() => goToAppointment(service.id)}
+                className="w-full h-11 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black hover:scale-[1.02] active:scale-95 transition-transform duration-200 shadow-none"
+              >
+                <Calendar className="w-4 h-4 mr-2" />
+                Agendar Cita
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        {/* ── CTA — dos columnas light ── */}
+        <div id="appointment-form" className="grid lg:grid-cols-2 gap-6">
+
+          {/* Información de contacto */}
           <div
-            className={`bg-white rounded-3xl p-8 border border-gray-200 shadow-sm text-gray-900 opacity-0 animate-slide-up ${isVisible ? '' : ''
-              }`}
-            style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
+            style={{
+              ...anim(0),
+              background: '#fff',
+              border: `1px solid ${T.border}`,
+              borderRadius: 16,
+              padding: 32,
+            }}
           >
-            <h3 className="font-display font-bold text-2xl mb-6">Ven directo al taller</h3>
+            <h3
+              style={{
+                fontFamily: T.display,
+                fontSize: 30,
+                lineHeight: 1,
+                letterSpacing: '-0.3px',
+                color: T.text,
+                marginBottom: 24,
+              }}
+            >
+              Ven directo al taller
+            </h3>
 
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-ibiza-gold" />
+            <div className="space-y-5 mb-8">
+              {[
+                { Icon: MapPin, title: 'Sede Principal', l1: 'Cra 7 #25-41 Parque Lago Uribe, Pereira', l2: 'Risaralda · Eje Cafetero' },
+                { Icon: Clock, title: 'Horario de atención', l1: 'Lunes a Sábado: 8:00 AM - 6:00 PM', l2: 'Domingos: Solo emergencias' },
+                { Icon: Phone, title: 'Llámanos', l1: '(+57) 305 288 4546', l2: 'WhatsApp disponible' },
+              ].map(({ Icon, title, l1, l2 }) => (
+                <div key={title} className="flex items-start gap-4">
+                  <div
+                    className="flex items-center justify-center flex-shrink-0"
+                    style={{ width: 40, height: 40, borderRadius: 10, background: T.pill }}
+                  >
+                    <Icon className="w-5 h-5 text-[#E31937]" />
+                  </div>
+                  <div>
+                    <p style={{ fontWeight: 600, fontSize: 15, color: T.text }}>{title}</p>
+                    <p style={{ fontSize: 14, color: '#666' }}>{l1}</p>
+                    <p style={{ fontSize: 12, color: '#999' }}>{l2}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold">Sede Principal</p>
-                  <p className="text-gray-600 text-sm">Cra 7 #25-41 Parque Lago Uribe, Pereira</p>
-                  <p className="text-gray-500 text-xs">Risaralda · Eje Cafetero</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-5 h-5 text-ibiza-gold" />
-                </div>
-                <div>
-                  <p className="font-semibold">Horario de atención</p>
-                  <p className="text-gray-600 text-sm">Lunes a Sábado: 8:00 AM - 6:00 PM</p>
-                  <p className="text-gray-500 text-xs">Domingos: Solo emergencias</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-ibiza-gold" />
-                </div>
-                <div>
-                  <p className="font-semibold">Llámanos</p>
-                  <p className="text-gray-600 text-sm">(+57) 305 288 4546</p>
-                  <p className="text-gray-500 text-xs">WhatsApp disponible</p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <a
@@ -230,21 +279,38 @@ export default function Services() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="w-full bg-ibiza-red hover:bg-ibiza-gold hover:text-white text-white font-display font-semibold rounded-full py-6">
+              <Button className="w-full bg-[#E31937] text-white hover:bg-[#E31937] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
                 <Phone className="w-5 h-5 mr-2" />
                 Escribir por WhatsApp
               </Button>
             </a>
           </div>
 
-          {/* Quick Appointment CTA */}
+          {/* Cita online — tarjeta light (sin gradiente) */}
           <div
-            className={`bg-gradient-to-br from-ibiza-red to-ibiza-gold rounded-3xl p-8 !text-white opacity-0 animate-slide-up flex flex-col justify-between`}
-            style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }}
+            className="flex flex-col justify-between"
+            style={{
+              ...anim(80),
+              background: T.pill,
+              border: `1px solid ${T.border}`,
+              borderRadius: 16,
+              padding: 32,
+            }}
           >
             <div>
-              <h3 className="font-display font-bold text-2xl mb-2">Agenda tu cita online</h3>
-              <p className="!text-white/80 mb-8">
+              <h3
+                style={{
+                  fontFamily: T.display,
+                  fontSize: 30,
+                  lineHeight: 1,
+                  letterSpacing: '-0.3px',
+                  color: T.text,
+                  marginBottom: 10,
+                }}
+              >
+                Agenda tu cita online
+              </h3>
+              <p style={{ fontSize: 14, color: '#666', fontWeight: 300, lineHeight: 1.7, marginBottom: 28 }}>
                 Elige el servicio, la fecha y la hora que mejor te quede. Sin llamadas, sin esperas. Confirmamos en menos de 30 minutos.
               </p>
               <div className="space-y-3 mb-8">
@@ -254,21 +320,30 @@ export default function Services() {
                   { id: 'frenos', Icon: Star, label: 'Frenos y suspensión' },
                   { id: 'motor', Icon: Cpu, label: 'Reparación de motor' },
                 ].map(({ id, Icon, label }) => (
-                  <Button
+                  <button
                     key={id}
                     onClick={() => goToAppointment(id)}
-                    variant="secondary"
-                    className="w-full bg-ibiza-black/20 hover:bg-ibiza-black/40 !text-white border-0 rounded-xl py-5 justify-start transition-all"
+                    className="w-full flex items-center transition-colors duration-200 hover:border-[#000]"
+                    style={{
+                      background: '#fff',
+                      border: `1px solid ${T.border}`,
+                      borderRadius: 10,
+                      padding: '14px 16px',
+                      fontSize: 14,
+                      fontWeight: 500,
+                      color: T.text,
+                      textAlign: 'left',
+                    }}
                   >
-                    <Icon className="w-5 h-5 mr-3 shrink-0" />
+                    <Icon className="w-5 h-5 mr-3 shrink-0 text-[#E31937]" />
                     {label}
-                  </Button>
+                  </button>
                 ))}
               </div>
             </div>
             <Button
               onClick={() => navigate('/citas')}
-              className="w-full bg-ibiza-black text-white hover:bg-ibiza-black/80 font-display font-bold rounded-xl h-12"
+              className="w-full bg-black text-white hover:bg-black hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none"
             >
               <Calendar className="w-4 h-4 mr-2" />
               Ver disponibilidad completa
@@ -279,4 +354,3 @@ export default function Services() {
     </section>
   );
 }
-

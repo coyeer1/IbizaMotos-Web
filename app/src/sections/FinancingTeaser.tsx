@@ -29,33 +29,34 @@ export default function FinancingTeaser() {
   return (
     <section
       ref={ref}
-      className="py-20 bg-white relative overflow-hidden"
+      className="py-24 bg-white relative overflow-hidden font-body"
+      style={{ color: '#000' }}
     >
-      {/* Sutil acento rojo en esquina */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-ibiza-red/5 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* ── Header ── */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-ibiza-red flex items-center justify-center">
-              <Calculator className="w-4 h-4 text-white" />
-            </div>
-            <p className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase">
-              Financiamiento
-            </p>
-          </div>
-          <h2 className="font-display font-black text-4xl md:text-5xl text-gray-900 mb-4 leading-tight">
-            TU MOTO,{' '}
-            <span className="text-ibiza-red">A TU RITMO</span>
+          <p
+            className="font-body uppercase"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
+          >
+            Financiamiento
+          </p>
+          <h2
+            className="font-display mt-3 leading-[0.92]"
+            style={{ fontSize: 'clamp(40px, 6vw, 64px)', letterSpacing: '-1px', color: '#000' }}
+          >
+            TU MOTO, <span style={{ color: '#E31937' }}>A TU RITMO</span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-sm">
+          <p
+            className="mx-auto mt-5"
+            style={{ fontSize: 15, color: '#666', fontWeight: 300, lineHeight: 1.65, maxWidth: 460 }}
+          >
             Trabajamos con 8 financieras aliadas para que consigas la tasa más baja
             y la cuota que se ajusta a tu bolsillo.
           </p>
@@ -74,10 +75,13 @@ export default function FinancingTeaser() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isVisible ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.15 + i * 0.07 }}
-              className="bg-gray-50 border border-gray-200 rounded-2xl p-5 text-center"
+              className="text-center transition-transform duration-200 hover:scale-[1.02]"
+              style={{ background: '#f5f5f5', border: '1px solid #e8e8e8', borderRadius: 12, padding: '22px 18px' }}
             >
-              <p className="font-display font-black text-3xl text-ibiza-red">{s.value}</p>
-              <p className="text-[11px] text-gray-500 mt-1">{s.label}</p>
+              <p className="font-display leading-none" style={{ fontSize: 38, letterSpacing: '-0.5px', color: '#000' }}>
+                {s.value}
+              </p>
+              <p style={{ fontSize: 11, color: '#999', marginTop: 6, lineHeight: 1.4 }}>{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -89,7 +93,10 @@ export default function FinancingTeaser() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
         >
-          <p className="text-[10px] font-bold text-gray-400 tracking-widest uppercase text-center mb-5">
+          <p
+            className="uppercase text-center mb-6"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#aaa' }}
+          >
             Financieras aliadas
           </p>
           <div className="flex flex-wrap justify-center items-center gap-3">
@@ -99,9 +106,11 @@ export default function FinancingTeaser() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.35, delay: 0.3 + i * 0.05 }}
-                className="flex items-center justify-center bg-white border border-gray-200 rounded-xl px-4 py-3 hover:border-ibiza-red/40 hover:shadow-md cursor-pointer transition-all duration-200"
-                style={{ minWidth: 'clamp(60px, 15vw, 80px)' }}
+                className="flex items-center justify-center bg-white cursor-pointer transition-all duration-200 hover:scale-[1.02]"
+                style={{ minWidth: 'clamp(60px, 15vw, 80px)', border: '1px solid #e8e8e8', borderRadius: 10, padding: '12px 16px' }}
                 onClick={() => navigate(`/financiamiento?financiera=${f.id}`)}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#000'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; }}
                 title={`Financiar con ${f.name}`}
               >
                 <div style={{ width: f.w, height: f.h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -127,13 +136,14 @@ export default function FinancingTeaser() {
         >
           <button
             onClick={() => navigate('/financiamiento')}
-            className="inline-flex items-center gap-3 bg-ibiza-red hover:bg-red-700 text-white font-display font-bold px-10 py-4 rounded-2xl text-base active:scale-95 transition-all duration-200 shadow-[0_4px_24px_rgba(215,38,61,0.30)] group"
+            className="inline-flex items-center gap-3 text-white font-body active:scale-95 transition-transform duration-200 hover:scale-[1.02] group"
+            style={{ background: '#000', borderRadius: 8, padding: '14px 30px', fontSize: 15, fontWeight: 600 }}
           >
-            <Calculator className="w-5 h-5" />
+            <Calculator className="w-[18px] h-[18px]" />
             Calcular mi cuota
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+            <ArrowRight className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-200" />
           </button>
-          <p className="text-gray-400 text-xs mt-3">
+          <p style={{ fontSize: 12, color: '#aaa', marginTop: 14 }}>
             Simulación gratuita · Sin compromiso · Tasas vigentes 2026
           </p>
         </motion.div>

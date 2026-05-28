@@ -17,24 +17,11 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const location = useLocation();
-  // Navbar siempre en modo claro/opaco (texto oscuro). El Home ahora tiene
-  // hero blanco, así que no usamos el modo transparente con texto blanco.
-  const lightNav = true || isScrolled;
   const navigate = useNavigate();
   const { openSearch } = useSearch();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (href: string) => {
     if (location.pathname !== '/') {
@@ -72,11 +59,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          lightNav
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-2'
-            : 'bg-transparent py-4'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f0f0f0] py-2.5 font-body"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -92,7 +75,7 @@ export default function Navbar() {
               <img
                 src="/Logo-Ibiza-motos.png"
                 alt="Ibiza Motos"
-                className={`transition-all duration-300 object-contain ${lightNav ? 'h-12' : 'h-14'}`}
+                className="h-12 object-contain transition-transform duration-200 group-hover:scale-[1.03]"
               />
             </a>
 
@@ -103,14 +86,12 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative font-medium text-sm transition-colors duration-300 group ${
-                      lightNav
-                        ? 'text-gray-600 hover:text-ibiza-red'
-                        : '!text-white/90 hover:!text-white'
-                    } ${location.pathname === link.href ? '!text-ibiza-red' : ''}`}
+                    className={`relative font-body font-medium text-sm text-[#666] hover:text-ibiza-red transition-colors duration-200 group ${
+                      location.pathname === link.href ? '!text-ibiza-red' : ''
+                    }`}
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-red transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ) : (
                   <a
@@ -120,14 +101,10 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className={`relative font-medium text-sm transition-colors duration-300 group ${
-                      lightNav
-                        ? 'text-gray-600 hover:text-ibiza-red'
-                        : '!text-white/90 hover:!text-white'
-                    }`}
+                    className="relative font-body font-medium text-sm text-[#666] hover:text-ibiza-red transition-colors duration-200 group"
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-red transition-all duration-300 group-hover:w-full" />
                   </a>
                 )
               )}
@@ -139,15 +116,11 @@ export default function Navbar() {
               <button
                 onClick={openSearch}
                 title="Buscar moto (Ctrl+K)"
-                className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-all duration-300 text-sm font-medium ${
-                  lightNav
-                    ? 'border-gray-200 text-gray-500 hover:border-ibiza-red/40 hover:text-ibiza-red bg-gray-50 hover:bg-ibiza-red/5'
-                    : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white bg-white/5 hover:bg-white/10'
-                }`}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#e8e8e8] bg-[#f5f5f5] text-[#999] hover:border-ibiza-red/40 hover:text-ibiza-red transition-colors duration-200 text-sm font-body font-medium"
               >
                 <Search className="w-4 h-4" />
                 <span className="hidden xl:inline text-xs">Buscar</span>
-                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 rounded bg-black/10 font-mono">Ctrl K</kbd>
+                <kbd className="hidden xl:inline text-[10px] px-1.5 py-0.5 rounded bg-black/5 font-mono">Ctrl K</kbd>
               </button>
               <a
                 href={getGeneralWhatsApp()}
@@ -155,7 +128,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
               >
                 <Button
-                  className="bg-gradient-ibiza hover:opacity-90 !text-white font-display font-semibold px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-glow"
+                  className="bg-black hover:bg-black !text-white font-body font-semibold text-sm px-6 py-2 rounded-lg transition-transform duration-200 hover:scale-[1.02] active:scale-95"
                 >
                   <Phone className="w-4 h-4 mr-2" />
                   Cotizar Ahora
@@ -165,21 +138,21 @@ export default function Navbar() {
 
             {/* Mobile Search Button */}
             <button
-              className="lg:hidden p-2"
+              className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
               onClick={openSearch}
             >
-              <Search className={`w-5 h-5 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
+              <Search className="w-5 h-5" />
             </button>
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2"
+              className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
-                <X className={`w-6 h-6 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className={`w-6 h-6 ${lightNav ? 'text-gray-700' : '!text-white'}`} />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -201,14 +174,14 @@ export default function Navbar() {
             <div className="mb-8 flex justify-center">
               <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" className="h-16 object-contain" />
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
               {navLinks.map((link, index) =>
                 link.page ? (
                   <Link
                     key={link.name}
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg font-display font-semibold text-gray-700 hover:text-ibiza-red transition-colors py-2 border-b border-gray-100"
+                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-red transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}
@@ -221,7 +194,7 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-lg font-display font-semibold text-gray-700 hover:text-ibiza-red transition-colors py-2 border-b border-gray-100"
+                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-red transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}
@@ -236,7 +209,7 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 className="block"
               >
-                <Button className="w-full bg-gradient-ibiza !text-white font-display font-semibold py-3 rounded-full">
+                <Button className="w-full bg-black hover:bg-black !text-white font-body font-semibold py-3 rounded-lg transition-transform duration-200 hover:scale-[1.02] active:scale-95">
                   <Phone className="w-5 h-5 mr-2" />
                   Cotizar Ahora
                 </Button>

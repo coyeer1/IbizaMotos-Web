@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Phone, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { brands } from '@/data/motorcycles';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { getBrandPartsWhatsApp, getWhatsAppUrl } from '@/lib/config';
@@ -9,25 +8,27 @@ export default function SpareParts() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section id="repuestos" className="py-24 bg-gray-50 relative" ref={ref}>
+    <section id="repuestos" className="py-24 bg-white relative font-body" style={{ color: '#000' }} ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-14">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase mb-4"
+            className="uppercase"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
           >
-            🔧 Repuestos Originales
+            Repuestos Originales
           </motion.p>
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-4"
+            className="font-display mt-3 leading-[0.92]"
+            style={{ fontSize: 'clamp(40px, 6vw, 64px)', letterSpacing: '-1px', color: '#000' }}
           >
             REPUESTOS Y ACCESORIOS
           </motion.h2>
@@ -36,14 +37,16 @@ export default function SpareParts() {
             initial={{ scaleX: 0 }}
             animate={isVisible ? { scaleX: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-24 h-1 bg-gradient-ibiza mx-auto rounded-full"
+            className="mx-auto mt-5"
+            style={{ width: 56, height: 2, background: '#E31937', borderRadius: 2 }}
           />
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-gray-500 mt-4 max-w-xl mx-auto"
+            className="mx-auto mt-6"
+            style={{ fontSize: 15, color: '#666', fontWeight: 300, lineHeight: 1.65, maxWidth: 480 }}
           >
             Repuestos originales para todas las marcas que distribuimos. Toca tu marca y habla directo con el encargado.
           </motion.p>
@@ -56,10 +59,13 @@ export default function SpareParts() {
           transition={{ duration: 0.6, delay: 0.45 }}
           className="mb-14"
         >
-          <p className="text-center text-xs font-bold text-gray-400 tracking-widest uppercase mb-6">
+          <p
+            className="text-center uppercase mb-7"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#aaa' }}
+          >
             Selecciona tu marca para consultar
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {brands.map((brand, i) => (
               <motion.a
                 key={brand.id}
@@ -69,7 +75,10 @@ export default function SpareParts() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isVisible ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.3, delay: 0.5 + i * 0.06 }}
-                className="group flex items-center gap-3 px-6 py-4 bg-white rounded-2xl border border-gray-100 hover:border-ibiza-red/30 hover:shadow-[0_4px_20px_rgba(215,38,61,0.10)] transition-all duration-300"
+                className="group flex items-center gap-3 bg-white transition-all duration-200 hover:scale-[1.02]"
+                style={{ border: '1px solid #e8e8e8', borderRadius: 10, padding: '14px 22px' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#000'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; }}
               >
                 <img
                   src={brand.logo}
@@ -78,10 +87,13 @@ export default function SpareParts() {
                   decoding="async"
                   className="h-8 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                 />
-                <span className="text-sm font-semibold text-gray-500 group-hover:text-gray-900 transition-colors duration-300">
+                <span
+                  className="font-body transition-colors duration-200"
+                  style={{ fontSize: 14, fontWeight: 600, color: '#888' }}
+                >
                   {brand.name}
                 </span>
-                <MessageCircle className="w-4 h-4 text-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <MessageCircle className="w-4 h-4 text-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </motion.a>
             ))}
           </div>
@@ -93,30 +105,34 @@ export default function SpareParts() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl overflow-hidden border border-gray-200"
+          className="relative overflow-hidden"
+          style={{ background: '#000', borderRadius: 16 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-ibiza-red to-ibiza-gold opacity-90" />
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+          {/* Hairline accent rule */}
+          <div className="absolute top-0 left-0" style={{ width: 56, height: 3, background: '#E31937' }} />
 
-          <div className="relative p-8 md:p-12 text-center !text-white">
-            <h3 className="font-display font-bold text-2xl md:text-3xl mb-4">
-              ¿No encuentras el repuesto que necesitas?
+          <div className="relative p-10 md:p-14 text-center">
+            <h3
+              className="font-display"
+              style={{ fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.5px', lineHeight: 1.0, color: '#fff' }}
+            >
+              ¿NO ENCUENTRAS EL <span style={{ color: '#E31937' }}>REPUESTO</span> QUE NECESITAS?
             </h3>
-            <p className="!text-white/90 mb-6 max-w-xl mx-auto">
+            <p
+              className="mx-auto mt-5 mb-8"
+              style={{ fontSize: 15, color: 'rgba(255,255,255,0.7)', fontWeight: 300, lineHeight: 1.65, maxWidth: 480 }}
+            >
               Contamos con un amplio catálogo. Contáctanos y te ayudamos a encontrar exactamente lo que buscas.
             </p>
             <a
               href={getWhatsAppUrl('Hola, busco un repuesto específico')}
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center font-body transition-transform duration-200 hover:scale-[1.02] active:scale-95"
+              style={{ background: '#fff', color: '#000', borderRadius: 8, padding: '13px 28px', fontSize: 14, fontWeight: 600 }}
             >
-              <Button
-                size="lg"
-                className="bg-ibiza-black text-white hover:bg-white hover:text-ibiza-black font-display font-semibold rounded-full transition-all duration-300"
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Solicitar Repuesto
-              </Button>
+              <Phone className="w-[18px] h-[18px] mr-2" />
+              Solicitar Repuesto
             </a>
           </div>
         </motion.div>

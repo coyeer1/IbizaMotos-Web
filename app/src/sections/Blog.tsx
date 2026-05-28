@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Clock, ArrowRight, Eye, Heart, ChevronRight } from 'lucide-react';
+import { Clock, ArrowRight, Eye, Heart, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { posts, categoryStyles } from '@/data/blogPosts';
@@ -27,41 +27,38 @@ export default function Blog() {
   const getLikeCount = (post: any) => post.likes + (metrics[post.id]?.likes_count || 0);
 
   return (
-    <section id="blog" ref={ref} className="py-24 bg-white overflow-hidden relative">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-ibiza-red/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-slate-200/60 rounded-full blur-[120px] pointer-events-none" />
-
+    <section id="blog" ref={ref} className="py-28 md:py-32 bg-white overflow-hidden relative" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
         <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10"
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-ibiza-red flex items-center justify-center">
-                <BookOpen className="w-4 h-4 text-white" />
-              </div>
-              <p className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase">
-                Blog & Noticias
-              </p>
-            </div>
-            <h2 className="font-display font-bold text-4xl md:text-5xl text-gray-900">
-              TIPS Y <span className="text-ibiza-red">NOVEDADES</span>
+            <span
+              className="inline-block uppercase mb-4"
+              style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
+            >
+              Blog &amp; Noticias
+            </span>
+            <h2
+              className="font-display text-5xl md:text-6xl text-black"
+              style={{ lineHeight: 0.95, letterSpacing: '-0.5px' }}
+            >
+              TIPS Y <span style={{ color: '#E31937' }}>NOVEDADES</span>
             </h2>
           </div>
-          <p className="text-gray-500 max-w-xs text-sm">
+          <p className="max-w-xs text-sm" style={{ color: '#777', fontWeight: 300, lineHeight: 1.65 }}>
             Guías, consejos y noticias del mundo de las motos en el Eje Cafetero.
           </p>
         </motion.div>
 
         {/* Category filter tabs */}
         <motion.div
-          className="flex flex-wrap gap-2 mb-10"
+          className="flex flex-wrap gap-2 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -70,11 +67,12 @@ export default function Blog() {
             <button
               key={cat}
               onClick={() => { setActiveCategory(cat); setShowAll(false); }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all duration-300 ${
+              className="text-xs font-semibold tracking-wide transition-all duration-200 hover:scale-[1.02]"
+              style={
                 activeCategory === cat
-                  ? 'bg-ibiza-red text-white shadow-[0_0_15px_rgba(227,25,55,0.3)]'
-                  : 'bg-gray-50 text-gray-500 border border-gray-200 hover:text-gray-700 hover:border-gray-300'
-              }`}
+                  ? { padding: '8px 18px', borderRadius: 8, background: '#000', color: '#fff', border: '1px solid #000' }
+                  : { padding: '8px 18px', borderRadius: 8, background: '#fff', color: '#888', border: '1px solid #e8e8e8' }
+              }
             >
               {cat}
               {cat !== 'Todos' && (
@@ -93,29 +91,38 @@ export default function Blog() {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
             onClick={() => navigate(`/blog/${featured.id}`)}
-            className="group cursor-pointer mb-8"
+            className="group cursor-pointer mb-10"
           >
-            <div className="relative rounded-[2rem] overflow-hidden h-[28rem] md:h-[36rem] shadow-2xl shadow-ibiza-red/10 ring-1 ring-gray-900/5 group-hover:shadow-ibiza-red/20 transition-all duration-500">
+            <div
+              className="relative rounded-2xl overflow-hidden h-[28rem] md:h-[36rem] transition-shadow duration-300"
+              style={{ border: '1px solid #e8e8e8', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
+            >
               <img
                 src={featured.image}
                 alt={featured.title}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-              <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10">
-                <div className="flex items-center gap-3 mb-3">
+              <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12">
+                <div className="flex items-center gap-3 mb-4">
                   <span className={`text-[10px] font-bold tracking-widest px-3 py-1.5 rounded-full border uppercase ${categoryStyles[featured.category]}`}>
                     {featured.category}
                   </span>
-                  <span className="bg-ibiza-red text-white text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest">
+                  <span
+                    className="text-white text-[9px] font-bold px-2.5 py-1 rounded-full uppercase"
+                    style={{ background: '#E31937', letterSpacing: '0.12em' }}
+                  >
                     Destacado
                   </span>
                 </div>
 
-                <h3 className="font-display font-black text-3xl md:text-5xl text-white leading-[1.1] mb-5 max-w-2xl group-hover:text-white transition-colors duration-300 drop-shadow-sm">
+                <h3
+                  className="font-display text-4xl md:text-6xl text-white mb-6 max-w-2xl"
+                  style={{ lineHeight: 0.98, letterSpacing: '-0.5px' }}
+                >
                   {featured.title}
                 </h3>
 
@@ -133,7 +140,7 @@ export default function Blog() {
         )}
 
         {/* Posts grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayPosts
             .filter(p => activeCategory !== 'Todos' || p.id !== featured.id)
             .map((post, i) => (
@@ -143,49 +150,61 @@ export default function Blog() {
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
                 onClick={() => navigate(`/blog/${post.id}`)}
-                className="group cursor-pointer bg-white rounded-3xl p-3 border border-gray-100 hover:border-ibiza-red/20 hover:shadow-2xl hover:shadow-ibiza-red/5 hover:-translate-y-2 transition-all duration-500"
+                className="group cursor-pointer bg-white rounded-xl p-3 hover:-translate-y-1.5 transition-all duration-300"
+                style={{ border: '1px solid #e8e8e8' }}
+                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.08)'; e.currentTarget.style.borderColor = '#d8d8d8'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = '#e8e8e8'; }}
               >
                 {/* Thumbnail */}
-                <div className="relative h-48 md:h-52 overflow-hidden rounded-2xl mb-5">
+                <div className="relative h-48 md:h-52 overflow-hidden rounded-lg mb-5">
                   <img
                     src={post.image}
                     alt={post.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className={`text-[9px] font-bold tracking-widest px-2.5 py-1 rounded-full border uppercase ${categoryStyles[post.category]}`}>
                       {post.category}
                     </span>
                   </div>
                   <div className="absolute top-3 right-3 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                    <Clock className="w-3 h-3 text-white/50" />
-                    <span className="text-[10px] text-white/50">{post.readTime}</span>
+                    <Clock className="w-3 h-3 text-white/60" />
+                    <span className="text-[10px] text-white/60">{post.readTime}</span>
                   </div>
                 </div>
 
                 <div className="px-3 pb-3">
                   <div className="flex items-center gap-3 mb-3">
-                    <p className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">{post.date}</p>
+                    <p className="text-[11px] font-medium uppercase tracking-wider" style={{ color: '#aaa' }}>{post.date}</p>
                   </div>
-                  <h4 className="font-display font-bold text-lg text-gray-900 leading-snug mb-3 group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
+                  <h4
+                    className="font-display text-xl mb-3 line-clamp-2 transition-colors duration-200"
+                    style={{ color: '#000', lineHeight: 1.1, letterSpacing: '-0.2px' }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#E31937'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#000'; }}
+                  >
                     {post.title}
                   </h4>
-                  <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4">
+                  <p className="text-xs leading-relaxed line-clamp-2 mb-4" style={{ color: '#888' }}>
                     {post.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between mt-4 pt-4" style={{ borderTop: '1px solid #f0f0f0' }}>
                     <div className="flex gap-2">
                       {post.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[10px] uppercase tracking-wide font-semibold text-gray-500 bg-gray-50 border border-gray-200/60 px-2 py-1 rounded-md">
+                        <span
+                          key={tag}
+                          className="text-[10px] uppercase tracking-wide font-semibold px-2 py-1 rounded-md"
+                          style={{ color: '#888', background: '#f5f5f5', border: '1px solid #f0f0f0' }}
+                        >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center gap-3 text-[10px] text-gray-600">
+                    <div className="flex items-center gap-3 text-[10px]" style={{ color: '#999' }}>
                       <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{getViewCount(post) >= 1000 ? `${(getViewCount(post)/1000).toFixed(1)}k` : getViewCount(post)}</span>
                       <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{getLikeCount(post)}</span>
                     </div>
@@ -198,14 +217,15 @@ export default function Blog() {
         {/* Show more */}
         {filtered.length > 5 && !showAll && (
           <motion.div
-            className="text-center mt-8"
+            className="text-center mt-12"
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ delay: 0.5 }}
           >
             <button
               onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl border border-gray-200 text-gray-500 text-sm font-bold hover:border-ibiza-red/30 hover:text-ibiza-red transition-all duration-300 group"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 group hover:bg-black hover:text-white hover:border-black"
+              style={{ border: '1px solid #d0d0d0', color: '#000', background: 'transparent' }}
             >
               Ver todos los artículos
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

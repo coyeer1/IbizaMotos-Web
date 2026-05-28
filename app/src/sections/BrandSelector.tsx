@@ -4,15 +4,8 @@ import { MessageCircle, ChevronLeft, ChevronRight, ArrowRight, Play, X } from 'l
 import { brands, motorcycles as allMotos } from '@/data/motorcycles';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 
-const BRAND_COLORS: Record<string, string> = {
-  'Suzuki':    '#1a73e8',
-  'Vento':     '#e53935',
-  'Hero':      '#003087',
-  'Honda':     '#cc0000',
-  'Bajaj':     '#003087',
-  'AKT':       '#e53935',
-  'Good Kidz': '#2e7d32',
-};
+// Acento monocromático único — alineado con el hero (un solo rojo).
+const ACCENT = '#E31937';
 
 const BRAND_SLIDES: Record<string, string> = {
   'Suzuki':    '/brand-slides/suzuki.jpg',
@@ -122,7 +115,7 @@ export default function BrandSelector() {
   const handleNext = () => { goTo(active + 1); resetTimer(); };
 
   const brand = brandData[active];
-  const color = BRAND_COLORS[brand.name] ?? '#d7263d';
+  const color = ACCENT;
   const waUrl = getBrandSalesWhatsApp(brand.name);
   const videoId = BRAND_VIDEOS[brand.name] ?? null;
 
@@ -138,8 +131,8 @@ export default function BrandSelector() {
   return (
     <section
       id="motos"
-      className="relative w-full overflow-hidden select-none bg-[#f4f4f4]"
-      style={{ height: 'clamp(520px, 85vh, 820px)' }}
+      className="relative w-full overflow-hidden select-none bg-[#f5f5f5] font-body"
+      style={{ height: 'clamp(520px, 85vh, 820px)', color: '#000' }}
       onMouseEnter={() => { isPaused.current = true; }}
       onMouseLeave={() => { isPaused.current = false; }}
     >
@@ -172,7 +165,7 @@ export default function BrandSelector() {
       <div
         className="absolute inset-0 pointer-events-none z-10"
         style={{
-          background: 'linear-gradient(to right, #f4f4f4 36%, rgba(244,244,244,0.85) 54%, rgba(244,244,244,0.1) 75%, transparent 90%)',
+          background: 'linear-gradient(to right, #f5f5f5 36%, rgba(245,245,245,0.85) 54%, rgba(245,245,245,0.1) 75%, transparent 90%)',
         }}
       />
 
@@ -185,16 +178,17 @@ export default function BrandSelector() {
       {/* ── Top bar ── */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between pl-8 pr-6 sm:pl-12 sm:pr-10 pt-7 z-20">
         <div>
-          <span className="text-gray-400 text-[10px] uppercase tracking-[0.25em] font-semibold">
+          <span className="uppercase" style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}>
             Marcas oficiales
           </span>
-          <p className="text-gray-400 text-xs font-medium mt-0.5">
+          <p style={{ fontSize: 12, color: '#aaa', marginTop: 2 }}>
             {active + 1} / {brandData.length}
           </p>
         </div>
         <button
           onClick={() => navigate('/marca/todas')}
-          className="flex items-center gap-1.5 text-gray-400 hover:text-gray-700 text-xs font-semibold transition-colors"
+          className="flex items-center gap-1.5 transition-colors duration-200 hover:text-black"
+          style={{ fontSize: 12, fontWeight: 600, color: '#999' }}
         >
           Ver todo <ArrowRight className="w-3.5 h-3.5" />
         </button>
@@ -228,14 +222,15 @@ export default function BrandSelector() {
         {/* Brand name */}
         <h2
           key={`name-${active}`}
-          className="font-display font-black text-gray-900 leading-none mb-2 animate-[fadeUp_0.45s_ease_forwards]"
-          style={{ fontSize: 'clamp(2.8rem, 8vw, 5rem)' }}
+          className="font-display leading-none mb-2 animate-[fadeUp_0.45s_ease_forwards]"
+          style={{ fontSize: 'clamp(2.8rem, 8vw, 5rem)', letterSpacing: '-1px', color: '#000' }}
         >
           {brand.name}
         </h2>
         <p
           key={`count-${active}`}
-          className="text-gray-400 text-sm font-medium mb-7 animate-[fadeUp_0.5s_ease_forwards]"
+          className="mb-7 animate-[fadeUp_0.5s_ease_forwards]"
+          style={{ fontSize: 14, color: '#aaa', fontWeight: 400 }}
         >
           {brand.count} {brand.count === 1 ? 'modelo disponible' : 'modelos disponibles'}
         </p>
@@ -244,8 +239,8 @@ export default function BrandSelector() {
         <div className="flex items-center gap-3 pointer-events-auto flex-wrap">
           <button
             onClick={() => navigate(`/marca/${brand.id}`)}
-            className="flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-200 active:scale-95 shadow-md"
-            style={{ background: color }}
+            className="flex items-center gap-2 text-white transition-transform duration-200 active:scale-95 hover:scale-[1.02]"
+            style={{ background: '#000', borderRadius: 8, padding: '11px 22px', fontSize: 14, fontWeight: 600 }}
           >
             Ver catálogo <ArrowRight className="w-4 h-4" />
           </button>
@@ -253,7 +248,8 @@ export default function BrandSelector() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1db954] transition-colors active:scale-95 shadow-md"
+            className="flex items-center gap-2 text-white bg-[#25D366] hover:bg-[#1db954] transition-colors duration-200 active:scale-95"
+            style={{ borderRadius: 8, padding: '11px 22px', fontSize: 14, fontWeight: 600 }}
           >
             <MessageCircle className="w-4 h-4" />
             Consultar
@@ -262,18 +258,25 @@ export default function BrandSelector() {
             <button
               key={`video-${active}`}
               onClick={openVideo}
-              className="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full border-2 transition-all duration-200 active:scale-95 hover:text-white animate-[fadeUp_0.55s_ease_forwards]"
+              className="flex items-center gap-2 transition-all duration-200 active:scale-95 animate-[fadeUp_0.55s_ease_forwards]"
               style={{
-                borderColor: color,
-                color: color,
+                border: '1px solid #d0d0d0',
+                color: '#000',
+                background: 'transparent',
+                borderRadius: 8,
+                padding: '11px 22px',
+                fontSize: 14,
+                fontWeight: 600,
               }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = color;
+                (e.currentTarget as HTMLButtonElement).style.background = '#000';
                 (e.currentTarget as HTMLButtonElement).style.color = '#fff';
+                (e.currentTarget as HTMLButtonElement).style.borderColor = '#000';
               }}
               onMouseLeave={e => {
                 (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
-                (e.currentTarget as HTMLButtonElement).style.color = color;
+                (e.currentTarget as HTMLButtonElement).style.color = '#000';
+                (e.currentTarget as HTMLButtonElement).style.borderColor = '#d0d0d0';
               }}
             >
               <Play className="w-4 h-4 fill-current" />
@@ -290,11 +293,14 @@ export default function BrandSelector() {
             key={b.id}
             onClick={() => { goTo(i); resetTimer(); }}
             aria-label={`Ver ${b.name}`}
-            className="shrink-0 flex items-center justify-center rounded-xl bg-white transition-all duration-300 shadow-sm hover:shadow-md"
+            className="shrink-0 flex items-center justify-center bg-white transition-all duration-300 hover:opacity-100"
             style={{
               width: i === active ? 68 : 52,
               height: i === active ? 42 : 34,
-              outline: i === active ? `2.5px solid ${color}` : '2px solid transparent',
+              borderRadius: 8,
+              border: '1px solid #e8e8e8',
+              outline: i === active ? `2px solid ${color}` : '2px solid transparent',
+              outlineOffset: -1,
               opacity: i === active ? 1 : 0.55,
             }}
           >
@@ -313,8 +319,8 @@ export default function BrandSelector() {
         onClick={handlePrev}
         aria-label="Anterior marca"
         className="absolute right-16 bottom-7 z-20
-                   w-10 h-10 rounded-full bg-white shadow border border-gray-200
-                   flex items-center justify-center text-gray-600 hover:text-gray-900
+                   w-10 h-10 rounded-full bg-white border border-[#e8e8e8]
+                   flex items-center justify-center text-gray-500 hover:text-black hover:border-black
                    active:scale-90 transition-all duration-200"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -323,15 +329,15 @@ export default function BrandSelector() {
         onClick={handleNext}
         aria-label="Siguiente marca"
         className="absolute right-4 bottom-7 z-20
-                   w-10 h-10 rounded-full bg-white shadow border border-gray-200
-                   flex items-center justify-center text-gray-600 hover:text-gray-900
+                   w-10 h-10 rounded-full bg-white border border-[#e8e8e8]
+                   flex items-center justify-center text-gray-500 hover:text-black hover:border-black
                    active:scale-90 transition-all duration-200"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
 
       {/* ── Progress bar ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gray-200 z-30">
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#e8e8e8] z-30">
         <div
           key={active}
           className="h-full animate-[progressBar_4.5s_linear_forwards]"

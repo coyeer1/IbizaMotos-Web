@@ -93,9 +93,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0a0a0a] !text-white relative overflow-hidden">
-      {/* Decorative top border */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-ibiza-red to-transparent" />
+    <footer className="bg-[#0a0a0a] !text-white relative overflow-hidden font-body">
+      {/* Hairline top border */}
+      <div className="h-px w-full bg-white/10" />
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -117,7 +117,7 @@ export default function Footer() {
               />
             </div>
             
-            <p className="!text-white/80 mb-6 leading-relaxed text-sm">
+            <p className="!text-white/60 mb-6 leading-relaxed text-sm font-light">
               19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
               Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento.
             </p>
@@ -130,7 +130,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-ibiza-red hover:bg-ibiza-red/20 hover:shadow-[0_0_15px_rgba(227,25,55,0.3)] transition-all duration-300"
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-ibiza-red hover:bg-ibiza-red transition-all duration-200 hover:scale-[1.08]"
                   title={social.name}
                 >
                   {social.icon}
@@ -146,8 +146,8 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="font-display font-bold text-lg mb-6 flex items-center gap-2">
-              <span className="w-8 h-[2px] bg-ibiza-red rounded-full" />
+            <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
+              <span className="w-7 h-px bg-ibiza-red" />
               Navegación
             </h3>
             <ul className="space-y-3">
@@ -159,9 +159,9 @@ export default function Footer() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="!text-white/80 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
+                    className="text-white/60 hover:!text-ibiza-red transition-colors duration-200 flex items-center gap-2 group text-sm"
                   >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-ibiza-red" />
+                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-red" />
                     {link.name}
                   </a>
                 </li>
@@ -176,8 +176,8 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="font-display font-bold text-lg mb-6 flex items-center gap-2">
-              <span className="w-8 h-[2px] bg-ibiza-red rounded-full" />
+            <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
+              <span className="w-7 h-px bg-ibiza-red" />
               Marcas
             </h3>
             <ul className="space-y-3">
@@ -189,9 +189,9 @@ export default function Footer() {
                       e.preventDefault();
                       scrollToSection('#catalogo');
                     }}
-                    className="!text-white/80 hover:text-ibiza-red transition-colors flex items-center gap-2 group text-sm"
+                    className="text-white/60 hover:!text-ibiza-red transition-colors duration-200 flex items-center gap-2 group text-sm"
                   >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all text-ibiza-red" />
+                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-red" />
                     {brand.name}
                   </a>
                 </li>
@@ -206,36 +206,36 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="font-display font-bold text-lg mb-6 flex items-center gap-2">
-              <span className="w-8 h-[2px] bg-ibiza-red rounded-full" />
+            <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
+              <span className="w-7 h-px bg-ibiza-red" />
               Contacto
             </h3>
             <ul className="space-y-4 mb-8">
-              <li className="flex items-start gap-3 !text-white/80 text-sm">
+              <li className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-5 h-5 text-ibiza-red flex-shrink-0 mt-0.5" />
                 <span>Cra 7 #25-41 Parque Lago Uribe, Pereira</span>
               </li>
-              <li className="flex items-center gap-3 !text-white/80 text-sm">
+              <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Phone className="w-5 h-5 text-ibiza-red flex-shrink-0" />
-                <a href="tel:+573052884546" className="hover:text-white transition-colors">(+57) 305 288 4546</a>
+                <a href="tel:+573052884546" className="hover:text-white transition-colors duration-200">(+57) 305 288 4546</a>
               </li>
-              <li className="flex items-center gap-3 !text-white/80 text-sm">
+              <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Mail className="w-5 h-5 text-ibiza-red flex-shrink-0" />
-                <a href="mailto:ibizachat321@gmail.com" className="hover:text-white transition-colors">ibizachat321@gmail.com</a>
+                <a href="mailto:ibizachat321@gmail.com" className="hover:text-white transition-colors duration-200">ibizachat321@gmail.com</a>
               </li>
             </ul>
 
             {/* Newsletter */}
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-              <h4 className="font-display font-semibold text-sm mb-2">📬 Newsletter</h4>
-              <p className="text-white/60 text-xs mb-3">Recibe ofertas exclusivas y novedades</p>
+            <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+              <p className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-1">Newsletter</p>
+              <p className="text-white/60 text-xs mb-3 font-light">Recibe ofertas exclusivas y novedades</p>
               {isSubscribed ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="bg-green-500/20 text-green-400 px-4 py-3 rounded-xl text-sm text-center"
+                  className="bg-white/10 text-white px-4 py-3 rounded-lg text-sm text-center"
                 >
-                  ¡Gracias por suscribirte! 🎉
+                  ¡Gracias por suscribirte!
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -244,13 +244,13 @@ export default function Footer() {
                     placeholder="Tu correo electrónico"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-ibiza-black/50 border-white/10 !text-white placeholder:!text-white/50 rounded-xl text-sm"
+                    className="bg-black/40 border-white/10 !text-white placeholder:!text-white/40 rounded-lg text-sm"
                     required
                   />
                   <Button
                     type="submit"
                     size="icon"
-                    className="bg-ibiza-red hover:bg-ibiza-gold hover:text-white rounded-xl flex-shrink-0"
+                    className="bg-ibiza-red hover:bg-ibiza-red !text-white rounded-lg flex-shrink-0 transition-transform duration-200 hover:scale-[1.05] active:scale-95"
                   >
                     <Send className="w-4 h-4" />
                   </Button>
@@ -265,19 +265,19 @@ export default function Footer() {
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="!text-white/50 text-xs text-center md:text-left">
+            <p className="!text-white/40 text-xs text-center md:text-left">
               © {new Date().getFullYear()} Ibiza Motos del Eje Cafetero. Todos los derechos reservados.
             </p>
             <div className="flex gap-6 text-xs">
-              <Link to="/privacidad" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/privacidad" className="!text-white/40 hover:!text-white transition-colors duration-200 flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Política de privacidad
               </Link>
-              <Link to="/terminos" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/terminos" className="!text-white/40 hover:!text-white transition-colors duration-200 flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Términos de servicio
               </Link>
-              <Link to="/eliminacion-datos" className="!text-white/50 hover:!text-white transition-colors flex items-center gap-1">
+              <Link to="/eliminacion-datos" className="!text-white/40 hover:!text-white transition-colors duration-200 flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Eliminar mis datos
               </Link>
