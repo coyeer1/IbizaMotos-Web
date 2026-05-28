@@ -14,6 +14,20 @@
   will-change: transform;
 }
 
+/* Float suave para la moto insignia del hero de marca */
+@keyframes bike-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+.bike-float {
+  animation: bike-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bike-float { animation: none; }
+  .ken-burns  { animation: none; }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

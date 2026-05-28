@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, Heart, ChevronLeft, ChevronRight, MessageCircle, User, Phone, MapPin } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, Heart, ChevronLeft, ChevronRight, MessageCircle, User, Phone, MapPin, ZoomIn } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -63,7 +63,7 @@ export default function MotorcyclePage() {
     const [selectedColor, setSelectedColor] = useState<string>('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
-    const [activeTab, setActiveTab] = useState<'specs' | 'features'>('specs');
+    const [lightboxZoomed, setLightboxZoomed] = useState(false);
     const [showQuoteModal, setShowQuoteModal] = useState(false);
     const [quoteForm, setQuoteForm] = useState({ name: '', phone: '', city: '' });
     const [quoteSubmitted, setQuoteSubmitted] = useState(false);
@@ -165,15 +165,6 @@ export default function MotorcyclePage() {
         { label: 'TRANSMISIÓN', value: motorcycle.specifications.transmission, icon: specIcons['TRANSMISIÓN'] },
         { label: 'PESO', value: motorcycle.specifications.weight, icon: specIcons['PESO'] },
         { label: 'CAPACIDAD', value: motorcycle.specifications.fuelCapacity, icon: specIcons['CAPACIDAD'] },
-    ];
-
-    const features = [
-        'Sistema de frenos de alto rendimiento',
-        'Iluminación LED full',
-        'Panel digital multifunción',
-        'Inyección electrónica',
-        'Garantía extendida de 2 años',
-        'Servicio técnico autorizado',
     ];
 
     return (
@@ -339,15 +330,34 @@ export default function MotorcyclePage() {
                     </motion.div>
 
                     {/* Right: Image showcase */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
-                        className="lg:w-3/5 relative"
+                        className="lg:w-3/5 relative w-full"
                     >
-                        {/* Main image */}
+                        {/* Main image — moto flotante con glow, sin caja vacía */}
                         <div className="relative">
-                            <div className="relative bg-gradient-to-br from-zinc-900/50 to-transparent rounded-3xl p-8 border border-white/5">
+                            <div className="relative flex items-center justify-center overflow-hidden">
+
+                                {/* Glow de marca detrás de la moto */}
+                                <div
+                                    className="absolute w-[80%] h-[72%] rounded-full blur-[120px] pointer-events-none"
+                                    style={{ backgroundColor: `rgba(${brandGlow}, 0.28)` }}
+                                />
+                                {/* Watermark del modelo detrás */}
+                                <span
+                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-black uppercase whitespace-nowrap pointer-events-none select-none leading-none"
+                                    style={{
+                                        fontSize: 'clamp(4rem, 14vw, 13rem)',
+                                        color: 'rgba(255,255,255,0.035)',
+                                        letterSpacing: '-0.04em',
+                                    }}
+                                    aria-hidden
+                                >
+                                    {motorcycle.model.split(' ')[0]}
+                                </span>
+
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={`${selectedColor}-${currentImageIndex}`}
@@ -355,14 +365,18 @@ export default function MotorcyclePage() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                         transition={{ duration: 0.4 }}
-                                        className="relative h-[200px] sm:h-[300px] md:h-[400px] flex items-center justify-center cursor-zoom-in"
+                                        className="relative z-10 h-[260px] sm:h-[360px] md:h-[460px] w-full flex items-center justify-center cursor-zoom-in"
                                         onClick={() => setEnlargedImage(currentImage)}
                                     >
                                         <img
                                             src={currentImage}
                                             alt={`${motorcycle.brand} ${motorcycle.model}`}
-                                            className="max-h-full max-w-full object-contain filter drop-shadow-[0_30px_50px_rgba(0,0,0,0.8)]"
+                                            className="max-h-full max-w-full object-contain filter drop-shadow-[0_35px_55px_rgba(0,0,0,0.85)]"
                                         />
+                                        {/* Hint de zoom */}
+                                        <span className="absolute bottom-1 right-1 sm:bottom-3 sm:right-3 inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-white/70 bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
+                                            <ZoomIn className="w-3.5 h-3.5" /> Ampliar
+                                        </span>
                                     </motion.div>
                                 </AnimatePresence>
 
@@ -371,8 +385,7 @@ export default function MotorcyclePage() {
                                     <>
                                         <button
                                             onClick={prevImage}
-                                            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all hover:text-white"
-                                            style={{ ['--hover-bg' as string]: brandColor }}
+                                            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all"
                                             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; }}
                                             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''; (e.currentTarget as HTMLButtonElement).style.borderColor = ''; }}
                                         >
@@ -380,7 +393,7 @@ export default function MotorcyclePage() {
                                         </button>
                                         <button
                                             onClick={nextImage}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all"
+                                            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all"
                                             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; }}
                                             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''; (e.currentTarget as HTMLButtonElement).style.borderColor = ''; }}
                                         >
@@ -397,13 +410,13 @@ export default function MotorcyclePage() {
                                         <button
                                             key={idx}
                                             onClick={() => setCurrentImageIndex(idx)}
-                                            className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${currentImageIndex === idx
+                                            className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 bg-white/[0.03] ${currentImageIndex === idx
                                                 ? 'scale-105'
                                                 : 'border-white/10 opacity-50 hover:opacity-80 hover:border-white/20'
                                                 }`}
                                             style={currentImageIndex === idx ? { borderColor: brandColor, boxShadow: `0 0 15px rgba(${brandGlow}, 0.4)` } : {}}
                                         >
-                                            <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-cover" />
+                                            <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-contain p-1" />
                                         </button>
                                     ))}
                                 </div>
@@ -413,96 +426,95 @@ export default function MotorcyclePage() {
                 </div>
             </section>
 
-            {/* ── SPECS SECTION ── */}
+            {/* ── FICHA TÉCNICA ── */}
             <section className="py-16 border-t border-white/5" style={{ backgroundColor: brandBg }}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                    {/* Tab selector */}
-                    <div className="flex gap-2 mb-12 justify-center">
-                        <button
-                            onClick={() => setActiveTab('specs')}
-                            className={`px-8 py-3 rounded-full font-display font-bold text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === 'specs'
-                                ? 'text-white'
-                                : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
-                                }`}
-                            style={activeTab === 'specs' ? { backgroundColor: brandColor, boxShadow: `0 0 20px rgba(${brandGlow}, 0.3)` } : {}}
-                        >
-                            ⚙️ Especificaciones
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('features')}
-                            className={`px-8 py-3 rounded-full font-display font-bold text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === 'features'
-                                ? 'text-white'
-                                : 'bg-white/5 text-gray-400 border border-white/10 hover:bg-white/10'
-                                }`}
-                            style={activeTab === 'features' ? { backgroundColor: brandColor, boxShadow: `0 0 20px rgba(${brandGlow}, 0.3)` } : {}}
-                        >
-                            ✨ Características
-                        </button>
+                    {/* Header */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: 0.5 }}
+                        className="mb-10 flex items-end justify-between flex-wrap gap-4"
+                    >
+                        <div>
+                            <p className="text-[11px] font-bold tracking-[0.3em] uppercase mb-2" style={{ color: brandColor }}>Ficha técnica</p>
+                            <h2 className="font-display font-black text-3xl sm:text-4xl text-white">Especificaciones</h2>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300 font-medium">{motorcycle.category}</span>
+                            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300 font-medium">Modelo {motorcycle.year}</span>
+                        </div>
+                    </motion.div>
+
+                    {/* Specs destacadas: motor + potencia */}
+                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                        {specs.slice(0, 2).map((spec, idx) => (
+                            <motion.div
+                                key={spec.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-60px' }}
+                                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                                className="relative overflow-hidden rounded-2xl p-7 border"
+                                style={{ borderColor: `rgba(${brandGlow}, 0.25)`, background: `linear-gradient(135deg, rgba(${brandGlow}, 0.14) 0%, transparent 70%)` }}
+                            >
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-11 h-11 rounded-xl flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: brandColor }}>
+                                        {spec.icon}
+                                    </div>
+                                    <span className="text-[11px] font-bold text-white/50 tracking-widest uppercase">{spec.label}</span>
+                                </div>
+                                <p className="font-display font-black text-white text-2xl md:text-3xl leading-tight">{spec.value}</p>
+                            </motion.div>
+                        ))}
                     </div>
 
-                    <AnimatePresence mode="wait">
-                        {activeTab === 'specs' ? (
+                    {/* Resto de specs */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {specs.slice(2).map((spec, idx) => (
                             <motion.div
-                                key="specs"
+                                key={spec.label}
                                 initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-60px' }}
+                                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                                className="bg-white/[0.03] rounded-2xl p-5 border border-white/5 hover:border-white/15 transition-all duration-300"
                             >
-                                {specs.map((spec, idx) => (
-                                    <motion.div
-                                        key={spec.label}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.4, delay: idx * 0.08 }}
-                                        className="bg-white/[0.03] rounded-2xl p-6 border border-white/5 transition-all duration-300 group"
-                                        style={{ ['--brand-color' as string]: brandColor }}
-                                        onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `rgba(${brandGlow}, 0.25)`; }}
-                                        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = ''; }}
-                                    >
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <div
-                                                className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                                                style={{ backgroundColor: `rgba(${brandGlow}, 0.1)`, color: brandColor }}
-                                            >
-                                                {spec.icon}
-                                            </div>
-                                            <span className="text-[10px] font-bold text-gray-500 tracking-widest uppercase">
-                                                {spec.label}
-                                            </span>
-                                        </div>
-                                        <p className="font-display font-bold text-white text-lg md:text-xl">
-                                            {spec.value}
-                                        </p>
-                                    </motion.div>
-                                ))}
+                                <div className="flex items-center gap-2.5 mb-3">
+                                    <span style={{ color: brandColor }}>{spec.icon}</span>
+                                    <span className="text-[10px] font-bold text-gray-500 tracking-widest uppercase">{spec.label}</span>
+                                </div>
+                                <p className="font-display font-bold text-white text-base md:text-lg">{spec.value}</p>
                             </motion.div>
-                        ) : (
+                        ))}
+                    </div>
+
+                    {/* Respaldo del concesionario (honesto, igual para todas) */}
+                    <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3">
+                        {[
+                            { title: 'Concesionario autorizado', sub: `Marca ${motorcycle.brand} oficial` },
+                            { title: 'Garantía de fábrica', sub: 'Respaldo del fabricante' },
+                            { title: 'Financiación', sub: 'Cuotas a tu medida' },
+                            { title: 'Servicio técnico', sub: 'Repuestos originales' },
+                        ].map((item, idx) => (
                             <motion.div
-                                key="features"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                                key={item.title}
+                                initial={{ opacity: 0, y: 16 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                                className="flex items-start gap-3 bg-white/[0.02] rounded-2xl p-4 border border-white/5"
                             >
-                                {features.map((feature, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ duration: 0.4, delay: index * 0.08 }}
-                                        className="flex items-center gap-4 bg-white/[0.03] rounded-2xl p-5 border border-white/5 hover:border-green-500/20 transition-all duration-300"
-                                    >
-                                        <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0" />
-                                        <span className="text-gray-200 font-medium">{feature}</span>
-                                    </motion.div>
-                                ))}
+                                <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: brandColor }} />
+                                <div>
+                                    <p className="text-white font-display font-bold text-sm leading-tight">{item.title}</p>
+                                    <p className="text-gray-500 text-xs mt-0.5">{item.sub}</p>
+                                </div>
                             </motion.div>
-                        )}
-                    </AnimatePresence>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -732,15 +744,19 @@ export default function MotorcyclePage() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        onClick={() => setEnlargedImage(null)}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md cursor-zoom-out"
+                        onClick={() => { setEnlargedImage(null); setLightboxZoomed(false); }}
+                        className={`fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md ${lightboxZoomed ? 'overflow-auto' : 'cursor-zoom-out'}`}
                     >
                         <button
-                            onClick={() => setEnlargedImage(null)}
-                            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-ibiza-red text-white rounded-full transition-colors z-10"
+                            onClick={(e) => { e.stopPropagation(); setEnlargedImage(null); setLightboxZoomed(false); }}
+                            className="fixed top-6 right-6 p-2 bg-white/10 hover:bg-ibiza-red text-white rounded-full transition-colors z-20"
                         >
                             <X className="w-6 h-6" />
                         </button>
+                        {/* Hint */}
+                        <span className="fixed top-7 left-1/2 -translate-x-1/2 text-[11px] font-bold tracking-wider uppercase text-white/50 z-20 pointer-events-none">
+                            {lightboxZoomed ? 'Clic para reducir' : 'Clic en la imagen para hacer zoom'}
+                        </span>
                         <motion.img
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
@@ -748,8 +764,8 @@ export default function MotorcyclePage() {
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                             src={enlargedImage}
                             alt="Imagen Ampliada"
-                            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-                            onClick={(e) => e.stopPropagation()}
+                            className={`object-contain rounded-lg shadow-2xl transition-all duration-300 ${lightboxZoomed ? 'max-w-none w-auto h-auto scale-[1.8] cursor-zoom-out' : 'max-w-full max-h-[90vh] cursor-zoom-in'}`}
+                            onClick={(e) => { e.stopPropagation(); setLightboxZoomed(z => !z); }}
                         />
                     </motion.div>
                 )}

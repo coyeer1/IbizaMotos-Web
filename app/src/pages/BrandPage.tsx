@@ -18,7 +18,9 @@ export default function BrandPage() {
     const [selectedBrand, setSelectedBrand] = useState<string>('all');
 
     useEffect(() => {
-        const found = brands.find(b => b.name.toLowerCase() === brandId?.toLowerCase());
+        const found = brands.find(
+            b => b.slug === brandId?.toLowerCase() || b.name.toLowerCase() === brandId?.toLowerCase()
+        );
         setSelectedBrand(found ? found.name : 'all');
         window.scrollTo(0, 0);
     }, [brandId]);
@@ -66,50 +68,55 @@ export default function BrandPage() {
 
     const hasVideo = !!theme.heroVideoId;
 
+    // ── Moto insignia (flagship) de la marca ──────────────────────────────
+    const FLAGSHIP: Record<string, string> = {
+        Suzuki: 'Hayabusa',
+        Bajaj: 'Dominar 400 Volcano',
+        Honda: 'CB 300F',
+        Hero: 'XPulse 200 R 4V',
+        AKT: '250 R',
+        Vento: 'Alpina 300 EFI',
+    };
+    const brandMotos = allMotos.filter(m => m.brand === selectedBrand);
+    const flagship =
+        brandMotos.find(m => m.model === FLAGSHIP[selectedBrand]) ??
+        [...brandMotos]
+            .filter(m => !/tuk|3w|carpado|auto/i.test(m.model))
+            .sort((a, b) => b.price - a.price)[0] ??
+        brandMotos[0];
+    const flagshipImg = flagship?.images?.[0] ?? theme.slideImage;
+    const formatCOP = (n: number) =>
+        new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
+
     return (
         <div className="min-h-screen" style={{ backgroundColor: theme.bg }}>
 
-            {/* ─── HERO ──────────────────────────────────────────────────────── */}
-            <section className="relative w-full h-screen overflow-hidden">
+            {/* ─── HERO SPLIT PREMIUM ────────────────────────────────────────── */}
+            <section className="relative w-full min-h-[92vh] flex flex-col overflow-hidden">
 
-                {/* Fondo: video YouTube o imagen de marca */}
+                {/* Backdrop atmosférico: video o imagen de marca, oscurecido */}
                 {hasVideo ? (
                     <iframe
                         src={`https://www.youtube.com/embed/${theme.heroVideoId}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${theme.heroVideoId}&modestbranding=1&playsinline=1`}
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-50"
                         style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%' }}
                         frameBorder="0"
                         allow="autoplay; encrypted-media; fullscreen"
                     />
                 ) : (
                     <div
-                        className="absolute inset-0 bg-cover bg-center"
+                        className="absolute inset-0 bg-cover bg-center scale-110 opacity-30"
                         style={{ backgroundImage: `url(${theme.slideImage})` }}
                     />
                 )}
 
-                {/* Overlay de color de marca */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background: `linear-gradient(135deg, ${theme.bg}EE 0%, ${theme.bg}99 40%, transparent 70%, ${theme.bg}CC 100%)`,
-                    }}
-                />
-                {/* Gradiente inferior para que el texto sea legible */}
-                <div
-                    className="absolute inset-x-0 bottom-0 h-2/3"
-                    style={{
-                        background: `linear-gradient(to top, ${theme.bg} 0%, ${theme.bg}CC 30%, transparent 100%)`,
-                    }}
-                />
-                {/* Glow del color de la marca */}
-                <div
-                    className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[180px] pointer-events-none"
-                    style={{ backgroundColor: `rgba(${theme.glowRgb}, 0.12)` }}
-                />
+                {/* Capas: oscurecido lateral + glow radial de marca + base inferior */}
+                <div className="absolute inset-0" style={{ background: `linear-gradient(110deg, ${theme.bg} 0%, ${theme.bg}F2 42%, ${theme.bg}99 100%)` }} />
+                <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(115% 75% at 82% 48%, rgba(${theme.glowRgb}, 0.22) 0%, transparent 58%)` }} />
+                <div className="absolute inset-x-0 bottom-0 h-44" style={{ background: `linear-gradient(to top, ${theme.bg} 0%, transparent 100%)` }} />
 
                 {/* Botón volver */}
-                <div className="absolute top-6 left-4 sm:left-8 z-20">
+                <div className="absolute top-6 left-4 sm:left-8 z-30">
                     <button
                         onClick={() => navigate(-1)}
                         className="flex items-center gap-2 text-white/70 hover:text-white text-sm bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-white/25 transition-all"
@@ -119,124 +126,166 @@ export default function BrandPage() {
                     </button>
                 </div>
 
-                {/* Logo de marca — arriba derecha */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="absolute top-6 right-6 sm:right-10 z-20"
-                >
-                    <div className="bg-white rounded-2xl px-5 py-3 shadow-xl">
-                        <img
-                            src={activeBrandData.logo}
-                            alt={activeBrandData.name}
-                            className="h-8 sm:h-10 object-contain"
-                        />
-                    </div>
-                </motion.div>
+                {/* Grid de contenido */}
+                <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 grid lg:grid-cols-2 gap-6 lg:gap-10 items-center pt-24 pb-20">
 
-                {/* Contenido principal del hero */}
-                <div className="absolute bottom-0 left-0 right-0 z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pb-16 sm:pb-24">
-
-                    {/* Tag de marca */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-5"
-                        style={{
-                            backgroundColor: `rgba(${theme.glowRgb}, 0.15)`,
-                            borderColor: `rgba(${theme.glowRgb}, 0.35)`,
-                            color: theme.primary,
-                        }}
-                    >
-                        <span className="text-[10px] font-black tracking-[0.3em] uppercase">
-                            {activeBrandData.name} · {theme.origin}
-                        </span>
-                    </motion.div>
-
-                    {/* Nombre de la marca */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.1 }}
-                        className="font-display font-black text-6xl sm:text-8xl md:text-[9rem] lg:text-[11rem] text-white leading-none tracking-tight uppercase mb-3"
-                        style={{ textShadow: `0 0 80px rgba(${theme.glowRgb}, 0.25)` }}
-                    >
-                        {activeBrandData.name}
-                    </motion.h1>
-
-                    {/* Tagline */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-white/60 text-lg sm:text-2xl font-medium italic mb-8 tracking-wide"
-                    >
-                        "{theme.tagline}"
-                    </motion.p>
-
-                    {/* CTAs */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="flex flex-wrap gap-4"
-                    >
-                        <button
-                            onClick={scrollToCatalog}
-                            className="flex items-center gap-2.5 text-white font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-all hover:brightness-110 hover:-translate-y-0.5"
-                            style={{ backgroundColor: theme.primary, boxShadow: `0 0 30px rgba(${theme.glowRgb}, 0.4)` }}
+                    {/* ── LEFT: info de marca ── */}
+                    <div className="order-2 lg:order-1 flex flex-col items-start">
+                        {/* Logo + eyebrow */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex items-center gap-3 mb-6 flex-wrap"
                         >
-                            Ver catálogo
-                            <ChevronDown className="w-4 h-4" />
-                        </button>
-                        <a
-                            href={waUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2.5 text-white font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all"
-                        >
-                            <MessageCircle className="w-4 h-4" />
-                            Hablar con asesor
-                        </a>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ─── STATS BAR ─────────────────────────────────────────────────── */}
-            <motion.section
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative z-10 border-y border-white/5"
-                style={{ backgroundColor: `rgba(${theme.glowRgb}, 0.05)` }}
-            >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-3 divide-x divide-white/5">
-                        {[
-                            { icon: <Calendar className="w-4 h-4" />, label: 'Fundada', value: theme.founded || '—' },
-                            { icon: <Globe className="w-4 h-4" />,    label: 'Origen',  value: theme.origin || '—' },
-                            { icon: <Bike className="w-4 h-4" />,     label: 'Modelos disponibles', value: `${motoCount} motos` },
-                        ].map((stat) => (
-                            <div key={stat.label} className="flex flex-col sm:flex-row items-center justify-center gap-3 py-5 px-4 text-center sm:text-left">
-                                <div
-                                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white shadow-lg"
-                                    style={{ backgroundColor: theme.primary }}
-                                >
-                                    {stat.icon}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] font-bold text-white/50 tracking-widest uppercase">{stat.label}</p>
-                                    <p className="font-display font-bold text-white text-base sm:text-lg">{stat.value}</p>
-                                </div>
+                            <div className="bg-white rounded-xl px-4 py-2 shadow-lg">
+                                <img src={activeBrandData.logo} alt={activeBrandData.name} className="h-6 sm:h-7 object-contain" />
                             </div>
-                        ))}
+                            <span
+                                className="text-[10px] font-black tracking-[0.3em] uppercase px-3 py-1.5 rounded-full border"
+                                style={{ color: theme.primary, borderColor: `rgba(${theme.glowRgb}, 0.35)`, backgroundColor: `rgba(${theme.glowRgb}, 0.12)` }}
+                            >
+                                {theme.origin} · desde {theme.founded}
+                            </span>
+                        </motion.div>
+
+                        {/* Nombre de la marca */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 28 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.08 }}
+                            className="font-display font-black text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.85] tracking-tight uppercase mb-4"
+                            style={{ textShadow: `0 0 80px rgba(${theme.glowRgb}, 0.3)` }}
+                        >
+                            {activeBrandData.name}
+                        </motion.h1>
+
+                        {/* Tagline */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.16 }}
+                            className="text-xl sm:text-2xl font-medium italic mb-5 text-white/85"
+                        >
+                            "{theme.tagline}"
+                        </motion.p>
+
+                        {/* Descripción corta */}
+                        {theme.description && (
+                            <motion.p
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.22 }}
+                                className="text-gray-400 text-base leading-relaxed mb-7 max-w-md"
+                            >
+                                {theme.description.length > 160 ? theme.description.slice(0, 160).trim() + '…' : theme.description}
+                            </motion.p>
+                        )}
+
+                        {/* Mini-stats inline */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.28 }}
+                            className="flex items-center gap-5 sm:gap-7 mb-8"
+                        >
+                            {[
+                                { icon: <Calendar className="w-3.5 h-3.5" />, label: 'Fundada', value: theme.founded || '—' },
+                                { icon: <Globe className="w-3.5 h-3.5" />, label: 'Origen', value: theme.origin || '—' },
+                                { icon: <Bike className="w-3.5 h-3.5" />, label: 'Modelos', value: String(motoCount) },
+                            ].map((stat, i) => (
+                                <div key={stat.label} className="flex items-center gap-2.5">
+                                    {i > 0 && <span className="w-px h-8 bg-white/10 -ml-3.5 sm:-ml-5 mr-1" />}
+                                    <span style={{ color: theme.primary }}>{stat.icon}</span>
+                                    <div>
+                                        <p className="text-[9px] font-bold text-white/40 tracking-widest uppercase leading-none mb-1">{stat.label}</p>
+                                        <p className="font-display font-bold text-white text-sm leading-none">{stat.value}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </motion.div>
+
+                        {/* CTAs */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.34 }}
+                            className="flex flex-wrap gap-3"
+                        >
+                            <button
+                                onClick={scrollToCatalog}
+                                className="flex items-center gap-2.5 text-white font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full transition-all hover:brightness-110 hover:-translate-y-0.5"
+                                style={{ backgroundColor: theme.primary, boxShadow: `0 0 30px rgba(${theme.glowRgb}, 0.4)` }}
+                            >
+                                Ver catálogo
+                                <ChevronDown className="w-4 h-4" />
+                            </button>
+                            <a
+                                href={waUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2.5 text-white font-display font-bold text-sm uppercase tracking-wider px-7 py-3.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all"
+                            >
+                                <MessageCircle className="w-4 h-4" />
+                                Hablar con asesor
+                            </a>
+                        </motion.div>
                     </div>
+
+                    {/* ── RIGHT: moto insignia ── */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+                        className="order-1 lg:order-2 relative flex items-center justify-center min-h-[34vh] lg:min-h-0"
+                    >
+                        {/* Glow detrás de la moto */}
+                        <div
+                            className="absolute w-[78%] h-[70%] rounded-full blur-[110px] pointer-events-none"
+                            style={{ backgroundColor: `rgba(${theme.glowRgb}, 0.3)` }}
+                        />
+                        {flagship && (
+                            <button
+                                onClick={() => navigate(`/moto/${flagship.id}`)}
+                                className="relative z-10 w-full group cursor-pointer"
+                                aria-label={`Ver ${activeBrandData.name} ${flagship.model}`}
+                            >
+                                <div className="bike-float">
+                                    <img
+                                        src={flagshipImg}
+                                        alt={`${activeBrandData.name} ${flagship.model}`}
+                                        className="w-full max-h-[44vh] lg:max-h-[58vh] object-contain mx-auto drop-shadow-[0_30px_55px_rgba(0,0,0,0.7)] group-hover:scale-[1.03] transition-transform duration-500"
+                                    />
+                                </div>
+                                {/* Badge insignia */}
+                                <div className="mt-4 inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 group-hover:border-white/25 transition-all">
+                                    <span className="text-[9px] font-black tracking-[0.25em] uppercase px-2 py-1 rounded-md" style={{ color: theme.primary, backgroundColor: `rgba(${theme.glowRgb}, 0.15)` }}>
+                                        Insignia
+                                    </span>
+                                    <div className="text-left">
+                                        <p className="font-display font-bold text-white text-sm leading-tight">{flagship.model}</p>
+                                        <p className="text-white/50 text-xs leading-tight">desde {formatCOP(flagship.price)}</p>
+                                    </div>
+                                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                                </div>
+                            </button>
+                        )}
+                    </motion.div>
                 </div>
-                {/* Línea de color de la marca en la parte inferior */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ backgroundColor: theme.primary, opacity: 0.4 }} />
-            </motion.section>
+
+                {/* Indicador de scroll */}
+                <motion.button
+                    onClick={scrollToCatalog}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-white/40 hover:text-white/80 transition-colors"
+                    aria-label="Ver catálogo"
+                >
+                    <span className="text-[9px] font-bold tracking-[0.25em] uppercase">Catálogo</span>
+                    <ChevronDown className="w-5 h-5 animate-bounce" />
+                </motion.button>
+            </section>
 
             {/* ─── DESCRIPCIÓN DE MARCA ───────────────────────────────────────── */}
             {theme.description && (
