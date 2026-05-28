@@ -41,7 +41,7 @@ export default function Home() {
             {/* Hero — carga inmediata (above the fold) */}
             <Hero />
 
-            <Suspense fallback={null}>
+            <Suspense fallback={<div style={{ minHeight: '300vh' }} aria-hidden />}>
                 {/* Promotions Banner */}
                 <PromosBanner />
 
