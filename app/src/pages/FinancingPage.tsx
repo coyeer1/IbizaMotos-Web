@@ -126,19 +126,6 @@ const faqs = [
   },
 ];
 
-function calcMonthly(price: number, rate: number, months: number, initialPct: number = 20): number {
-  const principal = price * (1 - initialPct / 100);
-  const r = rate / 100;
-  if (r === 0) return principal / months;
-  return (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
-}
-
-function formatCOP(n: number) {
-  return '$' + new Intl.NumberFormat('es-CO').format(Math.round(n));
-}
-
-const DEMO_PRICE = 10000000;
-
 export default function FinancingPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

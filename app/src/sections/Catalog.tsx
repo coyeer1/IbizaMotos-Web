@@ -54,7 +54,7 @@ const colorMap: Record<string, string> = {
   'Blanco/Azul': '#f5f5f5', 'Blanco/Negro': '#f5f5f5',
   'Rojo Passion': '#dc2626', 'Negro Graphite': '#111',
   'Blanco Perlado': '#f5f5f5', 'Negro Metallic': '#111', 'Gris Glacial': '#9ca3af',
-  'Blanco/Rojo': '#f5f5f5', 'Negro/Gris': '#111', 'Azul/Negro': '#1e40af',
+  'Blanco/Rojo': '#f5f5f5',
   'Rojo/Negro': '#dc2626', 'Negro/Lima': '#111', 'Verde Neon': '#39ff14',
 };
 

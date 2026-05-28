@@ -35,26 +35,6 @@ const specIcons: Record<string, React.ReactNode> = {
     'CAPACIDAD': <Fuel className="w-5 h-5" />,
 };
 
-// Convert any YouTube URL format to embed URL
-function getYouTubeEmbedUrl(url: string): string {
-    if (!url) return '';
-    // Already an embed URL
-    if (url.includes('/embed/')) return url;
-    // Extract video ID from various formats
-    let videoId = '';
-    // youtu.be/VIDEO_ID
-    const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
-    if (shortMatch) videoId = shortMatch[1];
-    // youtube.com/watch?v=VIDEO_ID
-    const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
-    if (watchMatch) videoId = watchMatch[1];
-    // youtube.com/v/VIDEO_ID
-    const vMatch = url.match(/\/v\/([a-zA-Z0-9_-]+)/);
-    if (vMatch) videoId = vMatch[1];
-    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    return url; // Fallback
-}
-
 export default function MotorcyclePage() {
     const { id } = useParams();
     const navigate = useNavigate();

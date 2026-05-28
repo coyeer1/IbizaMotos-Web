@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, TrendingDown, DollarSign, Calendar, ArrowRight, CheckCircle2, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -319,7 +319,6 @@ function CompactCalculator({ initialPrice }: { initialPrice: number }) {
 // ─── Full section ─────────────────────────────────────────────────────────────
 export default function FinancingCalculator({ initialPrice = 8000000, initialFinanciera, compact = false }: FinancingCalculatorProps) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   const [price, setPrice] = useState(initialPrice);
   const [initialPct, setInitialPct] = useState(20);

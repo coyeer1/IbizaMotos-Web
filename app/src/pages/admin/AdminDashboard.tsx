@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { buildGoogleCalendarUrl } from '@/lib/googleCalendar';
 import {
   Bike, Plus, Pencil, Trash2, LogOut, Search, Save, X, Image as ImageIcon,
-  ChevronDown, AlertCircle, CheckCircle2, Upload, Check, Palette,
-  Calendar, Clock, Phone, User, Wrench, ChevronUp, RefreshCw
+  AlertCircle, CheckCircle2, Check, Palette,
+  Calendar, Phone, Wrench, RefreshCw
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
