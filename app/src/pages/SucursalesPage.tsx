@@ -382,7 +382,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.35 }}
         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
       >
@@ -734,14 +734,21 @@ export default function SucursalesPage() {
       <div className="border-t border-gray-200">
         {/* Header del mapa */}
         <div className="bg-ibiza-black py-8 px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <Map className="w-5 h-5 text-ibiza-gold" />
-            <span className="text-ibiza-gold font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
-          </div>
-          <h2 className="font-display font-black text-2xl md:text-3xl text-white">
-            Encuéntranos en el <span className="text-ibiza-red">mapa</span>
-          </h2>
-          <p className="text-gray-400 text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Map className="w-5 h-5 text-ibiza-gold" />
+              <span className="text-ibiza-gold font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
+            </div>
+            <h2 className="font-display font-black text-2xl md:text-3xl text-white">
+              Encuéntranos en el <span className="text-ibiza-red">mapa</span>
+            </h2>
+            <p className="text-gray-400 text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
+          </motion.div>
         </div>
 
         {/* Contenedor del mapa */}

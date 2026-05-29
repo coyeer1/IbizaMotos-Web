@@ -39,10 +39,10 @@ export const motorcycles: Motorcycle[] = [
       fuelCapacity: "6 litros",
       colors: ["Negro", "Gris"],
     },
-    images: ["/moto_images/125-cr4/125-cr4negro.png"],
+    images: ["/moto_images/125-cr4/125-cr4negro.webp"],
     imagesByColor: {
-      "Negro": ["/moto_images/125-cr4/125-cr4negro.png"],
-      "Gris": ["/moto_images/125-cr4/125-cr4gris.png"],
+      "Negro": ["/moto_images/125-cr4/125-cr4negro.webp"],
+      "Gris": ["/moto_images/125-cr4/125-cr4gris.webp"],
     },
     videoUrl: "https://youtu.be/SOibUI_X2sM",
     stock: 'available',
@@ -66,13 +66,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/125-ttr-cbs/descarga.png"
+                "/moto_images/125-ttr-cbs/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/125-ttr-cbs/descarga (1).png"
+                "/moto_images/125-ttr-cbs/descarga (1).webp"
           ]
     },
-    images: ["/moto_images/125-ttr-cbs/descarga.png"],
+    images: ["/moto_images/125-ttr-cbs/descarga.webp"],
     stock: 'available',
   },
   {
@@ -94,13 +94,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/150-cr4/descarga.png"
+                "/moto_images/150-cr4/descarga.webp"
           ],
           "Gris": [
-                "/moto_images/150-cr4/descarga (1).png"
+                "/moto_images/150-cr4/descarga (1).webp"
           ]
     },
-    images: ["/moto_images/150-cr4/descarga.png"],
+    images: ["/moto_images/150-cr4/descarga.webp"],
     stock: 'available',
   },
   {
@@ -122,14 +122,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/200-cr4/descarga.png"
+                "/moto_images/200-cr4/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/200-cr4/descarga (1).png",
-                "/moto_images/200-cr4/descarga (2).png"
+                "/moto_images/200-cr4/descarga (1).webp",
+                "/moto_images/200-cr4/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/200-cr4/descarga.png"],
+    images: ["/moto_images/200-cr4/descarga.webp"],
     stock: 'available',
   },
   {
@@ -151,16 +151,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/200-tt-abs/descarga.png"
+                "/moto_images/200-tt-abs/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/200-tt-abs/descarga (1).png"
+                "/moto_images/200-tt-abs/descarga (1).webp"
           ],
           "Amarillo": [
-                "/moto_images/200-tt-abs/descarga (2).png"
+                "/moto_images/200-tt-abs/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/200-tt-abs/descarga.png"],
+    images: ["/moto_images/200-tt-abs/descarga.webp"],
     stock: 'available',
   },
   {
@@ -182,16 +182,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/ak-110-nv-cbs/descarga.png"
+                "/moto_images/ak-110-nv-cbs/descarga.webp"
           ],
           "Negro/Azul": [
-                "/moto_images/ak-110-nv-cbs/descarga (1).png"
+                "/moto_images/ak-110-nv-cbs/descarga (1).webp"
           ],
           "Gris": [
-                "/moto_images/ak-110-nv-cbs/descarga (2).png"
+                "/moto_images/ak-110-nv-cbs/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/ak-110-nv-cbs/descarga.png"],
+    images: ["/moto_images/ak-110-nv-cbs/descarga.webp"],
     stock: 'available',
   },
   {
@@ -213,16 +213,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Rojo": [
-                "/moto_images/ak125chr-cbs/descarga.png"
+                "/moto_images/ak125chr-cbs/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/ak125chr-cbs/descarga (1).png"
+                "/moto_images/ak125chr-cbs/descarga (1).webp"
           ],
           "Azul": [
-                "/moto_images/ak125chr-cbs/descarga (2).png"
+                "/moto_images/ak125chr-cbs/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/ak125chr-cbs/descarga.png"],
+    images: ["/moto_images/ak125chr-cbs/descarga.webp"],
     stock: 'available',
   },
   {
@@ -244,14 +244,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/ak125nkd-cbs/n blanca.png"
+                "/moto_images/ak125nkd-cbs/n blanca.webp"
           ],
           "Negro": [
-                "/moto_images/ak125nkd-cbs/negro brillante.png",
-                "/moto_images/ak125nkd-cbs/nkd negra.png"
+                "/moto_images/ak125nkd-cbs/negro brillante.webp",
+                "/moto_images/ak125nkd-cbs/nkd negra.webp"
           ]
     },
-    images: ["/moto_images/ak125nkd-cbs/descarga.png"],
+    images: ["/moto_images/ak125nkd-cbs/descarga.webp"],
     featured: true,
     stock: 'available',
   },
@@ -274,10 +274,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.png"
+                "/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.webp"
           ]
     },
-    images: ["/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.png"],
+    images: ["/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.webp"],
     stock: 'available',
   },
   {
@@ -299,10 +299,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).png"
+                "/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).webp"
           ]
     },
-    images: ["/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).png"],
+    images: ["/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).webp"],
     stock: 'available',
   },
   {
@@ -324,13 +324,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/akt-250-r/descarga.png"
+                "/moto_images/akt-250-r/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/akt-250-r/descarga (3).png"
+                "/moto_images/akt-250-r/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/akt-250-r/descarga.png"],
+    images: ["/moto_images/akt-250-r/descarga.webp"],
     featured: true,
     stock: 'available',
   },
@@ -353,16 +353,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/dinamic-rx-150/descarga.png"
+                "/moto_images/dinamic-rx-150/descarga.webp"
           ],
           "Gris": [
-                "/moto_images/dinamic-rx-150/descarga (1).png"
+                "/moto_images/dinamic-rx-150/descarga (1).webp"
           ],
           "Negro": [
-                "/moto_images/dinamic-rx-150/descarga (3).png"
+                "/moto_images/dinamic-rx-150/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/dinamic-rx-150/descarga.png"],
+    images: ["/moto_images/dinamic-rx-150/descarga.webp"],
     stock: 'available',
   },
   {
@@ -384,19 +384,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.png"
+                "/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.webp"
           ],
           "Blanco": [
-                "/moto_images/dr-150-abs/DR-150-BLANCA-1385x800.png"
+                "/moto_images/dr-150-abs/DR-150-BLANCA-1385x800.webp"
           ],
           "Gris": [
-                "/moto_images/dr-150-abs/DR-150-GRIS-1385x800.png"
+                "/moto_images/dr-150-abs/DR-150-GRIS-1385x800.webp"
           ],
           "Negro": [
-                "/moto_images/dr-150-abs/DR-150-NEGRA-1385x800.png"
+                "/moto_images/dr-150-abs/DR-150-NEGRA-1385x800.webp"
           ]
     },
-    images: ["/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.png"],
+    images: ["/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.webp"],
     videoUrl: 'https://www.youtube.com/embed/7YMT196COhI?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -419,19 +419,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.png"
+                "/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.webp"
           ],
           "Azul": [
-                "/moto_images/dr-150-fi-abs/DR-AZUL-1385x800-1.png"
+                "/moto_images/dr-150-fi-abs/DR-AZUL-1385x800-1.webp"
           ],
           "Negro": [
-                "/moto_images/dr-150-fi-abs/DR-NEGRA-1385x800-1.png"
+                "/moto_images/dr-150-fi-abs/DR-NEGRA-1385x800-1.webp"
           ],
           "Rojo": [
-                "/moto_images/dr-150-fi-abs/DR-ROJA-1385x800-1.png"
+                "/moto_images/dr-150-fi-abs/DR-ROJA-1385x800-1.webp"
           ]
     },
-    images: ["/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.png"],
+    images: ["/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.webp"],
     videoUrl: 'https://www.youtube.com/embed/RhFji0P6KfM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -454,11 +454,11 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/dr-z4s/DR-Z4S-AMARILLA (1).png",
-                "/moto_images/dr-z4s/DR-Z4S-AMARILLA.png"
+                "/moto_images/dr-z4s/DR-Z4S-AMARILLA (1).webp",
+                "/moto_images/dr-z4s/DR-Z4S-AMARILLA.webp"
           ]
     },
-    images: ["/moto_images/dr-z4s/DR-Z4S-AMARILLA (1).png"],
+    images: ["/moto_images/dr-z4s/DR-Z4S-AMARILLA (1).webp"],
     videoUrl: 'https://www.youtube.com/embed/SJMU68aWL0k?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -481,13 +481,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/dr-z4sm/DR-Z4SM-AZUL.png"
+                "/moto_images/dr-z4sm/DR-Z4SM-AZUL.webp"
           ],
           "Blanco": [
-                "/moto_images/dr-z4sm/DR-Z4SM-BLANCA.png"
+                "/moto_images/dr-z4sm/DR-Z4SM-BLANCA.webp"
           ]
     },
-    images: ["/moto_images/dr-z4sm/DR-Z4SM-AZUL.png"],
+    images: ["/moto_images/dr-z4sm/DR-Z4SM-AZUL.webp"],
     videoUrl: 'https://www.youtube.com/embed/SkmWOpKOiwk?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -510,14 +510,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/dynamic-pro/descarga.png"
+                "/moto_images/dynamic-pro/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/dynamic-pro/descarga (1).png",
-                "/moto_images/dynamic-pro/descarga (2).png"
+                "/moto_images/dynamic-pro/descarga (1).webp",
+                "/moto_images/dynamic-pro/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/dynamic-pro/descarga.png"],
+    images: ["/moto_images/dynamic-pro/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/LY8bOpfC9SU?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -540,14 +540,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/flex-cbs/descarga.png"
+                "/moto_images/flex-cbs/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/flex-cbs/descarga (1).png",
-                "/moto_images/flex-cbs/descarga (3).png"
+                "/moto_images/flex-cbs/descarga (1).webp",
+                "/moto_images/flex-cbs/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/flex-cbs/descarga.png"],
+    images: ["/moto_images/flex-cbs/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/L8YQo9ii4Jw?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -570,10 +570,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Verde": [
-                "/moto_images/tt200-abs-rally/descarga (3).png"
+                "/moto_images/tt200-abs-rally/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/tt200-abs-rally/descarga (3).png"],
+    images: ["/moto_images/tt200-abs-rally/descarga (3).webp"],
     videoUrl: 'https://www.youtube.com/embed/b41U6816Uk8?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -596,13 +596,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/vivar-cool-eiii/VIVAR COOL EIII blanca.png"
+                "/moto_images/vivar-cool-eiii/VIVAR COOL EIII blanca.webp"
           ],
           "Negro": [
-                "/moto_images/vivar-cool-eiii/VIVAR COOL EIII negra.png"
+                "/moto_images/vivar-cool-eiii/VIVAR COOL EIII negra.webp"
           ]
     },
-    images: ["/moto_images/vivar-cool-eiii/VIVAR COOL EIII blanca.png"],
+    images: ["/moto_images/vivar-cool-eiii/VIVAR COOL EIII blanca.webp"],
     stock: 'available',
   },
   {
@@ -624,16 +624,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/address/ADDRESS-NEGRA.png"
+                "/moto_images/address/ADDRESS-NEGRA.webp"
           ],
           "Blanco": [
-                "/moto_images/address/ADRESS-BLANCA.png"
+                "/moto_images/address/ADRESS-BLANCA.webp"
           ],
           "Plateado": [
-                "/moto_images/address/ADRESS-PLATEADA.png"
+                "/moto_images/address/ADRESS-PLATEADA.webp"
           ]
     },
-    images: ["/moto_images/address/ADDRESS-NEGRA.png"],
+    images: ["/moto_images/address/ADDRESS-NEGRA.webp"],
     videoUrl: 'https://www.youtube.com/embed/VfOQCTuKG6U?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -656,19 +656,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/avenis/AVENIS AMARILLA.png"
+                "/moto_images/avenis/AVENIS AMARILLA.webp"
           ],
           "Blanco": [
-                "/moto_images/avenis/AVENIS BLANCA.png"
+                "/moto_images/avenis/AVENIS BLANCA.webp"
           ],
           "Dorado": [
-                "/moto_images/avenis/AVENIS DORADO.png"
+                "/moto_images/avenis/AVENIS DORADO.webp"
           ],
           "Negro": [
-                "/moto_images/avenis/AVENIS NEGRA.png"
+                "/moto_images/avenis/AVENIS NEGRA.webp"
           ]
     },
-    images: ["/moto_images/avenis/AVENIS AMARILLA.png"],
+    images: ["/moto_images/avenis/AVENIS AMARILLA.webp"],
     videoUrl: 'https://www.youtube.com/embed/lFKu1lm9C3U?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -691,16 +691,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/ax4-eiii/ax4 azul.png"
+                "/moto_images/ax4-eiii/ax4 azul.webp"
           ],
           "Negro": [
-                "/moto_images/ax4-eiii/ax4 negra.png"
+                "/moto_images/ax4-eiii/ax4 negra.webp"
           ],
           "Rojo": [
-                "/moto_images/ax4-eiii/ax4 roja.png"
+                "/moto_images/ax4-eiii/ax4 roja.webp"
           ]
     },
-    images: ["/moto_images/ax4-eiii/ax4 azul.png"],
+    images: ["/moto_images/ax4-eiii/ax4 azul.webp"],
     videoUrl: 'https://www.youtube.com/embed/DRaUPwcUHSQ?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -723,16 +723,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/ax4-abs/AX4 ABS AZUL.png"
+                "/moto_images/ax4-abs/AX4 ABS AZUL.webp"
           ],
           "Blanco": [
-                "/moto_images/ax4-abs/AX4 ABS BLANCA.png"
+                "/moto_images/ax4-abs/AX4 ABS BLANCA.webp"
           ],
           "Negro": [
-                "/moto_images/ax4-abs/AX4 ABS NEGRA.png"
+                "/moto_images/ax4-abs/AX4 ABS NEGRA.webp"
           ]
     },
-    images: ["/moto_images/ax4-abs/AX4 ABS AZUL.png"],
+    images: ["/moto_images/ax4-abs/AX4 ABS AZUL.webp"],
     videoUrl: 'https://www.youtube.com/embed/EL46sFlp908?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -755,13 +755,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.png"
+                "/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.webp"
           ],
           "Rojo": [
-                "/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-ROJA-min.png"
+                "/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-ROJA-min.webp"
           ]
     },
-    images: ["/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.png"],
+    images: ["/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.webp"],
     stock: 'available',
   },
   {
@@ -783,22 +783,22 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/burgman-fi/BURGMAN BLANCA.png"
+                "/moto_images/burgman-fi/BURGMAN BLANCA.webp"
           ],
           "Dorado": [
-                "/moto_images/burgman-fi/BURGMAN DORADA.png"
+                "/moto_images/burgman-fi/BURGMAN DORADA.webp"
           ],
           "Gris": [
-                "/moto_images/burgman-fi/BURGMAN GRIS.png"
+                "/moto_images/burgman-fi/BURGMAN GRIS.webp"
           ],
           "Negro": [
-                "/moto_images/burgman-fi/BURGMAN NEGRA (1).png"
+                "/moto_images/burgman-fi/BURGMAN NEGRA (1).webp"
           ],
           "Verde": [
-                "/moto_images/burgman-fi/BURGMAN VERDE.png"
+                "/moto_images/burgman-fi/BURGMAN VERDE.webp"
           ]
     },
-    images: ["/moto_images/burgman-fi/BURGMAN BLANCA.png"],
+    images: ["/moto_images/burgman-fi/BURGMAN BLANCA.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/-q2io-oPk_A?autoplay=0&rel=0',
     stock: 'available',
@@ -855,16 +855,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.png"
+                "/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.webp"
           ],
           "Blanco": [
-                "/moto_images/gixxer-250/GIXXER-250-BLANCA--2026_0_0_0.png"
+                "/moto_images/gixxer-250/GIXXER-250-BLANCA--2026_0_0_0.webp"
           ],
           "Negro": [
-                "/moto_images/gixxer-250/GIXXER-250-NEGRA-BRILLANTE.png"
+                "/moto_images/gixxer-250/GIXXER-250-NEGRA-BRILLANTE.webp"
           ]
     },
-    images: ["/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.png"],
+    images: ["/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.webp"],
     featured: true,
     stock: 'available',
     videoUrl: 'https://www.youtube.com/embed/5MVZJG2QABQ?autoplay=0&rel=0',
@@ -888,16 +888,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-NEGRA-2026.png"
+                "/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-NEGRA-2026.webp"
           ],
           "Rojo": [
-                "/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-ROJA-2026.png"
+                "/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-ROJA-2026.webp"
           ],
           "Azul": [
-                "/moto_images/gixxer-fi-150-abs/GIXXER-150-FI-ABS-AZUL-2027.png"
+                "/moto_images/gixxer-fi-150-abs/GIXXER-150-FI-ABS-AZUL-2027.webp"
           ]
     },
-    images: ["/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-NEGRA-2026.png"],
+    images: ["/moto_images/gixxer-fi-150-abs/GIXXER-150 FI ABS-NEGRA-2026.webp"],
     videoUrl: 'https://www.youtube.com/embed/C_NG5Wsm6uo?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -920,14 +920,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco/Azul": [
-                "/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL (1).png",
-                "/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL.png"
+                "/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL (1).webp",
+                "/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL.webp"
           ],
           "Negro": [
-                "/moto_images/gixxer-sf-250/GIXXER-SF-250-NEGRA-2026 (1).png"
+                "/moto_images/gixxer-sf-250/GIXXER-SF-250-NEGRA-2026 (1).webp"
           ]
     },
-    images: ["/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL (1).png"],
+    images: ["/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL (1).webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/6B1f9X1snCM?autoplay=0&rel=0',
     stock: 'available',
@@ -951,16 +951,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.png"
+                "/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.webp"
           ],
           "Gris": [
-                "/moto_images/gixxer-sf-fi-150-abs/GIXXER-SF-150-GRIS-.png"
+                "/moto_images/gixxer-sf-fi-150-abs/GIXXER-SF-150-GRIS-.webp"
           ],
           "Negro": [
-                "/moto_images/gixxer-sf-fi-150-abs/GIXXER-SF-150-NEGRA.png"
+                "/moto_images/gixxer-sf-fi-150-abs/GIXXER-SF-150-NEGRA.webp"
           ]
     },
-    images: ["/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.png"],
+    images: ["/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.webp"],
     videoUrl: 'https://www.youtube.com/embed/NaxspJ4Tj_E?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -983,17 +983,17 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul/Negro": [
-                "/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.png"
+                "/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.webp"
           ],
           "Negro": [
-                "/moto_images/gn125-abs/GN125 ABS NARANJA - NEGRO.png",
-                "/moto_images/gn125-abs/GN125 ABS NEGRA.png"
+                "/moto_images/gn125-abs/GN125 ABS NARANJA - NEGRO.webp",
+                "/moto_images/gn125-abs/GN125 ABS NEGRA.webp"
           ],
           "Rojo/Negro": [
-                "/moto_images/gn125-abs/GN125 ABS ROJO-NEGRO.png"
+                "/moto_images/gn125-abs/GN125 ABS ROJO-NEGRO.webp"
           ]
     },
-    images: ["/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.png"],
+    images: ["/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.webp"],
     videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1016,16 +1016,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.png"
+                "/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.webp"
           ],
           "Negro": [
-                "/moto_images/suzuki-gn125-eiii/GN125 EIII NEGRA.png"
+                "/moto_images/suzuki-gn125-eiii/GN125 EIII NEGRA.webp"
           ],
           "Rojo": [
-                "/moto_images/suzuki-gn125-eiii/GN125 EIII ROJA.png"
+                "/moto_images/suzuki-gn125-eiii/GN125 EIII ROJA.webp"
           ]
     },
-    images: ["/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.png"],
+    images: ["/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.webp"],
     videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1048,16 +1048,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/gsx-8r/GSX-8R-BLANCA_0.png"
+                "/moto_images/gsx-8r/GSX-8R-BLANCA_0.webp"
           ],
           "Naranja": [
-                "/moto_images/gsx-8r/GSX-8R-NARANJA.png"
+                "/moto_images/gsx-8r/GSX-8R-NARANJA.webp"
           ],
           "Negro": [
-                "/moto_images/gsx-8r/GSX-8R-NEGRA_0.png"
+                "/moto_images/gsx-8r/GSX-8R-NEGRA_0.webp"
           ]
     },
-    images: ["/moto_images/gsx-8r/GSX-8R-BLANCA_0.png"],
+    images: ["/moto_images/gsx-8r/GSX-8R-BLANCA_0.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/T00Pe0xoWEY?autoplay=0&rel=0',
     stock: 'order',
@@ -1081,13 +1081,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/gsx-8s/8S--NEGRA-ROJA-1385x800.png"
+                "/moto_images/gsx-8s/8S--NEGRA-ROJA-1385x800.webp"
           ],
           "Azul": [
-                "/moto_images/gsx-8s/8S-AZUL-1385x800.png"
+                "/moto_images/gsx-8s/8S-AZUL-1385x800.webp"
           ]
     },
-    images: ["/moto_images/gsx-8s/GSX-8S.png"],
+    images: ["/moto_images/gsx-8s/GSX-8S.webp"],
     videoUrl: 'https://www.youtube.com/embed/kxlj-VVsq5k?autoplay=0&rel=0',
     stock: 'order',
   },
@@ -1110,10 +1110,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/gsx-r1000r/GSX R1000R AZUL.png"
+                "/moto_images/gsx-r1000r/GSX R1000R AZUL.webp"
           ]
     },
-    images: ["/moto_images/gsx-r1000r/GSX R1000R AZUL.png"],
+    images: ["/moto_images/gsx-r1000r/GSX R1000R AZUL.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/2jgwrVs3Z9I?autoplay=0&rel=0',
     stock: 'order',
@@ -1137,13 +1137,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/gsx-r150-abs/GSX R150 ABS NEGRA.png"
+                "/moto_images/gsx-r150-abs/GSX R150 ABS NEGRA.webp"
           ],
           "Rojo": [
-                "/moto_images/gsx-r150-abs/GSX R150 ABS ROJA.png"
+                "/moto_images/gsx-r150-abs/GSX R150 ABS ROJA.webp"
           ]
     },
-    images: ["/moto_images/gsx-r150-abs/GSX R150 ABS NEGRA.png"],
+    images: ["/moto_images/gsx-r150-abs/GSX R150 ABS NEGRA.webp"],
     featured: true,
     stock: 'limited',
     videoUrl: 'https://www.youtube.com/embed/edLDAaTwjDM?autoplay=0&rel=0',
@@ -1167,16 +1167,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/gsx-s1000/GSX S1000 AZUL.png"
+                "/moto_images/gsx-s1000/GSX S1000 AZUL.webp"
           ],
           "Blanco": [
-                "/moto_images/gsx-s1000/GSX S1000 BLANCA.png"
+                "/moto_images/gsx-s1000/GSX S1000 BLANCA.webp"
           ],
           "Negro": [
-                "/moto_images/gsx-s1000/GSX S1000 NEGRA.png"
+                "/moto_images/gsx-s1000/GSX S1000 NEGRA.webp"
           ]
     },
-    images: ["/moto_images/gsx-s1000/GSX S1000 AZUL.png"],
+    images: ["/moto_images/gsx-s1000/GSX S1000 AZUL.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/p-X-z-LcVPc?autoplay=0&rel=0',
     stock: 'order',
@@ -1200,11 +1200,11 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).png",
-                "/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA.png"
+                "/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).webp",
+                "/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA.webp"
           ]
     },
-    images: ["/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).png"],
+    images: ["/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).webp"],
     videoUrl: 'https://www.youtube.com/embed/BOq5yTibCwg?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1227,19 +1227,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/hayabusa/HAYABUSA AZUL.png"
+                "/moto_images/hayabusa/HAYABUSA AZUL.webp"
           ],
           "Blanco": [
-                "/moto_images/hayabusa/HAYABUSA BLANCA.png"
+                "/moto_images/hayabusa/HAYABUSA BLANCA.webp"
           ],
           "Gris": [
-                "/moto_images/hayabusa/HAYABUSA GRIS.png"
+                "/moto_images/hayabusa/HAYABUSA GRIS.webp"
           ],
           "Negro": [
-                "/moto_images/hayabusa/HAYABUSA NEGRA.png"
+                "/moto_images/hayabusa/HAYABUSA NEGRA.webp"
           ]
     },
-    images: ["/moto_images/hayabusa/HAYABUSA AZUL.png"],
+    images: ["/moto_images/hayabusa/HAYABUSA AZUL.webp"],
     featured: true,
     stock: 'order',
     videoUrl: 'https://www.youtube.com/embed/1v4g4oo95Co?autoplay=0&rel=0',
@@ -1263,13 +1263,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/sv650a/SV650 NEGRA.png"
+                "/moto_images/sv650a/SV650 NEGRA.webp"
           ],
           "Verde": [
-                "/moto_images/sv650a/SV650 VERDE.png"
+                "/moto_images/sv650a/SV650 VERDE.webp"
           ]
     },
-    images: ["/moto_images/sv650a/SV650 NEGRA.png"],
+    images: ["/moto_images/sv650a/SV650 NEGRA.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/IoibhsER2X4?autoplay=0&rel=0',
     stock: 'available',
@@ -1293,16 +1293,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.png"
+                "/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.webp"
           ],
           "Blanco": [
-                "/moto_images/v-strom-1050-de/V-STROM-1050DE-BLANCA.png"
+                "/moto_images/v-strom-1050-de/V-STROM-1050DE-BLANCA.webp"
           ],
           "Negro": [
-                "/moto_images/v-strom-1050-de/V-STROM-1050DE-NEGRA.png"
+                "/moto_images/v-strom-1050-de/V-STROM-1050DE-NEGRA.webp"
           ]
     },
-    images: ["/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.png"],
+    images: ["/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/uD6jYjvofmg?autoplay=0&rel=0',
     stock: 'order',
@@ -1326,16 +1326,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/v-strom-160/V-STROM 160 AMARILLA.png"
+                "/moto_images/v-strom-160/V-STROM 160 AMARILLA.webp"
           ],
           "Blanco": [
-                "/moto_images/v-strom-160/V-STROM 160 BLANCO.png"
+                "/moto_images/v-strom-160/V-STROM 160 BLANCO.webp"
           ],
           "Negro": [
-                "/moto_images/v-strom-160/V-STROM 160 NEGRA.png"
+                "/moto_images/v-strom-160/V-STROM 160 NEGRA.webp"
           ]
     },
-    images: ["/moto_images/v-strom-160/V-STROM 160 AMARILLA.png"],
+    images: ["/moto_images/v-strom-160/V-STROM 160 AMARILLA.webp"],
     videoUrl: 'https://www.youtube.com/embed/hYWGNIsuMRM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1358,19 +1358,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.png"
+                "/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.webp"
           ],
           "Amarillo": [
-                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-AMARILLA.png"
+                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-AMARILLA.webp"
           ],
           "Azul": [
-                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-AZUL.png"
+                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-AZUL.webp"
           ],
           "Negro": [
-                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-NEGRA.png"
+                "/moto_images/v-strom-250-sx/V-STROM_250SX-2027-NEGRA.webp"
           ]
     },
-    images: ["/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.png"],
+    images: ["/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/JYRYcnJcvQU?autoplay=0&rel=0',
     stock: 'available',
@@ -1394,16 +1394,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Amarillo": [
-                "/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.png"
+                "/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.webp"
           ],
           "Blanco": [
-                "/moto_images/v-strom-800-de/V-STROM-800-DE-BLANCA.png"
+                "/moto_images/v-strom-800-de/V-STROM-800-DE-BLANCA.webp"
           ],
           "Negro": [
-                "/moto_images/v-strom-800-de/V-STROM-800-DE-NEGRA.png"
+                "/moto_images/v-strom-800-de/V-STROM-800-DE-NEGRA.webp"
           ]
     },
-    images: ["/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.png"],
+    images: ["/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.webp"],
     videoUrl: 'https://www.youtube.com/embed/L9f_VKbniMI?autoplay=0&rel=0',
     stock: 'order',
   },
@@ -1426,13 +1426,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/xoom-110/xoom110DiagAzul.png"
+                "/moto_images/xoom-110/xoom110DiagAzul.webp"
           ],
           "Negro": [
-                "/moto_images/xoom-110/xoom110DiagNegra.png"
+                "/moto_images/xoom-110/xoom110DiagNegra.webp"
           ]
     },
-    images: ["/moto_images/xoom-110/xoom110DiagAzul.png"],
+    images: ["/moto_images/xoom-110/xoom110DiagAzul.webp"],
     videoUrl: 'https://www.youtube.com/embed/62VTzVS3AWg?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1914,16 +1914,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/boxer-ct-100-es/descarga.png",
-                "/moto_images/boxer-ct-100-es/descarga (1).png",
-                "/moto_images/boxer-ct-100-es/descarga (2).png",
-                "/moto_images/boxer-ct-100-es/descarga (3).png"
+                "/moto_images/boxer-ct-100-es/descarga.webp",
+                "/moto_images/boxer-ct-100-es/descarga (1).webp",
+                "/moto_images/boxer-ct-100-es/descarga (2).webp",
+                "/moto_images/boxer-ct-100-es/descarga (3).webp"
           ],
           "Verde": [
-                "/moto_images/boxer-ct-100-es/descarga (5).png"
+                "/moto_images/boxer-ct-100-es/descarga (5).webp"
           ]
     },
-    images: ["/moto_images/boxer-ct-100-es/descarga.png"],
+    images: ["/moto_images/boxer-ct-100-es/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/dbEsT3zL-_A?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1946,16 +1946,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/boxer-ct-100-ks/descarga.png",
-                "/moto_images/boxer-ct-100-ks/descarga (1).png",
-                "/moto_images/boxer-ct-100-ks/descarga (2).png",
-                "/moto_images/boxer-ct-100-ks/descarga (3).png"
+                "/moto_images/boxer-ct-100-ks/descarga.webp",
+                "/moto_images/boxer-ct-100-ks/descarga (1).webp",
+                "/moto_images/boxer-ct-100-ks/descarga (2).webp",
+                "/moto_images/boxer-ct-100-ks/descarga (3).webp"
           ],
           "Gris": [
-                "/moto_images/boxer-ct-100-ks/descarga (4).png"
+                "/moto_images/boxer-ct-100-ks/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/boxer-ct-100-ks/descarga.png"],
+    images: ["/moto_images/boxer-ct-100-ks/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/dbEsT3zL-_A?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -1978,17 +1978,17 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/boxer-ct-125/descarga.png",
-                "/moto_images/boxer-ct-125/descarga (2).png"
+                "/moto_images/boxer-ct-125/descarga.webp",
+                "/moto_images/boxer-ct-125/descarga (2).webp"
           ],
           "Verde": [
-                "/moto_images/boxer-ct-125/descarga (1).png"
+                "/moto_images/boxer-ct-125/descarga (1).webp"
           ],
           "Blanco": [
-                "/moto_images/boxer-ct-125/descarga (4).png"
+                "/moto_images/boxer-ct-125/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/boxer-ct-125/descarga.png"],
+    images: ["/moto_images/boxer-ct-125/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/Xj8WbNVFFrw?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2011,16 +2011,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/boxer-150x/descarga.png"
+                "/moto_images/boxer-150x/descarga.webp"
           ],
           "Verde": [
-                "/moto_images/boxer-150x/descarga (1).png"
+                "/moto_images/boxer-150x/descarga (1).webp"
           ],
           "Azul": [
-                "/moto_images/boxer-150x/descarga (2).png"
+                "/moto_images/boxer-150x/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/boxer-150x/descarga.png"],
+    images: ["/moto_images/boxer-150x/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/qi_zZGb5RtU?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2043,17 +2043,17 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/discover-125-st-r/descarga.png"
+                "/moto_images/discover-125-st-r/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/discover-125-st-r/descarga (1).png",
-                "/moto_images/discover-125-st-r/descarga (3).png"
+                "/moto_images/discover-125-st-r/descarga (1).webp",
+                "/moto_images/discover-125-st-r/descarga (3).webp"
           ],
           "Verde": [
-                "/moto_images/discover-125-st-r/descarga (2).png"
+                "/moto_images/discover-125-st-r/descarga (2).webp"
           ]
     },
-    images: ["/moto_images/discover-125-st-r/descarga.png"],
+    images: ["/moto_images/discover-125-st-r/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/bspcnWvQa4w?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2076,13 +2076,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/dominar-400-pro-touring/descarga.png"
+                "/moto_images/dominar-400-pro-touring/descarga.webp"
           ],
           "Azul": [
-                "/moto_images/dominar-400-pro-touring/descarga (4).png"
+                "/moto_images/dominar-400-pro-touring/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/dominar-400-pro-touring/descarga.png"],
+    images: ["/moto_images/dominar-400-pro-touring/descarga.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/Ic1JxpXFGQA?autoplay=0&rel=0',
     stock: 'available',
@@ -2106,10 +2106,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/dominar-400-volcano/descarga (1).png"
+                "/moto_images/dominar-400-volcano/descarga (1).webp"
           ]
     },
-    images: ["/moto_images/dominar-400-volcano/descarga (1).png"],
+    images: ["/moto_images/dominar-400-volcano/descarga (1).webp"],
     videoUrl: 'https://www.youtube.com/embed/HE9G6c2H5C0?autoplay=0&rel=0',
     stock: 'limited',
   },
@@ -2132,16 +2132,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/pulsar-ns-125-ug/descarga.png"
+                "/moto_images/pulsar-ns-125-ug/descarga.webp"
           ],
           "Azul": [
-                "/moto_images/pulsar-ns-125-ug/descarga (1).png"
+                "/moto_images/pulsar-ns-125-ug/descarga (1).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-ns-125-ug/descarga (4).png"
+                "/moto_images/pulsar-ns-125-ug/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/pulsar-ns-125-ug/descarga.png"],
+    images: ["/moto_images/pulsar-ns-125-ug/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/1wQnLsKi-Ow?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2164,19 +2164,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Verde": [
-                "/moto_images/pulsar-n-125-fi/descarga.png"
+                "/moto_images/pulsar-n-125-fi/descarga.webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-n-125-fi/descarga (1).png"
+                "/moto_images/pulsar-n-125-fi/descarga (1).webp"
           ],
           "Azul": [
-                "/moto_images/pulsar-n-125-fi/descarga (2).png"
+                "/moto_images/pulsar-n-125-fi/descarga (2).webp"
           ],
           "Blanco": [
-                "/moto_images/pulsar-n-125-fi/descarga (3).png"
+                "/moto_images/pulsar-n-125-fi/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/pulsar-n-125-fi/descarga.png"],
+    images: ["/moto_images/pulsar-n-125-fi/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/ZUReXPc6WcM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2199,16 +2199,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/pulsar-p-150-fi-abs/descarga.png"
+                "/moto_images/pulsar-p-150-fi-abs/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/pulsar-p-150-fi-abs/descarga (1).png"
+                "/moto_images/pulsar-p-150-fi-abs/descarga (1).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-p-150-fi-abs/descarga (3).png"
+                "/moto_images/pulsar-p-150-fi-abs/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/pulsar-p-150-fi-abs/descarga.png"],
+    images: ["/moto_images/pulsar-p-150-fi-abs/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/ARJkO-i33nA?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2262,17 +2262,17 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/pulsar-n160-pro/descarga.png"
+                "/moto_images/pulsar-n160-pro/descarga.webp"
           ],
           "Gris": [
-                "/moto_images/pulsar-n160-pro/descarga (1).png"
+                "/moto_images/pulsar-n160-pro/descarga (1).webp"
           ],
           "Negro": [
-                "/moto_images/pulsar-n160-pro/descarga (2).png",
-                "/moto_images/pulsar-n160-pro/descarga (4).png"
+                "/moto_images/pulsar-n160-pro/descarga (2).webp",
+                "/moto_images/pulsar-n160-pro/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/pulsar-n160-pro/descarga.png"],
+    images: ["/moto_images/pulsar-n160-pro/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/aQl7kii9LiM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2295,19 +2295,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.png"
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.webp"
           ],
           "Gris": [
-                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (1).png"
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (1).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (2).png"
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (2).webp"
           ],
           "Azul": [
-                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (3).png"
+                "/moto_images/pulsar-ns-160-fi-abs-ug2/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.png"],
+    images: ["/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2330,19 +2330,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.png"
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.webp"
           ],
           "Azul": [
-                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (1).png"
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (1).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (2).png"
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (2).webp"
           ],
           "Gris": [
-                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (4).png"
+                "/moto_images/pulsar-ns-200-fi-abs-ug2/descarga (4).webp"
           ]
     },
-    images: ["/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.png"],
+    images: ["/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
@@ -2366,19 +2366,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/pulsar-ns-200-fi-sc/descarga.png"
+                "/moto_images/pulsar-ns-200-fi-sc/descarga.webp"
           ],
           "Gris": [
-                "/moto_images/pulsar-ns-200-fi-sc/descarga (1).png"
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (1).webp"
           ],
           "Azul": [
-                "/moto_images/pulsar-ns-200-fi-sc/descarga (2).png"
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (2).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-ns-200-fi-sc/descarga (3).png"
+                "/moto_images/pulsar-ns-200-fi-sc/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/pulsar-ns-200-fi-sc/descarga.png"],
+    images: ["/moto_images/pulsar-ns-200-fi-sc/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2401,10 +2401,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/pulsar-n-250-fi-abs/descarga.png"
+                "/moto_images/pulsar-n-250-fi-abs/descarga.webp"
           ]
     },
-    images: ["/moto_images/pulsar-n-250-fi-abs/descarga.png"],
+    images: ["/moto_images/pulsar-n-250-fi-abs/descarga.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/ujswfjm3W20?autoplay=0&rel=0',
     stock: 'available',
@@ -2456,19 +2456,19 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/pulsar-ns-400z/descarga.png"
+                "/moto_images/pulsar-ns-400z/descarga.webp"
           ],
           "Negro": [
-                "/moto_images/pulsar-ns-400z/descarga (1).png"
+                "/moto_images/pulsar-ns-400z/descarga (1).webp"
           ],
           "Rojo": [
-                "/moto_images/pulsar-ns-400z/descarga (2).png"
+                "/moto_images/pulsar-ns-400z/descarga (2).webp"
           ],
           "Gris": [
-                "/moto_images/pulsar-ns-400z/descarga (3).png"
+                "/moto_images/pulsar-ns-400z/descarga (3).webp"
           ]
     },
-    images: ["/moto_images/pulsar-ns-400z/descarga.png"],
+    images: ["/moto_images/pulsar-ns-400z/descarga.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/BXWuM0uvy7A?autoplay=0&rel=0',
     stock: 'available',
@@ -2492,10 +2492,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/tuk-tuk/descarga.png"
+                "/moto_images/tuk-tuk/descarga.webp"
           ]
     },
-    images: ["/moto_images/tuk-tuk/descarga.png"],
+    images: ["/moto_images/tuk-tuk/descarga.webp"],
     videoUrl: 'https://www.youtube.com/embed/arJJxESfbhc?autoplay=0&rel=0',
     stock: 'order',
   },
@@ -2522,7 +2522,7 @@ export const motorcycles: Motorcycle[] = [
                 "/moto_images/eco-100/eco 100 negra-roja.jpg"
           ]
     },
-    images: ["/moto_images/eco-100/ECO-100-globito.png"],
+    images: ["/moto_images/eco-100/ECO-100-globito.webp"],
     videoUrl: 'https://www.youtube.com/embed/sl-NwXLptMM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2609,14 +2609,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/eco-t-100/EcoT_NegraAzul.png"
+                "/moto_images/eco-t-100/EcoT_NegraAzul.webp"
           ],
           "Negro": [
-                "/moto_images/eco-t-100/EcoT_Negra_Gris.png",
-                "/moto_images/eco-t-100/EcoT_Negra_Roja.png"
+                "/moto_images/eco-t-100/EcoT_Negra_Gris.webp",
+                "/moto_images/eco-t-100/EcoT_Negra_Roja.webp"
           ]
     },
-    images: ["/moto_images/eco-t-100/EcoT_NegraAzul.png"],
+    images: ["/moto_images/eco-t-100/EcoT_NegraAzul.webp"],
     videoUrl: 'https://www.youtube.com/embed/sl-NwXLptMM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2639,16 +2639,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/hunk-125r/hunk125R-Black.png"
+                "/moto_images/hunk-125r/hunk125R-Black.webp"
           ],
           "Rojo": [
-                "/moto_images/hunk-125r/hunk125R-Red.png"
+                "/moto_images/hunk-125r/hunk125R-Red.webp"
           ],
           "Azul": [
-                "/moto_images/hunk-125r/hunk125RBlue.png"
+                "/moto_images/hunk-125r/hunk125RBlue.webp"
           ]
     },
-    images: ["/moto_images/hunk-125r/hunk125R-Black.png"],
+    images: ["/moto_images/hunk-125r/hunk125R-Black.webp"],
     videoUrl: 'https://www.youtube.com/embed/1dcTMAQcqH4?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2671,13 +2671,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/hunk-150-xt/HUNK150Xtec_Black.png"
+                "/moto_images/hunk-150-xt/HUNK150Xtec_Black.webp"
           ],
           "Azul": [
-                "/moto_images/hunk-150-xt/HUNK150Xtec_Blue.png"
+                "/moto_images/hunk-150-xt/HUNK150Xtec_Blue.webp"
           ]
     },
-    images: ["/moto_images/hunk-150-xt/HUNK150Xtec_Black.png"],
+    images: ["/moto_images/hunk-150-xt/HUNK150Xtec_Black.webp"],
     videoUrl: 'https://www.youtube.com/embed/l1FuZwUvWps?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2700,14 +2700,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/hunk-160-v2/hunk160 negra amarilla.png",
-                "/moto_images/hunk-160-v2/hunk160r_Negra.png"
+                "/moto_images/hunk-160-v2/hunk160 negra amarilla.webp",
+                "/moto_images/hunk-160-v2/hunk160r_Negra.webp"
           ],
           "Blanco": [
-                "/moto_images/hunk-160-v2/hunk160rV2Blanca.png"
+                "/moto_images/hunk-160-v2/hunk160rV2Blanca.webp"
           ]
     },
-    images: ["/moto_images/hunk-160-v2/hunk160 negra amarilla.png"],
+    images: ["/moto_images/hunk-160-v2/hunk160 negra amarilla.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/P7DvtUQmztw?autoplay=0&rel=0',
     stock: 'available',
@@ -2731,16 +2731,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro/Lima": [
-                "/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.png"
+                "/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.webp"
           ],
           "Negro/Rojo": [
-                "/moto_images/hunk-160-4v/Hunk160R-4VPro_negroRojo.png"
+                "/moto_images/hunk-160-4v/Hunk160R-4VPro_negroRojo.webp"
           ],
           "Verde Neon": [
-                "/moto_images/hunk-160-4v/Hunk160R-4VPro_verdeNeon.png"
+                "/moto_images/hunk-160-4v/Hunk160R-4VPro_verdeNeon.webp"
           ]
     },
-    images: ["/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.png"],
+    images: ["/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/P7DvtUQmztw?autoplay=0&rel=0',
     stock: 'available',
@@ -2764,16 +2764,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris/Lima": [
-                "/moto_images/splendor/Splendor_Xpro_GrisLima.png"
+                "/moto_images/splendor/Splendor_Xpro_GrisLima.webp"
           ],
           "Negro/Azul": [
-                "/moto_images/splendor/Splendor_Xpro_NegroAzul.png"
+                "/moto_images/splendor/Splendor_Xpro_NegroAzul.webp"
           ],
           "Negro/Rojo": [
-                "/moto_images/splendor/Splendor_Xpro_NegroRojo.png"
+                "/moto_images/splendor/Splendor_Xpro_NegroRojo.webp"
           ]
     },
-    images: ["/moto_images/splendor/Splendor_Xpro_GrisLima.png"],
+    images: ["/moto_images/splendor/Splendor_Xpro_GrisLima.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/VqIUR-6RIBs?autoplay=0&rel=0',
     stock: 'available',
@@ -2826,13 +2826,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/xoom-110/xoom110DiagAzul.png"
+                "/moto_images/xoom-110/xoom110DiagAzul.webp"
           ],
           "Negro": [
-                "/moto_images/xoom-110/xoom110DiagNegra.png"
+                "/moto_images/xoom-110/xoom110DiagNegra.webp"
           ]
     },
-    images: ["/moto_images/xoom-110/xoom110DiagAzul.png"],
+    images: ["/moto_images/xoom-110/xoom110DiagAzul.webp"],
     stock: 'available',
   },
   {
@@ -2854,13 +2854,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Verde": [
-                "/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.png"
+                "/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.webp"
           ],
           "Negro": [
-                "/moto_images/xpulse-200-4v/xpulse2004vNegro.png"
+                "/moto_images/xpulse-200-4v/xpulse2004vNegro.webp"
           ]
     },
-    images: ["/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.png"],
+    images: ["/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.webp"],
     featured: true,
     stock: 'available',
     videoUrl: 'https://www.youtube.com/embed/r4Jjh2fWVjI?autoplay=0&rel=0',
@@ -2884,16 +2884,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco/Azul": [
-                "/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.png"
+                "/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.webp"
           ],
           "Negro/Azul": [
-                "/moto_images/xpulse-200-ad/Xpulse200Ad_NegroAzulAr.png"
+                "/moto_images/xpulse-200-ad/Xpulse200Ad_NegroAzulAr.webp"
           ],
           "Negro/Rojo": [
-                "/moto_images/xpulse-200-ad/Xpulse200Ad_NegroRojoAr.png"
+                "/moto_images/xpulse-200-ad/Xpulse200Ad_NegroRojoAr.webp"
           ]
     },
-    images: ["/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.png"],
+    images: ["/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.webp"],
     videoUrl: 'https://www.youtube.com/embed/Kr-aVQlfzps?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -2916,10 +2916,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.png"
+                "/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.webp"
           ]
     },
-    images: ["/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.png"],
+    images: ["/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/1sAAz_I9_FA?autoplay=0&rel=0',
     stock: 'available',
@@ -2943,10 +2943,10 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/xpulse-200-r-4v/xpulseRallyColor.png"
+                "/moto_images/xpulse-200-r-4v/xpulseRallyColor.webp"
           ]
     },
-    images: ["/moto_images/xpulse-200-r-4v/xpulseRallyColor.png"],
+    images: ["/moto_images/xpulse-200-r-4v/xpulseRallyColor.webp"],
     videoUrl: 'https://www.youtube.com/embed/8QsLHrLmCQg?autoplay=0&rel=0',
     stock: 'limited',
   },

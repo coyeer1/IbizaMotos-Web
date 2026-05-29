@@ -292,7 +292,7 @@ export default function BrandPage() {
                 <motion.section
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.7 }}
                     className="py-16 sm:py-20"
                 >
@@ -344,14 +344,20 @@ export default function BrandPage() {
             {/* ─── EXPLORA OTRAS MARCAS ────────────────────────────────────────── */}
             <section className="py-20 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12">
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-12"
+                    >
                         <p className="text-xs font-bold tracking-[0.3em] uppercase mb-3" style={{ color: theme.primary }}>
                             También en Ibiza Motos
                         </p>
                         <h3 className="font-display font-black text-3xl sm:text-4xl text-white">
                             Explora otras marcas
                         </h3>
-                    </div>
+                    </motion.div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                         {brands
@@ -364,7 +370,7 @@ export default function BrandPage() {
                                         key={brand.id}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
+                                        viewport={{ once: true, amount: 0.2 }}
                                         transition={{ duration: 0.4, delay: i * 0.06 }}
                                         onClick={() => navigate(`/marca/${brand.name.toLowerCase().replace(' ', '-')}`)}
                                         className="group relative flex flex-col items-center gap-3 p-5 rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1"

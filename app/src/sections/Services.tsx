@@ -1,6 +1,7 @@
 import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Award, ShieldAlert, Cpu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import Reveal from '@/components/Reveal';
 
 // ─── Tokens (alineados con el hero) ───────────────────────────────────────
 const T = {
@@ -13,10 +14,6 @@ const T = {
   display: "'Bebas Neue', sans-serif",
   body: "'DM Sans', sans-serif",
 };
-
-// helper para el stagger de entrada interno
-const anim = (delayMs: number, dur = 0.5, name = 'fadeUp') =>
-  ({ animation: `${name} ${dur}s both`, animationDelay: `${delayMs}ms` } as React.CSSProperties);
 
 const servicesList = [
   {
@@ -82,56 +79,58 @@ export default function Services() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16">
           <div className="max-w-xl">
             {/* Eyebrow */}
-            <span
-              className="inline-block uppercase"
-              style={{
-                ...anim(0),
-                fontSize: 11,
-                letterSpacing: '0.15em',
-                color: '#999',
-                fontWeight: 500,
-              }}
-            >
-              Taller Mecánico
-            </span>
+            <Reveal direction="up">
+              <span
+                className="inline-block uppercase"
+                style={{
+                  fontSize: 11,
+                  letterSpacing: '0.15em',
+                  color: '#999',
+                  fontWeight: 500,
+                }}
+              >
+                Taller Mecánico
+              </span>
+            </Reveal>
 
-            <h2
-              style={{
-                ...anim(80, 0.55),
-                fontFamily: T.display,
-                fontSize: 'clamp(44px, 6vw, 68px)',
-                lineHeight: 0.95,
-                letterSpacing: '-1px',
-                marginTop: 12,
-                color: T.text,
-              }}
-            >
-              Servicio <span style={{ color: T.red }}>Técnico</span>
-            </h2>
+            <Reveal delay={0.08} direction="up">
+              <h2
+                style={{
+                  fontFamily: T.display,
+                  fontSize: 'clamp(44px, 6vw, 68px)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-1px',
+                  marginTop: 12,
+                  color: T.text,
+                }}
+              >
+                Servicio <span style={{ color: T.red }}>Técnico</span>
+              </h2>
+            </Reveal>
 
-            <p
-              style={{
-                ...anim(160),
-                fontSize: 15,
-                color: '#666',
-                fontWeight: 300,
-                lineHeight: 1.7,
-                maxWidth: 440,
-                marginTop: 18,
-              }}
-            >
-              Talleres autorizados Suzuki, Honda, Bajaj, AKT, Hero y Vento en toda
-              la red. Repuestos originales, diagnóstico honesto y precio justo.
-            </p>
+            <Reveal delay={0.16} direction="up">
+              <p
+                style={{
+                  fontSize: 15,
+                  color: '#666',
+                  fontWeight: 300,
+                  lineHeight: 1.7,
+                  maxWidth: 440,
+                  marginTop: 18,
+                }}
+              >
+                Talleres autorizados Suzuki, Honda, Bajaj, AKT, Hero y Vento en toda
+                la red. Repuestos originales, diagnóstico honesto y precio justo.
+              </p>
+            </Reveal>
           </div>
 
           {/* Stats — datos verificables, light */}
-          <div className="flex flex-wrap lg:flex-nowrap gap-4 sm:gap-6" style={anim(240)}>
+          <div className="flex flex-wrap lg:flex-nowrap gap-4 sm:gap-6">
             {stats.map(({ Icon, value, label }, i) => (
+              <Reveal key={label} delay={Math.min(i, 6) * 0.08} direction="up">
               <div
-                key={label}
                 className="group flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1"
-                style={anim(280 + i * 60)}
               >
                 <div
                   className="flex flex-col items-center justify-center transition-colors duration-200 group-hover:border-[#E31937]"
@@ -151,6 +150,7 @@ export default function Services() {
                 </div>
                 <span style={{ fontSize: 12, color: '#999', fontWeight: 500 }}>{label}</span>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -158,11 +158,10 @@ export default function Services() {
         {/* ── Grid de servicios — tarjetas light editorial ── */}
         <div className="grid md:grid-cols-2 gap-6 mb-24">
           {servicesList.map((service, index) => (
+            <Reveal key={service.id} delay={Math.min(index, 6) * 0.08} direction="up" className="flex">
             <div
-              key={service.id}
-              className="group flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.12)]"
+              className="group flex flex-col justify-between w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.12)]"
               style={{
-                ...anim(index * 80),
                 background: '#fff',
                 border: `1px solid ${T.border}`,
                 borderRadius: 14,
@@ -223,6 +222,7 @@ export default function Services() {
                 Agendar Cita
               </Button>
             </div>
+            </Reveal>
           ))}
         </div>
 
@@ -230,9 +230,10 @@ export default function Services() {
         <div id="appointment-form" className="grid lg:grid-cols-2 gap-6">
 
           {/* Información de contacto */}
+          <Reveal direction="up" className="flex">
           <div
+            className="w-full"
             style={{
-              ...anim(0),
               background: '#fff',
               border: `1px solid ${T.border}`,
               borderRadius: 16,
@@ -285,12 +286,13 @@ export default function Services() {
               </Button>
             </a>
           </div>
+          </Reveal>
 
           {/* Cita online — tarjeta light (sin gradiente) */}
+          <Reveal delay={0.08} direction="up" className="flex">
           <div
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between w-full"
             style={{
-              ...anim(80),
               background: T.pill,
               border: `1px solid ${T.border}`,
               borderRadius: 16,
@@ -349,6 +351,7 @@ export default function Services() {
               Ver disponibilidad completa
             </Button>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

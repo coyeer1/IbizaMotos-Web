@@ -583,7 +583,13 @@ export default function MotorcyclePage() {
             {/* ── CTA BANNER ── */}
             <section className="py-16 border-t border-white/5">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="relative rounded-3xl overflow-hidden">
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative rounded-3xl overflow-hidden"
+                    >
                         <div className="absolute inset-0 opacity-90" style={{ background: `linear-gradient(135deg, ${brandColor} 0%, ${theme.secondary} 100%)` }} />
                         <div className="relative p-10 md:p-16 text-center !text-white">
                             <h3 className="font-display font-bold text-3xl md:text-4xl mb-4">
@@ -608,7 +614,7 @@ export default function MotorcyclePage() {
                                 </Button>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 

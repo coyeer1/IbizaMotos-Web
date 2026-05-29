@@ -1,80 +1,67 @@
-import { motion } from 'framer-motion';
 import { Phone, MessageCircle } from 'lucide-react';
 import { brands } from '@/data/motorcycles';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { getBrandPartsWhatsApp, getWhatsAppUrl } from '@/lib/config';
+import Reveal from '@/components/Reveal';
 
 export default function SpareParts() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-
   return (
-    <section id="repuestos" className="py-24 bg-white relative font-body" style={{ color: '#000' }} ref={ref}>
+    <section id="repuestos" className="py-24 bg-white relative font-body" style={{ color: '#000' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="text-center mb-14">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="uppercase"
-            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
-          >
-            Repuestos Originales
-          </motion.p>
+          <Reveal direction="up">
+            <p
+              className="uppercase"
+              style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
+            >
+              Repuestos Originales
+            </p>
+          </Reveal>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display mt-3 leading-[0.92]"
-            style={{ fontSize: 'clamp(40px, 6vw, 64px)', letterSpacing: '-1px', color: '#000' }}
-          >
-            REPUESTOS Y ACCESORIOS
-          </motion.h2>
+          <Reveal delay={0.08} direction="up">
+            <h2
+              className="font-display mt-3 leading-[0.92]"
+              style={{ fontSize: 'clamp(40px, 6vw, 64px)', letterSpacing: '-1px', color: '#000' }}
+            >
+              REPUESTOS Y ACCESORIOS
+            </h2>
+          </Reveal>
 
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={isVisible ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mx-auto mt-5"
-            style={{ width: 56, height: 2, background: '#E31937', borderRadius: 2 }}
-          />
+          <Reveal delay={0.16} direction="fade">
+            <div
+              className="mx-auto mt-5"
+              style={{ width: 56, height: 2, background: '#E31937', borderRadius: 2 }}
+            />
+          </Reveal>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mx-auto mt-6"
-            style={{ fontSize: 15, color: '#666', fontWeight: 300, lineHeight: 1.65, maxWidth: 480 }}
-          >
-            Repuestos originales para todas las marcas que distribuimos. Toca tu marca y habla directo con el encargado.
-          </motion.p>
+          <Reveal delay={0.24} direction="fade">
+            <p
+              className="mx-auto mt-6"
+              style={{ fontSize: 15, color: '#666', fontWeight: 300, lineHeight: 1.65, maxWidth: 480 }}
+            >
+              Repuestos originales para todas las marcas que distribuimos. Toca tu marca y habla directo con el encargado.
+            </p>
+          </Reveal>
         </div>
 
         {/* Brand logos — WhatsApp por marca */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mb-14"
-        >
-          <p
-            className="text-center uppercase mb-7"
-            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#aaa' }}
-          >
-            Selecciona tu marca para consultar
-          </p>
+        <div className="mb-14">
+          <Reveal direction="up">
+            <p
+              className="text-center uppercase mb-7"
+              style={{ fontSize: 11, letterSpacing: '0.15em', color: '#aaa' }}
+            >
+              Selecciona tu marca para consultar
+            </p>
+          </Reveal>
           <div className="flex flex-wrap justify-center gap-3">
             {brands.map((brand, i) => (
-              <motion.a
-                key={brand.id}
+              <Reveal key={brand.id} delay={Math.min(i, 6) * 0.08} direction="up">
+              <a
                 href={getBrandPartsWhatsApp(brand.name)}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.3, delay: 0.5 + i * 0.06 }}
                 className="group flex items-center gap-3 bg-white transition-all duration-200 hover:scale-[1.02]"
                 style={{ border: '1px solid #e8e8e8', borderRadius: 10, padding: '14px 22px' }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#000'; }}
@@ -94,17 +81,15 @@ export default function SpareParts() {
                   {brand.name}
                 </span>
                 <MessageCircle className="w-4 h-4 text-[#25D366] opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-              </motion.a>
+              </a>
+              </Reveal>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* CTA Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <Reveal direction="up">
+        <div
           className="relative overflow-hidden"
           style={{ background: '#000', borderRadius: 16 }}
         >
@@ -135,7 +120,8 @@ export default function SpareParts() {
               Solicitar Repuesto
             </a>
           </div>
-        </motion.div>
+        </div>
+        </Reveal>
 
       </div>
     </section>

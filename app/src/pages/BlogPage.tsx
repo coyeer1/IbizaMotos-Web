@@ -183,8 +183,9 @@ export default function BlogPage() {
         {suggestions.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
             className="mt-16"
           >
             <div className="flex items-center justify-between mb-6">
@@ -197,9 +198,15 @@ export default function BlogPage() {
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {suggestions.map(rel => (
-                <Link
+              {suggestions.map((rel, i) => (
+                <motion.div
                   key={rel.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: Math.min(i, 6) * 0.07 }}
+                >
+                <Link
                   to={`/blog/${rel.id}`}
                   className="group bg-white/[0.02] rounded-2xl overflow-hidden border border-white/[0.04] hover:border-ibiza-red/20 hover:bg-white/[0.04] transition-all duration-300"
                 >
@@ -223,6 +230,7 @@ export default function BlogPage() {
                     </h4>
                   </div>
                 </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>

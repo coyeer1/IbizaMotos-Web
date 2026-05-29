@@ -198,7 +198,7 @@ export default function FinancingPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <div className="text-center mb-10">
             <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-3">¿Cómo financio mi moto?</h2>
@@ -229,7 +229,7 @@ export default function FinancingPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
           className="bg-gradient-to-r from-ibiza-red/10 to-ibiza-gold/5 rounded-3xl p-8 md:p-12 border border-ibiza-red/20"
         >
           <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -273,7 +273,7 @@ export default function FinancingPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <div className="text-center mb-10">
             <h2 className="font-display font-bold text-3xl md:text-4xl text-white mb-3">Preguntas frecuentes</h2>
@@ -281,8 +281,7 @@ export default function FinancingPage() {
           </div>
           <div className="max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, i) => (
-              <div
-                key={i}
+              <Reveal key={i} delay={Math.min(i, 6) * 0.07}><div
                 className="bg-white/[0.02] rounded-2xl border border-white/[0.05] overflow-hidden"
               >
                 <button
@@ -299,7 +298,7 @@ export default function FinancingPage() {
                     <p className="pt-4">{faq.a}</p>
                   </div>
                 )}
-              </div>
+              </div></Reveal>
             ))}
           </div>
         </motion.div>
@@ -308,7 +307,7 @@ export default function FinancingPage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center py-12"
         >
           <h2 className="font-display font-black text-4xl md:text-5xl text-white mb-4">

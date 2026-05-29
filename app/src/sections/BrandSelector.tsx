@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { MessageCircle, ChevronLeft, ChevronRight, ArrowRight, Play, X } from 'lucide-react';
 import { brands, motorcycles as allMotos } from '@/data/motorcycles';
 import { getBrandSalesWhatsApp } from '@/lib/config';
+import Reveal from '@/components/Reveal';
 
 // Acento monocromático único — alineado con el hero (un solo rojo).
 const ACCENT = '#E31937';
@@ -177,14 +178,14 @@ export default function BrandSelector() {
 
       {/* ── Top bar ── */}
       <div className="absolute top-0 left-0 right-0 flex items-center justify-between pl-8 pr-6 sm:pl-12 sm:pr-10 pt-7 z-20">
-        <div>
+        <Reveal direction="up">
           <span className="uppercase" style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}>
             Marcas oficiales
           </span>
           <p style={{ fontSize: 12, color: '#aaa', marginTop: 2 }}>
             {active + 1} / {brandData.length}
           </p>
-        </div>
+        </Reveal>
         <button
           onClick={() => navigate('/marca/todas')}
           className="flex items-center gap-1.5 transition-colors duration-200 hover:text-black"

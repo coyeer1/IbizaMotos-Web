@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { getQuoteWhatsApp } from '@/lib/config';
 import { useNavigate } from 'react-router-dom';
+import Reveal from '@/components/Reveal';
 
 // ─── Tokens (match the hero) ──────────────────────────────────────────────
 const T = {
@@ -95,7 +95,6 @@ function CountdownUnit({ value, label }: { value: number; label: string }) {
 }
 
 export default function PromosBanner() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const { motorcycles } = useMotorcycles();
   const { d, h, m, s } = useCountdown();
   const navigate = useNavigate();
@@ -111,38 +110,36 @@ export default function PromosBanner() {
 
   return (
     <section
-      ref={ref}
       className="py-16 sm:py-20 overflow-hidden bg-white"
       style={{ fontFamily: T.body, color: T.text }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
-        <motion.div
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <span
-            className="uppercase"
-            style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600 }}
-          >
-            Promociones
-          </span>
-          <h2
-            style={{
-              fontFamily: T.display,
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
-              lineHeight: 0.95,
-              letterSpacing: '-0.5px',
-              color: T.text,
-              marginTop: 6,
-            }}
-          >
-            Ofertas del mes
-          </h2>
-        </motion.div>
+        <div className="mb-8">
+          <Reveal direction="up">
+            <span
+              className="uppercase"
+              style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600 }}
+            >
+              Promociones
+            </span>
+          </Reveal>
+          <Reveal delay={0.08} direction="up">
+            <h2
+              style={{
+                fontFamily: T.display,
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                lineHeight: 0.95,
+                letterSpacing: '-0.5px',
+                color: T.text,
+                marginTop: 6,
+              }}
+            >
+              Ofertas del mes
+            </h2>
+          </Reveal>
+        </div>
 
         {/* Promo tabs */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -150,12 +147,11 @@ export default function PromosBanner() {
             const mo = motorcycles.find(mo => mo.id === p.motorcycleId);
             const active = activePromo === i;
             return (
+              <Reveal key={i} delay={Math.min(i, 6) * 0.08} direction="up">
               <button
-                key={i}
                 onClick={() => setActivePromo(i)}
                 className="transition-all duration-200 active:scale-95"
                 style={{
-                  ...anim(60 + i * 70),
                   fontFamily: T.body,
                   fontSize: 12,
                   fontWeight: 600,
@@ -168,11 +164,13 @@ export default function PromosBanner() {
               >
                 {mo?.brand} {mo?.model}
               </button>
+              </Reveal>
             );
           })}
         </div>
 
         {/* Main promo card */}
+        <Reveal direction="up">
         <motion.div
           key={activePromo}
           initial={{ opacity: 0, y: 20 }}
@@ -363,6 +361,7 @@ export default function PromosBanner() {
             </div>
           </div>
         </motion.div>
+        </Reveal>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Reveal from '@/components/Reveal';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -137,38 +138,38 @@ export default function Categories() {
     <section className="py-16 md:py-24 bg-white" style={{ fontFamily: T.body, color: T.text }}>
 
       {/* ── Header ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-center mb-12 md:mb-16 px-6"
-      >
-        <span
-          className="block uppercase"
-          style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600, marginBottom: 10 }}
-        >
-          Catálogo
-        </span>
-        <h2
-          style={{
-            fontFamily: T.display,
-            fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
-            lineHeight: 0.92,
-            letterSpacing: '-0.5px',
-            color: T.text,
-          }}
-        >
-          Nuestras motos Ibiza
-        </h2>
-        <button
-          onClick={() => navigate('/marca/todas')}
-          className="mt-6 inline-flex items-center gap-2 px-7 py-3 text-white rounded-lg text-sm font-semibold transition-transform duration-200 hover:scale-[1.02] active:scale-95"
-          style={{ background: T.text, fontFamily: T.body }}
-        >
-          Conócelas todas →
-        </button>
-      </motion.div>
+      <div className="text-center mb-12 md:mb-16 px-6">
+        <Reveal direction="up">
+          <span
+            className="block uppercase"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600, marginBottom: 10 }}
+          >
+            Catálogo
+          </span>
+        </Reveal>
+        <Reveal delay={0.08} direction="up">
+          <h2
+            style={{
+              fontFamily: T.display,
+              fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
+              lineHeight: 0.92,
+              letterSpacing: '-0.5px',
+              color: T.text,
+            }}
+          >
+            Nuestras motos Ibiza
+          </h2>
+        </Reveal>
+        <Reveal delay={0.16} direction="up">
+          <button
+            onClick={() => navigate('/marca/todas')}
+            className="mt-6 inline-flex items-center gap-2 px-7 py-3 text-white rounded-lg text-sm font-semibold transition-transform duration-200 hover:scale-[1.02] active:scale-95"
+            style={{ background: T.text, fontFamily: T.body }}
+          >
+            Conócelas todas →
+          </button>
+        </Reveal>
+      </div>
 
       {/* ── Carousel ── */}
       <motion.div

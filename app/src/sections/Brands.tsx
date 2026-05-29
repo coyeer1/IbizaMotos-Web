@@ -1,5 +1,6 @@
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { brands } from '@/data/motorcycles';
+import Reveal from '@/components/Reveal';
 
 // ─── Tokens (alineados con el hero) ───────────────────────────────────────
 const T = {
@@ -58,12 +59,14 @@ export default function Brands({ onBrandClick }: BrandsProps) {
       style={{ background: T.pill, fontFamily: T.body }}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mb-10">
-        <p
-          className={`text-center uppercase transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
-          style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999', fontWeight: 500 }}
-        >
-          Distribuidores Oficiales de las Mejores Marcas
-        </p>
+        <Reveal direction="up">
+          <p
+            className="text-center uppercase"
+            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999', fontWeight: 500 }}
+          >
+            Distribuidores Oficiales de las Mejores Marcas
+          </p>
+        </Reveal>
       </div>
 
       {/* Infinite scroll container */}

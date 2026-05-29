@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Clock, ArrowRight, Eye, Heart, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Reveal from '@/components/Reveal';
 import { posts, categoryStyles } from '@/data/blogPosts';
 import { useBlogMetrics } from '@/hooks/useBlogMetrics';
 
 const CATEGORIES = ['Todos', 'Mantenimiento', 'Compra Inteligente', 'Seguridad', 'Tendencias', 'Técnica'];
 
 export default function Blog() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05 });
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
@@ -27,16 +25,11 @@ export default function Blog() {
   const getLikeCount = (post: any) => post.likes + (metrics[post.id]?.likes_count || 0);
 
   return (
-    <section id="blog" ref={ref} className="py-28 md:py-32 bg-white overflow-hidden relative" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <section id="blog" className="py-28 md:py-32 bg-white overflow-hidden relative" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}
-        <motion.div
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
+        <Reveal direction="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
           <div>
             <span
               className="inline-block uppercase mb-4"
@@ -54,15 +47,10 @@ export default function Blog() {
           <p className="max-w-xs text-sm" style={{ color: '#777', fontWeight: 300, lineHeight: 1.65 }}>
             Guías, consejos y noticias del mundo de las motos en el Eje Cafetero.
           </p>
-        </motion.div>
+        </Reveal>
 
         {/* Category filter tabs */}
-        <motion.div
-          className="flex flex-wrap gap-2 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+        <Reveal delay={0.08} direction="up" className="flex flex-wrap gap-2 mb-12">
           {CATEGORIES.map(cat => (
             <button
               key={cat}
@@ -82,16 +70,14 @@ export default function Blog() {
               )}
             </button>
           ))}
-        </motion.div>
+        </Reveal>
 
         {/* Featured post — only when "Todos" */}
         {activeCategory === 'Todos' && (
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
+          <Reveal delay={0.16} direction="up" className="mb-10">
+          <article
             onClick={() => navigate(`/blog/${featured.id}`)}
-            className="group cursor-pointer mb-10"
+            className="group cursor-pointer"
           >
             <div
               className="relative rounded-2xl overflow-hidden h-[28rem] md:h-[36rem] transition-shadow duration-300"
@@ -136,7 +122,8 @@ export default function Blog() {
                 </div>
               </div>
             </div>
-          </motion.article>
+          </article>
+          </Reveal>
         )}
 
         {/* Posts grid */}
@@ -144,11 +131,12 @@ export default function Blog() {
           {displayPosts
             .filter(p => activeCategory !== 'Todos' || p.id !== featured.id)
             .map((post, i) => (
-              <motion.article
+              <Reveal
                 key={post.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+                delay={Math.min(i, 6) * 0.08}
+                direction="up"
+              >
+              <article
                 onClick={() => navigate(`/blog/${post.id}`)}
                 className="group cursor-pointer bg-white rounded-xl p-3 hover:-translate-y-1.5 transition-all duration-300"
                 style={{ border: '1px solid #e8e8e8' }}
@@ -210,18 +198,14 @@ export default function Blog() {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </article>
+              </Reveal>
             ))}
         </div>
 
         {/* Show more */}
         {filtered.length > 5 && !showAll && (
-          <motion.div
-            className="text-center mt-12"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : {}}
-            transition={{ delay: 0.5 }}
-          >
+          <Reveal direction="fade" className="text-center mt-12">
             <button
               onClick={() => setShowAll(true)}
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 group hover:bg-black hover:text-white hover:border-black"
@@ -230,7 +214,7 @@ export default function Blog() {
               Ver todos los artículos
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </Reveal>
         )}
       </div>
     </section>

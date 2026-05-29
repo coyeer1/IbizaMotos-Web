@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import Reveal from '@/components/Reveal';
 import { ChevronLeft, ChevronRight, X, Star, MapPin, Bike } from 'lucide-react';
 
 // ─── Datos honestos: motos REALES identificadas + Pereira ─────────────────────
@@ -137,7 +137,6 @@ function Lightbox({ index, onClose, onPrev, onNext }: {
 }
 
 export default function HappyCustomers() {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.15 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -173,32 +172,33 @@ export default function HappyCustomers() {
   const current = customers[currentIndex];
 
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden" ref={ref} style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 md:mb-16"
-        >
-          <span
-            className="inline-block uppercase mb-5"
-            style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
-          >
-            Familia Ibiza Motos
-          </span>
-          <h2
-            className="font-display text-5xl md:text-6xl text-black mb-4"
-            style={{ lineHeight: 0.95, letterSpacing: '-0.5px' }}
-          >
-            Clientes que ya rodaron <span style={{ color: '#E31937' }}>con nosotros</span>
-          </h2>
-          <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#777', fontWeight: 300, lineHeight: 1.65 }}>
-            Cada moto entregada es una historia que empieza. Estas son algunas de las experiencias
-            compartidas por la familia Ibiza Motos.
-          </p>
-        </motion.div>
+        <div className="text-center mb-14 md:mb-16">
+          <Reveal direction="up">
+            <span
+              className="inline-block uppercase mb-5"
+              style={{ fontSize: 11, letterSpacing: '0.15em', color: '#999' }}
+            >
+              Familia Ibiza Motos
+            </span>
+          </Reveal>
+          <Reveal delay={0.08} direction="up">
+            <h2
+              className="font-display text-5xl md:text-6xl text-black mb-4"
+              style={{ lineHeight: 0.95, letterSpacing: '-0.5px' }}
+            >
+              Clientes que ya rodaron <span style={{ color: '#E31937' }}>con nosotros</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16} direction="up">
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#777', fontWeight: 300, lineHeight: 1.65 }}>
+              Cada moto entregada es una historia que empieza. Estas son algunas de las experiencias
+              compartidas por la familia Ibiza Motos.
+            </p>
+          </Reveal>
+        </div>
 
         {/* Carousel */}
         <div className="relative">
@@ -325,17 +325,16 @@ export default function HappyCustomers() {
         </div>
 
         {/* Disclaimer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center text-xs mt-12"
-          style={{ color: '#bbb', lineHeight: 1.6 }}
-        >
-          Experiencias compartidas por clientes de la red Ibiza Motos.
-          Para reseñas verificadas, búscanos en Google como{' '}
-          <span style={{ fontWeight: 600, color: '#777' }}>Ibiza Motos</span> en tu ciudad.
-        </motion.p>
+        <Reveal direction="fade" className="mt-12">
+          <p
+            className="text-center text-xs"
+            style={{ color: '#bbb', lineHeight: 1.6 }}
+          >
+            Experiencias compartidas por clientes de la red Ibiza Motos.
+            Para reseñas verificadas, búscanos en Google como{' '}
+            <span style={{ fontWeight: 600, color: '#777' }}>Ibiza Motos</span> en tu ciudad.
+          </p>
+        </Reveal>
       </div>
 
       <AnimatePresence>
