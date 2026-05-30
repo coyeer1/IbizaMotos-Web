@@ -110,9 +110,11 @@ export default function Footer() {
           >
             {/* Real logo */}
             <div className="mb-6">
-              <img 
-                src="/Logo-Ibiza-motos.png" 
-                alt="Ibiza Motos - El placer en dos ruedas" 
+              <img
+                src="/Logo-Ibiza-motos.png"
+                alt="Ibiza Motos - El placer en dos ruedas"
+                loading="lazy"
+                decoding="async"
                 className="h-20 object-contain"
               />
             </div>

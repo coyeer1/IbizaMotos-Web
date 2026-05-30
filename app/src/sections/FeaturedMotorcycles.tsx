@@ -82,6 +82,8 @@ const PremiumMotoCard = ({
             <img
               src={motorcycle.images[0]}
               alt={motorcycle.model}
+              loading="lazy"
+              decoding="async"
               className={`relative z-10 max-h-full max-w-full object-contain filter drop-shadow-xl transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}
             />
           ) : (

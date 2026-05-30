@@ -345,6 +345,8 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           <img
             src={activeBrandInfo.logo}
             alt={`${activeBrandInfo.name} watermark`}
+            loading="lazy"
+            decoding="async"
             className="w-auto h-auto max-w-[80vw] max-h-[80vh] object-contain filter grayscale select-none"
           />
         </div>
@@ -426,7 +428,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                 : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
                 }`}
             >
-              <img src={brand.logo} alt={brand.name} className="w-4 h-4 object-contain rounded-[2px]" style={{
+              <img src={brand.logo} alt={brand.name} loading="lazy" decoding="async" className="w-4 h-4 object-contain rounded-[2px]" style={{
                 opacity: selectedBrand === brand.name ? 1 : 0.6,
                 filter: selectedBrand === brand.name ? 'none' : 'grayscale(1)',
                 mixBlendMode: 'multiply'

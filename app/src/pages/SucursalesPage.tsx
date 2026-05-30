@@ -395,6 +395,8 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
             <img
               src={s.fotos[fotoIdx]}
               alt={`${s.marca} ${s.ciudad}`}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
@@ -420,7 +422,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
                     i === fotoIdx ? 'border-white scale-110' : 'border-white/40 opacity-60 hover:opacity-90'
                   }`}
                 >
-                  <img src={f} alt="" className="w-full h-full object-cover" />
+                  <img src={f} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -549,6 +551,8 @@ function MapaSucursales({ sucursales, ciudadActiva }: { sucursales: Sucursal[]; 
                 <img
                   src={s.fotos[0]}
                   alt={s.marca}
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '110px', objectFit: 'cover', borderRadius: '6px', marginBottom: '8px' }}
                 />
               )}

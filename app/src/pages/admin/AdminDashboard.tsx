@@ -665,7 +665,7 @@ export default function AdminDashboard() {
       <div className="bg-[#0c0c0e] border-b border-white/[0.04] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" className="h-10" />
+            <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" loading="lazy" decoding="async" className="h-10" />
             <div className="h-6 w-px bg-white/10" />
             <span className="text-white/40 text-sm font-medium">Admin Panel</span>
           </div>
@@ -944,7 +944,7 @@ export default function AdminDashboard() {
                   {/* Image */}
                   <div className="w-16 h-12 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                     {moto.images?.[0] ? (
-                      <img src={moto.images[0]} alt={moto.model} className="w-full h-full object-contain" />
+                      <img src={moto.images[0]} alt={moto.model} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                     ) : (
                       <ImageIcon className="w-5 h-5 text-gray-300" />
                     )}

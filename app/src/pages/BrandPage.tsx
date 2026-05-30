@@ -139,7 +139,7 @@ export default function BrandPage() {
                             className="flex items-center gap-3 mb-6 flex-wrap"
                         >
                             <div className="bg-white rounded-xl px-4 py-2 shadow-lg">
-                                <img src={activeBrandData.logo} alt={activeBrandData.name} className="h-6 sm:h-7 object-contain" />
+                                <img src={activeBrandData.logo} alt={activeBrandData.name} loading="lazy" decoding="async" className="h-6 sm:h-7 object-contain" />
                             </div>
                             <span
                                 className="text-[10px] font-black tracking-[0.3em] uppercase px-3 py-1.5 rounded-full border"
@@ -254,6 +254,7 @@ export default function BrandPage() {
                                     <img
                                         src={flagshipImg}
                                         alt={`${activeBrandData.name} ${flagship.model}`}
+                                        decoding="async"
                                         className="w-full max-h-[44vh] lg:max-h-[58vh] object-contain mx-auto drop-shadow-[0_30px_55px_rgba(0,0,0,0.7)] group-hover:scale-[1.03] transition-transform duration-500"
                                     />
                                 </div>
@@ -305,6 +306,8 @@ export default function BrandPage() {
                                 <img
                                     src={activeBrandData.logo}
                                     alt={activeBrandData.name}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-contain"
                                 />
                             </div>
@@ -377,7 +380,7 @@ export default function BrandPage() {
                                         style={{ backgroundColor: `rgba(${bTheme.glowRgb}, 0.05)` }}
                                     >
                                         <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center transition-all shadow-md p-2">
-                                            <img src={brand.logo} alt={brand.name} className="w-full h-full object-contain" />
+                                            <img src={brand.logo} alt={brand.name} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                                         </div>
                                         <div className="text-center">
                                             <p className="font-display font-bold text-white text-sm">{brand.name}</p>

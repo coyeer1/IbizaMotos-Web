@@ -68,7 +68,7 @@ export function ImageUploader({ urls, onChange, bucketName = 'motorcycles', fold
       <div className="flex flex-wrap gap-3">
         {urlArray.map((url, i) => (
           <div key={i} className="relative w-24 h-24 bg-white/5 rounded-xl border border-white/10 group overflow-hidden">
-            <img src={url} alt={`Imagen ${i}`} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150?text=Error'; }} />
+            <img src={url} alt={`Imagen ${i}`} loading="lazy" decoding="async" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/150?text=Error'; }} />
             <button
               type="button"
               onClick={() => removeUrl(i)}

@@ -97,6 +97,8 @@ function ResultCard({
           <img
             src={moto.images[0]}
             alt={moto.model}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain p-1"
           />
         ) : (

@@ -243,6 +243,8 @@ export default function HappyCustomers() {
                     src={current.src}
                     alt=""
                     aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-30"
                   />
                   {/* Foto real centrada y completa */}

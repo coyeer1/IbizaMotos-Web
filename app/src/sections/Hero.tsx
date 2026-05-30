@@ -231,6 +231,8 @@ export default function Hero() {
             key={idx}
             src={slide.image}
             alt={`${slide.brand} ${slide.model}`}
+            fetchpriority="high"
+            decoding="async"
             className={phase === 'out' ? 'hero-img-out' : 'hero-img-in'}
             style={{
               width: '90%',

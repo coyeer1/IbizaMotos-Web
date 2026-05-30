@@ -406,6 +406,7 @@ export default function AppointmentPage() {
                               alt=""
                               aria-hidden
                               loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover transition-all duration-500"
                               style={{
                                 transform:  sel ? 'scale(1.08)' : 'scale(1)',

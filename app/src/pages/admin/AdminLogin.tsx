@@ -44,6 +44,8 @@ export default function AdminLogin() {
           <img
             src="/Logo-Ibiza-motos.png"
             alt="Ibiza Motos"
+            loading="lazy"
+            decoding="async"
             className="h-20 mx-auto mb-4"
           />
           <h1 className="font-display font-bold text-2xl text-white">

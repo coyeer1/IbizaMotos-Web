@@ -75,6 +75,7 @@ export default function Navbar() {
               <img
                 src="/Logo-Ibiza-motos.png"
                 alt="Ibiza Motos"
+                decoding="async"
                 className="h-12 object-contain transition-transform duration-200 group-hover:scale-[1.03]"
               />
             </a>
@@ -172,7 +173,7 @@ export default function Navbar() {
           <div className="p-4 sm:p-6 pt-20">
             {/* Logo in mobile menu */}
             <div className="mb-8 flex justify-center">
-              <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" className="h-16 object-contain" />
+              <img src="/Logo-Ibiza-motos.png" alt="Ibiza Motos" decoding="async" className="h-16 object-contain" />
             </div>
             <div className="flex flex-col gap-1">
               {navLinks.map((link, index) =>

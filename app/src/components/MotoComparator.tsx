@@ -86,7 +86,7 @@ function ComparatorBar() {
               {selected.map(m => (
                 <div key={m.id} className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center">
                   {m.images?.[0] ? (
-                    <img src={m.images[0]} alt={m.model} className="w-full h-full object-contain p-1" />
+                    <img src={m.images[0]} alt={m.model} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" />
                   ) : (
                     <span className="text-white/30 text-[8px] font-bold">{m.brand[0]}</span>
                   )}
@@ -208,7 +208,7 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
                     {/* Image */}
                     <div className="relative h-32 bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-2xl mb-3 overflow-hidden flex items-center justify-center p-3 border border-white/[0.06]">
                       {moto.images?.[0] && (
-                        <img src={moto.images[0]} alt={moto.model} className="max-h-full max-w-full object-contain" />
+                        <img src={moto.images[0]} alt={moto.model} loading="lazy" decoding="async" className="max-h-full max-w-full object-contain" />
                       )}
                       {moto.price === lowestPrice && (
                         <div className="absolute top-2 right-2 bg-ibiza-gold text-black text-[9px] font-black px-2 py-0.5 rounded-full">

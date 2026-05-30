@@ -366,6 +366,7 @@ export default function MotorcyclePage() {
                                         <img
                                             src={currentImage}
                                             alt={`${motorcycle.brand} ${motorcycle.model}`}
+                                            decoding="async"
                                             className="max-h-full max-w-full object-contain filter drop-shadow-[0_35px_55px_rgba(0,0,0,0.85)]"
                                         />
                                         {/* Hint de zoom */}
@@ -411,7 +412,7 @@ export default function MotorcyclePage() {
                                                 }`}
                                             style={currentImageIndex === idx ? { borderColor: brandColor, boxShadow: `0 0 15px rgba(${brandGlow}, 0.4)` } : {}}
                                         >
-                                            <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-contain p-1" />
+                                            <img src={img} alt={`Vista ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" />
                                         </button>
                                     ))}
                                 </div>
