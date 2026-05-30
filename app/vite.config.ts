@@ -20,6 +20,7 @@ export default defineConfig({
           'framer':       ['framer-motion'],
           'leaflet':      ['leaflet', 'react-leaflet'],
           'charts':       ['recharts'],
+          'supabase':     ['@supabase/supabase-js'],
           'ui':           [
             '@radix-ui/react-dialog',
             '@radix-ui/react-select',

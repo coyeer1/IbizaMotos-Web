@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useEffect, useRef, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '@/sections/Hero';
 import Reveal from '@/components/Reveal';
@@ -15,19 +15,31 @@ const Blog            = lazy(() => import('@/sections/Blog'));
 const HappyCustomers  = lazy(() => import('@/sections/HappyCustomers'));
 
 function ScrollProgress() {
-    const [progress, setProgress] = useState(0);
+    const barRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
+        let raf = 0;
         const update = () => {
+            raf = 0;
             const el = document.documentElement;
             const total = el.scrollHeight - el.clientHeight;
-            setProgress(total > 0 ? (el.scrollTop / total) * 100 : 0);
+            const p = total > 0 ? el.scrollTop / total : 0;
+            const bar = barRef.current;
+            if (bar) bar.style.transform = `scaleX(${p})`;
         };
-        window.addEventListener('scroll', update, { passive: true });
-        return () => window.removeEventListener('scroll', update);
+        // rAF-throttled: escribe el transform directo al DOM (GPU, sin layout)
+        // y SIN re-render de React en cada scroll → adiós a los micro-tirones.
+        const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        update();
+        return () => { window.removeEventListener('scroll', onScroll); if (raf) cancelAnimationFrame(raf); };
     }, []);
     return (
         <div className="fixed top-0 left-0 right-0 z-[100] h-[3px] pointer-events-none">
-            <div className="h-full bg-ibiza-red" style={{ width: `${progress}%`, transition: 'width 80ms linear' }} />
+            <div
+                ref={barRef}
+                className="h-full bg-ibiza-red origin-left"
+                style={{ transform: 'scaleX(0)', willChange: 'transform' }}
+            />
         </div>
     );
 }
