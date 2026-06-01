@@ -43,28 +43,28 @@ const SERVICES = [
     label: 'Mantenimiento Preventivo',
     desc: 'Cambio de aceite, filtros, ajuste de válvulas y revisión de 15 puntos.',
     price: 'Desde $85.000', duration: '1–2 horas',
-    Icon: Wrench, image: '/services/mantenimiento.jpg',
+    Icon: Wrench, image: '/services/mantenimiento.webp',
   },
   {
     id: 'revision', code: 'SRV-02',
     label: 'Revisión General',
     desc: 'Diagnóstico completo: motor, eléctrica, frenos y presupuesto detallado.',
     price: '$35.000', duration: '30–45 min',
-    Icon: Search, image: '/services/revision.jpg',
+    Icon: Search, image: '/services/revision.webp',
   },
   {
     id: 'frenos', code: 'SRV-03',
     label: 'Frenos y Suspensión',
     desc: 'Cambio de pastillas, rectificación de discos y reparación de horquillas.',
     price: 'Desde $120.000', duration: '2–3 horas',
-    Icon: ShieldAlert, image: '/services/frenos.jpg',
+    Icon: ShieldAlert, image: '/services/frenos.webp',
   },
   {
     id: 'motor', code: 'SRV-04',
     label: 'Reparación de Motor',
     desc: 'Desde ajustes menores hasta reconstrucción completa. Trabajo garantizado.',
     price: 'Cotización gratis', duration: 'Según diagnóstico',
-    Icon: Cpu, image: '/services/motor.jpg',
+    Icon: Cpu, image: '/services/motor.webp',
   },
 ];
 

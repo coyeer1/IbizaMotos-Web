@@ -31,7 +31,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '1909',
     origin: 'Japón',
     heroVideoId: '',
-    slideImage: '/brand-slides/suzuki.jpg',
+    slideImage: '/brand-slides/suzuki.webp',
   },
 
   // ── HONDA ──────────────────────────────────────────────────────────────────
@@ -47,7 +47,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '1948',
     origin: 'Japón',
     heroVideoId: '',
-    slideImage: '/brand-slides/honda.jpg',
+    slideImage: '/brand-slides/honda.webp',
   },
 
   // ── AKT ────────────────────────────────────────────────────────────────────
@@ -63,7 +63,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '2005',
     origin: 'Colombia',
     heroVideoId: '',
-    slideImage: '/brand-slides/akt.jpg',
+    slideImage: '/brand-slides/akt.webp',
   },
 
   // ── BAJAJ ──────────────────────────────────────────────────────────────────
@@ -79,7 +79,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '1945',
     origin: 'India',
     heroVideoId: '',
-    slideImage: '/brand-slides/bajaj.jpg',
+    slideImage: '/brand-slides/bajaj.webp',
   },
 
   // ── HERO ───────────────────────────────────────────────────────────────────
@@ -95,7 +95,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '1984',
     origin: 'India',
     heroVideoId: '',
-    slideImage: '/brand-slides/hero.png',
+    slideImage: '/brand-slides/hero.webp',
   },
 
   // ── VENTO ──────────────────────────────────────────────────────────────────
@@ -111,7 +111,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '2001',
     origin: 'México',
     heroVideoId: '',
-    slideImage: '/brand-slides/vento.jpg',
+    slideImage: '/brand-slides/vento.webp',
   },
 
   // ── GOOD KIDZ ──────────────────────────────────────────────────────────────
@@ -127,7 +127,7 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     founded: '2015',
     origin: 'Colombia',
     heroVideoId: '',
-    slideImage: '/brand-slides/goodkidz.jpg',
+    slideImage: '/brand-slides/goodkidz.webp',
   },
 };
 
