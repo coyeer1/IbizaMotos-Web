@@ -4,9 +4,11 @@
   "installCommand": "echo 'skip root install'",
   "framework": null,
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/robots.txt",  "destination": "/robots.txt"  },
-    { "source": "/(.*)",        "destination": "/index.html"  }
+    { "source": "/sitemap.xml",        "destination": "/sitemap.xml" },
+    { "source": "/robots.txt",         "destination": "/robots.txt"  },
+    { "source": "/privacidad",         "destination": "/privacidad.html" },
+    { "source": "/eliminacion-datos",  "destination": "/eliminacion-datos.html" },
+    { "source": "/(.*)",               "destination": "/index.html"  }
   ],
   "headers": [
     {
