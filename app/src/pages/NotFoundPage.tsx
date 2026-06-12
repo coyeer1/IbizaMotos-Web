@@ -7,7 +7,7 @@ export default function NotFoundPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#09090b] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#ffffff] flex items-center justify-center px-4">
 
       {/* Video de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -17,10 +17,10 @@ export default function NotFoundPage() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
         />
         {/* Overlay degradado */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#09090b]/60 via-[#09090b]/50 to-[#09090b]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff]/60 via-[#ffffff]/70 to-[#ffffff]" />
       </div>
 
       <motion.div
@@ -49,10 +49,10 @@ export default function NotFoundPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h1 className="font-display font-black text-3xl text-white mb-3">
+          <h1 className="font-display font-black text-3xl text-[#111111] mb-3">
             Página no encontrada
           </h1>
-          <p className="text-gray-500 mb-10 leading-relaxed">
+          <p className="text-[#666666] mb-10 leading-relaxed">
             Esta ruta no existe o fue movida.<br />
             Vuelve al inicio y encuentra lo que buscas.
           </p>
@@ -68,7 +68,7 @@ export default function NotFoundPage() {
           <Button
             onClick={() => navigate(-1)}
             variant="outline"
-            className="border-white/10 text-white hover:bg-white/[0.06] rounded-xl gap-2"
+            className="border-[#ececec] text-[#111111] hover:bg-black/[0.03] rounded-xl gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver
@@ -87,9 +87,9 @@ export default function NotFoundPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 pt-8 border-t border-white/[0.06]"
+          className="mt-12 pt-8 border-t border-[#ececec]"
         >
-          <p className="text-white/20 text-xs mb-4 uppercase tracking-widest font-bold">
+          <p className="text-[#999999] text-xs mb-4 uppercase tracking-widest font-bold">
             Páginas populares
           </p>
           <div className="flex flex-wrap gap-2 justify-center">
@@ -104,7 +104,7 @@ export default function NotFoundPage() {
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className="text-xs text-white/30 hover:text-ibiza-red transition-colors px-3 py-1.5 rounded-lg border border-white/[0.06] hover:border-ibiza-red/20"
+                className="text-xs text-[#999999] hover:text-ibiza-red transition-colors px-3 py-1.5 rounded-lg border border-[#e8e8e8] bg-white hover:border-ibiza-red/20"
               >
                 {label}
               </button>

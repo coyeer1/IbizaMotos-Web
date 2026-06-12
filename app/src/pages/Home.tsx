@@ -2,6 +2,7 @@ import { useEffect, useRef, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hero from '@/sections/Hero';
 import Reveal from '@/components/Reveal';
+import { useSEO } from '@/hooks/useSEO';
 
 // Secciones below-the-fold — se descargan solo cuando el usuario llega a ellas
 const Brands          = lazy(() => import('@/sections/Brands'));
@@ -46,6 +47,12 @@ function ScrollProgress() {
 
 export default function Home() {
     const navigate = useNavigate();
+
+    useSEO({
+        title: 'Ibiza Motos | Concesionario de Motos en Pereira y Eje Cafetero — 19 Sucursales',
+        description: 'Concesionario multimarca con 19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento. Financiación inmediata.',
+        path: '/',
+    });
 
     return (
         <>

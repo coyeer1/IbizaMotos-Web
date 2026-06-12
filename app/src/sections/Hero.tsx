@@ -52,8 +52,6 @@ const SLIDES: HeroSlide[] = [
 
 const fmtCOP = (n: number) =>
   new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
-const cuotaMensual = (p: number) =>
-  Math.round((p * (0.0126 * Math.pow(1.0126, 36))) / (Math.pow(1.0126, 36) - 1));
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -65,7 +63,6 @@ export default function Hero() {
   const slide = SLIDES[idx];
   const moto = motorcycles.find((m) => m.model === slide.model);
   const price = moto ? fmtCOP(moto.price) : '';
-  const monthly = moto ? `${fmtCOP(cuotaMensual(moto.price))}/mes` : '';
 
   // Cambio de slide: sale el actual (out), luego entra el nuevo (in)
   const goTo = useCallback((next: number) => {
@@ -182,7 +179,6 @@ export default function Hero() {
             <div style={{ ...anim(440), marginTop: 28 }}>
               <p style={{ fontSize: 10, letterSpacing: '0.25em', color: '#bbb' }}>DESDE</p>
               <p style={{ fontSize: 34, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>{price}</p>
-              <p style={{ fontSize: 13, color: '#aaa', marginTop: 2 }}>o {monthly}</p>
             </div>
 
             {/* CTAs */}
@@ -231,11 +227,15 @@ export default function Hero() {
             key={idx}
             src={slide.image}
             alt={`${slide.brand} ${slide.model}`}
+            width={580}
+            height={435}
             fetchpriority="high"
             decoding="async"
             className={phase === 'out' ? 'hero-img-out' : 'hero-img-in'}
             style={{
               width: '90%',
+              height: 'auto',
+              aspectRatio: '580 / 435',
               maxWidth: 580,
               maxHeight: '52svh',
               objectFit: 'contain',

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, FileText } from 'lucide-react';
 import Reveal from '@/components/Reveal';
+import { useSEO } from '@/hooks/useSEO';
 
 const LAST_UPDATE  = '26 de mayo de 2026';
 const RESPONSIBLE  = 'Ibiza Motos S.A.S.';
@@ -11,11 +12,12 @@ const EMAIL        = 'ibizachat321@gmail.com';
 const PHONE        = '+57 305 288 4546';
 
 export default function TermsPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.title = 'Términos y Condiciones | Ibiza Motos';
-    return () => { document.title = 'Ibiza Motos | El placer en dos ruedas'; };
-  }, []);
+  useSEO({
+    title: 'Términos y Condiciones | Ibiza Motos',
+    description: 'Términos y condiciones de uso del sitio web y servicios de Ibiza Motos S.A.S.',
+    path: '/terminos',
+  });
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-[#080808] text-white">

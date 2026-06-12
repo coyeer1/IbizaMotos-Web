@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, Phone, Mail, X, ChevronLeft, ChevronRight, Store, Navigation, Map, Search } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 
 // ─── Datos reales de las 19 sucursales ────────────────────────────────────────
 interface Sucursal {
@@ -318,7 +319,7 @@ function SinFoto({ marca, color }: { marca: string; color: string }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-2" style={{ backgroundColor: color + '15' }}>
       <Store className="w-12 h-12 opacity-30" style={{ color }} />
-      <span className="text-xs text-gray-400">{marca}</span>
+      <span className="text-xs text-[#999999]">{marca}</span>
     </div>
   );
 }
@@ -384,11 +385,12 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.35 }}
-        className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
+        className="bg-white rounded-2xl overflow-hidden border border-[#e8e8e8] transition-shadow duration-300 flex flex-col"
+        style={{ boxShadow: '0 8px 30px rgba(0,0,0,0.06)' }}
       >
         {/* Foto principal */}
         <div
-          className={`relative h-48 bg-gray-100 overflow-hidden ${tienefotos ? 'cursor-pointer group' : ''}`}
+          className={`relative h-48 bg-[#f5f5f5] overflow-hidden ${tienefotos ? 'cursor-pointer group' : ''}`}
           onClick={() => tienefotos && setLightbox(fotoIdx)}
         >
           {tienefotos ? (
@@ -432,11 +434,11 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
         {/* Info */}
         <div className="p-4 flex flex-col gap-3 flex-1">
           <div>
-            <h3 className="font-display font-bold text-gray-900 text-base leading-tight">{s.asesor}</h3>
-            <p className="text-xs text-gray-400 mt-0.5 font-medium uppercase tracking-wide">{s.marca} — Ibiza Motos</p>
+            <h3 className="font-display font-bold text-[#111111] text-base leading-tight">{s.asesor}</h3>
+            <p className="text-xs text-[#999999] mt-0.5 font-medium uppercase tracking-wide">{s.marca} — Ibiza Motos</p>
           </div>
 
-          <div className="flex flex-col gap-1.5 text-sm text-gray-600">
+          <div className="flex flex-col gap-1.5 text-sm text-[#666666]">
             <div className="flex items-start gap-2">
               <MapPin className="w-4 h-4 mt-0.5 text-ibiza-red flex-shrink-0" />
               <span className="leading-snug">{s.direccion}, {s.ciudad}</span>
@@ -461,7 +463,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
               href={getMapsUrl(s)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border-2 border-gray-200 text-gray-700 text-sm font-semibold hover:border-ibiza-red hover:text-ibiza-red transition-all duration-200"
+              className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border-2 border-[#e8e8e8] text-[#666666] text-sm font-semibold hover:border-ibiza-red hover:text-ibiza-red transition-all duration-200"
             >
               <Navigation className="w-4 h-4" />
               Cómo llegar
@@ -619,6 +621,12 @@ export default function SucursalesPage() {
   const [ciudadActiva, setCiudadActiva] = useState<string>('Todas');
   const [searchQuery, setSearchQuery] = useState('');
 
+  useSEO({
+    title: 'Nuestras 19 Sucursales en Pereira, Eje Cafetero y Neiva | Ibiza Motos',
+    description: 'Encuentra tu sucursal Ibiza Motos más cercana: 19 puntos en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Direcciones, teléfonos y mapa.',
+    path: '/sucursales',
+  });
+
   const ciudadesFiltro = ['Todas', ...CIUDADES];
 
   const sucursalesFiltradas = useMemo(() => {
@@ -638,39 +646,39 @@ export default function SucursalesPage() {
   }, [ciudadActiva, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-white pt-20">
       {/* Header */}
-      <div className="bg-ibiza-black py-14 px-4 text-center">
+      <div className="bg-white py-14 px-4 text-center border-b border-[#ececec]">
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Store className="w-5 h-5 text-ibiza-gold" />
-            <span className="text-ibiza-gold font-display text-xs tracking-widest uppercase">Red de distribución</span>
+            <Store className="w-5 h-5 text-ibiza-red" />
+            <span className="text-ibiza-red font-display text-xs tracking-widest uppercase">Red de distribución</span>
           </div>
-          <h1 className="font-display font-black text-4xl md:text-5xl text-white mb-3">
+          <h1 className="font-display font-black text-4xl md:text-5xl text-[#111111] mb-3">
             Nuestras <span className="text-ibiza-red">Sucursales</span>
           </h1>
-          <p className="text-gray-400 max-w-lg mx-auto text-base">
-            <span className="text-white font-bold">19 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
+          <p className="text-[#666666] max-w-lg mx-auto text-base">
+            <span className="text-[#111111] font-bold">19 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
             Encuentra el más cercano a ti.
           </p>
         </motion.div>
       </div>
 
       {/* Buscador */}
-      <div className="bg-white border-b border-gray-100 px-4 py-4">
+      <div className="bg-white border-b border-[#ececec] px-4 py-4">
         <div className="max-w-xl mx-auto relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999999] pointer-events-none" />
           <input
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Buscar por ciudad, marca o asesor…"
-            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-ibiza-red/30 focus:border-ibiza-red transition-all"
+            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#e8e8e8] bg-white text-sm text-[#111111] placeholder-[#999999] focus:outline-none focus:ring-2 focus:ring-ibiza-red/30 focus:border-ibiza-red transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#999999] hover:text-[#666666]"
             >
               <X className="w-4 h-4" />
             </button>
@@ -679,7 +687,7 @@ export default function SucursalesPage() {
       </div>
 
       {/* Filtro por ciudad */}
-      <div className="sticky top-16 z-10 bg-white border-b border-gray-100 shadow-sm">
+      <div className="sticky top-16 z-10 bg-white border-b border-[#ececec] shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 flex gap-2 overflow-x-auto no-scrollbar">
           {ciudadesFiltro.map(ciudad => {
             const count = ciudad === 'Todas' ? SUCURSALES.length : SUCURSALES.filter(s => s.ciudad === ciudad).length;
@@ -687,10 +695,10 @@ export default function SucursalesPage() {
               <button
                 key={ciudad}
                 onClick={() => setCiudadActiva(ciudad)}
-                className={`px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
+                className={`px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 border ${
                   ciudadActiva === ciudad
-                    ? 'bg-ibiza-red text-white shadow scale-105'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-ibiza-red text-white border-ibiza-red shadow scale-105'
+                    : 'bg-white text-[#666666] border-[#e8e8e8] hover:border-ibiza-red hover:text-ibiza-red'
                 }`}
               >
                 {ciudad}
@@ -719,7 +727,7 @@ export default function SucursalesPage() {
         </AnimatePresence>
 
         {sucursalesFiltradas.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">
+          <div className="text-center py-16 text-[#999999]">
             <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
             <p className="font-medium">Sin resultados para "{searchQuery}"</p>
             <button onClick={() => setSearchQuery('')} className="mt-2 text-ibiza-red text-sm hover:underline">
@@ -727,7 +735,7 @@ export default function SucursalesPage() {
             </button>
           </div>
         ) : (
-          <p className="text-center text-gray-400 text-sm mt-10">
+          <p className="text-center text-[#999999] text-sm mt-10">
             {sucursalesFiltradas.length} sucursal{sucursalesFiltradas.length !== 1 ? 'es' : ''}{' '}
             {searchQuery ? `con "${searchQuery}"` : ciudadActiva === 'Todas' ? 'en toda la red' : `en ${ciudadActiva}`}
           </p>
@@ -735,9 +743,9 @@ export default function SucursalesPage() {
       </div>
 
       {/* ── Mapa ── */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-[#ececec]">
         {/* Header del mapa */}
-        <div className="bg-ibiza-black py-8 px-4 text-center">
+        <div className="bg-white py-8 px-4 text-center border-b border-[#ececec]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -745,13 +753,13 @@ export default function SucursalesPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center justify-center gap-2 mb-1">
-              <Map className="w-5 h-5 text-ibiza-gold" />
-              <span className="text-ibiza-gold font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
+              <Map className="w-5 h-5 text-ibiza-red" />
+              <span className="text-ibiza-red font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
             </div>
-            <h2 className="font-display font-black text-2xl md:text-3xl text-white">
+            <h2 className="font-display font-black text-2xl md:text-3xl text-[#111111]">
               Encuéntranos en el <span className="text-ibiza-red">mapa</span>
             </h2>
-            <p className="text-gray-400 text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
+            <p className="text-[#666666] text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
           </motion.div>
         </div>
 

@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, X, Star, MapPin, Bike } from 'lucide-react';
 const customers = [
   {
     id: 1,
-    src: '/clientes/cliente1.jpg',
+    src: '/clientes/cliente1.webp',
     name: 'Andrés',
     city: 'Pereira',
     motorcycle: 'AKT Special 125',
@@ -16,7 +16,7 @@ const customers = [
   },
   {
     id: 2,
-    src: '/clientes/cliente2.jpg',
+    src: '/clientes/cliente2.webp',
     name: 'Sebastián',
     city: 'Pereira',
     motorcycle: 'AKT 125 TTR CBS',
@@ -25,7 +25,7 @@ const customers = [
   },
   {
     id: 3,
-    src: '/clientes/cliente3.jpg',
+    src: '/clientes/cliente3.webp',
     name: 'Camila',
     city: 'Pereira',
     motorcycle: 'AKT Dynamic R3',
@@ -34,7 +34,7 @@ const customers = [
   },
   {
     id: 4,
-    src: '/clientes/cliente4.jpg',
+    src: '/clientes/cliente4.webp',
     name: 'Juan',
     city: 'Pereira',
     motorcycle: 'AKT NKD 125',
@@ -43,7 +43,7 @@ const customers = [
   },
   {
     id: 5,
-    src: '/clientes/cliente5.jpg',
+    src: '/clientes/cliente5.webp',
     name: 'Don Mauricio',
     city: 'Pereira',
     motorcycle: 'AKT 3W 200',
@@ -52,7 +52,7 @@ const customers = [
   },
   {
     id: 6,
-    src: '/clientes/cliente6.jpg',
+    src: '/clientes/cliente6.webp',
     name: 'Carlos',
     city: 'Pereira',
     motorcycle: 'Suzuki Gixxer 150',
@@ -61,7 +61,7 @@ const customers = [
   },
   {
     id: 7,
-    src: '/clientes/cliente7.jpg',
+    src: '/clientes/cliente7.webp',
     name: 'Alejandro y Sara',
     city: 'Pereira',
     motorcycle: 'AKT NKD 125',
@@ -70,7 +70,7 @@ const customers = [
   },
   {
     id: 8,
-    src: '/clientes/cliente8.jpg',
+    src: '/clientes/cliente8.webp',
     name: 'Diana',
     city: 'Pereira',
     motorcycle: 'AKT Dynamic Pro 125',
@@ -79,7 +79,7 @@ const customers = [
   },
   {
     id: 9,
-    src: '/clientes/cliente9.jpg',
+    src: '/clientes/cliente9.webp',
     name: 'Mateo y Valentina',
     city: 'Pereira',
     motorcycle: 'Suzuki DR 150',
@@ -88,7 +88,7 @@ const customers = [
   },
   {
     id: 10,
-    src: '/clientes/cliente10.jpg',
+    src: '/clientes/cliente10.webp',
     name: 'Don Hernando',
     city: 'Pereira',
     motorcycle: 'Honda XR 150L',

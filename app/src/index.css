@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+/* Fuentes cargadas desde index.html (<link>) — NO usar @import aquí:
+   bloquea el render y obliga a una cadena de descargas secuencial. */
 
 @tailwind base;
 @tailwind components;

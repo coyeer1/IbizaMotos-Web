@@ -11,6 +11,7 @@ import { Calculator, ArrowRight } from 'lucide-react';
 import type { Motorcycle } from '@/types';
 import { CompareButton } from '@/components/MotoComparator';
 import { getBrandTheme } from '@/lib/brandThemes';
+import { useSEO } from '@/hooks/useSEO';
 
 // Map de colores para renderizar
 const colorMap: Record<string, string> = {
@@ -24,6 +25,11 @@ const colorMap: Record<string, string> = {
     'Verde Militar': '#3f4f3a',
     'Gris': '#6b7280',
     'Naranja': '#f97316',
+    'Amarillo': '#eab308',
+    'Púrpura': '#7c3aed',
+    'Gris Verde': '#5f6b5a',
+    'Gris Brillante': '#9ca3af',
+    'Gris/Negro': '#374151',
 };
 
 const specIcons: Record<string, React.ReactNode> = {
@@ -64,40 +70,25 @@ export default function MotorcyclePage() {
         }
     }, [id, navigate, motorcycles, loading]);
 
-    // SEO: update page title and meta tags
-    useEffect(() => {
-        if (!motorcycle) return;
-        const title = `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} | Ibiza Motos`;
-        document.title = title;
-
-        const setMeta = (name: string, content: string, prop = false) => {
-            const attr = prop ? 'property' : 'name';
-            let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
-            if (!el) {
-                el = document.createElement('meta');
-                el.setAttribute(attr, name);
-                document.head.appendChild(el);
+    // SEO por moto: título, descripción, canonical y og:image únicos por ficha
+    const motoPrice = motorcycle
+        ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(motorcycle.price)
+        : '';
+    useSEO(
+        motorcycle
+            ? {
+                title: `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} | Ibiza Motos Pereira`,
+                description: `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} desde ${motoPrice}. ${motorcycle.category} disponible en Ibiza Motos, Pereira y el Eje Cafetero. Financiación inmediata.`,
+                path: `/moto/${motorcycle.id}`,
+                image: motorcycle.images?.[0],
+                type: 'product',
             }
-            el.setAttribute('content', content);
-        };
-
-        const price = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(motorcycle.price);
-        const desc = `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} - ${price}. ${motorcycle.category}. Disponible en Ibiza Motos, Armenia Quindío.`;
-
-        setMeta('description', desc);
-        setMeta('og:title', title, true);
-        setMeta('og:description', desc, true);
-        if (motorcycle.images?.[0]) setMeta('og:image', motorcycle.images[0], true);
-        setMeta('og:type', 'product', true);
-
-        return () => {
-            document.title = 'Ibiza Motos | El placer en dos ruedas';
-        };
-    }, [motorcycle]);
+            : { title: 'Ibiza Motos | El placer en dos ruedas' }
+    );
 
     if (loading || !motorcycle) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-ibiza-black">
+            <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#ffffff' }}>
                 <div className="w-12 h-12 border-4 border-ibiza-red/30 border-t-ibiza-red rounded-full animate-spin"></div>
             </div>
         );
@@ -108,7 +99,6 @@ export default function MotorcyclePage() {
 
     const theme = getBrandTheme(motorcycle.brand);
     const brandColor = theme.primary;
-    const brandBg = theme.bg;
     const brandGlow = theme.glowRgb;
 
     const formatPrice = (price: number) => {
@@ -156,27 +146,23 @@ export default function MotorcyclePage() {
         { value: pick(/([\d.]+)\s*kg/i, motorcycle.specifications.weight), unit: 'kg', label: 'Peso' },
     ].filter(s => s.value);
 
-    // Cuota estimada (36 meses, 1.26% E.M.) para el bloque de financiación
-    const fMeses = 36, fTasa = 0.0126;
-    const cuotaEstimada = Math.round(
-        (motorcycle.price * (fTasa * Math.pow(1 + fTasa, fMeses))) / (Math.pow(1 + fTasa, fMeses) - 1)
-    );
-
     return (
-        <div className="min-h-screen relative pb-32" style={{ backgroundColor: brandBg }}>
+        <div className="min-h-screen relative pb-32" style={{ backgroundColor: '#ffffff' }}>
 
             {/* ── VIDEO HERO ── */}
             {videoId && (
                 <section className="relative w-full h-[60vh] md:h-screen overflow-hidden">
                     <iframe
-                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1`}
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                        style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', pointerEvents: 'none' }}
+                        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3&showinfo=0`}
+                        className="absolute top-1/2 left-1/2"
+                        style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', transform: 'translate(-50%, -50%) scale(1.35)', pointerEvents: 'none' }}
                         frameBorder="0"
                         allow="autoplay; encrypted-media; fullscreen"
                     />
+                    {/* Capa transparente: bloquea cualquier interacción/chrome de YouTube */}
+                    <div className="absolute inset-0 z-[1]" style={{ pointerEvents: 'none' }} aria-hidden />
                     {/* Gradiente superior e inferior */}
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%, ${brandBg} 100%)` }} />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%, #ffffff 100%)` }} />
                     {/* Texto overlay inferior */}
                     <div className="absolute bottom-10 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
                         <span className="text-[10px] font-bold tracking-[0.3em] uppercase block mb-1" style={{ color: brandColor }}>{motorcycle.brand}</span>
@@ -201,15 +187,16 @@ export default function MotorcyclePage() {
             <section className="relative w-full min-h-[60vh] md:min-h-[85vh] flex flex-col overflow-hidden">
                 {/* Background glow effects */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px]" style={{ backgroundColor: `rgba(${brandGlow}, 0.08)` }} />
-                    <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-[120px]" style={{ backgroundColor: `rgba(${brandGlow}, 0.05)` }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px]" style={{ backgroundColor: `rgba(${brandGlow}, 0.05)` }} />
+                    <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-[120px]" style={{ backgroundColor: `rgba(${brandGlow}, 0.04)` }} />
                 </div>
 
                 {/* Navigation Bar inside Hero */}
                 <div className="relative z-30 pt-24 px-4 sm:px-8 lg:px-12 flex items-center justify-between">
                     <button
                         onClick={() => navigate(-1)}
-                        className="flex items-center text-gray-400 hover:text-white transition-colors font-medium text-sm bg-white/5 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 hover:border-white/20"
+                        className="flex items-center transition-colors font-medium text-sm backdrop-blur-md px-5 py-2.5 rounded-full"
+                        style={{ color: '#666666', backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}
                     >
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         Volver al catálogo
@@ -217,10 +204,10 @@ export default function MotorcyclePage() {
 
                     <div className="flex items-center gap-3">
                         {motorcycle && <CompareButton motorcycle={motorcycle} />}
-                        <button className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-400 hover:text-ibiza-red hover:border-ibiza-red/30 transition-all">
+                        <button className="w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center text-[#999999] hover:text-ibiza-red hover:border-ibiza-red/30 transition-all" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>
                             <Heart className="w-5 h-5" />
                         </button>
-                        <button className="w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-400 hover:text-ibiza-red hover:border-ibiza-red/30 transition-all">
+                        <button className="w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center text-[#999999] hover:text-ibiza-red hover:border-ibiza-red/30 transition-all" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>
                             <Share2 className="w-5 h-5" />
                         </button>
                     </div>
@@ -244,35 +231,35 @@ export default function MotorcyclePage() {
                             >
                                 {motorcycle.brand}
                             </span>
-                            <span className="text-xs text-gray-500 tracking-wider uppercase">
+                            <span className="text-xs text-[#999999] tracking-wider uppercase">
                                 {motorcycle.category}
                             </span>
                         </div>
 
                         {/* Model title */}
-                        <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[0.9] tracking-tight mb-4">
+                        <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-[#111111] leading-[0.9] tracking-tight mb-4">
                             {motorcycle.model}
                         </h1>
 
                         {/* Year */}
-                        <span className="text-ibiza-gold font-display font-bold text-lg mb-6">
+                        <span className="font-display font-bold text-lg mb-6" style={{ color: brandColor }}>
                             Modelo {motorcycle.year}
                         </span>
 
                         {/* Description */}
-                        <p className="text-gray-400 text-base leading-relaxed mb-8 max-w-md">
+                        <p className="text-[#666666] text-base leading-relaxed mb-8 max-w-md">
                             {motorcycle.description}
                         </p>
 
                         {/* Price block */}
                         <div className="mb-8">
-                            <p className="text-xs text-gray-500 font-semibold tracking-wider uppercase mb-1">Precio desde</p>
+                            <p className="text-xs text-[#999999] font-semibold tracking-wider uppercase mb-1">Precio desde</p>
                             <div className="flex items-end gap-3">
-                                <span className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-white leading-none">
+                                <span className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-[#111111] leading-none">
                                     {formatPrice(motorcycle.price)}
                                 </span>
                             </div>
-                            <span className="text-sm text-gray-500 line-through mt-1 block">
+                            <span className="text-sm text-[#999999] line-through mt-1 block">
                                 {formatPrice(originalPrice)}
                             </span>
                         </div>
@@ -280,8 +267,8 @@ export default function MotorcyclePage() {
                         {/* Color selector — solo si hay imagesByColor real */}
                         {motorcycle.imagesByColor && motorcycle.specifications.colors?.length > 0 && (
                         <div className="mb-8">
-                            <p className="text-xs font-bold text-gray-500 tracking-widest uppercase mb-3">
-                                Color: <span className="text-white">{selectedColor}</span>
+                            <p className="text-xs font-bold text-[#999999] tracking-widest uppercase mb-3">
+                                Color: <span className="text-[#111111]">{selectedColor}</span>
                             </p>
                             <div className="flex gap-3 flex-wrap">
                                 {motorcycle.specifications.colors.map((color) => (
@@ -292,11 +279,11 @@ export default function MotorcyclePage() {
                                         className={`w-10 h-10 rounded-full transition-all duration-300 ${
                                             selectedColor === color
                                                 ? 'ring-2 ring-offset-2 scale-110'
-                                                : 'border border-white/20 hover:scale-105 hover:border-white/40'
+                                                : 'border border-[#e8e8e8] hover:scale-105 hover:border-[#cccccc]'
                                         }`}
                                         style={{
                                             backgroundColor: colorMap[color] || '#888',
-                                            ...(selectedColor === color ? { ringColor: brandColor, '--tw-ring-color': brandColor, '--tw-ring-offset-color': brandBg } as React.CSSProperties : {}),
+                                            ...(selectedColor === color ? { ringColor: brandColor, '--tw-ring-color': brandColor, '--tw-ring-offset-color': '#ffffff' } as React.CSSProperties : {}),
                                         }}
                                     />
                                 ))}
@@ -317,7 +304,7 @@ export default function MotorcyclePage() {
                             <Button
                                 variant="outline"
                                 onClick={() => setShowQuoteModal(true)}
-                                className="flex-1 h-14 border-2 border-white/10 text-white hover:bg-white/5 font-display font-bold text-sm uppercase tracking-wider rounded-2xl transition-all"
+                                className="flex-1 h-14 border-2 border-[#e8e8e8] text-[#111111] hover:bg-[#f7f7f7] font-display font-bold text-sm uppercase tracking-wider rounded-2xl transition-all"
                             >
                                 💬 Cotizar
                             </Button>
@@ -338,14 +325,14 @@ export default function MotorcyclePage() {
                                 {/* Glow de marca detrás de la moto */}
                                 <div
                                     className="absolute w-[80%] h-[72%] rounded-full blur-[120px] pointer-events-none"
-                                    style={{ backgroundColor: `rgba(${brandGlow}, 0.28)` }}
+                                    style={{ backgroundColor: `rgba(${brandGlow}, 0.10)` }}
                                 />
                                 {/* Watermark del modelo detrás */}
                                 <span
                                     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-black uppercase whitespace-nowrap pointer-events-none select-none leading-none"
                                     style={{
                                         fontSize: 'clamp(4rem, 14vw, 13rem)',
-                                        color: 'rgba(255,255,255,0.035)',
+                                        color: 'rgba(17,17,17,0.04)',
                                         letterSpacing: '-0.04em',
                                     }}
                                     aria-hidden
@@ -367,10 +354,10 @@ export default function MotorcyclePage() {
                                             src={currentImage}
                                             alt={`${motorcycle.brand} ${motorcycle.model}`}
                                             decoding="async"
-                                            className="max-h-full max-w-full object-contain filter drop-shadow-[0_35px_55px_rgba(0,0,0,0.85)]"
+                                            className="max-h-full max-w-full object-contain filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.18)]"
                                         />
                                         {/* Hint de zoom */}
-                                        <span className="absolute bottom-1 right-1 sm:bottom-3 sm:right-3 inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-white/70 bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
+                                        <span className="absolute bottom-1 right-1 sm:bottom-3 sm:right-3 inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#666666] backdrop-blur-sm px-3 py-1.5 rounded-full" style={{ backgroundColor: 'rgba(255,255,255,0.85)', border: '1px solid #e8e8e8' }}>
                                             <ZoomIn className="w-3.5 h-3.5" /> Ampliar
                                         </span>
                                     </motion.div>
@@ -381,17 +368,19 @@ export default function MotorcyclePage() {
                                     <>
                                         <button
                                             onClick={prevImage}
-                                            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all"
-                                            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; }}
-                                            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''; (e.currentTarget as HTMLButtonElement).style.borderColor = ''; }}
+                                            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full backdrop-blur-sm flex items-center justify-center text-[#111111] transition-all"
+                                            style={{ backgroundColor: 'rgba(255,255,255,0.9)', border: '1px solid #e8e8e8' }}
+                                            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; (e.currentTarget as HTMLButtonElement).style.color = '#ffffff'; }}
+                                            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(255,255,255,0.9)'; (e.currentTarget as HTMLButtonElement).style.borderColor = '#e8e8e8'; (e.currentTarget as HTMLButtonElement).style.color = '#111111'; }}
                                         >
                                             <ChevronLeft className="w-5 h-5" />
                                         </button>
                                         <button
                                             onClick={nextImage}
-                                            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white transition-all"
-                                            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; }}
-                                            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = ''; (e.currentTarget as HTMLButtonElement).style.borderColor = ''; }}
+                                            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full backdrop-blur-sm flex items-center justify-center text-[#111111] transition-all"
+                                            style={{ backgroundColor: 'rgba(255,255,255,0.9)', border: '1px solid #e8e8e8' }}
+                                            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = brandColor; (e.currentTarget as HTMLButtonElement).style.borderColor = brandColor; (e.currentTarget as HTMLButtonElement).style.color = '#ffffff'; }}
+                                            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'rgba(255,255,255,0.9)'; (e.currentTarget as HTMLButtonElement).style.borderColor = '#e8e8e8'; (e.currentTarget as HTMLButtonElement).style.color = '#111111'; }}
                                         >
                                             <ChevronRight className="w-5 h-5" />
                                         </button>
@@ -406,11 +395,11 @@ export default function MotorcyclePage() {
                                         <button
                                             key={idx}
                                             onClick={() => setCurrentImageIndex(idx)}
-                                            className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 bg-white/[0.03] ${currentImageIndex === idx
+                                            className={`w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 bg-[#f7f7f7] ${currentImageIndex === idx
                                                 ? 'scale-105'
-                                                : 'border-white/10 opacity-50 hover:opacity-80 hover:border-white/20'
+                                                : 'border-[#ececec] opacity-60 hover:opacity-100 hover:border-[#cccccc]'
                                                 }`}
-                                            style={currentImageIndex === idx ? { borderColor: brandColor, boxShadow: `0 0 15px rgba(${brandGlow}, 0.4)` } : {}}
+                                            style={currentImageIndex === idx ? { borderColor: brandColor, boxShadow: `0 0 15px rgba(${brandGlow}, 0.25)` } : {}}
                                         >
                                             <img src={img} alt={`Vista ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-full object-contain p-1" />
                                         </button>
@@ -423,7 +412,7 @@ export default function MotorcyclePage() {
             </section>
 
             {/* ── FICHA TÉCNICA ── */}
-            <section className="py-16 border-t border-white/5" style={{ backgroundColor: brandBg }}>
+            <section className="py-16 border-t" style={{ backgroundColor: '#ffffff', borderColor: '#ececec' }}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {/* Header */}
@@ -436,11 +425,11 @@ export default function MotorcyclePage() {
                     >
                         <div>
                             <p className="text-[11px] font-bold tracking-[0.3em] uppercase mb-2" style={{ color: brandColor }}>Ficha técnica</p>
-                            <h2 className="font-display font-black text-3xl sm:text-4xl text-white">Especificaciones</h2>
+                            <h2 className="font-display font-black text-3xl sm:text-4xl text-[#111111]">Especificaciones</h2>
                         </div>
                         <div className="flex items-center gap-2 text-xs">
-                            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300 font-medium">{motorcycle.category}</span>
-                            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300 font-medium">Modelo {motorcycle.year}</span>
+                            <span className="px-3 py-1.5 rounded-full text-[#666666] font-medium" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>{motorcycle.category}</span>
+                            <span className="px-3 py-1.5 rounded-full text-[#666666] font-medium" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>Modelo {motorcycle.year}</span>
                         </div>
                     </motion.div>
 
@@ -452,18 +441,18 @@ export default function MotorcyclePage() {
                             viewport={{ once: true, margin: '-60px' }}
                             transition={{ duration: 0.5 }}
                             className="relative overflow-hidden rounded-3xl border mb-5"
-                            style={{ borderColor: `rgba(${brandGlow}, 0.22)`, background: `linear-gradient(135deg, rgba(${brandGlow}, 0.16) 0%, rgba(${brandGlow}, 0.02) 55%, transparent 100%)` }}
+                            style={{ borderColor: '#e8e8e8', background: `linear-gradient(135deg, rgba(${brandGlow}, 0.06) 0%, rgba(${brandGlow}, 0.015) 55%, #ffffff 100%)` }}
                         >
                             {/* Glow decorativo */}
-                            <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full blur-[110px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.25)` }} />
-                            <div className={`relative grid ${keyStats.length === 4 ? 'grid-cols-2 md:grid-cols-4' : keyStats.length === 3 ? 'grid-cols-3' : 'grid-cols-2'} divide-x divide-white/[0.06]`}>
+                            <div className="absolute -right-20 -top-20 w-72 h-72 rounded-full blur-[110px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.08)` }} />
+                            <div className={`relative grid ${keyStats.length === 4 ? 'grid-cols-2 md:grid-cols-4' : keyStats.length === 3 ? 'grid-cols-3' : 'grid-cols-2'} divide-x divide-[#ececec]`}>
                                 {keyStats.map((s) => (
                                     <div key={s.label} className="px-4 py-8 sm:py-10 text-center">
-                                        <p className="font-display font-black text-white leading-none tracking-tight" style={{ fontSize: 'clamp(2.4rem, 6vw, 4.25rem)' }}>
+                                        <p className="font-display font-black text-[#111111] leading-none tracking-tight" style={{ fontSize: 'clamp(2.4rem, 6vw, 4.25rem)' }}>
                                             <span style={{ fontVariantNumeric: 'tabular-nums' }}>{s.value}</span>
                                             <span className="text-base sm:text-xl align-top ml-1 font-bold" style={{ color: brandColor }}>{s.unit}</span>
                                         </p>
-                                        <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-white/45 mt-3">{s.label}</p>
+                                        <p className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[#999999] mt-3">{s.label}</p>
                                     </div>
                                 ))}
                             </div>
@@ -476,19 +465,20 @@ export default function MotorcyclePage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-50px' }}
                         transition={{ duration: 0.5, delay: 0.1 }}
-                        className="rounded-2xl border border-white/[0.07] overflow-hidden"
+                        className="rounded-2xl overflow-hidden"
+                        style={{ border: '1px solid #e8e8e8' }}
                     >
                         {specs.map((spec, i) => (
                             <div
                                 key={spec.label}
-                                className="flex items-center justify-between gap-4 px-5 sm:px-7 py-4 sm:py-5 border-b border-white/[0.05] last:border-b-0 transition-colors hover:bg-white/[0.02]"
-                                style={{ backgroundColor: i % 2 === 0 ? 'rgba(255,255,255,0.018)' : 'transparent' }}
+                                className="flex items-center justify-between gap-4 px-5 sm:px-7 py-4 sm:py-5 last:border-b-0 transition-colors hover:bg-[#f7f7f7]"
+                                style={{ backgroundColor: i % 2 === 0 ? '#fafafa' : '#ffffff', borderBottom: '1px solid #ececec' }}
                             >
                                 <div className="flex items-center gap-3 min-w-0">
                                     <span className="shrink-0" style={{ color: brandColor }}>{spec.icon}</span>
-                                    <span className="text-[11px] sm:text-xs font-bold text-gray-500 tracking-wider uppercase">{spec.label}</span>
+                                    <span className="text-[11px] sm:text-xs font-bold text-[#999999] tracking-wider uppercase">{spec.label}</span>
                                 </div>
-                                <span className="font-display font-bold text-white text-sm sm:text-lg text-right">{spec.value}</span>
+                                <span className="font-display font-bold text-[#111111] text-sm sm:text-lg text-right">{spec.value}</span>
                             </div>
                         ))}
                     </motion.div>
@@ -507,12 +497,13 @@ export default function MotorcyclePage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-40px' }}
                                 transition={{ duration: 0.4, delay: idx * 0.06 }}
-                                className="flex items-start gap-3 bg-white/[0.02] rounded-2xl p-4 border border-white/5"
+                                className="flex items-start gap-3 rounded-2xl p-4"
+                                style={{ backgroundColor: '#f7f7f7', border: '1px solid #e8e8e8' }}
                             >
                                 <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: brandColor }} />
                                 <div>
-                                    <p className="text-white font-display font-bold text-sm leading-tight">{item.title}</p>
-                                    <p className="text-gray-500 text-xs mt-0.5">{item.sub}</p>
+                                    <p className="text-[#111111] font-display font-bold text-sm leading-tight">{item.title}</p>
+                                    <p className="text-[#999999] text-xs mt-0.5">{item.sub}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -521,7 +512,7 @@ export default function MotorcyclePage() {
             </section>
 
             {/* ── FINANCING CTA ── */}
-            <section className="py-14 border-t border-white/5">
+            <section className="py-14 border-t" style={{ borderColor: '#ececec' }}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
@@ -529,51 +520,46 @@ export default function MotorcyclePage() {
                         viewport={{ once: true, margin: '-60px' }}
                         transition={{ duration: 0.5 }}
                         className="relative overflow-hidden rounded-3xl border"
-                        style={{ borderColor: `rgba(${brandGlow}, 0.22)`, background: `linear-gradient(115deg, rgba(${brandGlow}, 0.16) 0%, rgba(${brandGlow}, 0.04) 45%, transparent 100%)` }}
+                        style={{ borderColor: '#e8e8e8', background: `linear-gradient(115deg, rgba(${brandGlow}, 0.06) 0%, rgba(${brandGlow}, 0.02) 45%, #ffffff 100%)` }}
                     >
                         {/* Glow */}
-                        <div className="absolute -left-16 -bottom-20 w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.22)` }} />
+                        <div className="absolute -left-16 -bottom-20 w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `rgba(${brandGlow}, 0.08)` }} />
 
                         <div className="relative grid md:grid-cols-2 gap-8 items-center p-7 sm:p-10">
-                            {/* Izquierda: cuota gigante */}
+                            {/* Izquierda: gancho (sin números) */}
                             <div>
                                 <span className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full border mb-5" style={{ color: brandColor, borderColor: `rgba(${brandGlow}, 0.3)`, backgroundColor: `rgba(${brandGlow}, 0.1)` }}>
-                                    <Calculator className="w-3.5 h-3.5" /> Llévatela a cuotas
+                                    <Calculator className="w-3.5 h-3.5" /> Financiación a tu medida
                                 </span>
-                                <p className="text-white/55 text-sm font-semibold tracking-wide uppercase mb-1">Cuota desde</p>
-                                <p className="font-display font-black text-white leading-none mb-2" style={{ fontSize: 'clamp(3rem, 9vw, 5.5rem)' }}>
-                                    <span className="text-2xl sm:text-3xl align-top mr-1" style={{ color: brandColor }}>$</span>
-                                    <span style={{ fontVariantNumeric: 'tabular-nums' }}>{new Intl.NumberFormat('es-CO').format(cuotaEstimada)}</span>
-                                    <span className="text-lg sm:text-2xl text-white/50 font-bold ml-2">/mes</span>
+                                <p className="font-display font-black text-[#111111] leading-[0.95] mb-3" style={{ fontSize: 'clamp(2.2rem, 6vw, 3.5rem)' }}>
+                                    FINÁNCIALA Y<br />ESTRÉNALA <span style={{ color: brandColor }}>HOY</span>
                                 </p>
-                                <p className="text-gray-500 text-xs leading-relaxed max-w-sm">
-                                    Estimado a {fMeses} meses · tasa desde 1.26% E.M. sobre {'$' + new Intl.NumberFormat('es-CO').format(motorcycle.price)}. Valor sujeto a aprobación de crédito.
+                                <p className="text-[#666666] text-sm leading-relaxed max-w-sm">
+                                    Te armamos el plan que más te conviene con nuestras 8 financieras aliadas. Aprobación en menos de 24 horas — muchas veces sin codeudor.
                                 </p>
                             </div>
 
                             {/* Derecha: trust + CTA */}
-                            <div className="md:border-l md:border-white/10 md:pl-8">
+                            <div className="md:border-l md:pl-8" style={{ borderColor: '#ececec' }}>
                                 <div className="space-y-3 mb-6">
                                     {['8 financieras aliadas (Progreser, Banco de Bogotá, Brilla…)', 'Respuesta en menos de 24 horas', 'Cuota inicial flexible · sin codeudor en muchos casos'].map((t) => (
                                         <div key={t} className="flex items-start gap-2.5">
                                             <CheckCircle2 className="w-4 h-4 shrink-0 mt-1" style={{ color: brandColor }} />
-                                            <span className="text-gray-300 text-sm">{t}</span>
+                                            <span className="text-[#666666] text-sm">{t}</span>
                                         </div>
                                     ))}
                                 </div>
-                                <button
-                                    onClick={() =>
-                                        navigate(
-                                            `/financiamiento?precio=${motorcycle.price}&moto=${encodeURIComponent(motorcycle.brand + ' ' + motorcycle.model)}`
-                                        )
-                                    }
+                                <a
+                                    href={getWhatsAppUrl(`Hola, quiero financiar la ${motorcycle.brand} ${motorcycle.model}. ¿Me asesoran con el crédito?`)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-3 w-full text-white font-display font-bold px-8 py-4 rounded-2xl text-sm uppercase tracking-wider active:scale-[0.98] transition-all duration-200 group"
                                     style={{ backgroundColor: brandColor, boxShadow: `0 0 28px rgba(${brandGlow}, 0.35)` }}
                                 >
-                                    <Calculator className="w-5 h-5" />
-                                    Simular mi crédito
+                                    <MessageCircle className="w-5 h-5" />
+                                    Quiero que me asesoren
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </motion.div>
@@ -582,7 +568,7 @@ export default function MotorcyclePage() {
 
 
             {/* ── CTA BANNER ── */}
-            <section className="py-16 border-t border-white/5">
+            <section className="py-16 border-t" style={{ borderColor: '#ececec' }}>
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
@@ -621,11 +607,11 @@ export default function MotorcyclePage() {
 
             {/* ── STICKY BOTTOM ACTION BAR ── */}
             <div className="fixed bottom-0 left-0 right-0 z-50">
-                <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+                <div className="backdrop-blur-xl border-t shadow-[0_-10px_40px_rgba(0,0,0,0.08)]" style={{ backgroundColor: 'rgba(255,255,255,0.95)', borderColor: '#ececec' }}>
                     <div className="max-w-7xl mx-auto h-16 sm:h-20 px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-6">
                         {/* Info — visible en todos los tamaños */}
                         <div className="flex flex-col flex-1 pl-3 sm:pl-4 border-l-2 min-w-0" style={{ borderColor: brandColor }}>
-                            <h4 className="font-display font-bold text-sm sm:text-lg text-white leading-tight truncate">
+                            <h4 className="font-display font-bold text-sm sm:text-lg text-[#111111] leading-tight truncate">
                                 {motorcycle.brand} {motorcycle.model}
                             </h4>
                             <span className="font-display font-black text-base sm:text-2xl md:text-3xl leading-none" style={{ color: brandColor }}>
@@ -638,7 +624,7 @@ export default function MotorcyclePage() {
                             <Button
                                 variant="outline"
                                 onClick={() => setShowQuoteModal(true)}
-                                className="h-10 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-white/20 text-white/70 hover:bg-white/10 font-bold text-xs transition-all hidden sm:flex items-center gap-1"
+                                className="h-10 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-[#e8e8e8] text-[#666666] hover:bg-[#f7f7f7] font-bold text-xs transition-all hidden sm:flex items-center gap-1"
                             >
                                 <MessageCircle className="w-3.5 h-3.5" />
                                 Cotizar
@@ -672,17 +658,19 @@ export default function MotorcyclePage() {
                             exit={{ y: 60, opacity: 0 }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                             onClick={e => e.stopPropagation()}
-                            className="bg-[#0d0d0f] border border-white/10 rounded-t-3xl md:rounded-3xl w-full md:max-w-md shadow-2xl p-6"
+                            className="rounded-t-3xl md:rounded-3xl w-full md:max-w-md shadow-2xl p-6"
+                            style={{ backgroundColor: '#ffffff', border: '1px solid #e8e8e8' }}
                         >
                             {/* Header */}
                             <div className="flex items-center justify-between mb-6">
                                 <div>
-                                    <h3 className="font-display font-bold text-white text-xl">Cotizar esta moto</h3>
-                                    <p className="text-gray-500 text-sm mt-0.5">{motorcycle.brand} {motorcycle.model}{selectedColor ? ` · ${selectedColor}` : ''}</p>
+                                    <h3 className="font-display font-bold text-[#111111] text-xl">Cotizar esta moto</h3>
+                                    <p className="text-[#999999] text-sm mt-0.5">{motorcycle.brand} {motorcycle.model}{selectedColor ? ` · ${selectedColor}` : ''}</p>
                                 </div>
                                 <button
                                     onClick={() => setShowQuoteModal(false)}
-                                    className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-[#999999] hover:text-[#111111] transition-colors"
+                                    style={{ backgroundColor: '#f7f7f7' }}
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -693,13 +681,13 @@ export default function MotorcyclePage() {
                                     <div className="w-16 h-16 bg-ibiza-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
                                         <CheckCircle2 className="w-8 h-8 text-ibiza-red" />
                                     </div>
-                                    <h4 className="font-display font-bold text-white text-lg mb-2">¡Cotización enviada!</h4>
-                                    <p className="text-gray-400 text-sm">Te responderemos por WhatsApp en minutos.</p>
+                                    <h4 className="font-display font-bold text-[#111111] text-lg mb-2">¡Cotización enviada!</h4>
+                                    <p className="text-[#666666] text-sm">Te responderemos por WhatsApp en minutos.</p>
                                 </div>
                             ) : (
                                 <form onSubmit={handleQuoteSubmit} className="space-y-4">
                                     <div>
-                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                        <Label className="text-[#666666] text-xs font-bold tracking-widest uppercase mb-1.5 block">
                                             <User className="w-3.5 h-3.5 inline mr-1.5" />Tu nombre
                                         </Label>
                                         <Input
@@ -707,11 +695,11 @@ export default function MotorcyclePage() {
                                             value={quoteForm.name}
                                             onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
                                             placeholder="Ej: Juan García"
-                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
                                         />
                                     </div>
                                     <div>
-                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                        <Label className="text-[#666666] text-xs font-bold tracking-widest uppercase mb-1.5 block">
                                             <Phone className="w-3.5 h-3.5 inline mr-1.5" />Teléfono
                                         </Label>
                                         <Input
@@ -720,18 +708,18 @@ export default function MotorcyclePage() {
                                             value={quoteForm.phone}
                                             onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })}
                                             placeholder="300 123 4567"
-                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
                                         />
                                     </div>
                                     <div>
-                                        <Label className="text-gray-400 text-xs font-bold tracking-widest uppercase mb-1.5 block">
+                                        <Label className="text-[#666666] text-xs font-bold tracking-widest uppercase mb-1.5 block">
                                             <MapPin className="w-3.5 h-3.5 inline mr-1.5" />Ciudad
                                         </Label>
                                         <Input
                                             value={quoteForm.city}
                                             onChange={e => setQuoteForm({ ...quoteForm, city: e.target.value })}
                                             placeholder="Ej: Armenia"
-                                            className="bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20 rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
                                         />
                                     </div>
                                     {/* Checkbox consentimiento */}
@@ -740,11 +728,11 @@ export default function MotorcyclePage() {
                                             type="checkbox"
                                             checked={quotePrivacyAccepted}
                                             onChange={e => setQuotePrivacyAccepted(e.target.checked)}
-                                            className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/10 accent-ibiza-red cursor-pointer shrink-0"
+                                            className="mt-0.5 w-4 h-4 rounded border-[#e8e8e8] bg-[#f7f7f7] accent-ibiza-red cursor-pointer shrink-0"
                                         />
-                                        <span className="text-[11px] text-gray-500 leading-relaxed group/check:text-gray-400">
+                                        <span className="text-[11px] text-[#999999] leading-relaxed group/check:text-[#666666]">
                                             He leído y acepto la{' '}
-                                            <a href="/privacidad" target="_blank" className="text-gray-400 underline hover:text-white transition-colors">
+                                            <a href="/privacidad" target="_blank" className="text-[#666666] underline hover:text-[#111111] transition-colors">
                                                 política de tratamiento de datos personales
                                             </a>
                                             {' '}de Ibiza Motos (Ley 1581/2012).

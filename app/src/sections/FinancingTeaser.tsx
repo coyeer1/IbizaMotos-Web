@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Calculator } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import Reveal from '@/components/Reveal';
+import { getWhatsAppUrl } from '@/lib/config';
 
 // Dimensiones basadas en las proporciones reales de cada imagen
 const FINANCIERAS_LOGOS = [
@@ -8,17 +9,17 @@ const FINANCIERAS_LOGOS = [
   { id: 'bancobogota',  logo: '/financieras/banco-bogota.png', name: 'Banco de Bogotá',w: 76, h: 56 },
   { id: 'sufi',         logo: '/financieras/sufi.png',         name: 'SUFI',           w: 72, h: 22 },
   { id: 'brilla',       logo: '/financieras/brilla.png',       name: 'Brilla',         w: 72, h: 26 },
-  { id: 'addi',         logo: '/financieras/addi.jpg',         name: 'ADDI',           w: 60, h: 42 },
+  { id: 'addi',         logo: '/financieras/addi.webp',         name: 'ADDI',           w: 60, h: 42 },
   { id: 'venfi',        logo: '/financieras/venfi.png',        name: 'Venfi',          w: 76, h: 30 },
   { id: 'sistecredito', logo: '/financieras/sistecredito.png', name: 'Sistecredito',   w: 48, h: 48 },
   { id: 'crediorbe',    logo: '/financieras/crediorbe.png',    name: 'CrediorBe',      w: 84, h: 17 },
 ];
 
 const STATS = [
-  { value: '1.26%', label: 'Tasa mínima mensual' },
-  { value: '60',    label: 'Meses máx. de plazo' },
-  { value: '8',     label: 'Financieras aliadas' },
-  { value: '24h',   label: 'Desembolso rápido' },
+  { value: '8',    label: 'Financieras aliadas' },
+  { value: '24h',  label: 'Aprobación rápida' },
+  { value: '60',   label: 'Meses máx. de plazo' },
+  { value: '15+',  label: 'Años financiando motos' },
 ];
 
 export default function FinancingTeaser() {
@@ -54,8 +55,8 @@ export default function FinancingTeaser() {
               className="mx-auto mt-5"
               style={{ fontSize: 15, color: '#666', fontWeight: 300, lineHeight: 1.65, maxWidth: 460 }}
             >
-              Trabajamos con 8 financieras aliadas para que consigas la tasa más baja
-              y la cuota que se ajusta a tu bolsillo.
+              Trabajamos con 8 financieras aliadas para que estrenes tu moto con el
+              plan que más se ajuste a ti. Te asesoramos sin compromiso.
             </p>
           </Reveal>
         </div>
@@ -115,17 +116,19 @@ export default function FinancingTeaser() {
 
         {/* ── CTA ── */}
         <Reveal direction="up" className="text-center">
-          <button
-            onClick={() => navigate('/financiamiento')}
+          <a
+            href={getWhatsAppUrl('Hola, quiero financiar una moto. ¿Me asesoran con las opciones de crédito?')}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-white font-body active:scale-95 transition-transform duration-200 hover:scale-[1.02] group"
             style={{ background: '#000', borderRadius: 8, padding: '14px 30px', fontSize: 15, fontWeight: 600 }}
           >
-            <Calculator className="w-[18px] h-[18px]" />
-            Calcular mi cuota
+            <MessageCircle className="w-[18px] h-[18px]" />
+            Habla con un asesor
             <ArrowRight className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform duration-200" />
-          </button>
+          </a>
           <p style={{ fontSize: 12, color: '#aaa', marginTop: 14 }}>
-            Simulación gratuita · Sin compromiso · Tasas vigentes 2026
+            Te asesoramos sin compromiso · Aprobación en 24 horas
           </p>
         </Reveal>
 

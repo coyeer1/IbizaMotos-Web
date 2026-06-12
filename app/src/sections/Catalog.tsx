@@ -2,15 +2,6 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import type { Motorcycle } from '@/types';
 import { Search, X, SlidersHorizontal, ArrowRight, Gauge, Zap, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
-// ─── Cuota estimada (20% inicial, 36 meses, 1.8%/mes) ───────────────────────
-function calcCuota(price: number): string {
-  const principal = price * 0.80;
-  const r = 0.018;
-  const n = 36;
-  const monthly = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-  return '$' + new Intl.NumberFormat('es-CO').format(Math.round(monthly));
-}
-
 // ─── Stock badge config ───────────────────────────────────────────────────────
 const stockConfig = {
   available: { label: 'En stock', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', Icon: CheckCircle2 },
@@ -45,6 +36,7 @@ const colorMap: Record<string, string> = {
   'Negro Mate': '#1a1a1a', 'Negro': '#111', 'Rojo': '#dc2626',
   'Blanco': '#f5f5f5', 'Azul': '#2563eb', 'Azul Metálico': '#1e40af',
   'Verde': '#16a34a', 'Verde Militar': '#3f4f3a', 'Gris': '#6b7280',
+  'Gris Verde': '#5f6b5a', 'Gris Brillante': '#9ca3af', 'Gris/Negro': '#374151',
   'Naranja': '#f97316', 'Amarillo': '#eab308', 'Dorado': '#d97706',
   'Plateado': '#9ca3af', 'Café': '#92400e', 'Púrpura': '#7c3aed',
   'Lima': '#84cc16', 'Beige': '#d4b896', 'Neon': '#39ff14',
@@ -103,17 +95,17 @@ const MotoCard = ({
       className="group cursor-pointer"
     >
       <div
-        className="relative rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-500 shadow-sm"
+        className="relative rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-500"
         style={dk ? {
-          backgroundColor: `rgba(255,255,255,0.04)`,
-          border: `1px solid rgba(255,255,255,0.07)`,
-          backdropFilter: 'blur(12px)',
+          backgroundColor: '#fff',
+          border: '1px solid #e8e8e8',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.06)',
         } : {
           backgroundColor: '#fff',
           border: '1px solid #f3f4f6',
         }}
-        onMouseEnter={e => { if (dk) (e.currentTarget as HTMLDivElement).style.borderColor = `rgba(${dk.glowRgb}, 0.35)`; }}
-        onMouseLeave={e => { if (dk) (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.07)'; }}
+        onMouseEnter={e => { if (dk) (e.currentTarget as HTMLDivElement).style.borderColor = `rgba(${dk.glowRgb}, 0.5)`; }}
+        onMouseLeave={e => { if (dk) (e.currentTarget as HTMLDivElement).style.borderColor = '#e8e8e8'; }}
       >
 
         {/* ── IMAGE AREA ── */}
@@ -146,7 +138,7 @@ const MotoCard = ({
                 className={`max-h-full max-w-full object-contain relative z-10 transition-all duration-700 group-hover:scale-110 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
               />
             ) : (
-              <span className={`font-display font-black text-7xl uppercase ${dk ? 'text-white/5' : 'text-black/5'}`}>
+              <span className={`font-display font-black text-7xl uppercase ${dk ? 'text-black/5' : 'text-black/5'}`}>
                 {motorcycle.brand}
               </span>
             )}
@@ -202,14 +194,14 @@ const MotoCard = ({
             >
               {motorcycle.brand}
             </span>
-            <span className={dk ? 'text-white/20' : 'text-gray-200'}>|</span>
-            <span className={`text-[11px] tracking-wider uppercase ${dk ? 'text-white/40' : 'text-gray-400'}`}>
+            <span className={dk ? 'text-gray-200' : 'text-gray-200'}>|</span>
+            <span className={`text-[11px] tracking-wider uppercase ${dk ? 'text-gray-400' : 'text-gray-400'}`}>
               {motorcycle.category}
             </span>
           </div>
 
           {/* Model Name */}
-          <h3 className={`font-display font-bold text-[28px] leading-tight tracking-tight mb-3 ${dk ? 'text-white' : 'text-gray-900'}`}>
+          <h3 className={`font-display font-bold text-[28px] leading-tight tracking-tight mb-3 ${dk ? 'text-gray-900' : 'text-gray-900'}`}>
             {motorcycle.model}
           </h3>
 
@@ -227,19 +219,19 @@ const MotoCard = ({
                     style={{
                       backgroundColor: colorMap[color] || '#555',
                       border: selectedColor === color ? `3px solid ${dk ? dk.primary : '#d7263d'}` : undefined,
-                      boxShadow: selectedColor === color ? `0 0 0 1px ${dk ? 'rgba(255,255,255,0.2)' : 'white'}` : undefined,
+                      boxShadow: selectedColor === color ? `0 0 0 1px ${dk ? 'white' : 'white'}` : undefined,
                     }}
                     title={color}
                   />
                 ))}
                 {colorKeys.length > 6 && (
-                  <span className={`text-[10px] font-medium self-center ml-1 ${dk ? 'text-white/40' : 'text-gray-400'}`}>
+                  <span className={`text-[10px] font-medium self-center ml-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>
                     +{colorKeys.length - 6}
                   </span>
                 )}
               </div>
               {selectedColor && (
-                <span className={`text-[10px] font-medium ${dk ? 'text-white/40' : 'text-gray-500'}`}>{selectedColor}</span>
+                <span className={`text-[10px] font-medium ${dk ? 'text-gray-500' : 'text-gray-500'}`}>{selectedColor}</span>
               )}
             </div>
           )}
@@ -249,33 +241,30 @@ const MotoCard = ({
           {/* Price & Action */}
           <div className="flex items-end justify-between pt-5 mt-auto">
             <div>
-              <p className={`text-[10px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-white/40' : 'text-gray-400'}`}>Desde</p>
+              <p className={`text-[10px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>Desde</p>
               <p
                 className="font-display font-black text-[28px] leading-none tracking-tight transition-colors duration-500"
-                style={{ color: dk ? '#fff' : '#111' }}
+                style={{ color: '#111' }}
                 onMouseEnter={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = dk.primary; }}
-                onMouseLeave={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = '#fff'; }}
+                onMouseLeave={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = '#111'; }}
               >
                 ${new Intl.NumberFormat('es-CO').format(motorcycle.price)}
-              </p>
-              <p className="text-[10px] font-semibold mt-1" style={{ color: dk ? `rgba(${dk.glowRgb},0.8)` : 'rgba(215,38,61,0.7)' }}>
-                o {calcCuota(motorcycle.price)}<span className={dk ? 'text-white/30' : 'text-gray-400'}>/mes · 36 cuotas</span>
               </p>
             </div>
 
             {/* CTA Arrow */}
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
-              style={dk ? { backgroundColor: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' } : { backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
+              style={dk ? { backgroundColor: '#f9fafb', border: '1px solid #e8e8e8' } : { backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
               onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? dk.primary : '#d7263d'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? dk.primary : '#d7263d'; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 25px rgba(${dk?.glowRgb ?? '215,38,61'},0.4)`; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? 'rgba(255,255,255,0.06)' : '#f9fafb'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? 'rgba(255,255,255,0.1)' : '#e5e7eb'; (e.currentTarget as HTMLDivElement).style.boxShadow = ''; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? '#f9fafb' : '#f9fafb'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? '#e8e8e8' : '#e5e7eb'; (e.currentTarget as HTMLDivElement).style.boxShadow = ''; }}
             >
-              <ArrowRight className={`w-5 h-5 group-hover:translate-x-0.5 transition-all duration-300 ${dk ? 'text-white/50 group-hover:text-white' : 'text-gray-400 group-hover:text-white'}`} />
+              <ArrowRight className={`w-5 h-5 group-hover:translate-x-0.5 transition-all duration-300 ${dk ? 'text-gray-400 group-hover:text-white' : 'text-gray-400 group-hover:text-white'}`} />
             </div>
           </div>
 
           {/* Compare button */}
-          <div className={`mt-3 pt-3 border-t ${dk ? 'border-white/8' : 'border-gray-100'}`} onClick={e => e.stopPropagation()}>
+          <div className="mt-3 pt-3 border-t" style={{ borderColor: '#ececec' }} onClick={e => e.stopPropagation()}>
             <CompareButton motorcycle={motorcycle} asRow />
           </div>
         </div>
@@ -330,14 +319,14 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
 
   if (loading) {
     return (
-      <section id="catalogo" className="py-24 min-h-[50vh] flex justify-center items-center" style={{ backgroundColor: dk?.bg ?? '#f9fafb' }}>
+      <section id="catalogo" className="py-24 min-h-[50vh] flex justify-center items-center" style={{ backgroundColor: dk ? '#ffffff' : '#f9fafb' }}>
         <div className="text-xl animate-pulse font-display font-medium" style={{ color: dk?.primary ?? '#d7263d' }}>Cargando inventario...</div>
       </section>
     );
   }
 
   return (
-    <section id="catalogo" className="py-24 min-h-screen relative overflow-hidden" style={{ backgroundColor: dk?.bg ?? '#f9fafb' }} ref={ref}>
+    <section id="catalogo" className="py-24 min-h-screen relative overflow-hidden" style={{ backgroundColor: dk ? '#ffffff' : '#f9fafb' }} ref={ref}>
 
       {/* Brand Dynamic Background Watermark */}
       {activeBrandInfo && (
@@ -380,7 +369,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           {/* Search */}
           <div className="flex gap-3">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: dk ? 'rgba(255,255,255,0.3)' : '#9ca3af' }} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: dk ? '#999999' : '#9ca3af' }} />
               <Input
                 type="text"
                 placeholder="Buscar moto..."
@@ -388,9 +377,9 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 pr-4 py-3 w-full md:w-72 rounded-xl"
                 style={dk ? {
-                  backgroundColor: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: '#fff',
+                  backgroundColor: '#fff',
+                  border: '1px solid #e8e8e8',
+                  color: '#111',
                 } : {}}
               />
             </div>
@@ -400,7 +389,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
               className="rounded-xl px-4"
               style={showFilters
                 ? { backgroundColor: dk?.primary ?? '#d7263d', color: '#fff', borderColor: dk?.primary ?? '#d7263d' }
-                : dk ? { backgroundColor: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' } : {}
+                : dk ? { backgroundColor: '#fff', borderColor: '#e8e8e8', color: '#666666' } : {}
               }
             >
               <SlidersHorizontal className="w-5 h-5" />
@@ -444,16 +433,16 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           <div className="mb-8 animate-slide-down">
             <div
               className="rounded-2xl p-6 border"
-              style={dk ? { backgroundColor: 'rgba(255,255,255,0.05)', borderColor: 'rgba(255,255,255,0.08)' } : { backgroundColor: '#fff', borderColor: '#f3f4f6', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
+              style={dk ? { backgroundColor: '#fff', borderColor: '#e8e8e8', boxShadow: '0 8px 30px rgba(0,0,0,0.06)' } : { backgroundColor: '#fff', borderColor: '#f3f4f6', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
             >
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label className={`block text-[10px] font-bold mb-2 tracking-widest uppercase ${dk ? 'text-white/40' : 'text-gray-400'}`}>Categoría</label>
+                  <label className={`block text-[10px] font-bold mb-2 tracking-widest uppercase ${dk ? 'text-gray-400' : 'text-gray-400'}`}>Categoría</label>
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl border outline-none text-sm"
-                    style={dk ? { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.1)', color: '#fff' } : { backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#111' }}
+                    style={dk ? { backgroundColor: '#fff', borderColor: '#e8e8e8', color: '#111' } : { backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#111' }}
                   >
                     <option value="all">Todas</option>
                     {categories.map((cat) => (
@@ -462,12 +451,12 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                   </select>
                 </div>
                 <div>
-                  <label className={`block text-[10px] font-bold mb-2 tracking-widest uppercase ${dk ? 'text-white/40' : 'text-gray-400'}`}>Ordenar</label>
+                  <label className={`block text-[10px] font-bold mb-2 tracking-widest uppercase ${dk ? 'text-gray-400' : 'text-gray-400'}`}>Ordenar</label>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
                     className="w-full px-4 py-2.5 rounded-xl border outline-none text-sm"
-                    style={dk ? { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.1)', color: '#fff' } : { backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#111' }}
+                    style={dk ? { backgroundColor: '#fff', borderColor: '#e8e8e8', color: '#111' } : { backgroundColor: '#fff', borderColor: '#e5e7eb', color: '#111' }}
                   >
                     <option value="name">Nombre</option>
                     <option value="price-asc">Menor precio</option>
@@ -493,8 +482,8 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
 
         {/* Results count */}
         <div className="mb-8">
-          <p className={`text-sm ${dk ? 'text-white/40' : 'text-gray-400'}`}>
-            Mostrando <span className={`font-bold ${dk ? 'text-white' : 'text-gray-900'}`}>{filteredMotorcycles.length}</span> motos
+          <p className={`text-sm ${dk ? 'text-gray-400' : 'text-gray-400'}`}>
+            Mostrando <span className={`font-bold ${dk ? 'text-gray-900' : 'text-gray-900'}`}>{filteredMotorcycles.length}</span> motos
           </p>
         </div>
 
@@ -514,11 +503,11 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
         {/* Empty state */}
         {filteredMotorcycles.length === 0 && (
           <div className="text-center py-20">
-            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border ${dk ? 'bg-white/5 border-white/10' : 'bg-gray-100 border-gray-200'}`}>
-              <Search className={`w-8 h-8 ${dk ? 'text-white/20' : 'text-gray-300'}`} />
+            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border ${dk ? 'bg-gray-100 border-gray-200' : 'bg-gray-100 border-gray-200'}`}>
+              <Search className={`w-8 h-8 ${dk ? 'text-gray-300' : 'text-gray-300'}`} />
             </div>
-            <h3 className={`font-display font-bold text-xl mb-2 ${dk ? 'text-white' : 'text-gray-900'}`}>No se encontraron motos</h3>
-            <p className={`mb-6 text-sm ${dk ? 'text-white/40' : 'text-gray-400'}`}>Intenta ajustar tus filtros de búsqueda</p>
+            <h3 className={`font-display font-bold text-xl mb-2 ${dk ? 'text-gray-900' : 'text-gray-900'}`}>No se encontraron motos</h3>
+            <p className={`mb-6 text-sm ${dk ? 'text-gray-400' : 'text-gray-400'}`}>Intenta ajustar tus filtros de búsqueda</p>
             <Button
               onClick={clearFilters}
               className="text-white rounded-xl px-8"

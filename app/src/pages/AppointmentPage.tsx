@@ -9,6 +9,7 @@ import {
 import { supabase } from '@/lib/supabase';
 import { buildGoogleCalendarUrl, notifyAppsScript, type CalendarEventParams } from '@/lib/googleCalendar';
 import { branches } from '@/data/motorcycles';
+import { useSEO } from '@/hooks/useSEO';
 
 // ─── WhatsApp admin notification ─────────────────────────────────────────────
 async function notifyWhatsAppAdmin(p: CalendarEventParams): Promise<void> {
@@ -199,6 +200,12 @@ function Field({ label, icon: Icon, children }: { label: string; icon: React.Ele
 export default function AppointmentPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
+  useSEO({
+    title: 'Agenda tu Cita de Taller en Pereira | Ibiza Motos',
+    description: 'Agenda en línea el mantenimiento de tu moto en Ibiza Motos: revisión, frenos, motor y más. Taller especializado en Pereira y el Eje Cafetero. Reserva en 1 minuto.',
+    path: '/citas',
+  });
 
   const [step, setStep]                       = useState(1);
   const [selectedService, setSelectedService] = useState<string>(searchParams.get('servicio') || '');

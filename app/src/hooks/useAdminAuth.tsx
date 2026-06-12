@@ -3,58 +3,63 @@ import { supabase } from '@/lib/supabase';
 
 interface AdminAuthContextType {
   isAuthenticated: boolean;
+  loading: boolean;
   login: (password: string) => Promise<boolean>;
   logout: () => void;
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType>({
   isAuthenticated: false,
+  loading: true,
   login: async () => false,
   logout: () => {},
 });
 
-// Admin password from environment variable — never hardcode secrets!
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || '';
+// Correo del usuario administrador en Supabase. NO es secreto.
+// La contraseña la valida Supabase en el servidor — nunca viaja en el bundle.
+const ADMIN_EMAIL = 'web@ibizamotos.com';
 
 export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('ibiza_admin_auth');
-    if (stored === 'true') {
-      setIsAuthenticated(true);
-    }
+    // La fuente de verdad es la sesión real de Supabase, no un flag local.
+    supabase.auth.getSession().then(({ data }) => {
+      setIsAuthenticated(!!data.session);
+      setLoading(false);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+      setLoading(false);
+    });
+    return () => sub.subscription.unsubscribe();
   }, []);
 
   const login = async (password: string) => {
-    if (password === ADMIN_PASSWORD) {
-      // Authenticate with Supabase to bypass RLS
-      const { error } = await supabase.auth.signInWithPassword({
-        email: 'web@ibizamotos.com',
-        password: password
-      });
+    // Supabase valida la contraseña en el servidor. Si es correcta, abre sesión
+    // (y con RLS activo, recién ahí se obtienen permisos sobre las tablas).
+    const { error } = await supabase.auth.signInWithPassword({
+      email: ADMIN_EMAIL,
+      password,
+    });
 
-      if (error) {
-        console.error("Supabase Auth Error:", error);
-        alert("Error de base de datos: Debes crear el usuario Administrador en Supabase para tener permisos (ejecuta el script SQL).");
-        return false;
-      }
-
-      setIsAuthenticated(true);
-      sessionStorage.setItem('ibiza_admin_auth', 'true');
-      return true;
+    if (error) {
+      console.error('Supabase Auth Error:', error.message);
+      return false;
     }
-    return false;
+
+    setIsAuthenticated(true);
+    return true;
   };
 
   const logout = async () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem('ibiza_admin_auth');
     await supabase.auth.signOut();
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AdminAuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
       {children}
     </AdminAuthContext.Provider>
   );

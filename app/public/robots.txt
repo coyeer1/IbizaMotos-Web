@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
-Sitemap: https://www.ibizamotos.com/sitemap.xml
+Sitemap: https://ibizamotos.co/sitemap.xml

@@ -484,7 +484,7 @@ function MotoFormModal({
 
 // ─── Main Admin Dashboard ───
 export default function AdminDashboard() {
-  const { isAuthenticated, logout } = useAdminAuth();
+  const { isAuthenticated, loading: authLoading, logout } = useAdminAuth();
   const navigate = useNavigate();
   const [motos, setMotos] = useState<Motorcycle[]>([]);
   const [loading, setLoading] = useState(true);
@@ -570,13 +570,14 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
+    if (authLoading) return;          // espera a saber si hay sesión de Supabase
     if (!isAuthenticated) {
       navigate('/admin');
       return;
     }
     fetchMotos();
     fetchAppointments();
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, authLoading, navigate]);
 
   const fetchMotos = async () => {
     setLoading(true);

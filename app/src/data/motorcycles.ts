@@ -370,7 +370,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "DR 150 ABS",
     year: 2026,
-    price: 10630000,
+    price: 10990000,
     category: 'Enduro',
     description: "La Suzuki DR 150 ABS es la moto de aventura urbana con frenos ABS de serie. Su diseño dual sport te lleva por la ciudad y el campo con igual destreza. Motor de 150cc, neumáticos mixtos y posición de manejo erguida para mayor control en todo terreno.",
     specifications: {
@@ -822,16 +822,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/dl650xt/V-STROM-DL650-BLK.jpg"
+                "/moto_images/dl650xt/V-STROM-DL650-BLK.webp"
           ],
           "Azul": [
-                "/moto_images/dl650xt/V-STROM-DL650-BLU.jpg"
+                "/moto_images/dl650xt/V-STROM-DL650-BLU.webp"
           ],
           "Amarillo": [
-                "/moto_images/dl650xt/V-STROM-DL650-YELLOW.jpg"
+                "/moto_images/dl650xt/V-STROM-DL650-YELLOW.webp"
           ]
     },
-    images: ["/moto_images/dl650xt/V-STROM-DL650-BLK.jpg"],
+    images: ["/moto_images/dl650xt/V-STROM-DL650-BLK.webp"],
     featured: true,
     stock: 'order',
     videoUrl: 'https://www.youtube.com/embed/L7YXsyS9XqE?autoplay=0&rel=0',
@@ -841,7 +841,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer 250",
     year: 2026,
-    price: 15580000,
+    price: 14990000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer 250 lleva el espíritu deportivo de las GSX-R a un formato accesible. Motor de 249cc con tecnología SOCS, frenos de disco doble con ABS y diseño inspirado en las motos de circuito. La puerta de entrada al mundo de las deportivas Suzuki.",
     specifications: {
@@ -906,7 +906,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Suzuki',
     model: "Gixxer SF 250",
     year: 2026,
-    price: 16830000,
+    price: 15990000,
     category: 'Urban Sport',
     description: "La Suzuki Gixxer SF 250 es la versión full-fairing del Gixxer 250. Carenado deportivo completo inspirado en la GSX-R, ABS de serie, motor de 249cc con 26.5 HP y posición semi-carenada. La deportiva 250 más elegante del mercado colombiano.",
     specifications: {
@@ -1532,7 +1532,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "CB 300F",
     year: 2026,
-    price: 17800000,
+    price: 16800000,
     category: 'Urban Sport',
     description: "La Honda CB 300F sube el listón con su motor monocilíndrico de 286cc DOHC. Diseño inspirado en la CB1000R, frenos radiales con ABS, suspensión invertida y tablero LCD de alta resolución. Una naked que compite de frente con motos de mayor cilindrada a precio más accesible.",
     specifications: {
@@ -1867,7 +1867,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Honda',
     model: "XR 300L Tornado",
     year: 2026,
-    price: 33090000,
+    price: 30490000,
     category: 'Enduro',
     description: "La Honda XR 300L Tornado es la bestia del segmento enduro Honda. Motor de 299cc de alto rendimiento, suspensión de competencia, frenos Nissin con ABS y diseño Tornado que impone respeto en cualquier terreno. Para los pilotos que van en serio con la aventura.",
     specifications: {
@@ -1997,7 +1997,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Boxer 150X",
     year: 2026,
-    price: 7499999,
+    price: 7499000,
     category: 'City',
     description: "La Bajaj Boxer 150X es el Boxer de trabajo evolucionado para quienes necesitan más potencia. Motor de 149cc DTS-i, freno de disco delantero, suspensión mejorada y diseño más robusto. La moto de carga más potente del portafolio Bajaj, lista para los trabajos más exigentes.",
     specifications: {
@@ -2316,7 +2316,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Bajaj',
     model: "Pulsar NS 200 FI ABS UG2",
     year: 2026,
-    price: 15799999,
+    price: 15799000,
     category: 'Urban Sport',
     description: "La Bajaj Pulsar NS 200 FI ABS UG2 es la segunda generación de la naked 200 más popular de Colombia. Motor de 199.5cc con FI y 24.5 HP, frenos Bybre ABS doble canal, Slipper Clutch y nuevos detalles de diseño. La NS 200 que lo tiene todo.",
     specifications: {
@@ -2518,8 +2518,8 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/eco-100/eco 100 negra roja.jpg",
-                "/moto_images/eco-100/eco 100 negra-roja.jpg"
+                "/moto_images/eco-100/eco 100 negra roja.webp",
+                "/moto_images/eco-100/eco 100 negra-roja.webp"
           ]
     },
     images: ["/moto_images/eco-100/ECO-100-globito.webp"],
@@ -2750,7 +2750,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Hero',
     model: "Splendor X Pro",
     year: 2026,
-    price: 6290000,
+    price: 6390000,
     category: 'City',
     description: "La Hero Splendor X Pro es la evolución de la moto más vendida del mundo. Diseño X totalmente renovado, motor de 100cc con inyección electrónica, tablero digital Bluetooth y conectividad con app. La Splendor para la era digital: económica, tecnológica y confiable.",
     specifications: {
@@ -2969,14 +2969,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/alpina-300-efi/vento-alpina-300-02.jpg",
-                "/moto_images/alpina-300-efi/vento-alpina-300-06.jpg",
-                "/moto_images/alpina-300-efi/vento-alpina-300-10.jpg",
-                "/moto_images/alpina-300-efi/vento-alpina-300-14.jpg",
-                "/moto_images/alpina-300-efi/vento-alpina-300-16.jpg"
+                "/moto_images/alpina-300-efi/vento-alpina-300-02.webp",
+                "/moto_images/alpina-300-efi/vento-alpina-300-06.webp",
+                "/moto_images/alpina-300-efi/vento-alpina-300-10.webp",
+                "/moto_images/alpina-300-efi/vento-alpina-300-14.webp",
+                "/moto_images/alpina-300-efi/vento-alpina-300-16.webp"
           ]
     },
-    images: ["/moto_images/alpina-300-efi/vento-alpina-300-02.jpg"],
+    images: ["/moto_images/alpina-300-efi/vento-alpina-300-02.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/Ni2JSDHyB24?autoplay=0&rel=0',
     stock: 'available',
@@ -3000,13 +3000,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.jpg",
-                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-02-1024x819.jpg",
-                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-04-1024x819.jpg",
-                "/moto_images/crossmax-200/colombia-vento-crossmax-200-pro-360-1024x608.jpg"
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.webp",
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-02-1024x819.webp",
+                "/moto_images/crossmax-200/GAL-CROSSMAX200PRO-04-1024x819.webp",
+                "/moto_images/crossmax-200/colombia-vento-crossmax-200-pro-360-1024x608.webp"
           ]
     },
-    images: ["/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.jpg"],
+    images: ["/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/2uQtcyIjkfk?autoplay=0&rel=0',
     stock: 'available',
@@ -3016,7 +3016,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Falkon 125",
     year: 2026,
-    price: 5990000,
+    price: 6190000,
     category: 'Urban Sport',
     description: "La Vento Falkon 125 es la naked de diseño europeo al precio colombiano. Motor de 125cc de alto rendimiento, faros LED, freno de disco doble y líneas inspiradas en las naked italianas. Para los jóvenes que quieren estilo premium sin el precio importado.",
     specifications: {
@@ -3030,14 +3030,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.jpg",
-                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-03-1024x819.jpg",
-                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-04-1024x819.jpg",
-                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-06-1024x819.jpg",
-                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-08-1024x819.jpg"
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.webp",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-03-1024x819.webp",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-04-1024x819.webp",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-06-1024x819.webp",
+                "/moto_images/falkon-125/GAL-VENTO-FALKON-220-08-1024x819.webp"
           ]
     },
-    images: ["/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.jpg"],
+    images: ["/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.webp"],
     videoUrl: 'https://www.youtube.com/embed/r2TuNNk2vis?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -3046,7 +3046,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "GTS 300",
     year: 2026,
-    price: 10990000,
+    price: 9990000,
     category: 'Scooters',
     description: "La Vento GTS 300 es el maxi-scooter de lujo con más espacio de carga del mercado. Motor de 300cc con inyección electrónica, frenos ABS, cajuela enorme para dos cascos y asiento calefactado como opción. El ejecutivo se mueve en GTS 300.",
     specifications: {
@@ -3060,14 +3060,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Gris": [
-                "/moto_images/gts-300/vento-gts-300-cajuela-02.jpg",
-                "/moto_images/gts-300/vento-gts-300-cajuela-08.jpg",
-                "/moto_images/gts-300/vento-gts-300-cajuela-10.jpg",
-                "/moto_images/gts-300/vento-gts-300-cajuela-13.jpg",
-                "/moto_images/gts-300/vento-gts-300-cajuela-16.jpg"
+                "/moto_images/gts-300/vento-gts-300-cajuela-02.webp",
+                "/moto_images/gts-300/vento-gts-300-cajuela-08.webp",
+                "/moto_images/gts-300/vento-gts-300-cajuela-10.webp",
+                "/moto_images/gts-300/vento-gts-300-cajuela-13.webp",
+                "/moto_images/gts-300/vento-gts-300-cajuela-16.webp"
           ]
     },
-    images: ["/moto_images/gts-300/vento-gts-300-cajuela-02.jpg"],
+    images: ["/moto_images/gts-300/vento-gts-300-cajuela-02.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/ipB3pT6JxP4?autoplay=0&rel=0',
     stock: 'available',
@@ -3077,7 +3077,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Lithium 125",
     year: 2026,
-    price: 3990000,
+    price: 4250000,
     category: 'City',
     description: "La Vento Lithium 125 es la naked con diseño naked moderno y motor de 125cc eficiente. Faros LED, frenos de disco en ambas ruedas, tablero digital y el estilo urbano que define a la gama Lithium de Vento. Moderna, práctica y con el respaldo de Vento.",
     specifications: {
@@ -3091,12 +3091,12 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.jpg",
-                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-02.jpg",
-                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-08.jpg"
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.webp",
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-02.webp",
+                "/moto_images/lithium-125/VENTO-LITHIUM-125-4-08.webp"
           ]
     },
-    images: ["/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.jpg"],
+    images: ["/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.webp"],
     videoUrl: 'https://www.youtube.com/embed/X30DijdUbDM?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -3105,7 +3105,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Presley 200 ABS",
     year: 2026,
-    price: 5490000,
+    price: 5790000,
     category: 'Rebels',
     description: "La Vento Presley 200 ABS es el cruiser que combina el estilo retro americano con la practicidad de una 200cc. Motor de 197cc suave y torquento, posición de manejo relajada de crucero, frenos ABS de serie y diseño inspirado en las grandes cruiser americanas. Para los que van al ritmo de su propia música.",
     specifications: {
@@ -3119,16 +3119,16 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/presley-200-abs/vento-latam-presley-200-01.jpg",
-                "/moto_images/presley-200-abs/vento-latam-presley-200-02.jpg",
-                "/moto_images/presley-200-abs/vento-latam-presley-200-08.jpg",
-                "/moto_images/presley-200-abs/vento-latam-presley-200-13.jpg"
+                "/moto_images/presley-200-abs/vento-latam-presley-200-01.webp",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-02.webp",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-08.webp",
+                "/moto_images/presley-200-abs/vento-latam-presley-200-13.webp"
           ],
           "Gris": [
-                "/moto_images/presley-200-abs/vento-latam-presley-200-05.jpg"
+                "/moto_images/presley-200-abs/vento-latam-presley-200-05.webp"
           ]
     },
-    images: ["/moto_images/presley-200-abs/vento-latam-presley-200-01.jpg"],
+    images: ["/moto_images/presley-200-abs/vento-latam-presley-200-01.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/pjcop5Blhlo?autoplay=0&rel=0',
     stock: 'available',
@@ -3152,14 +3152,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Rojo": [
-                "/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.jpg",
-                "/moto_images/rapid-125/GAL-RAPID-125-02-1024x819.jpg",
-                "/moto_images/rapid-125/GAL-RAPID-125-04-1024x819.jpg",
-                "/moto_images/rapid-125/GAL-RAPID-125-05-1024x819.jpg",
-                "/moto_images/rapid-125/GAL-RAPID-125-07-1024x819.jpg"
+                "/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.webp",
+                "/moto_images/rapid-125/GAL-RAPID-125-02-1024x819.webp",
+                "/moto_images/rapid-125/GAL-RAPID-125-04-1024x819.webp",
+                "/moto_images/rapid-125/GAL-RAPID-125-05-1024x819.webp",
+                "/moto_images/rapid-125/GAL-RAPID-125-07-1024x819.webp"
           ]
     },
-    images: ["/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.jpg"],
+    images: ["/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.webp"],
     videoUrl: 'https://www.youtube.com/embed/47PHlOdGJW4?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -3182,13 +3182,13 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Azul": [
-                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.jpg",
-                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-09.jpg",
-                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-12.jpg",
-                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-16.jpg"
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.webp",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-09.webp",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-12.webp",
+                "/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-16.webp"
           ]
     },
-    images: ["/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.jpg"],
+    images: ["/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.webp"],
     featured: true,
     videoUrl: 'https://www.youtube.com/embed/pzKI_zOdiX8?autoplay=0&rel=0',
     stock: 'available',
@@ -3212,14 +3212,14 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.jpg",
-                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-03-1024x819.jpg",
-                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-05-1024x819.jpg",
-                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-06-1024x819.jpg",
-                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-07-1024x819.jpg"
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.webp",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-03-1024x819.webp",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-05-1024x819.webp",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-06-1024x819.webp",
+                "/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-07-1024x819.webp"
           ]
     },
-    images: ["/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.jpg"],
+    images: ["/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.webp"],
     videoUrl: 'https://www.youtube.com/embed/2JtirEvbtb0?autoplay=0&rel=0',
     stock: 'available',
   },
@@ -3242,20 +3242,284 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Blanco": [
-                "/moto_images/motos-nios/KB57 60CC 4T.jpg"
+                "/moto_images/motos-nios/KB57 60CC 4T.webp"
           ],
           "Naranja": [
-                "/moto_images/motos-nios/KB57 60CC 4T2.jpg",
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E3.jpg"
+                "/moto_images/motos-nios/KB57 60CC 4T2.webp",
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E3.webp"
           ],
           "Rojo": [
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E.jpg"
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E.webp"
           ],
           "Azul": [
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E2.jpg"
+                "/moto_images/motos-nios/MOTO 60CC 2T 1E2.webp"
           ]
     },
-    images: ["/moto_images/motos-nios/KB57 60CC 4T.jpg"],
+    images: ["/moto_images/motos-nios/KB57 60CC 4T.webp"],
+    stock: 'available',
+  },
+  {
+    id: '106',
+    brand: 'AKT',
+    model: "VOGE 300 DS",
+    year: 2026,
+    price: 15990000,
+    category: 'Adventure',
+    description: "La VOGE 300 DS es una adventure de calle con alma viajera: motor de 292cc refrigerado por líquido, inyección Bosch, tablero TFT y un equipamiento premium que la pone por encima de su categoría. Perfecta para la ciudad y la ruta del Eje Cafetero.",
+    specifications: {
+      engine: "292cc, monocilíndrico, 4T, refrigerado por líquido, DOHC 4 válvulas",
+      power: "29 HP @ 9.000 RPM",
+      torque: "25 Nm @ 6.500 RPM",
+      transmission: "6 velocidades",
+      weight: "165 kg",
+      fuelCapacity: "16 litros",
+      colors: ["Amarillo","Rojo"],
+    },
+    imagesByColor: {
+      "Amarillo": ["/moto_images/voge-300-ds/voge-300-ds-amarillo.webp"],
+      "Rojo": ["/moto_images/voge-300-ds/voge-300-ds-rojo.webp"],
+    },
+    images: ["/moto_images/voge-300-ds/voge-300-ds-amarillo.webp"],
+    videoUrl: 'https://youtu.be/rWW4gTBiz9U',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '107',
+    brand: 'AKT',
+    model: "VOGE 300 Rally",
+    year: 2026,
+    price: 17990000,
+    category: 'Adventure',
+    description: "La VOGE 300 Rally lleva el mismo motor de 292cc a otro nivel off-road: suspensión de largo recorrido, rines radiados, protecciones y postura de trail de verdad. Lista para salir del asfalto sin complejos.",
+    specifications: {
+      engine: "292cc, monocilíndrico, 4T, refrigerado por líquido, DOHC 4 válvulas",
+      power: "29 HP @ 9.000 RPM",
+      torque: "25 Nm @ 6.500 RPM",
+      transmission: "6 velocidades",
+      weight: "158 kg",
+      fuelCapacity: "16 litros",
+      colors: ["Gris Brillante","Gris/Negro","Negro"],
+    },
+    imagesByColor: {
+      "Gris Brillante": ["/moto_images/voge-300-rally/voge-300-rally-gris-brillante.webp"],
+      "Gris/Negro": ["/moto_images/voge-300-rally/voge-300-rally-gris-negro.webp"],
+      "Negro": ["/moto_images/voge-300-rally/voge-300-rally-negro.webp"],
+    },
+    images: ["/moto_images/voge-300-rally/voge-300-rally-gris-brillante.webp"],
+    videoUrl: 'https://youtu.be/M9WygOSHYcw',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '108',
+    brand: 'AKT',
+    model: "VOGE 525 DSX",
+    year: 2026,
+    price: 31990000,
+    category: 'Adventure',
+    description: "La VOGE 525 DSX es una adventure de media cilindrada con motor bicilíndrico de 494cc, suspensión KYB, frenos J.Juan y electrónica de gama alta. Touring serio para los que quieren comerse la carretera.",
+    specifications: {
+      engine: "494cc, bicilíndrico paralelo, 4T, refrigerado por líquido, DOHC 8 válvulas",
+      power: "47 HP @ 8.500 RPM",
+      torque: "50 Nm @ 7.000 RPM",
+      transmission: "6 velocidades",
+      weight: "199 kg",
+      fuelCapacity: "17,5 litros",
+      colors: ["Gris","Negro"],
+    },
+    imagesByColor: {
+      "Gris": ["/moto_images/voge-525/voge-525-gris.webp"],
+      "Negro": ["/moto_images/voge-525/voge-525-negro.webp"],
+    },
+    images: ["/moto_images/voge-525/voge-525-gris.webp"],
+    videoUrl: 'https://youtu.be/wI8uW_Umdwo',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '109',
+    brand: 'AKT',
+    model: "VOGE 900 DSX",
+    year: 2026,
+    price: 51990000,
+    category: 'Adventure',
+    description: "La VOGE 900 DSX es la tope de gama: motor bicilíndrico de 895cc con 95 HP, suspensión de largo recorrido, modos de manejo y todo el equipamiento de una maxi-trail premium a un precio sin competencia.",
+    specifications: {
+      engine: "895cc, bicilíndrico paralelo, 4T, refrigerado por líquido, DOHC",
+      power: "95 HP @ 8.250 RPM",
+      torque: "94 Nm @ 6.250 RPM",
+      transmission: "6 velocidades",
+      weight: "215 kg",
+      fuelCapacity: "17 litros",
+      colors: ["Negro"],
+    },
+    imagesByColor: {
+      "Negro": ["/moto_images/voge-900/voge-900-negro.webp"],
+    },
+    images: ["/moto_images/voge-900/voge-900-negro.webp"],
+    videoUrl: 'https://youtu.be/T67wcPwIXr0',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '110',
+    brand: 'AKT',
+    model: "TT200 ABS",
+    year: 2026,
+    price: 10590000,
+    category: 'Enduro',
+    description: "La AKT TT200 ABS es la trail más vendida del país, ahora con freno ABS. Motor de 197cc, suspensión de largo recorrido y robustez probada para el campo y la ciudad.",
+    specifications: {
+      engine: "197cc, monocilíndrico, 4T, SOHC",
+      power: "16,5 HP @ 8.500 RPM",
+      torque: "15,5 Nm @ 6.500 RPM",
+      transmission: "5 velocidades",
+      weight: "129 kg",
+      fuelCapacity: "12,5 litros",
+      colors: ["Blanco","Gris Verde","Negro"],
+    },
+    imagesByColor: {
+      "Blanco": ["/moto_images/tt200-abs/tt200-abs-blanco.webp"],
+      "Gris Verde": ["/moto_images/tt200-abs/tt200-abs-gris-verde.webp"],
+      "Negro": ["/moto_images/tt200-abs/tt200-abs-negro.webp"],
+    },
+    images: ["/moto_images/tt200-abs/tt200-abs-blanco.webp"],
+    videoUrl: 'https://youtu.be/usuP3bKKbRo',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '111',
+    brand: 'AKT',
+    model: "TT200 Rally ABS",
+    year: 2026,
+    price: 11390000,
+    category: 'Enduro',
+    description: "La AKT TT200 Rally ABS suma kit rally, protecciones y gráficos especiales sobre la base de la TT200. Para el que quiere aventura con actitud y la confianza del ABS.",
+    specifications: {
+      engine: "197cc, monocilíndrico, 4T, SOHC",
+      power: "16,5 HP @ 8.500 RPM",
+      torque: "15,5 Nm @ 6.500 RPM",
+      transmission: "5 velocidades",
+      weight: "131 kg",
+      fuelCapacity: "12,5 litros",
+      colors: ["Verde"],
+    },
+    imagesByColor: {
+      "Verde": ["/moto_images/tt200-rally-abs/tt200-rally-abs-verde.webp"],
+    },
+    images: ["/moto_images/tt200-rally-abs/tt200-rally-abs-verde.webp"],
+    videoUrl: 'https://youtu.be/b41U6816Uk8',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '112',
+    brand: 'AKT',
+    model: "VOGE XRS 180",
+    year: 2026,
+    price: 13990000,
+    category: 'Adventure',
+    description: "La AKT VOGE XRS 180 es una adventure compacta con motor de 174cc refrigerado por líquido e inyección electrónica. Tecnología VOGE en formato accesible para iniciarse en el mundo trail.",
+    specifications: {
+      engine: "174cc, monocilíndrico, 4T, 4 válvulas, refrigerado por líquido, EFI",
+      power: "17,5 HP @ 9.000 RPM",
+      torque: "16 Nm @ 7.000 RPM",
+      transmission: "6 velocidades",
+      weight: "158 kg",
+      fuelCapacity: "12 litros",
+      colors: ["Gris","Negro"],
+    },
+    imagesByColor: {
+      "Gris": ["/moto_images/xrs-180/xrs-180-gris.webp"],
+      "Negro": ["/moto_images/xrs-180/xrs-180-negro.webp"],
+    },
+    images: ["/moto_images/xrs-180/xrs-180-gris.webp"],
+    videoUrl: 'https://youtu.be/QvGSs42w2mk',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '113',
+    brand: 'AKT',
+    model: "Jet Evo",
+    year: 2026,
+    price: 12990000,
+    category: 'Scooters',
+    description: "El AKT Jet Evo es el scooter de nueva generación de AKT, con diseño moderno, transmisión automática y comodidad para el día a día en la ciudad. (Ficha técnica completa disponible en concesionario.)",
+    specifications: {
+      engine: "Consultar en concesionario",
+      power: "Consultar",
+      torque: "Consultar",
+      transmission: "Automática (CVT)",
+      weight: "Consultar",
+      fuelCapacity: "Consultar",
+      colors: ["Gris","Negro"],
+    },
+    imagesByColor: {
+      "Gris": ["/moto_images/jet-evo/jet-evo-gris.webp"],
+      "Negro": ["/moto_images/jet-evo/jet-evo-negro.webp"],
+    },
+    images: ["/moto_images/jet-evo/jet-evo-gris.webp"],
+    videoUrl: 'https://youtu.be/ZCyarsy2ssI',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '114',
+    brand: 'Bajaj',
+    model: "Pulsar N125",
+    year: 2026,
+    price: 7599000,
+    category: 'Urban Sport',
+    description: "La Bajaj Pulsar N125 trae el ADN deportivo Pulsar a la cilindrada de entrada: motor de 124,6cc con inyección, diseño agresivo, frenos CBS y un consumo imbatible. Tu primera Pulsar.",
+    specifications: {
+      engine: "124,6cc, monocilíndrico, 4T, refrigerado por aire, inyección",
+      power: "11,8 HP @ 8.500 RPM",
+      torque: "11 Nm @ 6.000 RPM",
+      transmission: "5 velocidades",
+      weight: "125 kg",
+      fuelCapacity: "11 litros",
+      colors: ["Gris","Púrpura","Rojo","Verde"],
+    },
+    imagesByColor: {
+      "Gris": ["/moto_images/pulsar-n125/pulsar-n125-gris.webp"],
+      "Púrpura": ["/moto_images/pulsar-n125/pulsar-n125-purpura.webp"],
+      "Rojo": ["/moto_images/pulsar-n125/pulsar-n125-rojo.webp"],
+      "Verde": ["/moto_images/pulsar-n125/pulsar-n125-verde.webp"],
+    },
+    images: ["/moto_images/pulsar-n125/pulsar-n125-gris.webp"],
+    videoUrl: 'https://youtu.be/1wQnLsKi-Ow',
+    featured: false,
+    stock: 'available',
+  },
+  {
+    id: '115',
+    brand: 'Suzuki',
+    model: "DR160X",
+    year: 2026,
+    price: 12999000,
+    category: 'Enduro',
+    description: "La Suzuki DR160X es la nueva doble propósito de Suzuki: motor de 162cc con inyección, ABS, iluminación full LED y tablero digital. Suzuki sube la apuesta en el segmento 160.",
+    specifications: {
+      engine: "162cc, monocilíndrico, 4T, refrigerado por aire, inyección",
+      power: "14,7 HP @ 8.000 RPM",
+      torque: "13,8 Nm @ 6.000 RPM",
+      transmission: "5 velocidades",
+      weight: "148 kg",
+      fuelCapacity: "12 litros",
+      colors: ["Blanco","Azul","Negro","Rojo"],
+    },
+    imagesByColor: {
+      "Blanco": ["/moto_images/dr160x/dr160x-blanco.webp"],
+      "Azul": ["/moto_images/dr160x/dr160x-azul.webp"],
+      "Negro": ["/moto_images/dr160x/dr160x-negro.webp"],
+      "Rojo": ["/moto_images/dr160x/dr160x-rojo.webp"],
+    },
+    images: ["/moto_images/dr160x/dr160x-blanco.webp"],
+    videoUrl: 'https://youtu.be/gcYODUJ7Q8Y',
+    featured: false,
     stock: 'available',
   },
 ];

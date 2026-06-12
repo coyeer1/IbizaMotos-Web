@@ -73,7 +73,7 @@ const FINANCIERAS = [
     id: 'addi',
     name: 'ADDI',
     shortName: 'ADDI',
-    logo: '/financieras/addi.jpg',
+    logo: '/financieras/addi.webp',
     color: '#7c3aed',
     bg: '#f5f3ff',
     monthlyRate: 1.83,

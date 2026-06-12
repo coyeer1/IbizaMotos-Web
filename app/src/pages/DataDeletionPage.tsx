@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Trash2 } from 'lucide-react';
 import Reveal from '@/components/Reveal';
+import { useSEO } from '@/hooks/useSEO';
 
 const RESPONSIBLE = 'Ibiza Motos S.A.S.';
 const EMAIL       = 'ibizachat321@gmail.com';
@@ -9,11 +10,12 @@ const PHONE       = '+57 305 288 4546';
 const WA_LINK     = `https://wa.me/573052884546?text=${encodeURIComponent('Hola, quiero solicitar la eliminación de mis datos personales.')}`;
 
 export default function DataDeletionPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.title = 'Eliminación de Datos | Ibiza Motos';
-    return () => { document.title = 'Ibiza Motos | El placer en dos ruedas'; };
-  }, []);
+  useSEO({
+    title: 'Eliminación de Datos Personales | Ibiza Motos',
+    description: 'Solicita la eliminación de tus datos personales de las bases de datos de Ibiza Motos S.A.S.',
+    path: '/eliminacion-datos',
+  });
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-[#080808] text-white">

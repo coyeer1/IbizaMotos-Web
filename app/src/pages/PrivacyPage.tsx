@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
 import Reveal from '@/components/Reveal';
+import { useSEO } from '@/hooks/useSEO';
 
 const LAST_UPDATE = '26 de mayo de 2026';
 const RESPONSIBLE  = 'Ibiza Motos S.A.S.';
@@ -11,11 +12,12 @@ const EMAIL        = 'ibizachat321@gmail.com';
 const PHONE        = '+57 305 288 4546';
 
 export default function PrivacyPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.title = 'Política de Privacidad | Ibiza Motos';
-    return () => { document.title = 'Ibiza Motos | El placer en dos ruedas'; };
-  }, []);
+  useSEO({
+    title: 'Política de Privacidad y Tratamiento de Datos | Ibiza Motos',
+    description: 'Política de tratamiento de datos personales de Ibiza Motos S.A.S. conforme a la Ley 1581 de 2012 de Colombia.',
+    path: '/privacidad',
+  });
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="min-h-screen bg-[#080808] text-white">

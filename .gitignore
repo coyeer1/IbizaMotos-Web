@@ -40,3 +40,14 @@ coverage/
 *.tsbuildinfo
 
 .vercel
+
+# Claude Code / herramientas de agente (no son parte del sitio)
+.claude/
+.superpowers/
+.agents/
+skills-lock.json
+
+# Scripts y archivos temporales de generación
+_convert_webp.py
+_webp_map.json
+precios_ibiza.csv

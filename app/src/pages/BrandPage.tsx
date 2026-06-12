@@ -7,6 +7,7 @@ import Catalog from '@/sections/Catalog';
 import { brands, motorcycles as allMotos } from '@/data/motorcycles';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { getBrandSalesWhatsApp } from '@/lib/config';
+import { useSEO } from '@/hooks/useSEO';
 
 export default function BrandPage() {
     const { brandId } = useParams<{ brandId: string }>();
@@ -30,6 +31,19 @@ export default function BrandPage() {
     const motoCount = allMotos.filter(m => m.brand === selectedBrand).length;
     const waUrl = getBrandSalesWhatsApp(selectedBrand);
 
+    useSEO(
+        activeBrandData
+            ? {
+                title: `Motos ${activeBrandData.name} en Pereira y Eje Cafetero | Ibiza Motos`,
+                description: `Catálogo oficial de motos ${activeBrandData.name} en Pereira, Dosquebradas y Neiva. ${motoCount} modelos disponibles con financiación inmediata en Ibiza Motos.`,
+                path: `/marca/${brandId ?? activeBrandData.name.toLowerCase()}`,
+            }
+            : {
+                title: 'Catálogo de Motos en Pereira y Eje Cafetero | Ibiza Motos',
+                description: 'Explora todo el catálogo de motos nuevas en Pereira y el Eje Cafetero: Suzuki, Honda, Bajaj, AKT, Hero y Vento. Financiación inmediata.',
+            }
+    );
+
     const handleViewDetails = (motorcycle: Motorcycle) => {
         navigate(`/moto/${motorcycle.id}`);
     };
@@ -41,19 +55,19 @@ export default function BrandPage() {
     // ─── Sin marca válida: catálogo genérico ──────────────────────────────────
     if (!activeBrandData) {
         return (
-            <div className="min-h-screen bg-ibiza-black pt-24">
+            <div className="min-h-screen bg-white pt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 mb-4">
                     <button
                         onClick={() => navigate(-1)}
-                        className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors duration-200 mb-6 group"
+                        className="inline-flex items-center gap-1.5 text-[#666666] hover:text-[#111111] transition-colors duration-200 mb-6 group"
                     >
                         <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform duration-200" />
                         <span className="text-sm font-medium">Volver</span>
                     </button>
-                    <h1 className="text-4xl font-display font-bold text-white">
+                    <h1 className="text-4xl font-display font-bold text-[#111111]">
                         {initialCategory !== 'all' ? initialCategory : 'Catálogo completo'}
                     </h1>
-                    <p className="text-gray-400 mt-2">Todas las marcas · Todas las motos</p>
+                    <p className="text-[#666666] mt-2">Todas las marcas · Todas las motos</p>
                 </div>
                 <Catalog
                     onViewDetails={handleViewDetails}
@@ -89,7 +103,7 @@ export default function BrandPage() {
         new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
 
     return (
-        <div className="min-h-screen" style={{ backgroundColor: theme.bg }}>
+        <div className="min-h-screen" style={{ backgroundColor: '#ffffff' }}>
 
             {/* ─── HERO SPLIT PREMIUM ────────────────────────────────────────── */}
             <section className="relative w-full min-h-[92vh] flex flex-col overflow-hidden">
@@ -113,7 +127,7 @@ export default function BrandPage() {
                 {/* Capas: oscurecido lateral + glow radial de marca + base inferior */}
                 <div className="absolute inset-0" style={{ background: `linear-gradient(110deg, ${theme.bg} 0%, ${theme.bg}F2 42%, ${theme.bg}99 100%)` }} />
                 <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(115% 75% at 82% 48%, rgba(${theme.glowRgb}, 0.22) 0%, transparent 58%)` }} />
-                <div className="absolute inset-x-0 bottom-0 h-44" style={{ background: `linear-gradient(to top, ${theme.bg} 0%, transparent 100%)` }} />
+                <div className="absolute inset-x-0 bottom-0 h-44" style={{ background: `linear-gradient(to top, #ffffff 0%, transparent 100%)` }} />
 
                 {/* Botón volver */}
                 <div className="absolute top-6 left-4 sm:left-8 z-30">
@@ -317,11 +331,11 @@ export default function BrandPage() {
                                     className="w-12 h-1 rounded-full mb-5"
                                     style={{ backgroundColor: theme.primary }}
                                 />
-                                <h2 className="font-display font-black text-3xl sm:text-4xl text-white mb-4 leading-tight">
+                                <h2 className="font-display font-black text-3xl sm:text-4xl text-[#111111] mb-4 leading-tight">
                                     Por qué elegir{' '}
                                     <span style={{ color: theme.primary }}>{activeBrandData.name}</span>
                                 </h2>
-                                <p className="text-gray-400 text-lg leading-relaxed">
+                                <p className="text-[#666666] text-lg leading-relaxed">
                                     {theme.description}
                                 </p>
                             </div>
@@ -345,7 +359,7 @@ export default function BrandPage() {
             </div>
 
             {/* ─── EXPLORA OTRAS MARCAS ────────────────────────────────────────── */}
-            <section className="py-20 border-t border-white/5">
+            <section className="py-20 border-t" style={{ borderColor: '#ececec' }}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
@@ -357,7 +371,7 @@ export default function BrandPage() {
                         <p className="text-xs font-bold tracking-[0.3em] uppercase mb-3" style={{ color: theme.primary }}>
                             También en Ibiza Motos
                         </p>
-                        <h3 className="font-display font-black text-3xl sm:text-4xl text-white">
+                        <h3 className="font-display font-black text-3xl sm:text-4xl text-[#111111]">
                             Explora otras marcas
                         </h3>
                     </motion.div>
@@ -376,17 +390,19 @@ export default function BrandPage() {
                                         viewport={{ once: true, amount: 0.2 }}
                                         transition={{ duration: 0.4, delay: i * 0.06 }}
                                         onClick={() => navigate(`/marca/${brand.name.toLowerCase().replace(' ', '-')}`)}
-                                        className="group relative flex flex-col items-center gap-3 p-5 rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1"
-                                        style={{ backgroundColor: `rgba(${bTheme.glowRgb}, 0.05)` }}
+                                        className="group relative flex flex-col items-center gap-3 p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1"
+                                        style={{ backgroundColor: `rgba(${bTheme.glowRgb}, 0.05)`, borderColor: '#ececec' }}
+                                        onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = `rgba(${bTheme.glowRgb}, 0.45)`; }}
+                                        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#ececec'; }}
                                     >
                                         <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center transition-all shadow-md p-2">
                                             <img src={brand.logo} alt={brand.name} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                                         </div>
                                         <div className="text-center">
-                                            <p className="font-display font-bold text-white text-sm">{brand.name}</p>
-                                            <p className="text-gray-500 text-xs mt-0.5">{bCount} motos</p>
+                                            <p className="font-display font-bold text-[#111111] text-sm">{brand.name}</p>
+                                            <p className="text-[#999999] text-xs mt-0.5">{bCount} motos</p>
                                         </div>
-                                        <ArrowRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-white group-hover:translate-x-0.5 transition-all absolute top-3 right-3" />
+                                        <ArrowRight className="w-3.5 h-3.5 text-[#999999] group-hover:text-[#111111] group-hover:translate-x-0.5 transition-all absolute top-3 right-3" />
                                     </motion.button>
                                 );
                             })}

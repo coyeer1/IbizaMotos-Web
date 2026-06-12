@@ -10,14 +10,14 @@
     <meta name="keywords" content="motos Pereira, concesionario motos Pereira, motos Dosquebradas, motos Santa Rosa de Cabal, motos Neiva, Suzuki Pereira, Honda Pereira, Bajaj Pereira, AKT Pereira, Hero Pereira, Vento Pereira, motos financiadas Pereira, comprar moto Pereira, Ibiza Motos" />
     <meta name="author" content="Ibiza Motos S.A.S." />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.ibizamotos.com" />
+    <link rel="canonical" href="https://ibizamotos.co" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Ibiza Motos | 19 sucursales en el Eje Cafetero y Neiva" />
     <meta property="og:description" content="La red de concesionarios más grande del Eje Cafetero. Suzuki, Honda, Bajaj, AKT, Hero y Vento. Financiación inmediata." />
-    <meta property="og:url" content="https://www.ibizamotos.com" />
-    <meta property="og:image" content="https://www.ibizamotos.com/Logo-Ibiza-motos.png" />
+    <meta property="og:url" content="https://ibizamotos.co" />
+    <meta property="og:image" content="https://ibizamotos.co/Logo-Ibiza-motos.png" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:site_name" content="Ibiza Motos" />
 
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Ibiza Motos | Motos Nuevas en Pereira y Eje Cafetero" />
     <meta name="twitter:description" content="Concesionario multimarca con 19 sucursales: Suzuki, Honda, Bajaj, AKT, Hero y Vento. Venta, taller y repuestos." />
-    <meta name="twitter:image" content="https://www.ibizamotos.com/Logo-Ibiza-motos.png" />
+    <meta name="twitter:image" content="https://ibizamotos.co/Logo-Ibiza-motos.png" />
 
     <!-- Geo Tags (Local SEO) -->
     <meta name="geo.region" content="CO-RIS" />
@@ -45,20 +45,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://ydecxldrzfqbngoewkhn.supabase.co" />
+
+    <!-- Fuentes (no bloqueantes): se aplican al cargar, con fallback inmediato vía display=swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" /></noscript>
+
+    <!-- Preload de la primera imagen del hero: el navegador la baja en paralelo
+         con el JS, sin esperar a que React monte el componente. -->
+    <link rel="preload" as="image" href="/moto_images/dominar-400-volcano/dominar-400-volcano.webp" fetchpriority="high" />
     
     <!-- Structured Data (JSON-LD) for Google -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "@id": "https://www.ibizamotos.com/#organization",
+      "@id": "https://ibizamotos.co/#organization",
       "name": "Ibiza Motos S.A.S.",
       "alternateName": "Ibiza Motos",
       "legalName": "Ibiza Motos S.A.S.",
       "taxID": "901.197.563-9",
-      "url": "https://www.ibizamotos.com",
-      "logo": "https://www.ibizamotos.com/Logo-Ibiza-motos.png",
-      "image": "https://www.ibizamotos.com/Logo-Ibiza-motos.png",
+      "url": "https://ibizamotos.co",
+      "logo": "https://ibizamotos.co/Logo-Ibiza-motos.png",
+      "image": "https://ibizamotos.co/Logo-Ibiza-motos.png",
       "description": "Concesionario multimarca de motocicletas con 19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva.",
       "email": "ibizachat321@gmail.com",
       "telephone": "+573052884546",
@@ -93,12 +102,12 @@
     {
       "@context": "https://schema.org",
       "@type": "MotorcycleDealer",
-      "@id": "https://www.ibizamotos.com/#dealer-main",
+      "@id": "https://ibizamotos.co/#dealer-main",
       "name": "Ibiza Motos — Sede Principal Pereira",
-      "parentOrganization": {"@id": "https://www.ibizamotos.com/#organization"},
-      "url": "https://www.ibizamotos.com",
+      "parentOrganization": {"@id": "https://ibizamotos.co/#organization"},
+      "url": "https://ibizamotos.co",
       "telephone": "+573052884546",
-      "image": "https://www.ibizamotos.com/Logo-Ibiza-motos.png",
+      "image": "https://ibizamotos.co/Logo-Ibiza-motos.png",
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",

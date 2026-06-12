@@ -1,0 +1,1388 @@
+{
+  "actualizado": "2026-06-09",
+  "base_url": "https://ibizamotos.co",
+  "moneda": "COP",
+  "total": 115,
+  "motos": [
+    {
+      "marca": "Suzuki",
+      "modelo": "AX4 EIII",
+      "anio": 2026,
+      "precio_cop": 5820000,
+      "precio_texto": "$5.820.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/ax4-eiii/ax4%20azul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ax4-eiii/ax4%20azul.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "AX4 ABS",
+      "anio": 2026,
+      "precio_cop": 6309000,
+      "precio_texto": "$6.309.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/ax4-abs/AX4%20ABS%20AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ax4-abs/AX4%20ABS%20AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GN125 EIII",
+      "anio": 2026,
+      "precio_cop": 6999000,
+      "precio_texto": "$6.999.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/suzuki-gn125-eiii/GN125%20EIII%20AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/suzuki-gn125-eiii/GN125%20EIII%20AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GN125 ABS",
+      "anio": 2026,
+      "precio_cop": 7399000,
+      "precio_texto": "$7.399.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/gn125-abs/GN125%20ABS%20AZUL-NEGRO.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gn125-abs/GN125%20ABS%20AZUL-NEGRO.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Vivar Cool EIII",
+      "anio": 2026,
+      "precio_cop": 7400000,
+      "precio_texto": "$7.400.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/vivar-cool-eiii/VIVAR%20COOL%20EIII%20blanca.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/vivar-cool-eiii/VIVAR%20COOL%20EIII%20blanca.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Address",
+      "anio": 2026,
+      "precio_cop": 8490000,
+      "precio_texto": "$8.490.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/address/ADDRESS-NEGRA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/address/ADDRESS-NEGRA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Avenis",
+      "anio": 2026,
+      "precio_cop": 9699000,
+      "precio_texto": "$9.699.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/avenis/AVENIS%20AMARILLA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/avenis/AVENIS%20AMARILLA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "BEST 125 FI",
+      "anio": 2026,
+      "precio_cop": 10490000,
+      "precio_texto": "$10.490.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/best-125-fi/SUZUKI-NEW-BEST-125-NEGRA-min.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Burgman 200 FI",
+      "anio": 2026,
+      "precio_cop": 10490000,
+      "precio_texto": "$10.490.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/burgman-fi/BURGMAN%20BLANCA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/burgman-fi/BURGMAN%20BLANCA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "DR 150 ABS",
+      "anio": 2026,
+      "precio_cop": 10990000,
+      "precio_texto": "$10.990.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dr-150-abs/DR-150-AMARILLA-1385x800_0.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Gixxer FI 150 ABS",
+      "anio": 2026,
+      "precio_cop": 11190000,
+      "precio_texto": "$11.190.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gixxer-fi-150-abs/GIXXER-150%20FI%20ABS-NEGRA-2026.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gixxer-fi-150-abs/GIXXER-150%20FI%20ABS-NEGRA-2026.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "DR 150 FI ABS",
+      "anio": 2026,
+      "precio_cop": 11999000,
+      "precio_texto": "$11.999.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Gixxer SF FI 150 ABS",
+      "anio": 2026,
+      "precio_cop": 12690000,
+      "precio_texto": "$12.690.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-S150 ABS",
+      "anio": 2026,
+      "precio_cop": 12990000,
+      "precio_texto": "$12.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-s150-abs/GSX%20S150%20ABS%20NEGRA%20%281%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-s150-abs/GSX%20S150%20ABS%20NEGRA%20%281%29.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "DR160X",
+      "anio": 2026,
+      "precio_cop": 12999000,
+      "precio_texto": "$12.999.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/dr160x/dr160x-blanco.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dr160x/dr160x-blanco.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "V-Strom 160",
+      "anio": 2026,
+      "precio_cop": 13490000,
+      "precio_texto": "$13.490.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/v-strom-160/V-STROM%20160%20AMARILLA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/v-strom-160/V-STROM%20160%20AMARILLA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Gixxer 250",
+      "anio": 2026,
+      "precio_cop": 14990000,
+      "precio_texto": "$14.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-R150 ABS",
+      "anio": 2026,
+      "precio_cop": 14990000,
+      "precio_texto": "$14.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-r150-abs/GSX%20R150%20ABS%20NEGRA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-r150-abs/GSX%20R150%20ABS%20NEGRA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Gixxer SF 250",
+      "anio": 2026,
+      "precio_cop": 15990000,
+      "precio_texto": "$15.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL%20%281%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gixxer-sf-250/GIXXER-SF-250-BLANCA-AZUL%20%281%29.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "V-Strom 250 SX",
+      "anio": 2027,
+      "precio_cop": 20190000,
+      "precio_texto": "$20.190.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/v-strom-250-sx/V-STROM_250SX--2027-BLANCA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "SV650A",
+      "anio": 2026,
+      "precio_cop": 44990000,
+      "precio_texto": "$44.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/sv650a/SV650%20NEGRA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/sv650a/SV650%20NEGRA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "V-Strom 650 XT",
+      "anio": 2026,
+      "precio_cop": 49850000,
+      "precio_texto": "$49.850.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/dl650xt/V-STROM-DL650-BLK.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dl650xt/V-STROM-DL650-BLK.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "DR Z4S",
+      "anio": 2026,
+      "precio_cop": 50000000,
+      "precio_texto": "$50.000.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/dr-z4s/DR-Z4S-AMARILLA%20%281%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dr-z4s/DR-Z4S-AMARILLA%20%281%29.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "DR Z4SM",
+      "anio": 2026,
+      "precio_cop": 50000000,
+      "precio_texto": "$50.000.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/dr-z4sm/DR-Z4SM-AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dr-z4sm/DR-Z4SM-AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-8S",
+      "anio": 2026,
+      "precio_cop": 55320000,
+      "precio_texto": "$55.320.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-8s/GSX-8S.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-8s/GSX-8S.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-8R",
+      "anio": 2026,
+      "precio_cop": 57690000,
+      "precio_texto": "$57.690.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-8r/GSX-8R-BLANCA_0.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-8r/GSX-8R-BLANCA_0.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "V-Strom 800 DE",
+      "anio": 2026,
+      "precio_cop": 69390000,
+      "precio_texto": "$69.390.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/v-strom-800-de/V-STROM-800-DE-AMARILLA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-S1000",
+      "anio": 2026,
+      "precio_cop": 77990000,
+      "precio_texto": "$77.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-s1000/GSX%20S1000%20AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-s1000/GSX%20S1000%20AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "V-Strom 1050 DE",
+      "anio": 2026,
+      "precio_cop": 81990000,
+      "precio_texto": "$81.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/v-strom-1050-de/V-STROM-1050DE-AMARILLA.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "GSX-R1000R",
+      "anio": 2026,
+      "precio_cop": 90900000,
+      "precio_texto": "$90.900.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/gsx-r1000r/GSX%20R1000R%20AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gsx-r1000r/GSX%20R1000R%20AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Suzuki",
+      "modelo": "Hayabusa",
+      "anio": 2026,
+      "precio_cop": 103500000,
+      "precio_texto": "$103.500.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/hayabusa/HAYABUSA%20AZUL.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/hayabusa/HAYABUSA%20AZUL.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "CB 100",
+      "anio": 2026,
+      "precio_cop": 5700000,
+      "precio_texto": "$5.700.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/cb-100/honda-cb-100-azul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/cb-100/honda-cb-100-azul.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "Navi",
+      "anio": 2026,
+      "precio_cop": 7090000,
+      "precio_texto": "$7.090.000",
+      "categoria": "Rebels",
+      "foto_principal": "https://ibizamotos.co/moto_images/navi/navi-rojo-b.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/navi/navi-rojo-b.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "CB 125F DLX",
+      "anio": 2026,
+      "precio_cop": 7150000,
+      "precio_texto": "$7.150.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/cb-125f-dlx/honda-cb125f-20-std-negro1.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/cb-125f-dlx/honda-cb125f-20-std-negro1.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "Wave 110S",
+      "anio": 2026,
+      "precio_cop": 7199000,
+      "precio_texto": "$7.199.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/wave-110s-2026/nueva-honda-wave-110-blanca.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/wave-110s-2026/nueva-honda-wave-110-blanca.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "Navi Mix",
+      "anio": 2026,
+      "precio_cop": 7390000,
+      "precio_texto": "$7.390.000",
+      "categoria": "Rebels",
+      "foto_principal": "https://ibizamotos.co/moto_images/navi-mix/navi-mix-negro.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/navi-mix/navi-mix-negro.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "Navi Adventure",
+      "anio": 2026,
+      "precio_cop": 7440000,
+      "precio_texto": "$7.440.000",
+      "categoria": "Rebels",
+      "foto_principal": "https://ibizamotos.co/moto_images/navi-adventure/Navi_Lateral_Derecha_Cafe2.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/navi-adventure/Navi_Lateral_Derecha_Cafe2.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "DIO LED STD",
+      "anio": 2026,
+      "precio_cop": 7590000,
+      "precio_texto": "$7.590.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/dio-led-std/nueva-dio-std-azul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dio-led-std/nueva-dio-std-azul.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "DIO LED DLX",
+      "anio": 2026,
+      "precio_cop": 7740000,
+      "precio_texto": "$7.740.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/dio-led-dlx/nueva-dio-dlx-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dio-led-dlx/nueva-dio-dlx-gris.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "X-Blade 160",
+      "anio": 2026,
+      "precio_cop": 10190000,
+      "precio_texto": "$10.190.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/x-blade-160/xblade160-beige.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/x-blade-160/xblade160-beige.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "XR 150L 2.0",
+      "anio": 2026,
+      "precio_cop": 10850000,
+      "precio_texto": "$10.850.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/xr-150l-20/XR150L-20-blanco-version.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xr-150l-20/XR150L-20-blanco-version.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "CB 190R 2.0",
+      "anio": 2026,
+      "precio_cop": 12690000,
+      "precio_texto": "$12.690.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/cb-190r-20/honda-cb190r-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/cb-190r-20/honda-cb190r-gris.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "XR 190L 2.0",
+      "anio": 2026,
+      "precio_cop": 13800000,
+      "precio_texto": "$13.800.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/xr-190l-20/xr-190l-abs-beige.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xr-190l-20/xr-190l-abs-beige.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "NX 190",
+      "anio": 2026,
+      "precio_cop": 14590000,
+      "precio_texto": "$14.590.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/nx-190/honda-nx190-negro-nueva.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/nx-190/honda-nx190-negro-nueva.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "PCX 160 ABS",
+      "anio": 2026,
+      "precio_cop": 14800000,
+      "precio_texto": "$14.800.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/pcx-160-abs/Azul-8194f.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pcx-160-abs/Azul-8194f.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "CB 300F",
+      "anio": 2026,
+      "precio_cop": 16800000,
+      "precio_texto": "$16.800.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/cb-300f/Nueva-CB-300F-azul-mate.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/cb-300f/Nueva-CB-300F-azul-mate.webp"
+      ]
+    },
+    {
+      "marca": "Honda",
+      "modelo": "XR 300L Tornado",
+      "anio": 2026,
+      "precio_cop": 30490000,
+      "precio_texto": "$30.490.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/xr-300l-tornado/blanco-honda-x300l-7ebd1.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xr-300l-tornado/blanco-honda-x300l-7ebd1.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Boxer CT 100 KS",
+      "anio": 2026,
+      "precio_cop": 5899000,
+      "precio_texto": "$5.899.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/boxer-ct-100-ks/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/boxer-ct-100-ks/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Boxer CT 100 ES",
+      "anio": 2026,
+      "precio_cop": 6199000,
+      "precio_texto": "$6.199.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/boxer-ct-100-es/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/boxer-ct-100-es/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Boxer CT 125",
+      "anio": 2026,
+      "precio_cop": 6899000,
+      "precio_texto": "$6.899.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/boxer-ct-125/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/boxer-ct-125/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Boxer 150X",
+      "anio": 2026,
+      "precio_cop": 7499000,
+      "precio_texto": "$7.499.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/boxer-150x/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/boxer-150x/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Discover 125 ST-R",
+      "anio": 2026,
+      "precio_cop": 7499000,
+      "precio_texto": "$7.499.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/discover-125-st-r/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/discover-125-st-r/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar N125",
+      "anio": 2026,
+      "precio_cop": 7599000,
+      "precio_texto": "$7.599.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-n125/pulsar-n125-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-n125/pulsar-n125-gris.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar N 125 FI",
+      "anio": 2026,
+      "precio_cop": 7899000,
+      "precio_texto": "$7.899.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-n-125-fi/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-n-125-fi/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar NS 125 UG",
+      "anio": 2026,
+      "precio_cop": 8799000,
+      "precio_texto": "$8.799.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-ns-125-ug/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-ns-125-ug/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar P 150 FI ABS",
+      "anio": 2026,
+      "precio_cop": 8799000,
+      "precio_texto": "$8.799.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-p-150-fi-abs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-p-150-fi-abs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar N 160 FI DC",
+      "anio": 2026,
+      "precio_cop": 10999000,
+      "precio_texto": "$10.999.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-n-160-fi-dc/1.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-n-160-fi-dc/1.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar N160 Pro",
+      "anio": 2026,
+      "precio_cop": 10999000,
+      "precio_texto": "$10.999.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-n160-pro/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-n160-pro/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar NS 160 FI ABS UG2",
+      "anio": 2026,
+      "precio_cop": 11799000,
+      "precio_texto": "$11.799.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar NS 200 FI SC",
+      "anio": 2026,
+      "precio_cop": 13199000,
+      "precio_texto": "$13.199.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-ns-200-fi-sc/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-ns-200-fi-sc/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar N 250 FI ABS",
+      "anio": 2026,
+      "precio_cop": 13799000,
+      "precio_texto": "$13.799.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-n-250-fi-abs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-n-250-fi-abs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar NS 200 FI ABS UG2",
+      "anio": 2026,
+      "precio_cop": 15799000,
+      "precio_texto": "$15.799.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-ns-200-fi-abs-ug2/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar RS 200 ABS",
+      "anio": 2026,
+      "precio_cop": 15999000,
+      "precio_texto": "$15.999.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-rs-200-abs/01.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-rs-200-abs/01.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Pulsar NS 400Z",
+      "anio": 2026,
+      "precio_cop": 18299000,
+      "precio_texto": "$18.299.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/pulsar-ns-400z/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/pulsar-ns-400z/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Dominar 400 Pro Touring",
+      "anio": 2026,
+      "precio_cop": 19399000,
+      "precio_texto": "$19.399.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/dominar-400-pro-touring/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dominar-400-pro-touring/descarga.webp"
+      ]
+    },
+    {
+      "marca": "Bajaj",
+      "modelo": "Dominar 400 Volcano",
+      "anio": 2026,
+      "precio_cop": 20399000,
+      "precio_texto": "$20.399.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/dominar-400-volcano/descarga%20%281%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dominar-400-volcano/descarga%20%281%29.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 NKD CBS",
+      "anio": 2026,
+      "precio_cop": 5490000,
+      "precio_texto": "$5.490.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/ak125nkd-cbs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ak125nkd-cbs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "110 NV CBS",
+      "anio": 2026,
+      "precio_cop": 5590000,
+      "precio_texto": "$5.590.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/ak-110-nv-cbs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ak-110-nv-cbs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 CHR CBS",
+      "anio": 2026,
+      "precio_cop": 5990000,
+      "precio_texto": "$5.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/ak125chr-cbs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ak125chr-cbs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 NKD CBS Clásica V3",
+      "anio": 2027,
+      "precio_cop": 6090000,
+      "precio_texto": "$6.090.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "Flex CBS",
+      "anio": 2026,
+      "precio_cop": 6290000,
+      "precio_texto": "$6.290.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/flex-cbs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/flex-cbs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 NKD CBS FP",
+      "anio": 2027,
+      "precio_cop": 6490000,
+      "precio_texto": "$6.490.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/ak125nkd-cbs-fp-27-pt/descarga%20%281%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/ak125nkd-cbs-fp-27-pt/descarga%20%281%29.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 CR4",
+      "anio": 2026,
+      "precio_cop": 6990000,
+      "precio_texto": "$6.990.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/125-cr4/125-cr4negro.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/125-cr4/125-cr4negro.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "150 CR4",
+      "anio": 2026,
+      "precio_cop": 7590000,
+      "precio_texto": "$7.590.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/150-cr4/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/150-cr4/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "125 TTR CBS",
+      "anio": 2026,
+      "precio_cop": 7790000,
+      "precio_texto": "$7.790.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/125-ttr-cbs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/125-ttr-cbs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "Dynamic Pro",
+      "anio": 2026,
+      "precio_cop": 8490000,
+      "precio_texto": "$8.490.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/dynamic-pro/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dynamic-pro/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "200 CR4",
+      "anio": 2026,
+      "precio_cop": 8690000,
+      "precio_texto": "$8.690.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/200-cr4/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/200-cr4/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "200 TT ABS",
+      "anio": 2026,
+      "precio_cop": 9590000,
+      "precio_texto": "$9.590.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/200-tt-abs/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/200-tt-abs/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "Dinamic RX 150",
+      "anio": 2026,
+      "precio_cop": 9890000,
+      "precio_texto": "$9.890.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/dinamic-rx-150/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/dinamic-rx-150/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "TT200 ABS",
+      "anio": 2026,
+      "precio_cop": 10590000,
+      "precio_texto": "$10.590.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/tt200-abs/tt200-abs-blanco.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/tt200-abs/tt200-abs-blanco.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "TT200 ABS Rally",
+      "anio": 2026,
+      "precio_cop": 11390000,
+      "precio_texto": "$11.390.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/tt200-abs-rally/descarga%20%283%29.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/tt200-abs-rally/descarga%20%283%29.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "TT200 Rally ABS",
+      "anio": 2026,
+      "precio_cop": 11390000,
+      "precio_texto": "$11.390.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/tt200-rally-abs/tt200-rally-abs-verde.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/tt200-rally-abs/tt200-rally-abs-verde.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "Jet Evo",
+      "anio": 2026,
+      "precio_cop": 12990000,
+      "precio_texto": "$12.990.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/jet-evo/jet-evo-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/jet-evo/jet-evo-gris.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "250 R",
+      "anio": 2026,
+      "precio_cop": 13028504,
+      "precio_texto": "$13.028.504",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/akt-250-r/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/akt-250-r/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "VOGE XRS 180",
+      "anio": 2026,
+      "precio_cop": 13990000,
+      "precio_texto": "$13.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/xrs-180/xrs-180-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xrs-180/xrs-180-gris.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "VOGE 300 DS",
+      "anio": 2026,
+      "precio_cop": 15990000,
+      "precio_texto": "$15.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/voge-300-ds/voge-300-ds-amarillo.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/voge-300-ds/voge-300-ds-amarillo.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "RE Auto TUK TUK",
+      "anio": 2026,
+      "precio_cop": 16490000,
+      "precio_texto": "$16.490.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/tuk-tuk/descarga.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/tuk-tuk/descarga.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "VOGE 300 Rally",
+      "anio": 2026,
+      "precio_cop": 17990000,
+      "precio_texto": "$17.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/voge-300-rally/voge-300-rally-gris-brillante.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/voge-300-rally/voge-300-rally-gris-brillante.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "VOGE 525 DSX",
+      "anio": 2026,
+      "precio_cop": 31990000,
+      "precio_texto": "$31.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/voge-525/voge-525-gris.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/voge-525/voge-525-gris.webp"
+      ]
+    },
+    {
+      "marca": "AKT",
+      "modelo": "VOGE 900 DSX",
+      "anio": 2026,
+      "precio_cop": 51990000,
+      "precio_texto": "$51.990.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/voge-900/voge-900-negro.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/voge-900/voge-900-negro.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "ECO 100",
+      "anio": 2026,
+      "precio_cop": 4990000,
+      "precio_texto": "$4.990.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/eco-100/ECO-100-globito.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/eco-100/ECO-100-globito.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "ECO T 100",
+      "anio": 2026,
+      "precio_cop": 5390000,
+      "precio_texto": "$5.390.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/eco-t-100/EcoT_NegraAzul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/eco-t-100/EcoT_NegraAzul.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "ECO SP",
+      "anio": 2026,
+      "precio_cop": 5590000,
+      "precio_texto": "$5.590.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/eco-sp/eco-sp-negro-gris-motored-hero.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/eco-sp/eco-sp-negro-gris-motored-hero.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "ECO CW",
+      "anio": 2026,
+      "precio_cop": 5690000,
+      "precio_texto": "$5.690.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/eco-cw/eco-cw-negro-gris-motored-hero.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/eco-cw/eco-cw-negro-gris-motored-hero.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "Splendor X Pro",
+      "anio": 2026,
+      "precio_cop": 6390000,
+      "precio_texto": "$6.390.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/splendor/Splendor_Xpro_GrisLima.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/splendor/Splendor_Xpro_GrisLima.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XOOM 110",
+      "anio": 2026,
+      "precio_cop": 6990000,
+      "precio_texto": "$6.990.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/xoom-110/xoom110DiagAzul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xoom-110/xoom110DiagAzul.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XOOM 110",
+      "anio": 2026,
+      "precio_cop": 6990000,
+      "precio_texto": "$6.990.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/xoom-110/xoom110DiagAzul.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xoom-110/xoom110DiagAzul.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "Hunk 125R",
+      "anio": 2026,
+      "precio_cop": 7490000,
+      "precio_texto": "$7.490.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/hunk-125r/hunk125R-Black.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/hunk-125r/hunk125R-Black.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "Hunk 150 XT",
+      "anio": 2026,
+      "precio_cop": 8590000,
+      "precio_texto": "$8.590.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/hunk-150-xt/HUNK150Xtec_Black.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/hunk-150-xt/HUNK150Xtec_Black.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "Hunk 160 V2",
+      "anio": 2026,
+      "precio_cop": 9390000,
+      "precio_texto": "$9.390.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/hunk-160-v2/hunk160%20negra%20amarilla.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/hunk-160-v2/hunk160%20negra%20amarilla.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XPulse 200 AD",
+      "anio": 2026,
+      "precio_cop": 10490000,
+      "precio_texto": "$10.490.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xpulse-200-ad/Xpulse200Ad_BlancoAzulAr.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "Hunk 160 4V Pro",
+      "anio": 2026,
+      "precio_cop": 10740000,
+      "precio_texto": "$10.740.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/hunk-160-4v/Hunk160R-4VProNegroLima.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XPulse 200 4V",
+      "anio": 2026,
+      "precio_cop": 12290000,
+      "precio_texto": "$12.290.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XPulse 200 Pro 4V",
+      "anio": 2026,
+      "precio_cop": 13190000,
+      "precio_texto": "$13.190.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xpulse-200-pro-4v/xpulse200Pro4vNegro.webp"
+      ]
+    },
+    {
+      "marca": "Hero",
+      "modelo": "XPulse 200 R 4V",
+      "anio": 2026,
+      "precio_cop": 13390000,
+      "precio_texto": "$13.390.000",
+      "categoria": "Adventure",
+      "foto_principal": "https://ibizamotos.co/moto_images/xpulse-200-r-4v/xpulseRallyColor.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/xpulse-200-r-4v/xpulseRallyColor.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Lithium 125",
+      "anio": 2026,
+      "precio_cop": 4250000,
+      "precio_texto": "$4.250.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/lithium-125/VENTO-LITHIUM-125-4-01.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Rapid 125",
+      "anio": 2026,
+      "precio_cop": 4290000,
+      "precio_texto": "$4.290.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/rapid-125/GAL-RAPID-125-01-1024x819.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Spirit 125 ZX",
+      "anio": 2026,
+      "precio_cop": 4990000,
+      "precio_texto": "$4.990.000",
+      "categoria": "City",
+      "foto_principal": "https://ibizamotos.co/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Presley 200 ABS",
+      "anio": 2026,
+      "precio_cop": 5790000,
+      "precio_texto": "$5.790.000",
+      "categoria": "Rebels",
+      "foto_principal": "https://ibizamotos.co/moto_images/presley-200-abs/vento-latam-presley-200-01.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/presley-200-abs/vento-latam-presley-200-01.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Falkon 125",
+      "anio": 2026,
+      "precio_cop": 6190000,
+      "precio_texto": "$6.190.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/falkon-125/GAL-VENTO-FALKON-220-02-1024x819.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "CrossMax 200 Pro",
+      "anio": 2026,
+      "precio_cop": 7990000,
+      "precio_texto": "$7.990.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/crossmax-200/GAL-CROSSMAX200PRO-01-1024x819.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "GTS 300",
+      "anio": 2026,
+      "precio_cop": 9990000,
+      "precio_texto": "$9.990.000",
+      "categoria": "Scooters",
+      "foto_principal": "https://ibizamotos.co/moto_images/gts-300/vento-gts-300-cajuela-02.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/gts-300/vento-gts-300-cajuela-02.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Screamer 250 FI",
+      "anio": 2026,
+      "precio_cop": 9990000,
+      "precio_texto": "$9.990.000",
+      "categoria": "Urban Sport",
+      "foto_principal": "https://ibizamotos.co/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/screamer-250-fi/A-SCREAMER-SPORTIVO-250-02.webp"
+      ]
+    },
+    {
+      "marca": "Vento",
+      "modelo": "Alpina 300 EFI",
+      "anio": 2026,
+      "precio_cop": 12990000,
+      "precio_texto": "$12.990.000",
+      "categoria": "Enduro",
+      "foto_principal": "https://ibizamotos.co/moto_images/alpina-300-efi/vento-alpina-300-02.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/alpina-300-efi/vento-alpina-300-02.webp"
+      ]
+    },
+    {
+      "marca": "Good Kidz",
+      "modelo": "Motos de Niños",
+      "anio": 2026,
+      "precio_cop": 1290000,
+      "precio_texto": "$1.290.000",
+      "categoria": "Niños",
+      "foto_principal": "https://ibizamotos.co/moto_images/motos-nios/KB57%2060CC%204T.webp",
+      "fotos": [
+        "https://ibizamotos.co/moto_images/motos-nios/KB57%2060CC%204T.webp"
+      ]
+    }
+  ]
+}
