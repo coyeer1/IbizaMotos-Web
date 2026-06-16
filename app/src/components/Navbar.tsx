@@ -141,6 +141,7 @@ export default function Navbar() {
             <button
               className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
               onClick={openSearch}
+              aria-label="Buscar moto"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -149,6 +150,8 @@ export default function Navbar() {
             <button
               className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />

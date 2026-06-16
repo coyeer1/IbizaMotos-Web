@@ -39,9 +39,15 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-ibiza-black">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-ibiza-red focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold"
+      >
+        Ir al contenido principal
+      </a>
       {!isAdminRoute && <Navbar />}
 
-      <main>
+      <main id="main-content">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/"                element={<Home />} />

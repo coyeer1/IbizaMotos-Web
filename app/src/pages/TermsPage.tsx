@@ -8,7 +8,7 @@ const LAST_UPDATE  = '26 de mayo de 2026';
 const RESPONSIBLE  = 'Ibiza Motos S.A.S.';
 const NIT          = 'NIT 901.197.563-9';
 const ADDRESS      = 'Cra 7 #25-41 Parque Lago Uribe, Pereira, Risaralda, Colombia';
-const EMAIL        = 'ibizachat321@gmail.com';
+const EMAIL        = 'ibizamotossas@gmail.com';
 const PHONE        = '+57 305 288 4546';
 
 export default function TermsPage() {
@@ -58,7 +58,7 @@ export default function TermsPage() {
           <Reveal delay={0.05}><section>
             <h2 className="text-white font-display font-bold text-xl mb-3">2. Aceptación</h2>
             <p>
-              Al acceder y utilizar el sitio web <strong className="text-white">ibizamotos.com</strong>,
+              Al acceder y utilizar el sitio web <strong className="text-white">ibizamotos.co</strong>,
               los canales de WhatsApp y los demás medios digitales de {RESPONSIBLE}, usted acepta
               quedar vinculado por estos Términos y Condiciones. Si no está de acuerdo, le pedimos
               abstenerse de utilizar nuestros servicios.

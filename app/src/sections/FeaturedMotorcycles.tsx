@@ -27,6 +27,7 @@ const getBrandColor = (brand: string): string => {
 };
 
 const formatPrice = (price: number) => {
+  if (!price || price <= 0) return 'Consultar';
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
     currency: 'COP',

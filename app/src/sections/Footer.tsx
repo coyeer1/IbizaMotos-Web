@@ -18,7 +18,7 @@ const navLinks = [
 const socialLinks = [
   {
     name: 'Facebook',
-    href: 'https://facebook.com/ibizamotos',
+    href: 'https://www.facebook.com/p/Ibiza-Motos-Eje-Cafetero-Digital-100064068939059/',
     color: '#1877F2',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://instagram.com/ibizamotos',
+    href: 'https://instagram.com/ibizamotossas',
     color: '#E4405F',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -185,17 +185,13 @@ export default function Footer() {
             <ul className="space-y-3">
               {brands.map((brand) => (
                 <li key={brand.id}>
-                  <a
-                    href={`#catalogo`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection('#catalogo');
-                    }}
+                  <Link
+                    to={`/marca/${brand.slug}`}
                     className="text-white/60 hover:!text-ibiza-red transition-colors duration-200 flex items-center gap-2 group text-sm"
                   >
                     <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-red" />
                     {brand.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -223,7 +219,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Mail className="w-5 h-5 text-ibiza-red flex-shrink-0" />
-                <a href="mailto:ibizachat321@gmail.com" className="hover:text-white transition-colors duration-200">ibizachat321@gmail.com</a>
+                <a href="mailto:ibizamotossas@gmail.com" className="hover:text-white transition-colors duration-200">ibizamotossas@gmail.com</a>
               </li>
             </ul>
 
@@ -267,9 +263,22 @@ export default function Footer() {
       <div className="border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="!text-white/40 text-xs text-center md:text-left">
-              © {new Date().getFullYear()} Ibiza Motos del Eje Cafetero. Todos los derechos reservados.
-            </p>
+            <div className="text-center md:text-left">
+              <p className="!text-white/40 text-xs">
+                © {new Date().getFullYear()} Ibiza Motos S.A.S. Todos los derechos reservados.
+              </p>
+              <p className="!text-white/30 text-[11px] mt-1">
+                Diseño y desarrollo por{' '}
+                <a
+                  href="https://chillinc.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="!text-white/50 hover:!text-ibiza-red transition-colors duration-200 font-medium"
+                >
+                  chillinc.app
+                </a>
+              </p>
+            </div>
             <div className="flex gap-6 text-xs">
               <Link to="/privacidad" className="!text-white/40 hover:!text-white transition-colors duration-200 flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />

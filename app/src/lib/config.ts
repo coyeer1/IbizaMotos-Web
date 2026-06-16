@@ -6,7 +6,7 @@ export const BUSINESS = {
   slogan: 'El placer en dos ruedas',
   phone: '+573052884546',
   whatsappNumber: '573052884546',
-  email: 'info@ibizamotos.com',
+  email: 'ibizamotossas@gmail.com',
   website: 'https://ibizamotos.co',
   address: 'Cra 7 #25-41 Parque Lago Uribe, Pereira',
   city: 'Pereira',

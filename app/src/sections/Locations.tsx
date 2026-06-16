@@ -4,27 +4,30 @@ import { MapPin, Store, Wrench } from 'lucide-react';
 import { branches } from '@/data/motorcycles';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-const branchMeta: Record<string, { type: string; color: string; icon: React.ReactNode; mapEmbed: string; image: string }> = {
+const branchMeta: Record<string, { type: string; color: string; icon: React.ReactNode; image: string }> = {
   '1': {
-    type: 'Showroom & Taller',
-    color: '#c0392b',
+    type: 'Showroom & Taller — Suzuki',
+    color: '#1a73e8',
     icon: <Store className="w-5 h-5" />,
-    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.4!2d-75.6811!3d4.5339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzInMDIuMCJOIDc1wrA0MCc1Mi4wIlc!5e0!3m2!1ses!2sco!4v1700000000',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=800',
+    image: '/sucursales/1/foto-fachada-1.webp',
   },
   '2': {
-    type: 'Taller Autorizado',
-    color: '#e67e22',
-    icon: <Wrench className="w-5 h-5" />,
-    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.0!2d-75.690!3d4.545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzInNDIuMCJOIDc1wrA0MScyNC4wIlc!5e0!3m2!1ses!2sco!4v1700000001',
-    image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    type: 'Concesionario — Honda',
+    color: '#cc0000',
+    icon: <Store className="w-5 h-5" />,
+    image: '/sucursales/2/foto-fachada-1.webp',
   },
   '3': {
-    type: 'Taller Autorizado',
-    color: '#8e44ad',
+    type: 'Concesionario — AKT',
+    color: '#e65c00',
+    icon: <Store className="w-5 h-5" />,
+    image: '/sucursales/3/foto-fachada-1.webp',
+  },
+  '4': {
+    type: 'Concesionario — Hero',
+    color: '#8b0000',
     icon: <Wrench className="w-5 h-5" />,
-    mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.8!2d-75.635!3d4.618!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzcnMDQuOCJOIDc1wrAzOCcwNi4wIlc!5e0!3m2!1ses!2sco!4v1700000002',
-    image: 'https://images.unsplash.com/photo-1558981359-219d6364c9c8?auto=format&fit=crop&q=80&w=800',
+    image: '/sucursales/4/foto-fachada-1.webp',
   },
 };
 
@@ -56,8 +59,8 @@ export default function Locations() {
           </span>
           <h2 className="locations-title">NUESTRAS SUCURSALES</h2>
           <p className="locations-subtitle">
-            Tres puntos estratégicos para servirte mejor. Showroom, taller autorizado
-            y atención personalizada en cada sede.
+            Nuestras sedes en Pereira (Carrera 7). Y contamos con 19 sucursales en todo
+            el Eje Cafetero y Neiva para atenderte de cerca.
           </p>
         </motion.div>
 
@@ -93,9 +96,7 @@ export default function Locations() {
                     <div className="branch-card-content">
                       <h3 className="branch-name">{branch.name}</h3>
                       <p className="branch-address">
-                        {branch.name === 'Sede Principal'
-                          ? 'Armenia, Quindío - Showroom & Taller Autorizado'
-                          : 'Armenia, Quindío - Taller Autorizado'}
+                        {m.type} · Pereira, Risaralda
                       </p>
                     </div>
                   </div>
@@ -116,7 +117,7 @@ export default function Locations() {
               <AnimatePresence mode="wait">
                 <motion.iframe
                   key={selectedBranch.id}
-                  src={meta.mapEmbed}
+                  src={`https://maps.google.com/maps?q=${selectedBranch.coordinates.lat},${selectedBranch.coordinates.lng}&z=16&output=embed`}
                   className="map-iframe"
                   allowFullScreen
                   loading="lazy"
@@ -152,9 +153,7 @@ export default function Locations() {
                   <div className="detail-card-body">
                     <h3 className="detail-name text-center">{selectedBranch.name}</h3>
                     <p className="detail-subtitle text-center">
-                      {selectedBranch.name === 'Sede Principal'
-                        ? 'Armenia, Quindío - Showroom & Taller Autorizado'
-                        : 'Armenia, Quindío - Taller Autorizado'}
+                      {meta.type} · Pereira, Risaralda
                     </p>
 
                     <div className="detail-info-list mt-4">

@@ -241,14 +241,14 @@ const MotoCard = ({
           {/* Price & Action */}
           <div className="flex items-end justify-between pt-5 mt-auto">
             <div>
-              <p className={`text-[10px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>Desde</p>
+              <p className={`text-[10px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>{motorcycle.price > 0 ? 'Desde' : 'Precio'}</p>
               <p
                 className="font-display font-black text-[28px] leading-none tracking-tight transition-colors duration-500"
                 style={{ color: '#111' }}
                 onMouseEnter={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = dk.primary; }}
                 onMouseLeave={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = '#111'; }}
               >
-                ${new Intl.NumberFormat('es-CO').format(motorcycle.price)}
+                {motorcycle.price > 0 ? `$${new Intl.NumberFormat('es-CO').format(motorcycle.price)}` : 'Consultar'}
               </p>
             </div>
 

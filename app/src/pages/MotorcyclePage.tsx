@@ -102,6 +102,7 @@ export default function MotorcyclePage() {
     const brandGlow = theme.glowRgb;
 
     const formatPrice = (price: number) => {
+        if (!price || price <= 0) return 'Consultar';
         return new Intl.NumberFormat('es-CO', {
             style: 'currency',
             currency: 'COP',
@@ -109,7 +110,7 @@ export default function MotorcyclePage() {
         }).format(price);
     };
 
-    const originalPrice = motorcycle.price * 1.05;
+    const hasPrice = motorcycle.price > 0;
 
     const whatsappUrl = getBrandBuyWhatsApp(motorcycle.brand, motorcycle.model, selectedColor);
 
@@ -253,15 +254,12 @@ export default function MotorcyclePage() {
 
                         {/* Price block */}
                         <div className="mb-8">
-                            <p className="text-xs text-[#999999] font-semibold tracking-wider uppercase mb-1">Precio desde</p>
+                            <p className="text-xs text-[#999999] font-semibold tracking-wider uppercase mb-1">{hasPrice ? 'Precio desde' : 'Precio'}</p>
                             <div className="flex items-end gap-3">
                                 <span className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-[#111111] leading-none">
                                     {formatPrice(motorcycle.price)}
                                 </span>
                             </div>
-                            <span className="text-sm text-[#999999] line-through mt-1 block">
-                                {formatPrice(originalPrice)}
-                            </span>
                         </div>
 
                         {/* Color selector — solo si hay imagesByColor real */}
@@ -354,6 +352,7 @@ export default function MotorcyclePage() {
                                             src={currentImage}
                                             alt={`${motorcycle.brand} ${motorcycle.model}`}
                                             decoding="async"
+                                            fetchPriority="high"
                                             className="max-h-full max-w-full object-contain filter drop-shadow-[0_25px_45px_rgba(0,0,0,0.18)]"
                                         />
                                         {/* Hint de zoom */}
@@ -624,7 +623,7 @@ export default function MotorcyclePage() {
                             <Button
                                 variant="outline"
                                 onClick={() => setShowQuoteModal(true)}
-                                className="h-10 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-[#e8e8e8] text-[#666666] hover:bg-[#f7f7f7] font-bold text-xs transition-all hidden sm:flex items-center gap-1"
+                                className="h-10 sm:h-11 px-3 sm:px-6 rounded-xl border-2 border-[#e8e8e8] text-[#666666] hover:bg-[#f7f7f7] font-bold text-xs transition-all flex items-center gap-1"
                             >
                                 <MessageCircle className="w-3.5 h-3.5" />
                                 Cotizar

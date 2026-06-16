@@ -112,6 +112,7 @@ function WhatsAppFloatInner() {
         className="relative w-13 h-13 sm:w-14 sm:h-14 w-[52px] h-[52px] bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
         style={{ boxShadow: '0 4px 20px 0 rgba(37, 211, 102, 0.45)' }}
         title="WhatsApp"
+        aria-label="Contactar por WhatsApp"
       >
         <AnimatePresence mode="wait">
           {menuOpen ? (

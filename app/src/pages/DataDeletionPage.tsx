@@ -5,7 +5,7 @@ import Reveal from '@/components/Reveal';
 import { useSEO } from '@/hooks/useSEO';
 
 const RESPONSIBLE = 'Ibiza Motos S.A.S.';
-const EMAIL       = 'ibizachat321@gmail.com';
+const EMAIL       = 'ibizamotossas@gmail.com';
 const PHONE       = '+57 305 288 4546';
 const WA_LINK     = `https://wa.me/573052884546?text=${encodeURIComponent('Hola, quiero solicitar la eliminación de mis datos personales.')}`;
 
