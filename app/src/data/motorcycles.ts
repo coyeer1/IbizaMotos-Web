@@ -2518,8 +2518,8 @@ export const motorcycles: Motorcycle[] = [
     },
     imagesByColor: {
           "Negro": [
-                "/moto_images/eco-100/eco 100 negra roja.webp",
-                "/moto_images/eco-100/eco 100 negra-roja.webp"
+                "/moto_images/eco-100/eco 100 negra-roja.webp",
+                "/moto_images/eco-100/eco 100 negra roja.webp"
           ]
     },
     images: ["/moto_images/eco-100/ECO-100-globito.webp"],
