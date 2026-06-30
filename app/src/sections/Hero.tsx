@@ -229,7 +229,7 @@ export default function Hero() {
             alt={`${slide.brand} ${slide.model}`}
             width={580}
             height={435}
-            fetchpriority="high"
+            fetchPriority="high"
             decoding="async"
             className={phase === 'out' ? 'hero-img-out' : 'hero-img-in'}
             style={{

@@ -96,7 +96,7 @@ function MotoFormModal({
         transmission: editingMoto.specifications?.transmission || '',
         weight: editingMoto.specifications?.weight || '',
         fuelCapacity: editingMoto.specifications?.fuelCapacity || '',
-        featured: editingMoto.featured,
+        featured: editingMoto.featured ?? false,
         slug: editingMoto.id || '',
         video_url: editingMoto.videoUrl || '',
       });

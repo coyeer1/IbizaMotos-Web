@@ -28,7 +28,7 @@ export function ImageUploader({ urls, onChange, bucketName = 'motorcycles', fold
       const fileName = `${Math.random().toString(36).substring(2, 12)}_${Date.now()}.${fileExt}`;
       const filePath = folderPath ? `${folderPath}/${fileName}` : fileName;
 
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from(bucketName)
         .upload(filePath, file, {
           cacheControl: '3600',

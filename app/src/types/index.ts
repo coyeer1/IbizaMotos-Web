@@ -18,7 +18,7 @@ export interface Motorcycle {
   images: string[];
   imagesByColor?: Record<string, string[]>;
   videoUrl?: string;
-  featured: boolean;
+  featured?: boolean;
   stock?: 'available' | 'limited' | 'order';
 }
 
@@ -61,6 +61,7 @@ export interface Branch {
   address: string;
   phone: string;
   hours: string;
+  city?: string;
   coordinates: {
     lat: number;
     lng: number;
