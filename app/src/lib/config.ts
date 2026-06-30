@@ -14,6 +14,13 @@ export const BUSINESS = {
   country: 'Colombia',
 } as const;
 
+// ─── Feature flags ───
+// Agendamiento de taller en línea: apagado hasta tener el equipo (asesores)
+// listo para atender las citas. Con `false` se ocultan precios y el formulario
+// de /citas, y se muestra "Próximamente". Cambiar a `true` reactiva todo el
+// flujo (precios, botones "Agendar Cita" y el asistente completo) sin más cambios.
+export const WORKSHOP_BOOKING_ENABLED: boolean = false;
+
 // Generate WhatsApp URL with pre-filled message
 export function getWhatsAppUrl(message: string): string {
   return `https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(message)}`;

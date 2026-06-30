@@ -2,6 +2,7 @@ import { Wrench, Calendar, Phone, MapPin, CheckCircle2, Clock, Star, Award, Shie
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import Reveal from '@/components/Reveal';
+import { WORKSHOP_BOOKING_ENABLED } from '@/lib/config';
 
 // ─── Tokens (alineados con el hero) ───────────────────────────────────────
 const T = {
@@ -92,6 +93,27 @@ export default function Services() {
                 Taller Mecánico
               </span>
             </Reveal>
+
+            {!WORKSHOP_BOOKING_ENABLED && (
+              <Reveal delay={0.04} direction="up">
+                <div style={{ marginTop: 10 }}>
+                  <span
+                    className="inline-flex items-center gap-1.5 uppercase"
+                    style={{
+                      fontSize: 10,
+                      letterSpacing: '0.15em',
+                      color: T.red,
+                      fontWeight: 600,
+                      border: `1px solid ${T.red}`,
+                      borderRadius: 999,
+                      padding: '4px 12px',
+                    }}
+                  >
+                    <Clock className="w-3 h-3" /> Agendamiento online próximamente
+                  </span>
+                </div>
+              </Reveal>
+            )}
 
             <Reveal delay={0.08} direction="up">
               <h2
@@ -189,7 +211,9 @@ export default function Services() {
                 </p>
 
                 <div className="flex items-center gap-5 mb-6">
-                  <span style={{ color: T.red, fontWeight: 600, fontSize: 14 }}>{service.price}</span>
+                  {WORKSHOP_BOOKING_ENABLED && (
+                    <span style={{ color: T.red, fontWeight: 600, fontSize: 14 }}>{service.price}</span>
+                  )}
                   <span className="flex items-center gap-1.5" style={{ color: '#999', fontSize: 13 }}>
                     <Clock className="w-3.5 h-3.5" />
                     {service.time}
@@ -214,13 +238,30 @@ export default function Services() {
                 </div>
               </div>
 
-              <Button
-                onClick={() => goToAppointment(service.id)}
-                className="w-full h-11 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black hover:scale-[1.02] active:scale-95 transition-transform duration-200 shadow-none"
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                Agendar Cita
-              </Button>
+              {WORKSHOP_BOOKING_ENABLED ? (
+                <Button
+                  onClick={() => goToAppointment(service.id)}
+                  className="w-full h-11 rounded-lg text-sm font-semibold bg-black text-white hover:bg-black hover:scale-[1.02] active:scale-95 transition-transform duration-200 shadow-none"
+                >
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Agendar Cita
+                </Button>
+              ) : (
+                <div
+                  className="w-full h-11 rounded-lg flex items-center justify-center gap-2 uppercase select-none cursor-not-allowed"
+                  style={{
+                    background: T.pill,
+                    border: `1px solid ${T.border}`,
+                    color: '#999',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  <Clock className="w-4 h-4" />
+                  Próximamente
+                </div>
+              )}
             </div>
             </Reveal>
           ))}
@@ -290,6 +331,7 @@ export default function Services() {
 
           {/* Cita online — tarjeta light (sin gradiente) */}
           <Reveal delay={0.08} direction="up" className="flex">
+          {WORKSHOP_BOOKING_ENABLED ? (
           <div
             className="flex flex-col justify-between w-full"
             style={{
@@ -351,6 +393,60 @@ export default function Services() {
               Ver disponibilidad completa
             </Button>
           </div>
+          ) : (
+          <div
+            className="flex flex-col justify-center items-center text-center w-full"
+            style={{
+              background: T.pill,
+              border: `1px solid ${T.border}`,
+              borderRadius: 16,
+              padding: 32,
+            }}
+          >
+            <span
+              className="inline-flex items-center gap-2 uppercase"
+              style={{
+                fontSize: 11,
+                letterSpacing: '0.15em',
+                color: T.red,
+                fontWeight: 600,
+                border: `1px solid ${T.red}`,
+                borderRadius: 999,
+                padding: '6px 14px',
+                marginBottom: 20,
+              }}
+            >
+              <Clock className="w-3.5 h-3.5" /> Próximamente
+            </span>
+            <h3
+              style={{
+                fontFamily: T.display,
+                fontSize: 30,
+                lineHeight: 1,
+                letterSpacing: '-0.3px',
+                color: T.text,
+                marginBottom: 12,
+              }}
+            >
+              Agendamiento online en camino
+            </h3>
+            <p style={{ fontSize: 14, color: '#666', fontWeight: 300, lineHeight: 1.7, marginBottom: 28, maxWidth: 360 }}>
+              Estamos afinando la reserva de citas de taller en línea. Muy pronto podrás agendar tu
+              mantenimiento desde aquí. Mientras tanto, escríbenos y con gusto coordinamos tu cita.
+            </p>
+            <a
+              href="https://wa.me/573052884546?text=Hola, quiero agendar una cita para el taller"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full"
+            >
+              <Button className="w-full bg-[#E31937] text-white hover:bg-[#E31937] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
+                <Phone className="w-5 h-5 mr-2" />
+                Escríbenos por WhatsApp
+              </Button>
+            </a>
+          </div>
+          )}
           </Reveal>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { supabase } from '@/lib/supabase';
 import { buildGoogleCalendarUrl, notifyAppsScript, type CalendarEventParams } from '@/lib/googleCalendar';
 import { branches } from '@/data/motorcycles';
 import { useSEO } from '@/hooks/useSEO';
+import { BUSINESS, getServiceWhatsApp, WORKSHOP_BOOKING_ENABLED } from '@/lib/config';
 
 // ─── WhatsApp admin notification ─────────────────────────────────────────────
 async function notifyWhatsAppAdmin(p: CalendarEventParams): Promise<void> {
@@ -216,6 +217,46 @@ export default function AppointmentPage() {
   const [submitted, setSubmitted]             = useState(false);
   const [error, setError]                     = useState('');
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+
+  // ── Agendamiento online aún no habilitado → pantalla "Próximamente" ─────────
+  // El asistente completo permanece intacto debajo; al poner
+  // WORKSHOP_BOOKING_ENABLED = true en config.ts vuelve a funcionar tal cual.
+  if (!WORKSHOP_BOOKING_ENABLED) {
+    return (
+      <div className="min-h-screen bg-[#d4d0cb] flex items-center justify-center px-4 pt-20 pb-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg w-full">
+          <div className="bg-white border-2 border-black p-8 sm:p-10 text-center">
+            <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#EE1111] border-2 border-[#EE1111] px-3 py-1.5 mb-7">
+              <Wrench className="w-3.5 h-3.5" /> Próximamente
+            </span>
+            <div className="w-16 h-16 bg-black flex items-center justify-center mx-auto mb-6">
+              <Clock className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="font-black text-3xl sm:text-4xl text-black mb-4 uppercase leading-[0.95]">
+              Agendamiento<br />en camino
+            </h1>
+            <p className="text-gray-600 text-sm sm:text-base mb-8 leading-relaxed max-w-sm mx-auto">
+              Estamos afinando el agendamiento de citas de taller en línea. Muy pronto vas a poder
+              reservar tu mantenimiento aquí mismo. Mientras tanto, escríbenos o llámanos y con gusto
+              coordinamos tu cita.
+            </p>
+            <a href={getServiceWhatsApp('taller')} target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white font-black px-6 py-3.5 mb-3 border-2 border-[#25D366] hover:bg-[#1db954] transition-colors text-sm uppercase tracking-wider">
+              <MessageSquare className="w-5 h-5 shrink-0" /> Escríbenos por WhatsApp
+            </a>
+            <a href={`tel:${BUSINESS.phone}`}
+              className="flex items-center justify-center gap-3 w-full bg-white border-2 border-black text-black font-black px-6 py-3.5 mb-3 hover:bg-black hover:text-white transition-colors text-sm uppercase tracking-wider">
+              <Phone className="w-5 h-5 shrink-0" /> {BUSINESS.phone}
+            </a>
+            <button onClick={() => navigate('/')}
+              className="w-full text-black/40 hover:text-black font-black py-3 transition-colors text-sm uppercase tracking-wider">
+              Volver al inicio
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   const formatDate    = (d: Date) => `${DAYS_ES[d.getDay()]} ${d.getDate()} de ${MONTHS_ES[d.getMonth()]} ${d.getFullYear()}`;
   const formatDateISO = (d: Date) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
