@@ -5,13 +5,17 @@ import { buildGoogleCalendarUrl } from '@/lib/googleCalendar';
 import {
   Bike, Plus, Pencil, Trash2, LogOut, Search, Save, X, Image as ImageIcon,
   AlertCircle, CheckCircle2, Check, Palette,
-  Calendar, Phone, Wrench, RefreshCw
+  Calendar, Phone, Wrench, RefreshCw, Star, Printer
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import type { Motorcycle } from '@/types';
 import { brands, categories } from '@/data/motorcycles';
 import { ImageUploader } from '@/components/ImageUploader';
+import { SUCURSALES } from '@/data/sucursales';
+import { QRCodeImg } from '@/components/QRCodeImg';
+import QRCode from 'qrcode';
+import type { AdvisorReview } from '@/lib/reviews';
 
 // ─── Available Colors with visual hex values ───
 const AVAILABLE_COLORS: { name: string; hex: string }[] = [
@@ -493,7 +497,7 @@ export default function AdminDashboard() {
   const [editingMoto, setEditingMoto] = useState<Motorcycle | null>(null);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'inventory' | 'appointments'>('inventory');
+  const [activeTab, setActiveTab] = useState<'inventory' | 'appointments' | 'reviews' | 'qr'>('inventory');
 
   // ─── Citas state ────────────────────────────────────────────────────────────
   interface Appointment {
@@ -569,6 +573,70 @@ export default function AdminDashboard() {
     }
   };
 
+  // ─── Opiniones (advisor_reviews) ──────────────────────────────────────────────
+  const [reviews, setReviews] = useState<AdvisorReview[]>([]);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
+
+  const fetchReviews = async () => {
+    setReviewsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('advisor_reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      setReviews((data as AdvisorReview[]) || []);
+    } catch (err: any) {
+      showToast('Error cargando opiniones: ' + err.message, 'error');
+    } finally {
+      setReviewsLoading(false);
+    }
+  };
+
+  const deleteReview = async (id: string) => {
+    const { error } = await supabase.from('advisor_reviews').delete().eq('id', id);
+    if (error) { showToast('Error eliminando opinión', 'error'); }
+    else { setReviews(prev => prev.filter(r => r.id !== id)); showToast('Opinión eliminada ✓', 'success'); }
+  };
+
+  // Abre una ventana imprimible con un QR por sucursal (cada uno apunta a /opinion?s=<id>).
+  const printAllQRs = async () => {
+    const origin = window.location.origin;
+    const items = await Promise.all(
+      SUCURSALES.map(async (s) => ({
+        s,
+        url: await QRCode.toDataURL(`${origin}/opinion?s=${s.id}`, { width: 320, margin: 1 }),
+      }))
+    );
+    const cards = items.map(({ s, url }) => `
+      <div class="card">
+        <img src="${url}" />
+        <div class="marca">${s.marca}</div>
+        <div class="ciudad">${s.ciudad}</div>
+        <div class="asesor">${s.asesor}</div>
+        <div class="cta">Escanéame y déjanos tu opinión</div>
+      </div>`).join('');
+    const html = `<!doctype html><html><head><meta charset="utf-8"><title>QR Opiniones - Ibiza Motos</title>
+      <style>
+        *{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+        body{margin:0;padding:16px}
+        .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+        .card{border:2px solid #000;border-radius:10px;padding:14px;text-align:center;page-break-inside:avoid}
+        .card img{width:100%;max-width:240px}
+        .marca{font-weight:800;font-size:18px;margin-top:8px;text-transform:uppercase}
+        .ciudad{color:#555;font-size:13px}
+        .asesor{font-weight:700;font-size:14px;margin-top:4px}
+        .cta{color:#E31937;font-size:11px;font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
+      </style></head>
+      <body><div class="grid">${cards}</div>
+      <script>window.onload=function(){setTimeout(function(){window.print()},300)}</script>
+      </body></html>`;
+    const w = window.open('', '_blank');
+    if (!w) { showToast('Permite las ventanas emergentes para imprimir', 'error'); return; }
+    w.document.write(html);
+    w.document.close();
+  };
+
   useEffect(() => {
     if (authLoading) return;          // espera a saber si hay sesión de Supabase
     if (!isAuthenticated) {
@@ -578,6 +646,13 @@ export default function AdminDashboard() {
     fetchMotos();
     fetchAppointments();
   }, [isAuthenticated, authLoading, navigate]);
+
+  // Las opiniones se cargan solo al abrir su pestaña (evita errores si la tabla
+  // aún no existe en Supabase).
+  useEffect(() => {
+    if (isAuthenticated && activeTab === 'reviews') fetchReviews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, activeTab]);
 
   const fetchMotos = async () => {
     setLoading(true);
@@ -687,6 +762,8 @@ export default function AdminDashboard() {
           {([
             { id: 'inventory', label: '🏍️ Inventario' },
             { id: 'appointments', label: `📅 Citas${appointments.filter(a => a.status === 'pending').length > 0 ? ` · ${appointments.filter(a => a.status === 'pending').length} nuevas` : ''}` },
+            { id: 'reviews', label: '⭐ Opiniones' },
+            { id: 'qr', label: '🔳 QR opiniones' },
           ] as const).map(tab => (
             <button
               key={tab.id}
@@ -881,6 +958,130 @@ export default function AdminDashboard() {
                   title="Calendario de citas Ibiza Motos"
                 />
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* ══════════════════════════ OPINIONES TAB ══════════════════════════ */}
+        {activeTab === 'reviews' && (
+          <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+              <h2 className="font-display font-bold text-2xl text-white">Opiniones de asesores</h2>
+              <button
+                onClick={fetchReviews}
+                className="p-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-white/30 hover:text-white transition-colors"
+                title="Recargar"
+              >
+                <RefreshCw className={`w-4 h-4 ${reviewsLoading ? 'animate-spin' : ''}`} />
+              </button>
+            </div>
+
+            {reviews.length > 0 && (
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/[0.02] rounded-2xl p-5 border border-white/[0.04]">
+                  <p className="font-display font-black text-3xl text-white">{reviews.length}</p>
+                  <p className="text-white/25 text-xs font-medium mt-1">Opiniones</p>
+                </div>
+                <div className="bg-white/[0.02] rounded-2xl p-5 border border-white/[0.04]">
+                  <p className="font-display font-black text-3xl text-ibiza-gold">
+                    {(reviews.reduce((a, r) => a + r.rating, 0) / reviews.length).toFixed(1)} ★
+                  </p>
+                  <p className="text-white/25 text-xs font-medium mt-1">Promedio general</p>
+                </div>
+                <div className="bg-white/[0.02] rounded-2xl p-5 border border-white/[0.04]">
+                  <p className="font-display font-black text-3xl text-white">{reviews.filter(r => r.rating >= 4).length}</p>
+                  <p className="text-white/25 text-xs font-medium mt-1">Positivas (4-5★)</p>
+                </div>
+              </div>
+            )}
+
+            {reviews.length > 0 && (
+              <div className="bg-white/[0.02] rounded-2xl border border-white/[0.04] p-5 mb-8">
+                <p className="text-white/40 text-xs font-bold uppercase tracking-wider mb-4">Promedio por asesor</p>
+                <div className="space-y-2">
+                  {Object.values(reviews.reduce((acc, r) => {
+                    if (!acc[r.asesor]) acc[r.asesor] = { asesor: r.asesor, sucursal: r.sucursal_nombre, sum: 0, n: 0 };
+                    acc[r.asesor].sum += r.rating; acc[r.asesor].n += 1;
+                    return acc;
+                  }, {} as Record<string, { asesor: string; sucursal: string; sum: number; n: number }>))
+                    .sort((a, b) => (b.sum / b.n) - (a.sum / a.n))
+                    .map(row => (
+                      <div key={row.asesor} className="flex items-center justify-between text-sm gap-3">
+                        <div className="min-w-0 truncate">
+                          <span className="text-white font-semibold">{row.asesor}</span>
+                          <span className="text-white/30 ml-2 text-xs">{row.sucursal}</span>
+                        </div>
+                        <span className="text-ibiza-gold font-bold shrink-0">
+                          {(row.sum / row.n).toFixed(1)} ★ <span className="text-white/30 font-normal">({row.n})</span>
+                        </span>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+
+            {reviewsLoading ? (
+              <p className="text-white/40 text-sm">Cargando...</p>
+            ) : reviews.length === 0 ? (
+              <div className="bg-white/[0.02] rounded-2xl border border-white/[0.04] p-10 text-center">
+                <p className="text-white/40 text-sm">Aún no hay opiniones. Cuando un cliente escanee un QR y deje su opinión, aparecerá aquí.</p>
+                <p className="text-white/20 text-xs mt-3">¿No cargan? Asegúrate de haber corrido <code className="text-white/40">supabase-advisor-reviews.sql</code> en Supabase.</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {reviews.map(r => (
+                  <div key={r.id} className="bg-white/[0.02] rounded-2xl border border-white/[0.04] p-5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1 mb-1.5">
+                          {[1, 2, 3, 4, 5].map(n => (
+                            <Star key={n} className="w-4 h-4" style={{ fill: n <= r.rating ? '#f9c846' : 'transparent', color: n <= r.rating ? '#f9c846' : '#444' }} />
+                          ))}
+                          <span className="text-white/30 text-xs ml-2">{new Date(r.created_at).toLocaleDateString('es-CO')}</span>
+                        </div>
+                        <p className="text-white font-semibold text-sm">
+                          {r.asesor} <span className="text-white/30 font-normal">· {r.sucursal_nombre}</span>
+                        </p>
+                        {r.comentario && <p className="text-white/60 text-sm mt-2 leading-relaxed">“{r.comentario}”</p>}
+                        {(r.cliente_nombre || r.cliente_telefono) && (
+                          <p className="text-white/25 text-xs mt-2">{[r.cliente_nombre, r.cliente_telefono].filter(Boolean).join(' · ')}</p>
+                        )}
+                      </div>
+                      <button onClick={() => deleteReview(r.id)} className="text-white/20 hover:text-ibiza-red transition-colors shrink-0" title="Eliminar">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ══════════════════════════ QR TAB ══════════════════════════ */}
+        {activeTab === 'qr' && (
+          <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <h2 className="font-display font-bold text-2xl text-white">QR de opiniones por sucursal</h2>
+                <p className="text-white/40 text-sm mt-1">Imprime y pega el QR de cada local. Al escanearlo, el cliente califica directo a su asesor.</p>
+              </div>
+              <button
+                onClick={printAllQRs}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ibiza-red text-white text-sm font-semibold hover:bg-ibiza-red/90 transition-colors shrink-0"
+              >
+                <Printer className="w-4 h-4" /> Imprimir todos
+              </button>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {SUCURSALES.map(s => (
+                <div key={s.id} className="bg-white rounded-2xl p-4 flex flex-col items-center text-center">
+                  <QRCodeImg value={`${window.location.origin}/opinion?s=${s.id}`} size={150} />
+                  <p className="font-black text-black text-sm mt-3 uppercase leading-tight">{s.marca}</p>
+                  <p className="text-black/50 text-xs">{s.ciudad}</p>
+                  <p className="text-black/70 text-xs font-semibold mt-0.5">{s.asesor}</p>
+                </div>
+              ))}
             </div>
           </div>
         )}

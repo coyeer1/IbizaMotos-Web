@@ -16,6 +16,7 @@ const BrandPage       = lazy(() => import('@/pages/BrandPage'));
 const BlogPage        = lazy(() => import('@/pages/BlogPage'));
 const FinancingPage   = lazy(() => import('@/pages/FinancingPage'));
 const AppointmentPage = lazy(() => import('@/pages/AppointmentPage'));
+const OpinionPage     = lazy(() => import('@/pages/OpinionPage'));
 const SucursalesPage  = lazy(() => import('@/pages/SucursalesPage'));
 const AdminLogin      = lazy(() => import('@/pages/admin/AdminLogin'));
 const AdminDashboard  = lazy(() => import('@/pages/admin/AdminDashboard'));
@@ -56,6 +57,7 @@ function AppContent() {
             <Route path="/blog/:id"        element={<BlogPage />} />
             <Route path="/financiamiento"  element={<FinancingPage />} />
             <Route path="/citas"           element={<AppointmentPage />} />
+            <Route path="/opinion"         element={<OpinionPage />} />
             <Route path="/sucursales"      element={<SucursalesPage />} />
             <Route path="/privacidad"      element={<PrivacyPage />} />
             <Route path="/terminos"        element={<TermsPage />} />
