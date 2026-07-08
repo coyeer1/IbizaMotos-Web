@@ -13,12 +13,18 @@ export function useBlogMetrics() {
 
   const fetchMetrics = useCallback(async () => {
     try {
-      const { data, error } = await supabase
-        .from('blog_metrics')
-        .select('*');
+      // Timeout: si Supabase está pausado/lento (plan Free se pausa solo), esta
+      // llamada NO debe dejar el home colgado. A los 3s seguimos sin métricas.
+      const result = await Promise.race([
+        supabase.from('blog_metrics').select('*'),
+        new Promise<{ data: null; error: unknown }>((resolve) =>
+          setTimeout(() => resolve({ data: null, error: 'timeout' }), 3000)
+        ),
+      ]);
+      const { data, error } = result as { data: BlogMetrics[] | null; error: unknown };
 
       if (error) {
-        console.error('Error fetching blog metrics:', error);
+        console.warn('Métricas del blog no disponibles; se continúa sin ellas.');
         return;
       }
 
@@ -30,7 +36,7 @@ export function useBlogMetrics() {
         setMetrics(metricsMap);
       }
     } catch (err) {
-      console.error('Failed to fetch blog metrics:', err);
+      console.warn('Fallo al cargar métricas del blog (ignorado):', err);
     } finally {
       setLoading(false);
     }
