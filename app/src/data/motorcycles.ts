@@ -3138,7 +3138,7 @@ export const motorcycles: Motorcycle[] = [
     brand: 'Vento',
     model: "Rapid 125",
     year: 2026,
-    price: 4290000,
+    price: 4690000,
     category: 'City',
     description: "La Vento Rapid 125 es la moto city de Vento con el perfil más dinámico. Motor de 125cc ágil, freno de disco delantero, suspensión deportiva y diseño de líneas rápidas. Para moverse con estilo por la ciudad sin gastar de más en combustible ni mantenimiento.",
     specifications: {
