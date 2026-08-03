@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Reveal from '@/components/Reveal';
 import { posts, categoryStyles } from '@/data/blogPosts';
 import { useBlogMetrics } from '@/hooks/useBlogMetrics';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const CATEGORIES = ['Todos', 'Mantenimiento', 'Compra Inteligente', 'Seguridad', 'Tendencias', 'Técnica'];
 
@@ -19,13 +20,17 @@ export default function Blog() {
   const featured = posts.find(p => p.featured)!;
   const displayPosts = showAll ? filtered : filtered.slice(0, 5);
 
-  const { metrics } = useBlogMetrics();
+  // El blog está al final del home y la mayoría de visitas nunca llegan hasta
+  // acá. Solo pedimos las métricas a Supabase cuando la sección se asoma (200px
+  // antes de entrar en pantalla) → una visita normal hace CERO consultas a la BD.
+  const { ref: blogRef, isVisible: blogVisible } = useScrollAnimation({ threshold: 0, rootMargin: '200px' });
+  const { metrics } = useBlogMetrics({ enabled: blogVisible });
 
   const getViewCount = (post: any) => post.views + (metrics[post.id]?.views_count || 0);
   const getLikeCount = (post: any) => post.likes + (metrics[post.id]?.likes_count || 0);
 
   return (
-    <section id="blog" className="py-28 md:py-32 bg-white overflow-hidden relative" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <section id="blog" ref={blogRef} className="py-28 md:py-32 bg-white overflow-hidden relative" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header */}

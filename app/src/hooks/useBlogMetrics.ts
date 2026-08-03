@@ -7,7 +7,16 @@ export interface BlogMetrics {
   likes_count: number;
 }
 
-export function useBlogMetrics() {
+interface UseBlogMetricsOptions {
+  /**
+   * `false` no consulta nada. Lo usa la sección Blog del home, que solo activa
+   * las métricas cuando el visitante se asoma al blog — así una visita normal
+   * no gasta ni una ida a la base de datos.
+   */
+  enabled?: boolean;
+}
+
+export function useBlogMetrics({ enabled = true }: UseBlogMetricsOptions = {}) {
   const [metrics, setMetrics] = useState<Record<number, BlogMetrics>>({});
   const [loading, setLoading] = useState(true);
 
@@ -43,34 +52,15 @@ export function useBlogMetrics() {
   }, []);
 
   useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+      return;
+    }
     fetchMetrics();
-    
-    // Set up real-time subscription
-    const subscription = supabase
-      .channel('blog_metrics_changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'blog_metrics'
-        },
-        (payload) => {
-          const newMetric = payload.new as BlogMetrics;
-          if (newMetric && newMetric.post_id) {
-            setMetrics((prev) => ({
-              ...prev,
-              [newMetric.post_id]: newMetric
-            }));
-          }
-        }
-      )
-      .subscribe();
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [fetchMetrics]);
+    // A propósito SIN suscripción realtime: abría un WebSocket permanente a
+    // Supabase en CADA visita, solo para ver subir contadores de vistas/likes
+    // que nadie mira en vivo, y gastaba la cuota de conexiones del plan Free.
+  }, [enabled, fetchMetrics]);
 
   const recordView = useCallback(async (postId: number) => {
     try {
