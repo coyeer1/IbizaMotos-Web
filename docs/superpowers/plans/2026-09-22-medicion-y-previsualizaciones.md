@@ -17,13 +17,13 @@
 - **No tocar** `WORKSHOP_BOOKING_ENABLED` (queda en `false`), `vercel.json`, el diseño ni el contenido del sitio.
 - **Dominio canónico:** `https://ibizamotos.co` (sin barra final).
 - **Moneda:** `COP`. Formato de precio: `Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits: 0 })`.
-- **URLs de moto:** `/moto/<id>` donde `id` es el campo `id` del catálogo, que es un **string numérico** (`'1'`, `'2'`, … hasta 135 motos). No son slugs.
+- **URLs de moto:** `/moto/<id>` donde `id` es el campo `id` del catálogo, que es un **string numérico** (`'1'`, `'2'`, … 114 motos en el catálogo actual). No son slugs. Ojo: `motorcycles.ts` también exporta `testimonials`, `services`, `branches` y `spareParts`, cuyos `id` NO son motos — contar siempre con `motorcycles.length`, nunca con un regex sobre el archivo.
 - **`og:image` debe ser absoluta, en PNG o JPG (nunca WebP) y pasada por `encodeURI`** — 132 rutas del catálogo contienen espacios o paréntesis (ej. `/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).webp`).
 - **Sin framework de pruebas.** `app/CLAUDE.md` dice «There are no tests in this project». La verificación de este plan son scripts de Node con `node:assert` que se ejecutan de verdad, más `npm run build`. No inventar Vitest ni Jest.
 - **Convención de commits del repo:** `feat(ambito): ...`, `fix(ambito): ...`, `docs(ambito): ...`, `chore(ambito): ...`. Mensajes en español, sin tildes en la primera línea.
 - Cada commit termina con:
   ```
-  Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+  Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
   ```
 
 ---
@@ -50,7 +50,7 @@
 
 ## Fuera de alcance (anotado, no se hace)
 
-- **Slugs en las URLs de moto.** Hoy son `/moto/1`. Un slug (`/moto/akt-125-nkd-cbs-fp`) posicionaría mucho mejor, pero implica redirecciones 301 de las 135 URLs viejas, actualizar enlaces internos y el sitemap. Es un trabajo aparte con su propio spec.
+- **Slugs en las URLs de moto.** Hoy son `/moto/1`. Un slug (`/moto/akt-125-nkd-cbs-fp`) posicionaría mucho mejor, pero implica redirecciones 301 de las 114 URLs viejas, actualizar enlaces internos y el sitemap. Es un trabajo aparte con su propio spec.
 - Reactivar el agendamiento de taller.
 - Renderizar el `<body>` (SSR real).
 
@@ -242,7 +242,7 @@ Fuente unica para el hook useSEO y para el script de prerender que viene
 despues, para que no se desincronicen. De paso, una moto sin precio deja
 de anunciarse como "desde $0" y pasa a "precio a consultar".
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -508,7 +508,7 @@ export { rutasSitemap };
 cd app && npm run build && node scripts/prerender-meta.mjs && node scripts/verify-prerender.mjs
 ```
 
-Esperado: `prerender: 162 paginas` (135 motos + 6 marcas + 13 posts + 8 fijas), posiblemente una lista de motos sin raster, y `verify-prerender: OK`.
+Esperado: `prerender: 141 paginas` (114 motos + 6 marcas + 13 posts + 8 fijas), posiblemente una lista de motos sin raster, y `verify-prerender: OK`.
 
 Si el número no cuadra, contar de nuevo antes de seguir: significa que el catálogo cambió. `brands` tiene 6 entradas (suzuki, vento, hero, honda, bajaj, akt); las otras siete `slug:` del archivo son de `categories`, no de marcas, y no se generan.
 
@@ -526,7 +526,7 @@ dist/index.html por ruta y sustituye titulo, Open Graph y canonical.
 og:image cae al PNG hermano (WhatsApp no renderiza WebP) y pasa por
 encodeURI, porque 132 rutas del catalogo traen espacios o parentesis.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -674,7 +674,7 @@ Precio en COP y disponibilidad, para que Google pueda mostrar el precio en
 resultados. Las motos sin precio cargado omiten offers en vez de declarar
 price 0, que seria un dato falso.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -683,7 +683,7 @@ EOF
 
 ## Task 4: Regenerar el sitemap desde el catálogo
 
-El `sitemap.xml` de `public/` se escribió a mano: tiene 115 URLs de moto y el catálogo ya va en 135. Está desactualizado en 20 motos y volverá a estarlo en cuanto se agregue otra.
+El `sitemap.xml` de `public/` se escribió a mano: tiene 115 URLs de moto y el catálogo tiene 114: ya lista una moto que no existe, y se desfasa cada vez que se agrega o se quita una.
 
 **Files:**
 - Modify: `app/scripts/prerender-meta.mjs`
@@ -716,7 +716,7 @@ assert.ok(!locs.some((u) => u.includes('/admin')), 'el sitemap expone /admin');
 cd app && node scripts/verify-prerender.mjs
 ```
 
-Esperado: FALLA. Si `public/sitemap.xml` todavía se copia a `dist`, falla con `el sitemap trae 115 motos y el catalogo tiene 135`.
+Esperado: FALLA. Si `public/sitemap.xml` todavía se copia a `dist`, falla con `el sitemap trae 115 motos y el catalogo tiene 114`.
 
 - [ ] **Step 3: Generarlo**
 
@@ -754,7 +754,7 @@ Nota: `urlAbsoluta('/')` devuelve `https://ibizamotos.co/`, que es lo que el ver
 cd app && npm run build && node scripts/prerender-meta.mjs && node scripts/verify-prerender.mjs
 ```
 
-Esperado: `prerender: sitemap con 163 URLs` (162 páginas + la home) y `verify-prerender: OK`.
+Esperado: `prerender: sitemap con 142 URLs` (141 páginas + la home) y `verify-prerender: OK`.
 
 - [ ] **Step 5: Comprobar a ojo el sitemap generado y borrar el viejo**
 
@@ -779,10 +779,10 @@ git rm --cached -- app/public/sitemap.xml
 git commit -m "$(cat <<'EOF'
 feat(seo): generar el sitemap desde el catalogo
 
-El sitemap escrito a mano tenia 115 motos y el catalogo ya va en 135.
+El sitemap escrito a mano tenia 115 motos y el catalogo tiene 114: listaba una que ya no existe.
 Generarlo en el build evita que vuelva a envejecer.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -832,7 +832,7 @@ build(web): encadenar prerender y verificacion en npm run build
 El verificador corre dentro del build: si el prerender se rompe, preferimos
 que falle el despliegue a publicar sin previsualizaciones.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -1041,7 +1041,7 @@ feat(analytics): modulo de medicion con pixel de Meta y GA4
 Carga condicional: sin IDs configurados o sin consentimiento no se inyecta
 ningun script. Ninguna funcion lanza si el script fue bloqueado.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -1265,7 +1265,7 @@ Barra de consentimiento previo: sin aceptar no se carga ningun pixel.
 Los 18 enlaces a wa.me se capturan con un unico listener delegado en vez
 de tocar 14 archivos.
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -1319,7 +1319,7 @@ y volver a desplegar el preview y repetir la comprobación.
 curl -s "https://<PREVIEW>/sitemap.xml" | grep -c "<loc>"
 ```
 
-Esperado: 163, no 143.
+Esperado: 142, el mismo número que imprime el build. Que sea distinto del viejo (143) es normal: el viejo se escribió a mano y listaba rutas que ya no existen.
 
 - [ ] **Step 4: Commit (sólo si hubo que tocar `vercel.json`)**
 
@@ -1328,7 +1328,7 @@ git add -- vercel.json
 git commit -m "$(cat <<'EOF'
 fix(vercel): servir el HTML prerenderizado antes del comodin del SPA
 
-Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 EOF
 )"
 ```
@@ -1364,7 +1364,7 @@ Pegar también los valores en `app/.env.local` para desarrollo. **No commitear `
 
 Sólo cuando los pasos 2, 7 y 8 hayan pasado. Desplegar a producción y repetir el paso 2 contra `https://ibizamotos.co`.
 
-Después, en Google Search Console, enviar `https://ibizamotos.co/sitemap.xml` para que reindexe con las 163 URLs.
+Después, en Google Search Console, enviar `https://ibizamotos.co/sitemap.xml` para que reindexe con las 142 URLs.
 
 ---
 
@@ -1372,5 +1372,5 @@ Después, en Google Search Console, enviar `https://ibizamotos.co/sitemap.xml` p
 
 1. **Cuatro contactos de WhatsApp no quedan medidos** — los que abren con `window.open` en vez de un enlace: `MotorcyclePage.tsx:124`, `AppointmentPage.tsx:340`, `WhatsAppFloat.tsx:107`, `Footer.tsx:59`. El listener delegado sólo ve enlaces. Se resuelve añadiendo una línea `trackContact('...')` en cada uno. Se deja fuera para no dispersar el cambio; los 14 enlaces restantes sí quedan cubiertos.
 2. **Las motos sin PNG/JPG comparten el logo** — el build las lista por nombre al terminar. Hay que generarles un raster.
-3. **Las URLs de moto son `/moto/1`** en vez de un slug. Mejora de SEO real, pero implica 135 redirecciones 301 y su propio spec.
+3. **Las URLs de moto son `/moto/1`** en vez de un slug. Mejora de SEO real, pero implica 114 redirecciones 301 y su propio spec.
 4. **El `<body>` sigue vacío** en el HTML servido. No afecta a Google (ejecuta JS) ni a las previsualizaciones (leen las etiquetas). Si algún día se quiere, se cambia sólo `prerender-meta.mjs` para usar Puppeteer, que ya está instalado.
