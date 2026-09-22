@@ -1,28 +1,33 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getStoredConsent, setConsent, initAnalytics, trackPageView } from '@/lib/analytics';
+import { setConsent, initAnalytics, trackPageView } from '@/lib/analytics';
+
+interface CookieConsentProps {
+  /** Fuente de verdad para mostrarse: vive en App.tsx (ver comentario alli). */
+  visible: boolean;
+  /** Avisa al padre que ya hay decision, para que libere a WhatsAppFloat. */
+  onDecide: () => void;
+}
 
 /**
  * Barra de consentimiento. Sin decision previa no se carga ningun pixel.
  * Al aceptar, la medicion arranca en el momento y registra la visita en
- * curso, sin recargar la pagina.
+ * curso (incluida su query string, para no perder atribucion de UTM en la
+ * pagina exacta donde el visitante decidio), sin recargar la pagina.
  *
- * La visibilidad inicial se calcula con un inicializador perezoso (en vez
- * de un useEffect) para no violar la regla react-hooks/set-state-in-effect
- * del lint del proyecto: el dato (localStorage) ya esta disponible de forma
- * sincronica al montar, asi que no hace falta un efecto para leerlo.
+ * Componente controlado: la visibilidad la calcula App.tsx con un
+ * inicializador perezoso (correcta desde el primer pintado, sin useEffect)
+ * porque WhatsAppFloat necesita el mismo dato para levantarse por encima de
+ * esta barra mientras este visible.
  */
-export default function CookieConsent() {
-  const [visible, setVisible] = useState(() => getStoredConsent() === null);
-
+export default function CookieConsent({ visible, onDecide }: CookieConsentProps) {
   if (!visible) return null;
 
   const decidir = (valor: 'granted' | 'denied') => {
     setConsent(valor);
-    setVisible(false);
+    onDecide();
     if (valor === 'granted') {
       initAnalytics();
-      trackPageView(window.location.pathname);
+      trackPageView(window.location.pathname + window.location.search);
     }
   };
 
