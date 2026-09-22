@@ -1391,3 +1391,27 @@ Después, en Google Search Console, enviar `https://ibizamotos.co/sitemap.xml` p
 2. **Las motos sin PNG/JPG comparten el logo** — el build las lista por nombre al terminar. Hay que generarles un raster.
 3. **Las URLs de moto son `/moto/1`** en vez de un slug. Mejora de SEO real, pero implica 114 redirecciones 301 y su propio spec.
 4. **El `<body>` sigue vacío** en el HTML servido. No afecta a Google (ejecuta JS) ni a las previsualizaciones (leen las etiquetas). Si algún día se quiere, se cambia sólo `prerender-meta.mjs` para usar Puppeteer, que ya está instalado.
+
+---
+
+## Estado final (2026-09-22) — ejecutado y revisado
+
+Las 7 tareas de código quedaron implementadas y revisadas una por una, más una revisión final de toda la rama. Rama `feat/medicion-y-previsualizaciones`, 13 commits desde `fb8efba`.
+
+Resultado del build: **139 páginas generadas, sitemap con 142 URLs, `verify-prerender: OK`**, `tsc -b` limpio, lint sin errores nuevos sobre la base preexistente de 28.
+
+**Correcciones al propio plan descubiertas durante la ejecución** (las tres, hallazgos reales que el plan tenía mal):
+
+1. El catálogo tiene **114 motos, no 135** — el conteo original usaba un regex que también contaba los `id` de `testimonials`, `services`, `branches` y `spareParts`.
+2. `vercel.json` compilaba con `npx vite build`, **saltándose `package.json`**. La Task 5 original solo tocaba `package.json`, así que el prerender nunca habría corrido en producción y el sitemap habría quedado en 404. Se amplió para cambiar también `buildCommand`.
+3. `verify-prerender.mjs` congelaba el precio de la moto 10. Era inocuo como script de mano, pero la Task 5 lo puso en el camino del despliegue: el primer uso de `ACTUALIZAR PRECIOS.bat` habría roto todos los deploys. Ahora las aserciones se derivan del catálogo.
+
+### Pendientes conocidos, en orden de valor
+
+1. **30 de las 114 motos no tienen foto en PNG/JPG**, solo WebP, así que al compartirlas por WhatsApp sale el logo. **15 de ellas son toda la línea Honda.** El build las lista por nombre al terminar. Ids: 47-61 (Honda), 72, 78 (Bajaj Pulsar), 82, 83 (Hero ECO), 90 (X-Blade), 106-113 (AKT/VOGE), 114 (Pulsar N125), 115 (Suzuki DR160X).
+2. **Dos contactos de WhatsApp siguen sin medirse:** `AppointmentPage.tsx:340` y `Footer.tsx:59` usan `window.open`, que el listener delegado no ve. Los dos de más intención (botón flotante y cotizador de ficha) ya quedaron medidos.
+3. **GA4 recibe parámetros con forma de Meta.** `trackViewContent` manda `content_ids`/`content_type` a ambos; GA4 espera `items: [{ item_id, item_name, price }]`. Sin eso, las dimensiones de producto salen vacías en los informes de GA4. Hacerlo al conectar el ID real.
+4. **No hay forma de retirar el consentimiento.** La barra solo aparece si no hay decisión guardada. La Ley 1581/2012 contempla la revocación como derecho del titular. Requiere además que `trackX` vuelva a consultar `hasConsent()`, no solo el cerrojo `iniciado`.
+5. **`availability` va fijo en `InStock`** por decisión del dueño (todas se venden bajo pedido). Revisar si algún día se conecta Merchant Center o Shopping Ads: ahí un desajuste de disponibilidad es causa común de rechazo de productos. Son 3 líneas en `productoDeMoto`.
+6. **El levantamiento del botón de WhatsApp son píxeles fijos.** Medido en 360×740 da 26 px de holgura; en 320 px o con texto agrandado del sistema podría quedarse corto. Un `ResizeObserver` sobre la barra lo haría independiente del tamaño.
+7. **`lastmod` es la fecha del build en las 142 URLs.** Google descuenta los `lastmod` que juzga inexactos, y lo hace para el sitemap entero. Omitirlo es más honesto que mentir.
