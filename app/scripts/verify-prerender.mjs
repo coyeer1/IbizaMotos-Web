@@ -28,6 +28,8 @@ assert.ok(existsSync(join(DIST, 'index.html')), 'falta dist/index.html');
 const home = readFileSync(join(DIST, 'index.html'), 'utf8');
 
 // --- Una ficha de moto concreta ---
+const refMoto = datosMotos.find((m) => m.id === '10');
+assert.ok(refMoto, 'la moto de referencia id 10 ya no existe en el catalogo');
 assert.ok(existsSync(join(DIST, 'moto', '10', 'index.html')), 'falta dist/moto/10/index.html');
 const moto = leer('moto/10');
 
@@ -42,7 +44,18 @@ assert.doesNotMatch(img, /\.webp(\?|$)/i, 'og:image en WebP: WhatsApp no lo rend
 assert.doesNotMatch(img, / /, 'og:image tiene espacios sin codificar');
 
 // Ninguna pagina generada puede quedarse con un og:image en WebP o con espacios.
-for (const id of ['1', '10', '50', '100', '135']) {
+// Muestra tomada del catalogo real (primera, ultima y 3 intermedias) en vez de
+// ids fijos: un id que ya no existe se saltaria en silencio (`continue`) y
+// reduciria la cobertura sin que nadie se diera cuenta.
+const idsCatalogo = datosMotos.map((m) => m.id);
+const idsMuestra = [...new Set([
+  idsCatalogo[0],
+  idsCatalogo[Math.floor(idsCatalogo.length * 0.25)],
+  idsCatalogo[Math.floor(idsCatalogo.length * 0.5)],
+  idsCatalogo[Math.floor(idsCatalogo.length * 0.75)],
+  idsCatalogo[idsCatalogo.length - 1],
+])];
+for (const id of idsMuestra) {
   const p = join(DIST, 'moto', id, 'index.html');
   if (!existsSync(p)) continue;
   const i = og(readFileSync(p, 'utf8'), 'og:image');
@@ -57,6 +70,18 @@ assert.match(leer('marca/suzuki'), /Suzuki/);
 assert.ok(existsSync(join(DIST, 'sucursales', 'index.html')), 'falta dist/sucursales');
 assert.notEqual(titulo(leer('sucursales')), titulo(home), 'sucursales repite el titulo del home');
 
+// --- /privacidad y /eliminacion-datos son HTML estatico, NO paginas generadas ---
+// Si alguien las vuelve a meter en FIJAS, Vercel serviria el cascaron vacio de
+// la SPA en vez del HTML real (vercel.json las reescribe a *.html en public/).
+assert.ok(
+  !existsSync(join(DIST, 'privacidad', 'index.html')),
+  'dist/privacidad/index.html existe: pisaria el HTML estatico de privacidad.html',
+);
+assert.ok(
+  !existsSync(join(DIST, 'eliminacion-datos', 'index.html')),
+  'dist/eliminacion-datos/index.html existe: pisaria el HTML estatico de eliminacion-datos.html',
+);
+
 // --- JSON-LD Product ---
 const bloquesLd = (html) =>
   [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
@@ -65,9 +90,9 @@ const bloquesLd = (html) =>
 const ldMoto = bloquesLd(moto).find((b) => b['@type'] === 'Product');
 assert.ok(ldMoto, 'la ficha de moto no trae JSON-LD Product');
 assert.equal(ldMoto.offers.priceCurrency, 'COP');
-assert.equal(String(ldMoto.offers.price), '6490000');
+assert.equal(String(ldMoto.offers.price), String(refMoto.price));
 assert.equal(ldMoto.offers.seller['@id'], 'https://ibizamotos.co/#organization');
-assert.equal(ldMoto.brand.name, 'AKT');
+assert.equal(ldMoto.brand.name, refMoto.brand);
 assert.equal(ldMoto.image, og(moto, 'og:image'));
 
 // Los bloques del sitio siguen ahi y siguen siendo JSON valido.
@@ -95,6 +120,9 @@ assert.equal(
 );
 assert.ok(locs.includes('https://ibizamotos.co/'), 'falta la home en el sitemap');
 assert.ok(locs.includes('https://ibizamotos.co/sucursales'), 'falta /sucursales en el sitemap');
+// No se generan como pagina (HTML estatico), pero deben seguir indexadas.
+assert.ok(locs.includes('https://ibizamotos.co/privacidad'), 'falta /privacidad en el sitemap');
+assert.ok(locs.includes('https://ibizamotos.co/eliminacion-datos'), 'falta /eliminacion-datos en el sitemap');
 assert.equal(new Set(locs).size, locs.length, 'el sitemap tiene URLs repetidas');
 assert.ok(!locs.some((u) => u.includes('/admin')), 'el sitemap expone /admin');
 

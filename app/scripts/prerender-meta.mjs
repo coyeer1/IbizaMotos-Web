@@ -47,7 +47,7 @@ function imagenParaCompartir(ruta) {
     const candidata = ruta.replace(/\.[a-z0-9]+$/i, ext);
     if (existsSync(join(PUBLIC, candidata))) return [urlAbsoluta(candidata), false];
   }
-  if (!/\.webp$/i.test(ruta) && existsSync(join(PUBLIC, ruta))) {
+  if (/\.(png|jpe?g)$/i.test(ruta) && existsSync(join(PUBLIC, ruta))) {
     return [urlAbsoluta(ruta), false];
   }
   return [urlAbsoluta(FALLBACK_IMAGE), true];
@@ -86,7 +86,8 @@ function aplicar(base, { title, description, url, image, type }) {
  * (Organization y MotorcycleDealer viven en index.html).
  */
 function agregarJsonLd(html, objeto) {
-  const bloque = `    <script type="application/ld+json">\n${JSON.stringify(objeto, null, 2)}\n    </script>\n`;
+  const json = JSON.stringify(objeto, null, 2).replace(/</g, '\\u003c');
+  const bloque = `    <script type="application/ld+json">\n${json}\n    </script>\n`;
   return html.replace('</head>', `${bloque}  </head>`);
 }
 
@@ -123,16 +124,25 @@ function escribir(ruta, html) {
 }
 
 // --- Rutas fijas: titulo y descripcion propios de cada una ---
+// /privacidad y /eliminacion-datos NO van aqui: son HTML estatico propio
+// (public/privacidad.html, public/eliminacion-datos.html) que vercel.json
+// reescribe antes de tocar el filesystem. Si se generara un dist/<ruta>/index.html
+// para ellas, Vercel serviria ese cascaron vacio de la SPA en vez del HTML real
+// que Meta necesita poder leer sin JS. Igual deben quedar en el sitemap: ver
+// RUTAS_SOLO_SITEMAP mas abajo.
 const FIJAS = [
   ['/sucursales',        'Nuestras 19 sucursales | Ibiza Motos Eje Cafetero',      'Encuentra tu sede mas cercana: Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchina y Neiva. Direccion, telefono y horario de cada una.'],
   ['/financiamiento',    'Financia tu moto | 8 entidades | Ibiza Motos',           'Simula la cuota de tu moto con Progreser, Banco de Bogota, SUFI, Brilla, Addi, Venfi, Sistecredito o Crediorbe. Aprobacion rapida en Pereira y el Eje Cafetero.'],
-  ['/citas',             'Agenda tu cita de taller | Ibiza Motos',                 'Servicio tecnico especializado para Suzuki, Honda, Bajaj, AKT, Hero y Vento en el Eje Cafetero.'],
+  ['/citas',             'Servicio tecnico de motos | Ibiza Motos',                'Conoce nuestro servicio tecnico especializado para Suzuki, Honda, Bajaj, AKT, Hero y Vento en el Eje Cafetero.'],
   ['/opinion',           'Califica a tu asesor | Ibiza Motos',                     'Cuentanos como te atendieron. Tu opinion nos ayuda a mejorar el servicio en las 19 sucursales.'],
-  ['/privacidad',        'Politica de tratamiento de datos | Ibiza Motos',         'Como tratamos tus datos personales conforme a la Ley 1581 de 2012.'],
   ['/terminos',          'Terminos y condiciones | Ibiza Motos',                   'Condiciones de uso del sitio web de Ibiza Motos S.A.S.'],
-  ['/eliminacion-datos', 'Eliminacion de datos | Ibiza Motos',                     'Solicita la eliminacion de tus datos personales de nuestros sistemas.'],
   ['/marca/todas',       'Todas las marcas de motos | Ibiza Motos',                'Suzuki, Honda, Bajaj, AKT, Hero y Vento en un solo concesionario, con 19 sucursales en el Eje Cafetero y Neiva.'],
 ];
+
+// Rutas que existen como HTML estatico servido por rewrite (ver vercel.json)
+// y por eso no se generan como pagina, pero que igual deben aparecer en el
+// sitemap para que Google y Meta las indexen.
+const RUTAS_SOLO_SITEMAP = ['/privacidad', '/eliminacion-datos'];
 
 const base = readFileSync(join(DIST, 'index.html'), 'utf8');
 const sinRaster = [];
@@ -202,10 +212,13 @@ if (sinRaster.length) {
 }
 
 // --- sitemap.xml desde el mismo catalogo que genero las paginas ---
+// RUTAS_SOLO_SITEMAP se agrega aparte: no pasaron por el loop de FIJAS (no se
+// generan como pagina), pero igual deben quedar indexadas.
 const hoy = new Date().toISOString().slice(0, 10);
 const entradas = [
   { ruta: '/', prioridad: '1.0' },
   ...rutasSitemap,
+  ...RUTAS_SOLO_SITEMAP.map((ruta) => ({ ruta, prioridad: '0.7' })),
 ];
 const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +
