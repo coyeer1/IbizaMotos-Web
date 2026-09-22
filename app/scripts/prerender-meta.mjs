@@ -81,6 +81,41 @@ function aplicar(base, { title, description, url, image, type }) {
   return html;
 }
 
+/**
+ * Inserta un bloque JSON-LD antes de </head>, sin tocar los que ya existen
+ * (Organization y MotorcycleDealer viven en index.html).
+ */
+function agregarJsonLd(html, objeto) {
+  const bloque = `    <script type="application/ld+json">\n${JSON.stringify(objeto, null, 2)}\n    </script>\n`;
+  return html.replace('</head>', `${bloque}  </head>`);
+}
+
+function productoDeMoto(m, url, image, description) {
+  const producto = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${m.brand} ${m.model} ${m.year}`,
+    brand: { '@type': 'Brand', name: m.brand },
+    category: m.category,
+    image,
+    description,
+    url,
+  };
+  // Sin precio cargado no se declara offers: un price 0 seria un dato falso
+  // y Google penaliza el marcado incorrecto.
+  if (m.price > 0) {
+    producto.offers = {
+      '@type': 'Offer',
+      price: String(m.price),
+      priceCurrency: 'COP',
+      availability: 'https://schema.org/InStock',
+      url,
+      seller: { '@id': `${SITE}/#organization` },
+    };
+  }
+  return producto;
+}
+
 function escribir(ruta, html) {
   const destino = join(DIST, ruta.replace(/^\//, ''), 'index.html');
   mkdirSync(dirname(destino), { recursive: true });
@@ -109,13 +144,13 @@ for (const m of datos.motorcycles) {
   const ruta = seo.motoPath(m);
   const [image, fallback] = imagenParaCompartir(m.images?.[0]);
   if (fallback) sinRaster.push(`${m.id} — ${m.brand} ${m.model}`);
-  escribir(ruta, aplicar(base, {
-    title: seo.motoTitle(m),
-    description: seo.motoDescription(m),
-    url: urlAbsoluta(ruta),
-    image,
-    type: 'product',
-  }));
+  const url = urlAbsoluta(ruta);
+  const description = seo.motoDescription(m);
+  let html = aplicar(base, {
+    title: seo.motoTitle(m), description, url, image, type: 'product',
+  });
+  html = agregarJsonLd(html, productoDeMoto(m, url, image, description));
+  escribir(ruta, html);
   rutasSitemap.push({ ruta, prioridad: '0.8' });
   total++;
 }
