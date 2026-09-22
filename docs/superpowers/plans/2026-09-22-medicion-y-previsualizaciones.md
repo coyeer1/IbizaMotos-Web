@@ -14,7 +14,7 @@
 
 - **Directorio de trabajo:** todos los comandos se ejecutan desde `app/` salvo los `git`, que corren desde la raíz del repo.
 - **Hay trabajo sin commitear de otra tarea** en `app/src/data/motorcycles.ts`, `app/src/lib/brandThemes.ts`, `app/src/lib/config.ts`, `app/src/pages/SucursalesPage.tsx`, `app/src/sections/BrandSelector.tsx`, más `app/optimize-images.mjs` y `app/public/_redirects` sin seguimiento. **Nunca usar `git add -A` ni `git add .`** — cada commit lista rutas explícitas.
-- **No tocar** `WORKSHOP_BOOKING_ENABLED` (queda en `false`), `vercel.json`, el diseño ni el contenido del sitio.
+- **No tocar** `WORKSHOP_BOOKING_ENABLED` (queda en `false`), el diseño ni el contenido del sitio. **`vercel.json` solo se toca en las tareas 5 y 8**, y solo en las claves que cada una indica: `buildCommand` (Task 5) y `rewrites` si la verificación lo exige (Task 8). Ninguna otra tarea lo modifica.
 - **Dominio canónico:** `https://ibizamotos.co` (sin barra final).
 - **Moneda:** `COP`. Formato de precio: `Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits: 0 })`.
 - **URLs de moto:** `/moto/<id>` donde `id` es el campo `id` del catálogo, que es un **string numérico** (`'1'`, `'2'`, … 114 motos en el catálogo actual). No son slugs. Ojo: `motorcycles.ts` también exporta `testimonials`, `services`, `branches` y `spareParts`, cuyos `id` NO son motos — contar siempre con `motorcycles.length`, nunca con un regex sobre el archivo.
@@ -791,10 +791,17 @@ EOF
 
 ## Task 5: Encadenar el prerender en el build
 
-Hasta aquí el script se corría a mano. Esta tarea lo mete en `npm run build`, que es lo que ejecuta Vercel.
+Hasta aquí el script se corría a mano. Esta tarea lo mete en el build **y hace que Vercel lo ejecute de verdad**.
+
+> **Corrección al plan (2026-09-22).** La versión original de esta tarea decía que `npm run build` «es lo que ejecuta Vercel». Es falso: `vercel.json` compila con `cd app && npm install && npx vite build`, llamando a Vite directamente y saltándose por completo los scripts de `package.json`. Tal como estaba, el prerender nunca habría corrido en producción y, tras borrar `public/sitemap.xml` en la Task 4, `ibizamotos.co/sitemap.xml` habría quedado en 404.
+>
+> **Decisión del dueño (2026-09-22):** que Vercel use `npm run build`, para que exista **una sola definición del build** y lo que se corre en local sea exactamente lo que corre en el despliegue — esa divergencia es justo lo que produjo el error. Esto añade `tsc -b` a cada despliegue; ya se verificó que el árbol commiteado lo pasa limpio (exit 0), y se comprobó la cadena completa sobre una copia limpia del código commiteado: `vite build` → `prerender: 143 paginas` → `verify-prerender: OK`.
+>
+> Esta tarea, por tanto, **sí toca `vercel.json`**, como excepción explícita a la restricción global.
 
 **Files:**
 - Modify: `app/package.json`
+- Modify: `vercel.json` (en la raíz del repo, no dentro de `app/`)
 
 - [ ] **Step 1: Encadenarlo**
 
@@ -803,6 +810,16 @@ En `app/package.json`, cambiar el script `build`:
 ```json
 "build": "tsc -b && vite build && node scripts/prerender-meta.mjs && node scripts/verify-prerender.mjs",
 ```
+
+- [ ] **Step 1b: Hacer que Vercel use ese mismo build**
+
+En `vercel.json` (raíz del repo), cambiar únicamente `buildCommand`:
+
+```json
+"buildCommand": "cd app && npm install && npm run build",
+```
+
+No tocar nada más del archivo: `outputDirectory`, `installCommand`, `rewrites` y `headers` se quedan exactamente como están.
 
 El verificador va **dentro** del build a propósito: si el prerender se rompe, es preferible que falle el despliegue a publicar sin previsualizaciones creyendo que quedaron.
 
