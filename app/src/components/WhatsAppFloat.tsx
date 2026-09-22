@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { X, ChevronRight } from 'lucide-react';
 import { getGeneralWhatsApp, getBuyWhatsApp } from '@/lib/config';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
+import { trackContact } from '@/lib/analytics';
 
 const WA_ICON = (
   <svg className="w-6 h-6 sm:w-7 sm:h-7 !text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -121,6 +122,7 @@ function WhatsAppFloatInner({ liftedByConsentBar }: WhatsAppFloatInnerProps) {
         onClick={() => {
           // If no motorcycle context → go directly to WhatsApp
           if (!motorcycle) {
+            trackContact(window.location.pathname);
             window.open(generalUrl, '_blank');
           } else {
             setMenuOpen(prev => !prev);

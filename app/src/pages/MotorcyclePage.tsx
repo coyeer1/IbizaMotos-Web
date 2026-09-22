@@ -13,7 +13,7 @@ import { CompareButton } from '@/components/MotoComparator';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { useSEO } from '@/hooks/useSEO';
 import { motoTitle, motoDescription, motoPath, DEFAULT_TITLE } from '@/lib/seoTexts';
-import { trackViewContent } from '@/lib/analytics';
+import { trackViewContent, trackContact } from '@/lib/analytics';
 
 // Map de colores para renderizar
 const colorMap: Record<string, string> = {
@@ -132,6 +132,7 @@ export default function MotorcyclePage() {
     const handleQuoteSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
+        trackContact(window.location.pathname);
         window.open(getWhatsAppUrl(msg), '_blank');
         setQuoteSubmitted(true);
         setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); setQuotePrivacyAccepted(false); }, 2500);

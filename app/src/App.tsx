@@ -80,7 +80,7 @@ function AppContent() {
       {!isAdminRoute && <Footer />}
 
       <ScrollRestorer />
-      <Analytics />
+      {!isAdminRoute && <Analytics />}
       {!isAdminRoute && <WhatsAppFloat liftedByConsentBar={consentBarVisible} />}
       {!isAdminRoute && (
         <CookieConsent
