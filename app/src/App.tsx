@@ -5,6 +5,7 @@ import Footer from '@/sections/Footer';
 import Home from '@/pages/Home';
 import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
+import CookieConsent from '@/components/CookieConsent';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
 import { ComparatorProvider } from '@/components/MotoComparator';
 import { SearchProvider } from '@/components/SearchOverlay';
@@ -74,6 +75,7 @@ function AppContent() {
       <ScrollRestorer />
       <Analytics />
       {!isAdminRoute && <WhatsAppFloat />}
+      {!isAdminRoute && <CookieConsent />}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import { CompareButton } from '@/components/MotoComparator';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { useSEO } from '@/hooks/useSEO';
 import { motoTitle, motoDescription, motoPath, DEFAULT_TITLE } from '@/lib/seoTexts';
+import { trackViewContent } from '@/lib/analytics';
 
 // Map de colores para renderizar
 const colorMap: Record<string, string> = {
@@ -84,6 +85,17 @@ export default function MotorcyclePage() {
             }
             : { title: DEFAULT_TITLE }
     );
+
+    // Publico de remarketing: "vio esta moto y no escribio".
+    useEffect(() => {
+        if (!motorcycle) return;
+        trackViewContent({
+            id: motorcycle.id,
+            brand: motorcycle.brand,
+            model: motorcycle.model,
+            price: motorcycle.price,
+        });
+    }, [motorcycle]);
 
     if (loading || !motorcycle) {
         return (
