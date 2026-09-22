@@ -84,4 +84,18 @@ if (sinPrecio) {
   assert.equal(ld.offers, undefined, `moto ${sinPrecio.id}: declara offers sin precio`);
 }
 
+// --- sitemap generado desde el catalogo ---
+const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');
+const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+const locsMoto = locs.filter((u) => u.includes('/moto/'));
+
+assert.equal(
+  locsMoto.length, datosMotos.length,
+  `el sitemap trae ${locsMoto.length} motos y el catalogo tiene ${datosMotos.length}`,
+);
+assert.ok(locs.includes('https://ibizamotos.co/'), 'falta la home en el sitemap');
+assert.ok(locs.includes('https://ibizamotos.co/sucursales'), 'falta /sucursales en el sitemap');
+assert.equal(new Set(locs).size, locs.length, 'el sitemap tiene URLs repetidas');
+assert.ok(!locs.some((u) => u.includes('/admin')), 'el sitemap expone /admin');
+
 console.log('verify-prerender: OK');

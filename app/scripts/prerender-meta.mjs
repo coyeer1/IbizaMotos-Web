@@ -201,4 +201,24 @@ if (sinRaster.length) {
   for (const s of sinRaster) console.log(`  - ${s}`);
 }
 
-export { rutasSitemap };
+// --- sitemap.xml desde el mismo catalogo que genero las paginas ---
+const hoy = new Date().toISOString().slice(0, 10);
+const entradas = [
+  { ruta: '/', prioridad: '1.0' },
+  ...rutasSitemap,
+];
+const xml =
+  `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  entradas
+    .map(({ ruta, prioridad }) =>
+      `  <url>\n` +
+      `    <loc>${urlAbsoluta(ruta)}</loc>\n` +
+      `    <lastmod>${hoy}</lastmod>\n` +
+      `    <priority>${prioridad}</priority>\n` +
+      `  </url>`)
+    .join('\n') +
+  `\n</urlset>\n`;
+
+writeFileSync(join(DIST, 'sitemap.xml'), xml, 'utf8');
+console.log(`prerender: sitemap con ${entradas.length} URLs`);
