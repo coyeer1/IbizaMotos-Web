@@ -8,7 +8,7 @@ export const BUSINESS = {
   whatsappNumber: '573052884546',
   email: 'ibizamotossas@gmail.com',
   website: 'https://ibizamotos.co',
-  address: 'Cra 7 #25-41 Parque Lago Uribe, Pereira',
+  address: 'Av. 30 de Agosto #48-60, Pereira',
   city: 'Pereira',
   region: 'Risaralda',
   country: 'Colombia',

@@ -194,7 +194,7 @@ export default function Footer() {
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3 text-white/60 text-sm">
                 <MapPin className="w-5 h-5 text-ibiza-red flex-shrink-0 mt-0.5" />
-                <span>Cra 7 #25-41 Parque Lago Uribe, Pereira</span>
+                <span>Av. 30 de Agosto #48-60, Pereira</span>
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
                 <Phone className="w-5 h-5 text-ibiza-red flex-shrink-0" />

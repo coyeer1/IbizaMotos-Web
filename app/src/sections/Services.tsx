@@ -296,7 +296,7 @@ export default function Services() {
 
             <div className="space-y-5 mb-8">
               {[
-                { Icon: MapPin, title: 'Sede Principal', l1: 'Cra 7 #25-41 Parque Lago Uribe, Pereira', l2: 'Risaralda · Eje Cafetero' },
+                { Icon: MapPin, title: 'Sede Principal', l1: 'Av. 30 de Agosto #48-60, Pereira', l2: 'Risaralda · Eje Cafetero' },
                 { Icon: Clock, title: 'Horario de atención', l1: 'Lunes a Sábado: 8:00 AM - 6:00 PM', l2: 'Domingos: Solo emergencias' },
                 { Icon: Phone, title: 'Llámanos', l1: '(+57) 305 288 4546', l2: 'WhatsApp disponible' },
               ].map(({ Icon, title, l1, l2 }) => (

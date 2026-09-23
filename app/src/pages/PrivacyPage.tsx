@@ -7,7 +7,7 @@ import { useSEO } from '@/hooks/useSEO';
 const LAST_UPDATE = '26 de mayo de 2026';
 const RESPONSIBLE  = 'Ibiza Motos S.A.S.';
 const NIT          = 'NIT 901.197.563-9';
-const ADDRESS      = 'Cra 7 #25-41 Parque Lago Uribe, Pereira, Risaralda, Colombia';
+const ADDRESS      = 'Av. 30 de Agosto #48-60, Pereira, Risaralda, Colombia';
 const EMAIL        = 'ibizamotossas@gmail.com';
 const PHONE        = '+57 305 288 4546';
 

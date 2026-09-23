@@ -3592,10 +3592,10 @@ export const branches: Branch[] = [
   {
     id: '1',
     name: 'Sede Suzuki — Pereira',
-    address: 'Cra 7 #25-41, Parque Lago Uribe, Pereira, Risaralda',
+    address: 'Av. 30 de Agosto #48-60, Pereira, Risaralda',
     phone: '(+57) 305 288 4546',
     hours: 'Lunes a Sábado: 8:00 AM - 6:00 PM',
-    coordinates: { lat: 4.815230, lng: -75.699683 },
+    coordinates: { lat: 4.815645, lng: -75.718636 },
   },
   {
     id: '2',

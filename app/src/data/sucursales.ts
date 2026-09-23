@@ -22,7 +22,7 @@ export const SUCURSALES: Sucursal[] = [
     id: 1, marca: 'Suzuki', asesor: 'Kevin Hinestroza',
     telefono: '3052884546', correo: 'suzukipereiraiibizamotos@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
-    direccion: 'Cra 7 #25-41 Parque Lago Uribe',
+    direccion: 'Av. 30 de Agosto #48-60',
     fotos: [
       '/sucursales/1/foto-fachada-1.webp',
       '/sucursales/1/foto-fachada-2.webp',
@@ -31,8 +31,9 @@ export const SUCURSALES: Sucursal[] = [
       '/sucursales/1/foto-sala-3.webp',
     ],
     color: '#1a73e8',
-    lat: 4.815230, lng: -75.699683,
-    placeUrl: 'https://maps.app.goo.gl/zEkCHqbfjjEcfvvSA',
+    // Aprox. (±60 m): esquina Av. 30 de Agosto x Calle 48 (OpenStreetMap). Cambiar
+    // por las exactas y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 4.815645, lng: -75.718636,
   },
   {
     id: 2, marca: 'Honda', asesor: 'Kelly Dahiana Ramírez Castaño',
