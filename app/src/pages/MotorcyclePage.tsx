@@ -12,6 +12,8 @@ import type { Motorcycle } from '@/types';
 import { CompareButton } from '@/components/MotoComparator';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { useSEO } from '@/hooks/useSEO';
+import { motoTitle, motoDescription, motoPath, DEFAULT_TITLE } from '@/lib/seoTexts';
+import { trackViewContent, trackContact } from '@/lib/analytics';
 
 // Map de colores para renderizar
 const colorMap: Record<string, string> = {
@@ -70,21 +72,30 @@ export default function MotorcyclePage() {
         }
     }, [id, navigate, motorcycles, loading]);
 
-    // SEO por moto: título, descripción, canonical y og:image únicos por ficha
-    const motoPrice = motorcycle
-        ? new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(motorcycle.price)
-        : '';
+    // SEO por moto: los textos viven en seoTexts.ts para que el script de
+    // prerender genere exactamente los mismos que ve el navegador.
     useSEO(
         motorcycle
             ? {
-                title: `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} | Ibiza Motos Pereira`,
-                description: `${motorcycle.brand} ${motorcycle.model} ${motorcycle.year} desde ${motoPrice}. ${motorcycle.category} disponible en Ibiza Motos, Pereira y el Eje Cafetero. Financiación inmediata.`,
-                path: `/moto/${motorcycle.id}`,
+                title: motoTitle(motorcycle),
+                description: motoDescription(motorcycle),
+                path: motoPath(motorcycle),
                 image: motorcycle.images?.[0],
                 type: 'product',
             }
-            : { title: 'Ibiza Motos | El placer en dos ruedas' }
+            : { title: DEFAULT_TITLE }
     );
+
+    // Publico de remarketing: "vio esta moto y no escribio".
+    useEffect(() => {
+        if (!motorcycle) return;
+        trackViewContent({
+            id: motorcycle.id,
+            brand: motorcycle.brand,
+            model: motorcycle.model,
+            price: motorcycle.price,
+        });
+    }, [motorcycle]);
 
     if (loading || !motorcycle) {
         return (
@@ -121,6 +132,7 @@ export default function MotorcyclePage() {
     const handleQuoteSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
+        trackContact(window.location.pathname);
         window.open(getWhatsAppUrl(msg), '_blank');
         setQuoteSubmitted(true);
         setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); setQuotePrivacyAccepted(false); }, 2500);

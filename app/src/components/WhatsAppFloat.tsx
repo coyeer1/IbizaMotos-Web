@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { X, ChevronRight } from 'lucide-react';
 import { getGeneralWhatsApp, getBuyWhatsApp } from '@/lib/config';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
+import { trackContact } from '@/lib/analytics';
 
 const WA_ICON = (
   <svg className="w-6 h-6 sm:w-7 sm:h-7 !text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -13,7 +14,12 @@ const WA_ICON = (
 
 // ── Wrapper that grabs motorcycle context when on /moto/:id ────────────────
 
-function WhatsAppFloatInner() {
+interface WhatsAppFloatInnerProps {
+  /** true mientras la barra de cookies este visible (ver App.tsx). */
+  liftedByConsentBar: boolean;
+}
+
+function WhatsAppFloatInner({ liftedByConsentBar }: WhatsAppFloatInnerProps) {
   const location = useLocation();
   const { id } = useParams<{ id: string }>();
   const { motorcycles } = useMotorcycles();
@@ -39,10 +45,22 @@ function WhatsAppFloatInner() {
     ? getBuyWhatsApp(motorcycle.brand, motorcycle.model)
     : null;
 
-  const bottomClass = isMotoPage ? 'bottom-20 sm:bottom-28' : 'bottom-6';
+  // Posicion normal (sin barra de cookies) — sin cambios respecto al
+  // comportamiento original.
+  //
+  // Posicion levantada (barra de cookies visible): la barra ocupa todo el
+  // ancho del viewport con z-index mayor (ver CookieConsent.tsx), asi que
+  // aqui se suma su alto aproximado a la posicion normal para que el boton
+  // no quede tapado, conservando la misma distincion entre pagina de moto y
+  // el resto. En movil la barra es mas alta (texto + fila de botones en
+  // columna, `flex-col`); desde `sm:` es una sola fila (`sm:flex-row`), mas
+  // baja.
+  const bottomClass = liftedByConsentBar
+    ? (isMotoPage ? 'bottom-[224px] sm:bottom-[188px]' : 'bottom-[168px] sm:bottom-[100px]')
+    : (isMotoPage ? 'bottom-20 sm:bottom-28' : 'bottom-6');
 
   return (
-    <div className={`fixed right-4 sm:right-6 z-[60] ${bottomClass} flex flex-col items-end gap-2`}>
+    <div className={`fixed right-4 sm:right-6 z-[60] ${bottomClass} transition-[bottom] duration-300 ease-out flex flex-col items-end gap-2`}>
 
       {/* ── Context menu (shown when menuOpen) ── */}
       <AnimatePresence>
@@ -104,6 +122,7 @@ function WhatsAppFloatInner() {
         onClick={() => {
           // If no motorcycle context → go directly to WhatsApp
           if (!motorcycle) {
+            trackContact(window.location.pathname);
             window.open(generalUrl, '_blank');
           } else {
             setMenuOpen(prev => !prev);
@@ -145,6 +164,6 @@ function WhatsAppFloatInner() {
 
 // ── Export: wrapped in a route-aware shell ─────────────────────────────────
 
-export function WhatsAppFloat() {
-  return <WhatsAppFloatInner />;
+export function WhatsAppFloat({ liftedByConsentBar = false }: { liftedByConsentBar?: boolean }) {
+  return <WhatsAppFloatInner liftedByConsentBar={liftedByConsentBar} />;
 }

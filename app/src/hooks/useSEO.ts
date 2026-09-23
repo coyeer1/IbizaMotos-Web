@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
-
-const SITE = 'https://ibizamotos.co';
-const DEFAULT_TITLE = 'Ibiza Motos | El placer en dos ruedas';
+import { SITE, DEFAULT_TITLE } from '@/lib/seoTexts';
 
 export interface SEOOptions {
   /** Título de la pestaña y de la página en Google. */

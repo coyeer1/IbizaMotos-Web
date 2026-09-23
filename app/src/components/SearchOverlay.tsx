@@ -4,6 +4,7 @@ import { Search, X, ArrowRight, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
 import type { Motorcycle } from '@/types';
+import { trackSearch } from '@/lib/analytics';
 
 // ── Context ───────────────────────────────────────────────────────────────────
 
@@ -146,6 +147,13 @@ function SearchOverlay() {
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [open]);
+
+  // Rebote: no disparar en cada tecla, solo cuando el visitante deja de escribir.
+  useEffect(() => {
+    if (!query.trim()) return;
+    const t = setTimeout(() => trackSearch(query), 800);
+    return () => clearTimeout(t);
+  }, [query]);
 
   // Filter motorcycles
   const results: Motorcycle[] = query.trim().length < 1

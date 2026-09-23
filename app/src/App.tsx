@@ -1,11 +1,13 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/sections/Footer';
 import Home from '@/pages/Home';
 import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
+import CookieConsent from '@/components/CookieConsent';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
+import { getStoredConsent } from '@/lib/analytics';
 import { ComparatorProvider } from '@/components/MotoComparator';
 import { SearchProvider } from '@/components/SearchOverlay';
 import ScrollRestorer from '@/components/ScrollRestorer';
@@ -37,6 +39,12 @@ function PageLoader() {
 function AppContent() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+
+  // Fuente unica de verdad de si la barra de cookies esta visible, compartida
+  // entre CookieConsent (que la muestra) y WhatsAppFloat (que se levanta para
+  // no quedar tapado por ella). Inicializador perezoso: correcto desde el
+  // primer pintado, sin useEffect ni fotograma con el boton bajo la barra.
+  const [consentBarVisible, setConsentBarVisible] = useState(() => getStoredConsent() === null);
 
   return (
     <div className="min-h-screen bg-ibiza-black">
@@ -72,8 +80,14 @@ function AppContent() {
       {!isAdminRoute && <Footer />}
 
       <ScrollRestorer />
-      <Analytics />
-      {!isAdminRoute && <WhatsAppFloat />}
+      {!isAdminRoute && <Analytics />}
+      {!isAdminRoute && <WhatsAppFloat liftedByConsentBar={consentBarVisible} />}
+      {!isAdminRoute && (
+        <CookieConsent
+          visible={consentBarVisible}
+          onDecide={() => setConsentBarVisible(false)}
+        />
+      )}
     </div>
   );
 }
