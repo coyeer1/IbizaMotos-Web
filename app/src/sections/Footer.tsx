@@ -103,7 +103,7 @@ export default function Footer() {
             </div>
             
             <p className="!text-white/60 mb-6 leading-relaxed text-sm font-light">
-              19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
+              20 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
               Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento.
             </p>
 

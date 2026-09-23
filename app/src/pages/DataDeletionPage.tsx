@@ -101,7 +101,7 @@ export default function DataDeletionPage() {
               <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-5">
                 <p className="text-white font-bold mb-2">🏪 En cualquier sucursal</p>
                 <p className="text-sm">
-                  Puedes acercarte a cualquiera de nuestras 19 sucursales en Pereira, Dosquebradas,
+                  Puedes acercarte a cualquiera de nuestras 20 sucursales en Pereira, Dosquebradas,
                   Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná o Neiva, y diligenciar
                   el formato físico de solicitud de derechos.
                 </p>

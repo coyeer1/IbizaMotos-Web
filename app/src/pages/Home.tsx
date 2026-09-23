@@ -49,8 +49,8 @@ export default function Home() {
     const navigate = useNavigate();
 
     useSEO({
-        title: 'Ibiza Motos | Concesionario de Motos en Pereira y Eje Cafetero — 19 Sucursales',
-        description: 'Concesionario multimarca con 19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento. Financiación inmediata.',
+        title: 'Ibiza Motos | Concesionario de Motos en Pereira y Eje Cafetero — 20 Sucursales',
+        description: 'Concesionario multimarca con 20 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento. Financiación inmediata.',
         path: '/',
     });
 

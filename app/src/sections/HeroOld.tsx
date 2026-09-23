@@ -307,7 +307,7 @@ export default function Hero() {
                 className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-7"
               >
                 {[
-                  { icon: <MapPin className="w-3.5 h-3.5" />, label: '19 sucursales' },
+                  { icon: <MapPin className="w-3.5 h-3.5" />, label: '20 sucursales' },
                   { icon: <BadgeCheck className="w-3.5 h-3.5" />, label: '6 marcas oficiales' },
                   { icon: <Clock className="w-3.5 h-3.5" />, label: 'Crédito en 24h' },
                 ].map((item, i) => (

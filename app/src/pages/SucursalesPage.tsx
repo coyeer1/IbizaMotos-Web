@@ -135,6 +135,13 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
             {s.marca}
           </div>
 
+          {/* Aviso de cierre temporal */}
+          {s.estado === 'cerrado-temporal' && (
+            <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#111111]/85 text-white text-xs font-bold shadow">
+              Cerrado temporalmente
+            </div>
+          )}
+
           {/* Miniaturas si hay más de 1 foto */}
           {s.fotos.length > 1 && (
             <div className="absolute bottom-2 right-2 flex gap-1">
@@ -295,6 +302,11 @@ function MapaSucursales({ sucursales, ciudadActiva }: { sucursales: Sucursal[]; 
               >
                 {s.marca}
               </span>
+              {s.estado === 'cerrado-temporal' && (
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#b91c1c', marginBottom: '4px' }}>
+                  Cerrado temporalmente
+                </div>
+              )}
               <div style={{ fontWeight: 700, fontSize: '13px', color: '#111', lineHeight: 1.3, marginBottom: '2px' }}>
                 {s.asesor}
               </div>
@@ -344,8 +356,8 @@ export default function SucursalesPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useSEO({
-    title: 'Nuestras 19 Sucursales en Pereira, Eje Cafetero y Neiva | Ibiza Motos',
-    description: 'Encuentra tu sucursal Ibiza Motos más cercana: 19 puntos en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Direcciones, teléfonos y mapa.',
+    title: 'Nuestras 20 Sucursales en Pereira, Eje Cafetero y Neiva | Ibiza Motos',
+    description: 'Encuentra tu sucursal Ibiza Motos más cercana: 20 puntos en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Direcciones, teléfonos y mapa.',
     path: '/sucursales',
   });
 
@@ -380,7 +392,7 @@ export default function SucursalesPage() {
             Nuestras <span className="text-ibiza-red">Sucursales</span>
           </h1>
           <p className="text-[#666666] max-w-lg mx-auto text-base">
-            <span className="text-[#111111] font-bold">19 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
+            <span className="text-[#111111] font-bold">20 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
             Encuentra el más cercano a ti.
           </p>
         </motion.div>

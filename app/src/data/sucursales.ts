@@ -1,4 +1,5 @@
-// Datos reales de las 19 sucursales de Ibiza Motos.
+// Datos reales de las sucursales de Ibiza Motos.
+// Fuente oficial: BASE DATOS PUNTOS IBIZA Y CLASSE MOTOS.xlsx (hoja Ibiza).
 // Fuente única compartida por SucursalesPage, OpinionPage y el panel admin (QR + opiniones).
 export interface Sucursal {
   id: number;
@@ -14,13 +15,15 @@ export interface Sucursal {
   lat: number;
   lng: number;
   placeUrl?: string;
+  /** Sale en la web con el aviso "Cerrado temporalmente". */
+  estado?: 'cerrado-temporal';
 }
 
 export const SUCURSALES: Sucursal[] = [
   // ── Pereira ──────────────────────────────────────────────────────────────────
   {
-    id: 1, marca: 'Suzuki', asesor: 'Kevin Hinestroza',
-    telefono: '3052884546', correo: 'suzukipereiraiibizamotos@gmail.com',
+    id: 1, marca: 'Suzuki', asesor: 'Luisa Arboleda',
+    telefono: '3023649306', correo: 'asesoribizamotos7@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
     direccion: 'Av. 30 de Agosto #48-60',
     fotos: [
@@ -36,8 +39,8 @@ export const SUCURSALES: Sucursal[] = [
     lat: 4.815645, lng: -75.718636,
   },
   {
-    id: 2, marca: 'Honda', asesor: 'Kelly Dahiana Ramírez Castaño',
-    telefono: '3008142375', correo: 'ibizamotosasesor2@gmail.com',
+    id: 2, marca: 'Honda', asesor: 'Kelly Ramirez',
+    telefono: '3013722506', correo: 'ibizamotosasesor6@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
     direccion: 'CRA 7 #26-31',
     fotos: [
@@ -49,10 +52,11 @@ export const SUCURSALES: Sucursal[] = [
     color: '#cc0000',
     lat: 4.815440, lng: -75.700313,
     placeUrl: 'https://maps.app.goo.gl/XVx4D95gzgi7hFuN9',
+    estado: 'cerrado-temporal',
   },
   {
-    id: 3, marca: 'AKT', asesor: 'Laura Marcela Correa',
-    telefono: '3244147066', correo: 'asesoradigital04@gmail.com',
+    id: 3, marca: 'AKT', asesor: 'Stefania Villa',
+    telefono: '3052010678', correo: 'ibizamotosasesor1@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
     direccion: 'CRA 7 #26-13',
     fotos: [
@@ -64,8 +68,8 @@ export const SUCURSALES: Sucursal[] = [
     placeUrl: 'https://maps.app.goo.gl/rSawM96UUb2HPNG29',
   },
   {
-    id: 4, marca: 'Hero', asesor: 'Juan Esteban Velasquez',
-    telefono: '3212541480', correo: 'heropereiraiibizamotos@gmail.com',
+    id: 4, marca: 'Hero', asesor: 'Karen Galves',
+    telefono: '3013722506', correo: 'ibizamotosasesor6@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
     direccion: 'Calle 26 #36-56',
     fotos: [
@@ -81,30 +85,18 @@ export const SUCURSALES: Sucursal[] = [
   },
   // ── Dosquebradas ─────────────────────────────────────────────────────────────
   {
-    id: 5, marca: 'AKT', asesor: 'Cristina Collazo',
-    telefono: '3244147027', correo: 'cristinaibizamotos@gmail.com',
-    ciudad: 'Dosquebradas', departamento: 'Risaralda',
-    direccion: 'Av. Simón Bolívar #20-73 (junto a Frisby La Pradera)',
-    fotos: [
-      '/sucursales/5/foto-fachada-1.webp',
-      '/sucursales/5/foto-fachada-2.webp',
-    ],
-    color: '#e65c00',
-    lat: 4.828440, lng: -75.680520,
-    placeUrl: 'https://maps.app.goo.gl/oh8zia1YXvxauVMN6',
-  },
-  {
     id: 6, marca: 'Hero', asesor: 'John Edison Gallego Martínez',
     telefono: '3185358870', correo: 'tslventas14@gmail.com',
     ciudad: 'Dosquebradas', departamento: 'Risaralda',
-    direccion: 'CRA 16 #41-13',
+    direccion: 'Av. Simón Bolívar #32-24 (frente a La Rosa)',
     fotos: [
       '/sucursales/6/foto-fachada-1.webp',
       '/sucursales/6/foto-fachada-2.webp',
     ],
     color: '#8b0000',
-    lat: 4.836115, lng: -75.669980,
-    placeUrl: 'https://maps.app.goo.gl/tWyQbkaZo1uwKvmf8',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 4.832653, lng: -75.674104,
   },
   // ── Santa Rosa de Cabal ──────────────────────────────────────────────────────
   {
@@ -159,19 +151,30 @@ export const SUCURSALES: Sucursal[] = [
     lat: 4.868254, lng: -75.621712,
     placeUrl: 'https://maps.app.goo.gl/VDHEMxcyC7cA2Kb87',
   },
-  // ── Quimbaya ─────────────────────────────────────────────────────────────────
   {
-    id: 11, marca: 'AKT', asesor: 'Yeferson Andrés Naranjo Arroyave',
-    telefono: '3174332361', correo: 'quimbayaibizamotos@gmail.com',
-    ciudad: 'Quimbaya', departamento: 'Quindío',
-    direccion: 'Cr 6 #18-32',
-    fotos: [
-      '/sucursales/11/foto-fachada-2.webp',
-    ],
-    color: '#e65c00',
-    lat: 4.623015, lng: -75.765215,
-    placeUrl: 'https://maps.app.goo.gl/ow9YCC3hZHhQ7mPv7',
+    id: 20, marca: 'Multimarca', asesor: 'Melanny Lopez',
+    telefono: '3243942165', correo: 'asesordigitalibizamotos1@gmail.com',
+    ciudad: 'Santa Rosa de Cabal', departamento: 'Risaralda',
+    direccion: 'Cra 14 #18-13 Local comercial',
+    fotos: [],
+    color: '#d7263d',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 4.869773, lng: -75.622176,
   },
+  {
+    id: 21, marca: 'Honda', asesor: 'Melanny Lopez',
+    telefono: '3243942165', correo: 'asesordigitalibizamotos1@gmail.com',
+    ciudad: 'Santa Rosa de Cabal', departamento: 'Risaralda',
+    direccion: 'Cra 11 #15-27',
+    fotos: [],
+    color: '#cc0000',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 4.868020, lng: -75.618922,
+    estado: 'cerrado-temporal',
+  },
+  // ── Quimbaya ─────────────────────────────────────────────────────────────────
   {
     id: 12, marca: 'Honda', asesor: 'Ingrid Giraldo',
     telefono: '3024055077', correo: 'ibizamotoshondaquimbaya@gmail.com',
@@ -183,6 +186,17 @@ export const SUCURSALES: Sucursal[] = [
     color: '#cc0000',
     lat: 4.622387, lng: -75.765433,
     placeUrl: 'https://maps.app.goo.gl/eUuxhtrCnetLpuR2A',
+  },
+  {
+    id: 22, marca: 'Suzuki', asesor: 'Roberth José Baena Martinez',
+    telefono: '3043465599', correo: 'suzukiquimbayaibizamotos@gmail.com',
+    ciudad: 'Quimbaya', departamento: 'Quindío',
+    direccion: 'Cra 4 #19-04',
+    fotos: [],
+    color: '#1a73e8',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 4.621703, lng: -75.765542,
   },
   // ── Montenegro ───────────────────────────────────────────────────────────────
   {
@@ -203,14 +217,15 @@ export const SUCURSALES: Sucursal[] = [
     id: 14, marca: 'AKT', asesor: 'Santiago Zapata Cardona',
     telefono: '3228487328', correo: 'magranadaibizamotos2@gmail.com',
     ciudad: 'Viterbo', departamento: 'Caldas',
-    direccion: 'Cra 9 #4-09',
+    direccion: 'Cra 8 #5-03',
     fotos: [
       '/sucursales/14/foto-fachada-1-(1).webp',
       '/sucursales/14/foto-fachada-2.webp',
     ],
     color: '#e65c00',
-    lat: 5.064854, lng: -75.870363,
-    placeUrl: 'https://maps.app.goo.gl/3oAhR8LZSgPp6dKm7',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 5.064509, lng: -75.872221,
   },
   // ── Chinchiná ────────────────────────────────────────────────────────────────
   {
@@ -241,8 +256,8 @@ export const SUCURSALES: Sucursal[] = [
     placeUrl: 'https://maps.app.goo.gl/sTs1q4j5cA2XtMGG7',
   },
   {
-    id: 17, marca: 'Vento', asesor: 'Maria Molano Polania',
-    telefono: '3052884548', correo: 'Posneivaibizamotos@gmail.com',
+    id: 17, marca: 'Vento', asesor: 'Alejandra Medina',
+    telefono: '3052884548', correo: 'ventoibizamotosneiva@gmail.com',
     ciudad: 'Neiva', departamento: 'Huila',
     direccion: 'Carrera 5 #12-44',
     fotos: [
@@ -278,5 +293,27 @@ export const SUCURSALES: Sucursal[] = [
     color: '#cc0000',
     lat: 2.924856, lng: -75.285825,
     placeUrl: 'https://maps.app.goo.gl/qPP7ZQv7Mjd9kDuk7',
+  },
+  {
+    id: 23, marca: 'Vento', asesor: 'Sebastian Artunduaga',
+    telefono: '3043953035', correo: 'ibizamotosbajajneiva@gmail.com',
+    ciudad: 'Neiva', departamento: 'Huila',
+    direccion: 'Calle 12 #5-108',
+    fotos: [],
+    color: '#006633',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 2.930443, lng: -75.290285,
+  },
+  {
+    id: 24, marca: 'Vento', asesor: 'Roger Mauricio',
+    telefono: '3219290428', correo: 'asesoribizaventocra7@gmail.com',
+    ciudad: 'Neiva', departamento: 'Huila',
+    direccion: 'Calle 6 #7-37',
+    fotos: [],
+    color: '#006633',
+    // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
+    // y agregar placeUrl cuando exista la ficha en Google Maps.
+    lat: 2.926184, lng: -75.285672,
   },
 ];

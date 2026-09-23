@@ -45,7 +45,7 @@ All secrets live in `.env.local` (gitignored). Required vars:
 | `/blog/:id` | `BlogPage` | Blog post detail |
 | `/financiamiento` | `FinancingPage` | Loan calculator |
 | `/citas` | `AppointmentPage` | 4-step appointment booking |
-| `/sucursales` | `SucursalesPage` | 19 branches, filterable by city |
+| `/sucursales` | `SucursalesPage` | 22 branches (20 open), filterable by city |
 | `/admin` | `AdminLogin` | Password gate |
 | `/admin/dashboard` | `AdminDashboard` | Protected admin panel |
 | `/privacidad` | `PrivacyPage` | Política de datos (Ley 1581/2012) |
@@ -181,7 +181,7 @@ Rediseñada con selector de 8 entidades financieras reales (datos 2026):
 - La versión `compact` (usada dentro de `MotorcyclePage`) también tiene el selector de financieras
 
 ### Página de Sucursales (`src/pages/SucursalesPage.tsx`)
-19 sucursales con datos embebidos en el componente (array `SUCURSALES`). Ciudades: Pereira (4), Dosquebradas (2), Santa Rosa de Cabal (4), Quimbaya (2), Montenegro (1), Viterbo (1), Chinchiná (1), Neiva (4). Cada sucursal tiene: `asesor`, `telefono`, `correo`, `ciudad`, `direccion`, `fotos[]`, `color` de marca, y `placeUrl` (link directo de Google Maps).
+22 sucursales (20 abiertas + 2 con `estado: 'cerrado-temporal'`) en `src/data/sucursales.ts`. Ciudades: Pereira (4), Dosquebradas (1), Santa Rosa de Cabal (6), Quimbaya (2), Montenegro (1), Viterbo (1), Chinchiná (1), Neiva (6). Fuente oficial: `BASE DATOS PUNTOS IBIZA Y CLASSE MOTOS.xlsx`. Los `id` NO se renumeran: los QR impresos de opiniones usan `/opinion?s=<id>`.
 
 - Filtro sticky por ciudad (pills horizontales con scroll)
 - `TarjetaSucursal`: foto principal + miniaturas inline + lightbox al hacer clic

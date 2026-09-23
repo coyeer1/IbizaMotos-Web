@@ -274,7 +274,7 @@ export default function Hero() {
         className="hidden lg:flex absolute bottom-0 left-0 right-0 items-center"
         style={{ borderTop: `1px solid #f0f0f0`, padding: '16px 80px', gap: 40 }}
       >
-        {['19 sucursales', '6 marcas oficiales', 'Crédito en 24h'].map((item, i) => (
+        {['20 sucursales', '6 marcas oficiales', 'Crédito en 24h'].map((item, i) => (
           <span key={item} className="flex items-center" style={{ gap: 40 }}>
             {i > 0 && <span style={{ width: 1, height: 14, background: '#e0e0e0', marginRight: 40 }} />}
             <span style={{ fontSize: 12, color: '#aaa' }}>{item}</span>

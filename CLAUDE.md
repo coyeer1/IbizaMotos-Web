@@ -47,7 +47,7 @@ To add a new model to the price sync, add an entry to `MAPEO` in `actualizar_pre
 - `outputDirectory`: `app/dist`
 - `rewrites`: all routes → `/index.html` (SPA fallback)
 
-To deploy: connect the GitHub repo at vercel.com. Every push to `master` triggers a new deployment automatically.
+**Deploy is MANUAL.** There is no Vercel Git integration (verified 2026-09-22: 0 deployments, 0 webhooks, no PR checks), so pushing or merging to `master` deploys nothing and creates no previews. Publish with `vercel --prod --yes` from the repo root (needs `vercel login`). **The CLI uploads the local directory as it is on disk — uncommitted changes ship too**, so check `git status` first.
 
 ### Supabase SQL Scripts
 

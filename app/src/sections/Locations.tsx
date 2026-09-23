@@ -59,7 +59,7 @@ export default function Locations() {
           </span>
           <h2 className="locations-title">NUESTRAS SUCURSALES</h2>
           <p className="locations-subtitle">
-            Nuestras sedes en Pereira (Carrera 7). Y contamos con 19 sucursales en todo
+            Nuestras sedes en Pereira (Carrera 7). Y contamos con 20 sucursales en todo
             el Eje Cafetero y Neiva para atenderte de cerca.
           </p>
         </motion.div>
