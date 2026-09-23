@@ -58,7 +58,6 @@ export const BRAND_CONTACTS: Record<string, { sales: string; parts: string }> = 
   Hero:        { sales: '573013722506', parts: '573013722506' }, // Karen Galves - Pereira (base oficial 2026-09-23)
   Vento:       { sales: '573052884548', parts: '573052884548' }, // Maria Molano - Neiva
   Bajaj:       { sales: '573014323989', parts: '573014323989' }, // John Ferney Gomez - Neiva
-  'Good Kidz': { sales: '573052884546', parts: '573052884546' }, // Línea general
 };
 
 export function getBrandBuyWhatsApp(brandName: string, model: string, color?: string): string {

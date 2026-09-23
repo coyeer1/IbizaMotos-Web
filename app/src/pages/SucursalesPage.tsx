@@ -224,7 +224,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
 // ─── Marcador personalizado ───────────────────────────────────────────────────
 const BRAND_ABBREV: Record<string, string> = {
   Suzuki: 'Su', Honda: 'Ho', AKT: 'AK', Hero: 'He',
-  Vento: 'Ve', Bajaj: 'Bj', 'Good Kidz': 'GK',
+  Vento: 'Ve', Bajaj: 'Bj',
 };
 
 function createPin(color: string, marca: string) {

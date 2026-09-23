@@ -113,22 +113,6 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
     heroVideoId: '',
     slideImage: '/brand-slides/vento.webp',
   },
-
-  // ── GOOD KIDZ ──────────────────────────────────────────────────────────────
-  // Verde fresco y natural. Los futuros grandes motociclistas empiezan aquí.
-  'Good Kidz': {
-    primary: '#43A047',
-    secondary: '#1B5E20',
-    bg: '#020A03',
-    glowRgb: '67, 160, 71',
-    tagline: 'El comienzo de la aventura',
-    description:
-      'Good Kidz introduce a los más pequeños del hogar al mundo de las dos ruedas de forma segura y divertida. Motos de pequeña cilindrada y eléctricas diseñadas para los futuros grandes motociclistas.',
-    founded: '2015',
-    origin: 'Colombia',
-    heroVideoId: '',
-    slideImage: '/brand-slides/goodkidz.webp',
-  },
 };
 
 export const DEFAULT_THEME: BrandTheme = {

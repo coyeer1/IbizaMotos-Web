@@ -7,7 +7,6 @@ export const brands: Brand[] = [
   { id: '4', name: 'Honda', logo: '/brands/Honda.png', slug: 'honda' },
   { id: '5', name: 'Bajaj', logo: '/brands/Bajaj.png', slug: 'bajaj' },
   { id: '6', name: 'AKT', logo: '/brands/AKT.png', slug: 'akt' },
-  { id: '7', name: 'Good Kidz', logo: '/brands/GoodKidz.png', slug: 'good-kidz' },
 ];
 
 export const categories: Category[] = [
@@ -18,7 +17,6 @@ export const categories: Category[] = [
   { id: '5', name: 'Enduro', description: 'Todo terreno', icon: 'Mountain', slug: 'enduro' },
   { id: '6', name: 'Adventure', description: 'Larga distancia', icon: 'Compass', slug: 'adventure' },
   { id: '7', name: 'Eléctricas', description: 'Futuro sostenible', icon: 'Battery', slug: 'electricas' },
-  { id: '8', name: 'Niños', description: 'Para los más pequeños', icon: 'Star', slug: 'ninos' },
 ];
 
 export const motorcycles: Motorcycle[] = [
@@ -3221,41 +3219,6 @@ export const motorcycles: Motorcycle[] = [
     },
     images: ["/moto_images/spirit-125/GAL-VENTO-SPIRIT-125-ZX-02-1024x819.webp"],
     videoUrl: 'https://www.youtube.com/embed/2JtirEvbtb0?autoplay=0&rel=0',
-    stock: 'available',
-  },
-  {
-    id: '105',
-    brand: 'Good Kidz',
-    model: "Motos de Niños",
-    year: 2026,
-    price: 1290000,
-    category: 'Niños',
-    description: "Las Good Kidz son las motos para niños más seguras del mercado colombiano. Disponibles en versiones de 60cc de 2 tiempos y 4 tiempos, con velocidad limitada, protecciones integrales y diseño colorido que los niños aman. El regalo perfecto para iniciar a los más pequeños en el mundo de las dos ruedas.",
-    specifications: {
-      engine: "60cc, 2T / 4T, monocilíndrico",
-      power: "3-4 HP",
-      torque: "4-5 Nm",
-      transmission: "Automática / 3 velocidades",
-      weight: "45 kg",
-      fuelCapacity: "2 litros",
-      colors: ["Blanco","Naranja","Rojo","Azul"],
-    },
-    imagesByColor: {
-          "Blanco": [
-                "/moto_images/motos-nios/KB57 60CC 4T.webp"
-          ],
-          "Naranja": [
-                "/moto_images/motos-nios/KB57 60CC 4T2.webp",
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E3.webp"
-          ],
-          "Rojo": [
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E.webp"
-          ],
-          "Azul": [
-                "/moto_images/motos-nios/MOTO 60CC 2T 1E2.webp"
-          ]
-    },
-    images: ["/moto_images/motos-nios/KB57 60CC 4T.webp"],
     stock: 'available',
   },
   {

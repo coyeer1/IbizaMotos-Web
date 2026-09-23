@@ -25,7 +25,6 @@ const BRAND_VIDEOS: Record<string, string> = {
   'Vento':     'fV7GSt4MB9g',
   'Honda':     'Ium-algvybU',
   'Bajaj':     '4T3RPI3xvmY',
-  'Good Kidz': 'CWXcKx-hPAo',
 };
 
 const AUTOPLAY_DELAY = 4500;
