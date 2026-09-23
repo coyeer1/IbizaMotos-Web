@@ -53,9 +53,9 @@ export function getGeneralWhatsApp(): string {
 // Formato: código de país + número sin espacios ni guiones (ej: 573001234567)
 export const BRAND_CONTACTS: Record<string, { sales: string; parts: string }> = {
   Suzuki:      { sales: '573052884546', parts: '573052884546' }, // Kevin Hinestroza - Pereira
-  Honda:       { sales: '573008142375', parts: '573008142375' }, // Kelly Dahiana Ramírez - Pereira
-  AKT:         { sales: '573244147066', parts: '573244147066' }, // Laura Marcela Correa - Pereira
-  Hero:        { sales: '573212541480', parts: '573212541480' }, // Juan Esteban Velasquez - Pereira
+  Honda:       { sales: '573013722506', parts: '573013722506' }, // Kelly Ramirez - Pereira (base oficial 2026-09-23)
+  AKT:         { sales: '573052010678', parts: '573052010678' }, // Stefania Villa - Pereira (base oficial 2026-09-23)
+  Hero:        { sales: '573013722506', parts: '573013722506' }, // Karen Galves - Pereira (base oficial 2026-09-23)
   Vento:       { sales: '573052884548', parts: '573052884548' }, // Maria Molano - Neiva
   Bajaj:       { sales: '573014323989', parts: '573014323989' }, // John Ferney Gomez - Neiva
   'Good Kidz': { sales: '573052884546', parts: '573052884546' }, // Línea general
