@@ -131,12 +131,12 @@ function escribir(ruta, html) {
 // que Meta necesita poder leer sin JS. Igual deben quedar en el sitemap: ver
 // RUTAS_SOLO_SITEMAP mas abajo.
 const FIJAS = [
-  ['/sucursales',        'Nuestras 19 sucursales | Ibiza Motos Eje Cafetero',      'Encuentra tu sede mas cercana: Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchina y Neiva. Direccion, telefono y horario de cada una.'],
+  ['/sucursales',        'Nuestras 20 sucursales | Ibiza Motos Eje Cafetero',      'Encuentra tu sede mas cercana: Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchina y Neiva. Direccion, telefono y horario de cada una.'],
   ['/financiamiento',    'Financia tu moto | 8 entidades | Ibiza Motos',           'Simula la cuota de tu moto con Progreser, Banco de Bogota, SUFI, Brilla, Addi, Venfi, Sistecredito o Crediorbe. Aprobacion rapida en Pereira y el Eje Cafetero.'],
   ['/citas',             'Servicio tecnico de motos | Ibiza Motos',                'Conoce nuestro servicio tecnico especializado para Suzuki, Honda, Bajaj, AKT, Hero y Vento en el Eje Cafetero.'],
-  ['/opinion',           'Califica a tu asesor | Ibiza Motos',                     'Cuentanos como te atendieron. Tu opinion nos ayuda a mejorar el servicio en las 19 sucursales.'],
+  ['/opinion',           'Califica a tu asesor | Ibiza Motos',                     'Cuentanos como te atendieron. Tu opinion nos ayuda a mejorar el servicio en las 20 sucursales.'],
   ['/terminos',          'Terminos y condiciones | Ibiza Motos',                   'Condiciones de uso del sitio web de Ibiza Motos S.A.S.'],
-  ['/marca/todas',       'Todas las marcas de motos | Ibiza Motos',                'Suzuki, Honda, Bajaj, AKT, Hero y Vento en un solo concesionario, con 19 sucursales en el Eje Cafetero y Neiva.'],
+  ['/marca/todas',       'Todas las marcas de motos | Ibiza Motos',                'Suzuki, Honda, Bajaj, AKT, Hero y Vento en un solo concesionario, con 20 sucursales en el Eje Cafetero y Neiva.'],
 ];
 
 // Rutas que existen como HTML estatico servido por rewrite (ver vercel.json)

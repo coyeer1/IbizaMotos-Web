@@ -39,5 +39,5 @@ export function brandTitle(brand: string): string {
 }
 
 export function brandDescription(brand: string): string {
-  return `Catálogo de motos ${brand} nuevas en Ibiza Motos: 19 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Financiación inmediata con 8 entidades.`;
+  return `Catálogo de motos ${brand} nuevas en Ibiza Motos: 20 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Financiación inmediata con 8 entidades.`;
 }

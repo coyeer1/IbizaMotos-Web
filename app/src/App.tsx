@@ -7,7 +7,7 @@ import { AdminAuthProvider } from '@/hooks/useAdminAuth';
 import Analytics from '@/components/Analytics';
 import CookieConsent from '@/components/CookieConsent';
 import { WhatsAppFloat } from '@/components/WhatsAppFloat';
-import { getStoredConsent } from '@/lib/analytics';
+import { getStoredConsent, ANALYTICS_CONFIGURED } from '@/lib/analytics';
 import { ComparatorProvider } from '@/components/MotoComparator';
 import { SearchProvider } from '@/components/SearchOverlay';
 import ScrollRestorer from '@/components/ScrollRestorer';
@@ -44,7 +44,7 @@ function AppContent() {
   // entre CookieConsent (que la muestra) y WhatsAppFloat (que se levanta para
   // no quedar tapado por ella). Inicializador perezoso: correcto desde el
   // primer pintado, sin useEffect ni fotograma con el boton bajo la barra.
-  const [consentBarVisible, setConsentBarVisible] = useState(() => getStoredConsent() === null);
+  const [consentBarVisible, setConsentBarVisible] = useState(() => ANALYTICS_CONFIGURED && getStoredConsent() === null);
 
   return (
     <div className="min-h-screen bg-ibiza-black">

@@ -10,6 +10,10 @@
 const PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID?.trim();
 const GA4_ID = import.meta.env.VITE_GA4_ID?.trim();
 
+/** Hay al menos un servicio de medicion configurado. Sin ninguno, no hay nada
+ *  que consentir: la barra de cookies no se muestra. */
+export const ANALYTICS_CONFIGURED = Boolean(PIXEL_ID || GA4_ID);
+
 export const CONSENT_KEY = 'ibz-consent';
 
 type Consent = 'granted' | 'denied';

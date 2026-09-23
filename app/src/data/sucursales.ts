@@ -26,13 +26,7 @@ export const SUCURSALES: Sucursal[] = [
     telefono: '3023649306', correo: 'asesoribizamotos7@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
     direccion: 'Av. 30 de Agosto #48-60',
-    fotos: [
-      '/sucursales/1/foto-fachada-1.webp',
-      '/sucursales/1/foto-fachada-2.webp',
-      '/sucursales/1/foto-sala-1.webp',
-      '/sucursales/1/foto-sala-2.webp',
-      '/sucursales/1/foto-sala-3.webp',
-    ],
+    fotos: [], // las fotos eran del local anterior al terremoto
     color: '#1a73e8',
     // Aprox. (±60 m): esquina Av. 30 de Agosto x Calle 48 (OpenStreetMap). Cambiar
     // por las exactas y agregar placeUrl cuando exista la ficha en Google Maps.
@@ -89,10 +83,7 @@ export const SUCURSALES: Sucursal[] = [
     telefono: '3185358870', correo: 'tslventas14@gmail.com',
     ciudad: 'Dosquebradas', departamento: 'Risaralda',
     direccion: 'Av. Simón Bolívar #32-24 (frente a La Rosa)',
-    fotos: [
-      '/sucursales/6/foto-fachada-1.webp',
-      '/sucursales/6/foto-fachada-2.webp',
-    ],
+    fotos: [], // las fotos eran del local anterior al terremoto
     color: '#8b0000',
     // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
     // y agregar placeUrl cuando exista la ficha en Google Maps.
