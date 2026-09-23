@@ -26,9 +26,16 @@ const CITY_VIEWS: Record<string, [number, number, number]> = {
 
 function getMapsUrl(s: Sucursal) {
   if (s.placeUrl) return s.placeUrl;
-  const direccionLimpia = s.direccion.replace(/#/g, 'No.');
-  const query = `Ibiza Motos ${s.marca}, ${direccionLimpia}, ${s.ciudad}, ${s.departamento}, Colombia`;
-  return `https://maps.google.com/?q=${encodeURIComponent(query)}`;
+  // Sin ficha propia en Google Maps se busca SOLO la direccion: con el nombre
+  // del negocio delante, Maps intenta encontrar un negocio que no existe y el
+  // cliente tiene que borrar el nombre a mano. Las referencias ("frente a...",
+  // "Local 8") tampoco las entiende el buscador.
+  const direccion = s.direccion
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\s+Local\b.*$/i, '')
+    .trim();
+  const query = `${direccion}, ${s.ciudad}, ${s.departamento}, Colombia`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
 function getWaUrl(s: Sucursal) {
