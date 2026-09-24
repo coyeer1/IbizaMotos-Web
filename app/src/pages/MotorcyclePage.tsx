@@ -10,6 +10,7 @@ import { getBrandBuyWhatsApp, getWhatsAppUrl } from '@/lib/config';
 import { Calculator, ArrowRight } from 'lucide-react';
 import type { Motorcycle } from '@/types';
 import { CompareButton } from '@/components/MotoComparator';
+import YouTubeBackground from '@/components/YouTubeBackground';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { useSEO } from '@/hooks/useSEO';
 import { motoTitle, motoDescription, motoPath, DEFAULT_TITLE } from '@/lib/seoTexts';
@@ -172,16 +173,16 @@ export default function MotorcyclePage() {
 
             {/* ── VIDEO HERO ── */}
             {videoId && (
-                <section className="relative w-full h-[60vh] md:h-screen overflow-hidden">
-                    <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&controls=0&rel=0&playlist=${videoId}&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3&showinfo=0`}
-                        className="absolute top-1/2 left-1/2"
-                        style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', transform: 'translate(-50%, -50%) scale(1.35)', pointerEvents: 'none' }}
-                        frameBorder="0"
-                        allow="autoplay; encrypted-media; fullscreen"
+                <section className="relative w-full h-[60vh] md:h-screen overflow-hidden bg-[#0a0a0a]">
+                    <YouTubeBackground
+                        key={videoId}
+                        videoId={videoId}
+                        poster={
+                            <div className="absolute inset-0 flex items-center justify-center" style={{ background: `radial-gradient(ellipse at center, rgba(${brandGlow}, 0.18) 0%, #0a0a0a 70%)` }}>
+                                <img src={motorcycle.images[0]} alt="" className="w-[80%] max-w-4xl max-h-[70%] object-contain drop-shadow-2xl" />
+                            </div>
+                        }
                     />
-                    {/* Capa transparente: bloquea cualquier interacción/chrome de YouTube */}
-                    <div className="absolute inset-0 z-[1]" style={{ pointerEvents: 'none' }} aria-hidden />
                     {/* Gradiente superior e inferior */}
                     <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%, #ffffff 100%)` }} />
                     {/* Texto overlay inferior */}

@@ -46,6 +46,19 @@ export function setConsent(valor: Consent): void {
   }
 }
 
+/** Retira la decision guardada (Ley 1581: el titular puede revocar la
+ *  autorizacion). Recarga la pagina para que los pixeles ya cargados
+ *  desaparezcan y la barra vuelva a preguntar. */
+export function revokeConsent(): void {
+  try {
+    localStorage.removeItem(CONSENT_KEY);
+  } catch {
+    // Sin almacenamiento no hay nada guardado que borrar.
+  }
+  window.fbq?.('consent', 'revoke');
+  window.location.reload();
+}
+
 export function hasConsent(): boolean {
   return getStoredConsent() === 'granted';
 }

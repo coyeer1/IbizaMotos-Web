@@ -75,6 +75,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/125-ttr-cbs/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/MP5ymDVOUSU',
   },
   {
     id: '3',
@@ -103,6 +104,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/150-cr4/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/SOibUI_X2sM',
   },
   {
     id: '4',
@@ -132,6 +134,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/200-cr4/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/SOibUI_X2sM',
   },
   {
     id: '5',
@@ -163,6 +166,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/200-tt-abs/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/sccr1Xu95VQ',
   },
   {
     id: '6',
@@ -225,6 +229,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/ak125chr-cbs/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/y8IWCsGvbKE',
   },
   {
     id: '8',
@@ -255,6 +260,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/ak125nkd-cbs/descarga.webp"],
     featured: true,
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/CgIeKLV-71Y',
   },
   {
     id: '9',
@@ -280,6 +286,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/ak125nkd-cbs-clas-v3-27-pt/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/Z69QWgzuOUQ',
   },
   {
     id: '10',
@@ -305,6 +312,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/ak125nkd-cbs-fp-27-pt/descarga (1).webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/CgIeKLV-71Y',
   },
   {
     id: '11',
@@ -334,6 +342,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/akt-250-r/descarga.webp"],
     featured: true,
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/TZYyxW6kVh0',
   },
   {
     id: '12',
@@ -365,6 +374,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/dinamic-rx-150/descarga.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/8UHnyHf0iTk',
   },
   {
     id: '13',
@@ -433,8 +443,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/dr-150-fi-abs/DR-150-FI-ABS-AMARILLA-2-1.webp"],
-    videoUrl: 'https://www.youtube.com/embed/RhFji0P6KfM?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/7YMT196COhI',
   },
   {
     id: '15',
@@ -702,7 +712,6 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/ax4-eiii/ax4 azul.webp"],
-    videoUrl: 'https://www.youtube.com/embed/DRaUPwcUHSQ?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -734,7 +743,6 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/ax4-abs/AX4 ABS AZUL.webp"],
-    videoUrl: 'https://www.youtube.com/embed/EL46sFlp908?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -835,7 +843,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/dl650xt/V-STROM-DL650-BLK.webp"],
     featured: true,
     stock: 'order',
-    videoUrl: 'https://www.youtube.com/embed/L7YXsyS9XqE?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/w1DwRHZ-wEw',
   },
   {
     id: '28',
@@ -868,7 +876,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/gixxer-250/GIXXER-250-AZUL-2026_0.webp"],
     featured: true,
     stock: 'available',
-    videoUrl: 'https://www.youtube.com/embed/5MVZJG2QABQ?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/RerGdIdc424',
   },
   {
     id: '29',
@@ -962,8 +970,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gixxer-sf-fi-150-abs/GIXXER--SF-150-FI-ABS-AZUL.webp"],
-    videoUrl: 'https://www.youtube.com/embed/NaxspJ4Tj_E?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/C_NG5Wsm6uo',
   },
   {
     id: '32',
@@ -995,7 +1003,6 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gn125-abs/GN125 ABS AZUL-NEGRO.webp"],
-    videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1027,7 +1034,6 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/suzuki-gn125-eiii/GN125 EIII AZUL.webp"],
-    videoUrl: 'https://www.youtube.com/embed/WTW4a-JQWnE?autoplay=0&rel=0',
     stock: 'available',
   },
   {
@@ -1147,7 +1153,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/gsx-r150-abs/GSX R150 ABS NEGRA.webp"],
     featured: true,
     stock: 'limited',
-    videoUrl: 'https://www.youtube.com/embed/edLDAaTwjDM?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/WgO-ThDmRxw',
   },
   {
     id: '38',
@@ -1206,8 +1212,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/gsx-s150-abs/GSX S150 ABS NEGRA (1).webp"],
-    videoUrl: 'https://www.youtube.com/embed/BOq5yTibCwg?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/_3P3X7z-8l4',
   },
   {
     id: '40',
@@ -1243,7 +1249,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/hayabusa/HAYABUSA AZUL.webp"],
     featured: true,
     stock: 'order',
-    videoUrl: 'https://www.youtube.com/embed/1v4g4oo95Co?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/zblu-Y652S0',
   },
   {
     id: '41',
@@ -1337,8 +1343,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/v-strom-160/V-STROM 160 AMARILLA.webp"],
-    videoUrl: 'https://www.youtube.com/embed/hYWGNIsuMRM?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/301ZcoRhjAo',
   },
   {
     id: '44',
@@ -1526,7 +1532,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/cb-190r-20/honda-cb190r-gris.webp"],
     featured: true,
     stock: 'available',
-    videoUrl: 'https://www.youtube.com/embed/OjNe1ixPrDk?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/vMZhBsUZ_bI',
   },
   {
     id: '50',
@@ -1861,7 +1867,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/xr-190l-20/xr-190l-abs-beige.webp"],
     stock: 'available',
-    videoUrl: 'https://www.youtube.com/embed/zKAlDMvp5AU?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/xWLwN92NXaY',
   },
   {
     id: '61',
@@ -2210,8 +2216,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/pulsar-p-150-fi-abs/descarga.webp"],
-    videoUrl: 'https://www.youtube.com/embed/ARJkO-i33nA?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/xEMmTqfCaGI',
   },
   {
     id: '72',
@@ -2309,8 +2315,8 @@ const catalogoBase: Motorcycle[] = [
           ]
     },
     images: ["/moto_images/pulsar-ns-160-fi-abs-ug2/descarga.webp"],
-    videoUrl: 'https://www.youtube.com/embed/nSw6pAqJ0PE?autoplay=0&rel=0',
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/JdIcXAevbtY',
   },
   {
     id: '75',
@@ -2835,6 +2841,7 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/xoom-110/xoom110DiagAzul.webp"],
     stock: 'available',
+    videoUrl: 'https://www.youtube.com/embed/L8WBysfLU-g',
   },
   {
     id: '92',
@@ -2864,7 +2871,7 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/xpulse-200-4v/xpulse2004vGrisVerde.webp"],
     featured: true,
     stock: 'available',
-    videoUrl: 'https://www.youtube.com/embed/r4Jjh2fWVjI?autoplay=0&rel=0',
+    videoUrl: 'https://www.youtube.com/embed/qFAtnhPfCNU',
   },
   {
     id: '93',
@@ -3131,7 +3138,6 @@ const catalogoBase: Motorcycle[] = [
     },
     images: ["/moto_images/presley-200-abs/vento-latam-presley-200-01.webp"],
     featured: true,
-    videoUrl: 'https://www.youtube.com/embed/pjcop5Blhlo?autoplay=0&rel=0',
     stock: 'available',
   },
   {

@@ -156,7 +156,7 @@ if (avisos.length) { console.log('\nAVISOS:'); avisos.forEach((a) => console.log
 if (sinPareja.length) console.log(`\nMotos de la web que no estan en el Sheet (conservan su precio): ${sinPareja.join(', ')}`);
 const marcasWeb = new Set(motorcycles.map((m) => norm(m.brand)));
 const faltan = [...new Set(filas.filter((f) => marcasWeb.has(norm(f.marca)) && !usados.has(norm(f.marca) + '|' + norm(f.modelo))).map((f) => `${f.marca} ${f.modelo}`))];
-if (faltan.length) console.log(`\nModelos del Sheet que la web todavia no tiene (${faltan.length}; se agregan a mano, con fotos): ${faltan.slice(0, 8).join(', ')}${faltan.length > 8 ? '...' : ''}`);
+if (faltan.length) console.log(`\nModelos del Sheet que la web todavia no tiene (${faltan.length}; se agregan a mano, con fotos):\n  ${faltan.join('\n  ')}`);
 
 if (!cambios.length || SOLO_VER) process.exit(0);
 

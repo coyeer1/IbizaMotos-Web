@@ -10,7 +10,8 @@ import { supabase } from '@/lib/supabase';
 import { buildGoogleCalendarUrl, notifyAppsScript, type CalendarEventParams } from '@/lib/googleCalendar';
 import { branches } from '@/data/motorcycles';
 import { useSEO } from '@/hooks/useSEO';
-import { BUSINESS, getServiceWhatsApp, WORKSHOP_BOOKING_ENABLED } from '@/lib/config';
+import { BUSINESS, getServiceWhatsApp, getWhatsAppUrl, WORKSHOP_BOOKING_ENABLED } from '@/lib/config';
+import { trackContact } from '@/lib/analytics';
 
 // ─── WhatsApp admin notification ─────────────────────────────────────────────
 async function notifyWhatsAppAdmin(p: CalendarEventParams): Promise<void> {
@@ -337,7 +338,8 @@ export default function AppointmentPage() {
               </button>
               <button onClick={() => {
                 const msg = `Hola, acabo de agendar una cita:\nServicio: ${serviceInfo?.label}\nFecha: ${selectedDate ? formatDate(selectedDate) : ''} a las ${selectedTime}\nNombre: ${form.name}`;
-                window.open(`https://wa.me/573052884546?text=${encodeURIComponent(msg)}`, '_blank');
+                trackContact(window.location.pathname);
+                window.open(getWhatsAppUrl(msg), '_blank');
               }} className="flex-1 bg-[#25D366] text-white font-black py-3 text-sm uppercase border-2 border-[#25D366] hover:bg-[#1db954] transition-colors">
                 WhatsApp
               </button>

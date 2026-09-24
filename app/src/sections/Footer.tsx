@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { brands } from '@/data/motorcycles';
 import { getGeneralWhatsApp, getWhatsAppUrl } from '@/lib/config';
+import { ANALYTICS_CONFIGURED, revokeConsent, trackContact } from '@/lib/analytics';
 
 const navLinks = [
   { name: 'Inicio', href: '#inicio' },
@@ -56,6 +57,7 @@ export default function Footer() {
     e.preventDefault();
     if (email) {
       // Open WhatsApp with the email for future newsletter
+      trackContact(window.location.pathname);
       window.open(getWhatsAppUrl(`Hola, quiero suscribirme al newsletter. Mi correo es: ${email}`), '_blank');
       setIsSubscribed(true);
       setTimeout(() => {
@@ -262,7 +264,7 @@ export default function Footer() {
                 </a>
               </p>
             </div>
-            <div className="flex gap-6 text-xs">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs">
               <Link to="/privacidad" className="!text-white/40 hover:!text-white transition-colors duration-200 flex items-center gap-1">
                 <ExternalLink className="w-3 h-3" />
                 Política de privacidad
@@ -275,6 +277,11 @@ export default function Footer() {
                 <ExternalLink className="w-3 h-3" />
                 Eliminar mis datos
               </Link>
+              {ANALYTICS_CONFIGURED && (
+                <button type="button" onClick={revokeConsent} className="!text-white/40 hover:!text-white transition-colors duration-200">
+                  Preferencias de cookies
+                </button>
+              )}
             </div>
           </div>
         </div>
