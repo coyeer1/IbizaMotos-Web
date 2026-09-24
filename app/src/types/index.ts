@@ -17,6 +17,8 @@ export interface Motorcycle {
   };
   images: string[];
   imagesByColor?: Record<string, string[]>;
+  /** Precio por año modelo ("2027": 6490000). `price` y `year` son siempre los del año mas nuevo. */
+  pricesByYear?: Record<string, number>;
   videoUrl?: string;
   featured?: boolean;
   stock?: 'available' | 'limited' | 'order';

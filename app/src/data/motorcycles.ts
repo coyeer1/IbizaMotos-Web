@@ -1,4 +1,5 @@
 import type { Motorcycle, Brand, Category, Testimonial, Service, Branch, SparePart } from '@/types';
+import { PRECIOS } from './precios.generado';
 
 export const brands: Brand[] = [
   { id: '1', name: 'Suzuki', logo: '/brands/Suzuki.png', slug: 'suzuki' },
@@ -19,7 +20,9 @@ export const categories: Category[] = [
   { id: '7', name: 'Eléctricas', description: 'Futuro sostenible', icon: 'Battery', slug: 'electricas' },
 ];
 
-export const motorcycles: Motorcycle[] = [
+// Catalogo base: especificaciones, fotos y un precio de RESPALDO. Los precios que
+// ve el cliente salen de la lista oficial (ver `motorcycles` mas abajo).
+const catalogoBase: Motorcycle[] = [
   {
     id: '1',
     brand: 'AKT',
@@ -3486,6 +3489,20 @@ export const motorcycles: Motorcycle[] = [
     stock: 'available',
   },
 ];
+
+/**
+ * Catalogo que usa todo el sitio. Los precios vienen de la lista oficial en Google
+ * Sheets (`precios.generado.ts`, que escribe `scripts/actualizar-precios.mjs`):
+ * `price` y `year` son los del año modelo mas nuevo, y `pricesByYear` guarda todos
+ * los años para el selector de la ficha. Las motos que no estan en la lista
+ * conservan el precio escrito en el catalogo base.
+ */
+export const motorcycles: Motorcycle[] = catalogoBase.map((m) => {
+  const porAnio = PRECIOS[m.id];
+  const anios = porAnio ? Object.keys(porAnio).map(Number).sort((a, b) => b - a) : [];
+  if (!anios.length) return m;
+  return { ...m, year: anios[0], price: porAnio[String(anios[0])], pricesByYear: porAnio };
+});
 
 export const testimonials: Testimonial[] = [
   {

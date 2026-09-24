@@ -1,25 +1,10 @@
 @echo off
-title Actualizador de Precios — Ibiza Motos
-cd /d "%~dp0"
-
-:: Verificar Python
-python --version >nul 2>&1
-if errorlevel 1 (
-    echo.
-    echo ERROR: Python no esta instalado o no esta en el PATH.
-    echo Descargalo desde https://www.python.org/downloads/
-    pause
-    exit /b 1
-)
-
-:: Instalar pywin32 si falta
-python -c "import win32com.client" >nul 2>&1
-if errorlevel 1 (
-    echo Instalando libreria requerida ^(pywin32^)...
-    pip install pywin32 --quiet
-    echo.
-)
-
-:: Ejecutar el script con UTF-8
-set PYTHONIOENCODING=utf-8
-python actualizar_precios.py
+chcp 65001 >nul
+title Actualizar precios - Ibiza Motos
+cd /d "%~dp0app"
+echo.
+echo   ACTUALIZAR PRECIOS DE LA WEB DESDE LA LISTA OFICIAL (Google Sheets)
+echo   -------------------------------------------------------------------
+node scripts\actualizar-precios.mjs
+echo.
+pause

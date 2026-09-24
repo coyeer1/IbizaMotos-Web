@@ -49,6 +49,7 @@ export default function MotorcyclePage() {
     const { motorcycles, loading } = useMotorcycles();
     const [motorcycle, setMotorcycle] = useState<Motorcycle | null>(null);
     const [selectedColor, setSelectedColor] = useState<string>('');
+    const [selectedYear, setSelectedYear] = useState<number | null>(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
     const [lightboxZoomed, setLightboxZoomed] = useState(false);
@@ -63,6 +64,7 @@ export default function MotorcyclePage() {
             const moto = motorcycles.find(m => m.id === id);
             if (moto) {
                 setMotorcycle(moto);
+                setSelectedYear(moto.year);
                 if (moto.specifications?.colors?.length > 0) {
                     setSelectedColor(moto.specifications.colors[0]);
                 }
@@ -121,9 +123,15 @@ export default function MotorcyclePage() {
         }).format(price);
     };
 
-    const hasPrice = motorcycle.price > 0;
+    // Años modelo disponibles segun la lista oficial; por defecto el mas nuevo.
+    const years = motorcycle.pricesByYear
+        ? Object.keys(motorcycle.pricesByYear).map(Number).sort((a, b) => b - a)
+        : [motorcycle.year];
+    const year = selectedYear !== null && years.includes(selectedYear) ? selectedYear : years[0];
+    const price = motorcycle.pricesByYear?.[String(year)] ?? motorcycle.price;
+    const hasPrice = price > 0;
 
-    const whatsappUrl = getBrandBuyWhatsApp(motorcycle.brand, motorcycle.model, selectedColor);
+    const whatsappUrl = getBrandBuyWhatsApp(motorcycle.brand, `${motorcycle.model} modelo ${year}`, selectedColor);
 
     const videoId = motorcycle.videoUrl
         ? (motorcycle.videoUrl.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([a-zA-Z0-9_-]+)/) || [])[1] ?? ''
@@ -131,7 +139,7 @@ export default function MotorcyclePage() {
 
     const handleQuoteSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
+        const msg = `Hola, me interesa cotizar la ${motorcycle.brand} ${motorcycle.model} modelo ${year}${selectedColor ? ` color ${selectedColor}` : ''}.\nNombre: ${quoteForm.name}\nTeléfono: ${quoteForm.phone}\nCiudad: ${quoteForm.city || 'No especificada'}`;
         trackContact(window.location.pathname);
         window.open(getWhatsAppUrl(msg), '_blank');
         setQuoteSubmitted(true);
@@ -256,7 +264,7 @@ export default function MotorcyclePage() {
 
                         {/* Year */}
                         <span className="font-display font-bold text-lg mb-6" style={{ color: brandColor }}>
-                            Modelo {motorcycle.year}
+                            Modelo {year}
                         </span>
 
                         {/* Description */}
@@ -266,12 +274,44 @@ export default function MotorcyclePage() {
 
                         {/* Price block */}
                         <div className="mb-8">
-                            <p className="text-xs text-[#999999] font-semibold tracking-wider uppercase mb-1">{hasPrice ? 'Precio desde' : 'Precio'}</p>
+                            <p className="text-xs text-[#999999] font-semibold tracking-wider uppercase mb-1">
+                                {!hasPrice ? 'Precio' : years.length > 1 ? `Precio modelo ${year}` : 'Precio desde'}
+                            </p>
                             <div className="flex items-end gap-3">
                                 <span className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-[#111111] leading-none">
-                                    {formatPrice(motorcycle.price)}
+                                    {formatPrice(price)}
                                 </span>
                             </div>
+
+                            {/* Selector de año modelo: solo si la lista oficial trae mas de uno */}
+                            {years.length > 1 && (
+                                <div className="mt-5">
+                                    <p className="text-xs font-bold text-[#999999] tracking-widest uppercase mb-3">
+                                        Año modelo: <span className="text-[#111111]">{year}</span>
+                                    </p>
+                                    <div className="flex gap-2 flex-wrap" role="radiogroup" aria-label="Año modelo">
+                                        {years.map((y) => {
+                                            const activo = y === year;
+                                            return (
+                                                <button
+                                                    key={y}
+                                                    type="button"
+                                                    role="radio"
+                                                    aria-checked={activo}
+                                                    onClick={() => setSelectedYear(y)}
+                                                    className={`px-4 py-2 rounded-full text-sm font-bold border transition-all ${activo ? 'text-white shadow' : 'text-[#666666] bg-white hover:border-[#999999]'}`}
+                                                    style={activo ? { backgroundColor: brandColor, borderColor: brandColor } : { borderColor: '#e0e0e0' }}
+                                                >
+                                                    {y}
+                                                    <span className={`ml-2 font-medium ${activo ? 'text-white/85' : 'text-[#999999]'}`}>
+                                                        {formatPrice(motorcycle.pricesByYear?.[String(y)] ?? 0)}
+                                                    </span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Color selector — solo si hay imagesByColor real */}
@@ -440,7 +480,7 @@ export default function MotorcyclePage() {
                         </div>
                         <div className="flex items-center gap-2 text-xs">
                             <span className="px-3 py-1.5 rounded-full text-[#666666] font-medium" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>{motorcycle.category}</span>
-                            <span className="px-3 py-1.5 rounded-full text-[#666666] font-medium" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>Modelo {motorcycle.year}</span>
+                            <span className="px-3 py-1.5 rounded-full text-[#666666] font-medium" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>Modelo {year}</span>
                         </div>
                     </motion.div>
 
@@ -561,7 +601,7 @@ export default function MotorcyclePage() {
                                     ))}
                                 </div>
                                 <a
-                                    href={getWhatsAppUrl(`Hola, quiero financiar la ${motorcycle.brand} ${motorcycle.model}. ¿Me asesoran con el crédito?`)}
+                                    href={getWhatsAppUrl(`Hola, quiero financiar la ${motorcycle.brand} ${motorcycle.model} modelo ${year}. ¿Me asesoran con el crédito?`)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center gap-3 w-full text-white font-display font-bold px-8 py-4 rounded-2xl text-sm uppercase tracking-wider active:scale-[0.98] transition-all duration-200 group"
@@ -626,7 +666,7 @@ export default function MotorcyclePage() {
                                 {motorcycle.brand} {motorcycle.model}
                             </h4>
                             <span className="font-display font-black text-base sm:text-2xl md:text-3xl leading-none" style={{ color: brandColor }}>
-                                {formatPrice(motorcycle.price)}
+                                {formatPrice(price)}
                             </span>
                         </div>
 

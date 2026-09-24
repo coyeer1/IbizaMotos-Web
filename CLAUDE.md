@@ -20,20 +20,20 @@ npm run preview    # Preview production build locally
 
 ## Root-Level Tooling
 
-### Price Updater (`actualizar_precios.py` / `ACTUALIZAR PRECIOS.bat`)
+### Price Updater (`ACTUALIZAR PRECIOS.bat`)
 
-Batch-updates motorcycle prices in `app/src/data/motorcycles.ts` by reading "Hoja 2" from the dealership's Excel file (`HOJA DE NEGOCIO IBIZA*.xlsm`) in the user's Downloads folder. The `MAPEO` dict maps Excel row names → model names in `motorcycles.ts`.
+Monthly, double-click `ACTUALIZAR PRECIOS.bat`. It runs `app/scripts/actualizar-precios.mjs`, which:
 
-- Run by double-clicking `ACTUALIZAR PRECIOS.bat` (no terminal needed)
-- Requires `openpyxl`: `python -m pip install openpyxl`
-- Prioritizes 2026 price column; falls back to 2025 if empty
-- Reports updated / unchanged / not-found models after running
-- **After running, rebuild and deploy the site**
+1. Reads the official price list from Google Sheets (tab `CONSOLIDADO`, shared as "anyone with the link can view").
+2. Shows the price changes the customer will see and waits for a yes.
+3. Writes `app/src/data/precios.generado.ts`, runs `npm run build` (aborts and restores on failure), commits, pushes and deploys with `vercel --prod`.
 
-To add a new model to the price sync, add an entry to `MAPEO` in `actualizar_precios.py`:
-```python
-'NOMBRE EN EXCEL':  'Nombre exacto del model en motorcycles.ts',
-```
+It refuses to run if the folder is not on `master` or has uncommitted tracked changes, because Vercel uploads the disk as-is.
+
+- Name matching lives in `app/scripts/precios-mapeo.json` (web motorcycle `id` -> exact `MODELO` in the Sheet). When the Sheet renames a model, fix it there.
+- Each motorcycle shows the newest model year by default; `pricesByYear` keeps every year for the selector on the motorcycle page.
+- Motorcycles missing from the Sheet keep the fallback price written in `motorcycles.ts`.
+- `--solo-ver` only shows the changes.
 
 ### Photo Utilities
 
