@@ -148,6 +148,24 @@
     "147": "3W 200 - MODELO 2027 TECHO",
     "148": "DAKAR 200S",
     "149": "OVNI 125 LANZAMIENTO",
-    "150": "OVNI TRACK 125-LANZAMIENTO"
+    "150": "OVNI TRACK 125-LANZAMIENTO",
+    "151": "BOXER CT 100 ES CBS (Boxer Racing)",
+    "152": "DOMINAR 400 VOLCANO CON CONTINETAL",
+    "153": "WAVE 110S CBS",
+    "154": "FLEX CBS GS ML V 27 PT",
+    "155": "AK 125 TTR CBS  Gr/Ng 27 PT",
+    "156": "AK 200 TTR ABS V/N 27 PT",
+    "157": "Rapid 125 ROJA",
+    "158": "XPULSE 200 PRO 4V 2.0"
+  },
+  "_nota_repetidos": "Filas del Sheet que son la MISMA moto que otra ya publicada (nombre viejo o duplicado). No se publican aparte; el valor es el id de la moto que ya las representa.",
+  "repetidos": {
+    "PULSAR NS 200 FI": "76",
+    "PULSAR NS 200 FI ABS": "75",
+    "PULSAR NS 200 FI UG": "75",
+    "PULSAR NS 200 FI ABS UG": "75",
+    "GIXXER FI": "29",
+    "V-STROM 800DE TRAVEL": "45",
+    "Alpina 300 EFI ABS": "96"
   }
 }

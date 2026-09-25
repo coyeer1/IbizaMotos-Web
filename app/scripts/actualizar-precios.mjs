@@ -97,7 +97,7 @@ console.log(`  ${filas.length} precios leidos.`);
 // ─── 3. Cruzar con el catalogo de la web ───────────────────────────────────────
 const { motorcycles } = await cargarTS('src/data/motorcycles.ts');
 const { PRECIOS: antes = {} } = existsSync(ARCHIVO) ? await cargarTS(ARCHIVO) : {};
-const mapeo = JSON.parse(readFileSync(MAPEO, 'utf8')).motos;
+const { motos: mapeo, repetidos = {} } = JSON.parse(readFileSync(MAPEO, 'utf8'));
 
 const nuevos = {}; const avisos = []; const sinPareja = []; const usados = new Set();
 for (const m of motorcycles) {
@@ -155,7 +155,9 @@ if (!cambios.length) {
 if (avisos.length) { console.log('\nAVISOS:'); avisos.forEach((a) => console.log('  ' + a)); }
 if (sinPareja.length) console.log(`\nMotos de la web que no estan en el Sheet (conservan su precio): ${sinPareja.join(', ')}`);
 const marcasWeb = new Set(motorcycles.map((m) => norm(m.brand)));
-const faltan = [...new Set(filas.filter((f) => marcasWeb.has(norm(f.marca)) && !usados.has(norm(f.marca) + '|' + norm(f.modelo))).map((f) => `${f.marca} ${f.modelo}`))];
+// Filas del Sheet que son la misma moto que otra ya publicada (mismo producto, otro nombre).
+const repetidosNorm = new Set(Object.keys(repetidos).map(norm));
+const faltan = [...new Set(filas.filter((f) => marcasWeb.has(norm(f.marca)) && !usados.has(norm(f.marca) + '|' + norm(f.modelo)) && !repetidosNorm.has(norm(f.modelo))).map((f) => `${f.marca} ${f.modelo}`))];
 if (faltan.length) console.log(`\nModelos del Sheet que la web todavia no tiene (${faltan.length}; se agregan a mano, con fotos):\n  ${faltan.join('\n  ')}`);
 
 if (!cambios.length || SOLO_VER) process.exit(0);

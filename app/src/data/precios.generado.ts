@@ -1,7 +1,7 @@
 // GENERADO por scripts/actualizar-precios.mjs a partir de la lista oficial en Google Sheets.
 // No editar a mano: el proximo "ACTUALIZAR PRECIOS" lo sobrescribe.
 // id de la moto -> { "año modelo": precio }. La web muestra por defecto el año mas nuevo.
-export const PRECIOS_ACTUALIZADO = '2026-09-24';
+export const PRECIOS_ACTUALIZADO = '2026-09-25';
 
 export const PRECIOS: Record<string, Record<string, number>> = {
   "1": {
@@ -564,5 +564,34 @@ export const PRECIOS: Record<string, Record<string, number>> = {
   },
   "150": {
     "2027": 5390000
+  },
+  "151": {
+    "2027": 6399000
+  },
+  "152": {
+    "2026": 21799000,
+    "2027": 21799000
+  },
+  "153": {
+    "2026": 7650000,
+    "2027": 7790000
+  },
+  "154": {
+    "2026": 6490000,
+    "2027": 6490000
+  },
+  "155": {
+    "2026": 8200000,
+    "2027": 8200000
+  },
+  "156": {
+    "2027": 9790000
+  },
+  "157": {
+    "2026": 4290000,
+    "2027": 4290000
+  },
+  "158": {
+    "2027": 13590000
   }
 };
