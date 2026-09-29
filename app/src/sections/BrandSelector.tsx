@@ -5,7 +5,7 @@ import { brands, motorcycles as allMotos } from '@/data/motorcycles';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 
 // Acento monocromático único — alineado con el hero (un solo rojo).
-const ACCENT = '#E31937';
+const ACCENT = '#CC4A12';
 
 // Moto insignia por marca (misma lógica que BrandPage). Fallback: la más cara no utilitaria.
 const FLAGSHIP: Record<string, string> = {
@@ -183,7 +183,7 @@ export default function BrandSelector() {
           {/* CTAs */}
           <div className="flex items-center gap-3 flex-wrap">
             <button
-              onClick={() => navigate(`/marca/${brand.id}`)}
+              onClick={() => navigate(`/marca/${brand.slug}`)}
               className="flex items-center gap-2 text-white transition-transform duration-200 active:scale-95 hover:scale-[1.02]"
               style={{ background: '#000', borderRadius: 8, padding: '11px 22px', fontSize: 14, fontWeight: 600 }}
             >

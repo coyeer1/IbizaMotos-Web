@@ -89,17 +89,32 @@ for (const f of parsearCSV(csv)) {
   if (f.length < 4 || !f[0] || !/^\d{4}$/.test((f[2] || '').trim())) continue;
   const precio = Number((f[3] || '').replace(/\D/g, ''));
   if (!precio) continue;
-  filas.push({ marca: f[0].trim(), modelo: f[1].trim(), anio: Number(f[2].trim()), precio });
+  const plata = (v) => Number((v || '').replace(/\D/g, '')) || 0;
+  filas.push({ marca: f[0].trim(), modelo: f[1].trim(), anio: Number(f[2].trim()), precio,
+    bonoMarca: plata(f[9]), bonoFinanciera: plata(f[10]), detalle: (f[11] || '').trim() });
 }
+// Mes de la lista ("Lista de precios SEPTIEMBRE 2026"): hasta cuando valen los bonos.
+const mesLista = ((csv.match(/Lista de precios\s+([A-Za-zÁÉÍÓÚáéíóú]+\s+\d{4})/i) || [])[1] || '').toLowerCase();
 if (filas.length < 50) salir(`El Sheet solo trajo ${filas.length} filas con precio; algo cambio en su formato. No toco nada.`);
 console.log(`  ${filas.length} precios leidos.`);
 
 // ─── 3. Cruzar con el catalogo de la web ───────────────────────────────────────
 const { motorcycles } = await cargarTS('src/data/motorcycles.ts');
-const { PRECIOS: antes = {} } = existsSync(ARCHIVO) ? await cargarTS(ARCHIVO) : {};
+const { PRECIOS: antes = {}, BONOS: bonosAntes = {} } = existsSync(ARCHIVO) ? await cargarTS(ARCHIVO) : {};
 const { motos: mapeo, repetidos = {} } = JSON.parse(readFileSync(MAPEO, 'utf8'));
 
 const nuevos = {}; const avisos = []; const sinPareja = []; const usados = new Set();
+// Bonos publicables del año mas nuevo. Reglas (pedidas por el negocio: la web no puede
+// prometer nada que el asesor no sostenga):
+//  - Solo el BONO DE MARCA, y solo si el detalle dice de donde sale (bono de marca,
+//    bono <marca>, bono dealer/PDV, bono de contado). Un monto sin explicacion no sale.
+//  - "Bono de contado" se publica como tal: no aplica financiando.
+//  - Los bonos de financiera NO se publican: van atados a una financiera y a condiciones.
+//  - Se descartan filas que la hoja marca como dudosas (dato de otro mes, pendiente).
+//  - El texto interno (comisiones, circulares) nunca sale: solo monto y tipo.
+const DUDOSO = /pendiente|dato de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)|no aparece/i;
+const ORIGEN_MARCA = /bono de marca|bono (akt|hero|suzuki|honda|bajaj|vento)\b|bono dealer|bono de contado/i;
+const bonos = {};
 for (const m of motorcycles) {
   const nombre = mapeo[m.id];
   const buscar = nombre ? norm(nombre) : null;
@@ -118,7 +133,14 @@ for (const m of motorcycles) {
     else porAnio[k] ??= f.precio;
   }
   nuevos[m.id] = porAnio;
+  const anioNuevo = Math.max(...deLaMoto.map((f) => f.anio));
+  const fila = deLaMoto.find((f) => f.anio === anioNuevo);
+  if (fila.bonoMarca && !DUDOSO.test(fila.detalle) && ORIGEN_MARCA.test(fila.detalle)) {
+    bonos[m.id] = { monto: fila.bonoMarca, tipo: /bono de contado/i.test(fila.detalle) ? 'contado' : 'marca', anio: anioNuevo };
+  }
 }
+const ordenarPorId = (o) => Object.fromEntries(Object.entries(o).sort(([a], [b]) => Number(a) - Number(b)));
+const cambianBonos = JSON.stringify(ordenarPorId(bonos)) !== JSON.stringify(ordenarPorId(bonosAntes));
 
 // ─── 4. Mostrar los cambios ────────────────────────────────────────────────────
 const masNuevo = (p) => { const a = Object.keys(p || {}).map(Number).sort((x, y) => y - x)[0]; return a ? { anio: a, precio: p[String(a)] } : null; };
@@ -139,7 +161,7 @@ for (const m of motorcycles) {
 
 console.log('');
 if (!cambios.length) {
-  console.log('Los precios de la web ya estan al dia con el Sheet. No hay nada que cambiar.');
+  console.log(cambianBonos ? 'Los precios no cambian, pero SI cambian los bonos del mes.' : 'Los precios de la web ya estan al dia con el Sheet. No hay nada que cambiar.');
 } else {
   const visibles = cambios.filter((c) => c.viejo.precio !== c.nuevo.precio || c.viejo.anio !== c.nuevo.anio);
   console.log(`CAMBIOS QUE VE EL CLIENTE (${visibles.length} motos):`);
@@ -160,7 +182,8 @@ const repetidosNorm = new Set(Object.keys(repetidos).map(norm));
 const faltan = [...new Set(filas.filter((f) => marcasWeb.has(norm(f.marca)) && !usados.has(norm(f.marca) + '|' + norm(f.modelo)) && !repetidosNorm.has(norm(f.modelo))).map((f) => `${f.marca} ${f.modelo}`))];
 if (faltan.length) console.log(`\nModelos del Sheet que la web todavia no tiene (${faltan.length}; se agregan a mano, con fotos):\n  ${faltan.join('\n  ')}`);
 
-if (!cambios.length || SOLO_VER) process.exit(0);
+console.log(`\nBonos que se publican (${mesLista || 'mes sin identificar'}): ${Object.keys(bonos).length} motos${cambianBonos ? ' (cambiaron)' : ''}.`);
+if ((!cambios.length && !cambianBonos) || SOLO_VER) process.exit(0);
 
 // ─── 5. Confirmar ──────────────────────────────────────────────────────────────
 if (!AUTO_SI) {
@@ -179,14 +202,17 @@ writeFileSync(ARCHIVO,
   + `// No editar a mano: el proximo "ACTUALIZAR PRECIOS" lo sobrescribe.\n`
   + `// id de la moto -> { "año modelo": precio }. La web muestra por defecto el año mas nuevo.\n`
   + `export const PRECIOS_ACTUALIZADO = '${hoy}';\n\n`
-  + `export const PRECIOS: Record<string, Record<string, number>> = ${JSON.stringify(ordenado, null, 2)};\n`, 'utf8');
+  + `export const PRECIOS: Record<string, Record<string, number>> = ${JSON.stringify(ordenado, null, 2)};\n\n`
+  + `// Bonos de marca del mes (columna BONO DE MARCA del Sheet, con su origen verificado).\n`
+  + `export const BONOS_MES = '${mesLista}';\n`
+  + `export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; anio: number }> = ${JSON.stringify(ordenarPorId(bonos), null, 2)};\n`, 'utf8');
 console.log('\nCompilando y verificando la web (1-2 minutos)...');
 if (correr('npm', ['run', 'build']).status !== 0) {
-  if (previo === null) writeFileSync(ARCHIVO, 'export const PRECIOS_ACTUALIZADO = \'\';\nexport const PRECIOS: Record<string, Record<string, number>> = {};\n');
+  if (previo === null) writeFileSync(ARCHIVO, `export const PRECIOS_ACTUALIZADO = '';\nexport const PRECIOS: Record<string, Record<string, number>> = {};\nexport const BONOS_MES = '';\nexport const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; anio: number }> = {};\n`);
   else writeFileSync(ARCHIVO, previo, 'utf8');
   salir('La compilacion fallo: deje los precios como estaban y NO publique nada.');
 }
-if (SIN_PUBLICAR) salir(`Listo: ${cambios.length} motos actualizadas y compiladas (sin publicar).`, 0);
+if (SIN_PUBLICAR) salir(`Listo: ${cambios.length} motos actualizadas${cambianBonos ? ' y bonos del mes al dia' : ''}, compiladas (sin publicar).`, 0);
 
 // ─── 7. Guardar en el repositorio y publicar ───────────────────────────────────
 correr('git', ['add', ARCHIVO]);

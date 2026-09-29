@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { scrollToSectionWhenReady } from '@/lib/scrollToSection';
 import { Menu, X, Phone, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
@@ -27,32 +28,17 @@ export default function Navbar() {
     if (location.pathname !== '/') {
       navigate('/', { state: { targetSection: href } });
     } else {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSectionWhenReady(href);
     }
     setIsMobileMenuOpen(false);
   };
 
+  // Llegada a la home desde otra pagina con una seccion pedida (Navbar o Footer).
   useEffect(() => {
     if (location.pathname === '/' && location.state?.targetSection) {
       const target = location.state.targetSection as string;
-      let tries = 0;
-      let timer: ReturnType<typeof setTimeout>;
-      // Polling: las secciones del Home son lazy (Suspense), pueden no
-      // existir aún cuando llegamos. Reintentamos hasta que aparezcan.
-      const tryScroll = () => {
-        const element = document.querySelector(target);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          window.history.replaceState({}, '');
-        } else if (tries++ < 40) {
-          timer = setTimeout(tryScroll, 100);
-        }
-      };
-      timer = setTimeout(tryScroll, 120);
-      return () => clearTimeout(timer);
+      window.history.replaceState({}, '');
+      return scrollToSectionWhenReady(target);
     }
   }, [location]);
 
@@ -87,12 +73,12 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative font-body font-medium text-sm text-[#666] hover:text-ibiza-red transition-colors duration-200 group ${
-                      location.pathname === link.href ? '!text-ibiza-red' : ''
+                    className={`relative font-body font-medium text-sm text-[#666] hover:text-ibiza-brand transition-colors duration-200 group ${
+                      location.pathname === link.href ? '!text-ibiza-brand' : ''
                     }`}
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-brand transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ) : (
                   <a
@@ -102,10 +88,10 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="relative font-body font-medium text-sm text-[#666] hover:text-ibiza-red transition-colors duration-200 group"
+                    className="relative font-body font-medium text-sm text-[#666] hover:text-ibiza-brand transition-colors duration-200 group"
                   >
                     {link.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-red transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ibiza-brand transition-all duration-300 group-hover:w-full" />
                   </a>
                 )
               )}
@@ -117,7 +103,7 @@ export default function Navbar() {
               <button
                 onClick={openSearch}
                 title="Buscar moto (Ctrl+K)"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#e8e8e8] bg-[#f5f5f5] text-[#999] hover:border-ibiza-red/40 hover:text-ibiza-red transition-colors duration-200 text-sm font-body font-medium"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-[#e8e8e8] bg-[#f5f5f5] text-[#999] hover:border-ibiza-brand/40 hover:text-ibiza-brand transition-colors duration-200 text-sm font-body font-medium"
               >
                 <Search className="w-4 h-4" />
                 <span className="hidden xl:inline text-xs">Buscar</span>
@@ -139,7 +125,7 @@ export default function Navbar() {
 
             {/* Mobile Search Button */}
             <button
-              className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
+              className="lg:hidden p-2 text-black hover:text-ibiza-brand transition-colors duration-200"
               onClick={openSearch}
               aria-label="Buscar moto"
             >
@@ -148,7 +134,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 text-black hover:text-ibiza-red transition-colors duration-200"
+              className="lg:hidden p-2 text-black hover:text-ibiza-brand transition-colors duration-200"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
               aria-expanded={isMobileMenuOpen}
@@ -185,7 +171,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-red transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
+                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-brand transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}
@@ -198,7 +184,7 @@ export default function Navbar() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-red transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
+                    className="text-2xl font-display tracking-wide text-black hover:text-ibiza-brand transition-colors duration-200 py-3 border-b border-[#f0f0f0]"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}

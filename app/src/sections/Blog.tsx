@@ -8,6 +8,10 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const CATEGORIES = ['Todos', 'Mantenimiento', 'Compra Inteligente', 'Seguridad', 'Tendencias', 'Técnica'];
 
+// Contadores reales (Supabase). Con pocas visitas se ocultan en vez de mostrar "3 vistas".
+const MIN_CONTADOR = 50;
+const MIN_LIKES = 5;
+
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('Todos');
   const [showAll, setShowAll] = useState(false);
@@ -46,7 +50,7 @@ export default function Blog() {
               className="font-display text-5xl md:text-6xl text-black"
               style={{ lineHeight: 0.95, letterSpacing: '-0.5px' }}
             >
-              TIPS Y <span style={{ color: '#E31937' }}>NOVEDADES</span>
+              TIPS Y <span style={{ color: '#CC4A12' }}>NOVEDADES</span>
             </h2>
           </div>
           <p className="max-w-xs text-sm" style={{ color: '#777', fontWeight: 300, lineHeight: 1.65 }}>
@@ -104,7 +108,7 @@ export default function Blog() {
                   </span>
                   <span
                     className="text-white text-[9px] font-bold px-2.5 py-1 rounded-full uppercase"
-                    style={{ background: '#E31937', letterSpacing: '0.12em' }}
+                    style={{ background: '#CC4A12', letterSpacing: '0.12em' }}
                   >
                     Destacado
                   </span>
@@ -119,8 +123,8 @@ export default function Blog() {
 
                 <div className="flex items-center gap-4 text-xs text-white/50">
                   <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{featured.readTime}</span>
-                  <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{getViewCount(featured).toLocaleString()} vistas</span>
-                  <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" />{getLikeCount(featured)}</span>
+                  {getViewCount(featured) >= MIN_CONTADOR && <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{getViewCount(featured).toLocaleString()} vistas</span>}
+                  {getLikeCount(featured) >= MIN_LIKES && <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5" />{getLikeCount(featured)}</span>}
                   <span className="ml-auto flex items-center gap-1.5 text-white font-bold text-sm group-hover:gap-3 transition-all">
                     Leer artículo <ChevronRight className="w-4 h-4" />
                   </span>
@@ -176,7 +180,7 @@ export default function Blog() {
                   <h4
                     className="font-display text-xl mb-3 line-clamp-2 transition-colors duration-200"
                     style={{ color: '#000', lineHeight: 1.1, letterSpacing: '-0.2px' }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#E31937'; }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#CC4A12'; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#000'; }}
                   >
                     {post.title}
@@ -198,8 +202,8 @@ export default function Blog() {
                       ))}
                     </div>
                     <div className="flex items-center gap-3 text-[10px]" style={{ color: '#999' }}>
-                      <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{getViewCount(post) >= 1000 ? `${(getViewCount(post)/1000).toFixed(1)}k` : getViewCount(post)}</span>
-                      <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{getLikeCount(post)}</span>
+                      {getViewCount(post) >= MIN_CONTADOR && <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{getViewCount(post) >= 1000 ? `${(getViewCount(post)/1000).toFixed(1)}k` : getViewCount(post)}</span>}
+                      {getLikeCount(post) >= MIN_LIKES && <span className="flex items-center gap-1"><Heart className="w-3 h-3" />{getLikeCount(post)}</span>}
                     </div>
                   </div>
                 </div>

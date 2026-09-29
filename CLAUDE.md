@@ -34,6 +34,8 @@ It refuses to run if the folder is not on `master` or has uncommitted tracked ch
 - Each motorcycle shows the newest model year by default; `pricesByYear` keeps every year for the selector on the motorcycle page.
 - Motorcycles missing from the Sheet keep the fallback price written in `motorcycles.ts`.
 - `--solo-ver` only shows the changes.
+- It also publishes the month's **brand bonuses** (`BONOS` in `precios.generado.ts`, shown in "Ofertas del mes" and on each motorcycle page). Rules: only the BONO DE MARCA column, only when the detail text says where it comes from (bono de marca / bono <brand> / dealer / de contado); "bono de contado" is labelled cash-only; **financing bonuses are never published** (they depend on a specific lender); rows the Sheet flags as stale or pending are skipped. Never hardcode discounts, gifts or countdowns in the site.
+- `repetidos` in `precios-mapeo.json` lists Sheet rows that are the same product as an already published motorcycle.
 
 ### Photo Utilities
 

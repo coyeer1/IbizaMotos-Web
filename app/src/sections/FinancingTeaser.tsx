@@ -47,7 +47,7 @@ export default function FinancingTeaser() {
               className="font-display mt-3 leading-[0.92]"
               style={{ fontSize: 'clamp(40px, 6vw, 64px)', letterSpacing: '-1px', color: '#000' }}
             >
-              TU MOTO, <span style={{ color: '#E31937' }}>A TU RITMO</span>
+              TU MOTO, <span style={{ color: '#CC4A12' }}>A TU RITMO</span>
             </h2>
           </Reveal>
           <Reveal delay={0.16} direction="up">

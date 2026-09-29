@@ -85,7 +85,7 @@
     --ring: 351 80% 49%;
     --radius: 0.625rem;
 
-    --ibiza-red: #E31937;
+    --ibiza-brand: #CC4A12;
     --ibiza-gold: #f9c846;
     --ibiza-black: #000000;
     --ibiza-white: #ffffff;
@@ -148,14 +148,14 @@
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, var(--ibiza-red) 0%, var(--ibiza-gold) 100%);
+    background: linear-gradient(135deg, var(--ibiza-brand) 0%, var(--ibiza-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-ibiza {
-    background: linear-gradient(135deg, var(--ibiza-red) 0%, #b91c31 100%);
+    background: linear-gradient(135deg, var(--ibiza-brand) 0%, #A83A0C 100%);
   }
 
   .glassmorphism {
@@ -256,11 +256,11 @@
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(215, 38, 61, 0.3);
+    box-shadow: 0 0 20px rgba(204, 74, 18, 0.3);
   }
 
   50% {
-    box-shadow: 0 0 40px rgba(215, 38, 61, 0.6);
+    box-shadow: 0 0 40px rgba(204, 74, 18, 0.6);
   }
 }
 
@@ -354,17 +354,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--ibiza-red);
+  background: var(--ibiza-brand);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b91c31;
+  background: #A83A0C;
 }
 
 /* Selection color */
 ::selection {
-  background: rgba(215, 38, 61, 0.15);
+  background: rgba(204, 74, 18, 0.15);
   color: var(--ibiza-black);
 }
 
@@ -383,7 +383,7 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(215, 38, 61, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 20% 20%, rgba(204, 74, 18, 0.04) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(249, 200, 70, 0.03) 0%, transparent 50%),
     linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.01) 50%, transparent 100%);
   pointer-events: none;
@@ -414,7 +414,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--ibiza-red);
+  color: var(--ibiza-brand);
   font-family: 'Montserrat', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
@@ -422,9 +422,9 @@
   text-transform: uppercase;
   margin-bottom: 1rem;
   padding: 0.4rem 1rem;
-  border: 1px solid rgba(215, 38, 61, 0.3);
+  border: 1px solid rgba(204, 74, 18, 0.3);
   border-radius: 100px;
-  background: rgba(215, 38, 61, 0.06);
+  background: rgba(204, 74, 18, 0.06);
 }
 
 .locations-title {
@@ -484,8 +484,8 @@
 }
 
 .branch-card-active {
-  border-color: var(--ibiza-red) !important;
-  box-shadow: 0 0 15px rgba(215, 38, 61, 0.4), inset 0 0 15px rgba(215, 38, 61, 0.1) !important;
+  border-color: var(--ibiza-brand) !important;
+  box-shadow: 0 0 15px rgba(204, 74, 18, 0.4), inset 0 0 15px rgba(204, 74, 18, 0.1) !important;
 }
 
 .branch-card-inner {
@@ -507,7 +507,7 @@
 }
 
 .branch-card-active .branch-thumbnail-wrapper {
-  border-color: var(--ibiza-red);
+  border-color: var(--ibiza-brand);
 }
 
 .branch-thumbnail-img {
@@ -692,5 +692,7 @@
 .detail-btn-primary:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(215, 38, 61, 0.4);
+  box-shadow: 0 6px 20px rgba(204, 74, 18, 0.4);
 }
+/* Paginas con barra fija inferior (ficha de moto): el footer no debe quedar tapado. */
+body.has-bottom-bar footer { padding-bottom: 5.5rem; }

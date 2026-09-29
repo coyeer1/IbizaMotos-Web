@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, Heart, ChevronLeft, ChevronRight, MessageCircle, User, Phone, MapPin, ZoomIn } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, X, Gauge, Zap, Weight, Fuel, Settings, Activity, Share2, ChevronLeft, ChevronRight, MessageCircle, User, Phone, MapPin, ZoomIn } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,8 @@ import { Calculator, ArrowRight } from 'lucide-react';
 import type { Motorcycle } from '@/types';
 import { CompareButton } from '@/components/MotoComparator';
 import YouTubeBackground from '@/components/YouTubeBackground';
+import { cuotaEstimada, CUOTA_NOTA } from '@/lib/cuota';
+import { BONOS_MES } from '@/data/precios.generado';
 import { getBrandTheme } from '@/lib/brandThemes';
 import { useSEO } from '@/hooks/useSEO';
 import { motoTitle, motoDescription, motoPath, DEFAULT_TITLE } from '@/lib/seoTexts';
@@ -58,6 +60,16 @@ export default function MotorcyclePage() {
     const [quoteForm, setQuoteForm] = useState({ name: '', phone: '', city: '' });
     const [quoteSubmitted, setQuoteSubmitted] = useState(false);
     const [quotePrivacyAccepted, setQuotePrivacyAccepted] = useState(false);
+    const [shareCopied, setShareCopied] = useState(false);
+
+    // Si entraron directo (Google, WhatsApp) no hay historial propio: navigate(-1) los sacaba del sitio.
+    const goBack = () => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/marca/todas'));
+
+    // Tambien marca la barra fija inferior para que el footer no quede tapado por ella.
+    useEffect(() => {
+        document.body.classList.add('has-bottom-bar');
+        return () => document.body.classList.remove('has-bottom-bar');
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -103,7 +115,7 @@ export default function MotorcyclePage() {
     if (loading || !motorcycle) {
         return (
             <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#ffffff' }}>
-                <div className="w-12 h-12 border-4 border-ibiza-red/30 border-t-ibiza-red rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-ibiza-brand/30 border-t-ibiza-brand rounded-full animate-spin"></div>
             </div>
         );
     }
@@ -147,6 +159,17 @@ export default function MotorcyclePage() {
         setTimeout(() => { setQuoteSubmitted(false); setShowQuoteModal(false); setQuoteForm({ name: '', phone: '', city: '' }); setQuotePrivacyAccepted(false); }, 2500);
     };
 
+    const handleShare = async () => {
+        const url = window.location.href;
+        const title = `${motorcycle.brand} ${motorcycle.model} | Ibiza Motos`;
+        try {
+            if (navigator.share) { await navigator.share({ title, url }); return; }
+            await navigator.clipboard.writeText(url);
+            setShareCopied(true);
+            setTimeout(() => setShareCopied(false), 2500);
+        } catch { /* el usuario cancelo */ }
+    };
+
     const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
     const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
@@ -178,24 +201,27 @@ export default function MotorcyclePage() {
                         key={videoId}
                         videoId={videoId}
                         poster={
-                            <div className="absolute inset-0 flex items-center justify-center" style={{ background: `radial-gradient(ellipse at center, rgba(${brandGlow}, 0.18) 0%, #0a0a0a 70%)` }}>
-                                <img src={motorcycle.images[0]} alt="" className="w-[80%] max-w-4xl max-h-[70%] object-contain drop-shadow-2xl" />
+                            // Fondo claro + multiply: muchas fotos oficiales traen fondo blanco y sobre
+                            // oscuro se veian como un recuadro gris ("no cargo bien").
+                            <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'radial-gradient(ellipse at center, #ffffff 0%, #f6f6f6 55%, #ececec 100%)' }}>
+                                <img src={motorcycle.images[0]} alt="" className="w-[80%] max-w-4xl max-h-[62%] object-contain mix-blend-multiply" />
                             </div>
                         }
+                        videoOverlay={<div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 40%)' }} />}
                     />
-                    {/* Gradiente superior e inferior */}
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%, #ffffff 100%)` }} />
+                    {/* Degradado inferior a blanco (une el video con la ficha) */}
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 55%, #ffffff 100%)' }} />
                     {/* Texto overlay inferior */}
                     <div className="absolute bottom-10 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
                         <span className="text-[10px] font-bold tracking-[0.3em] uppercase block mb-1" style={{ color: brandColor }}>{motorcycle.brand}</span>
-                        <h2 className="font-display font-black text-5xl md:text-8xl text-white uppercase leading-none tracking-tight drop-shadow-2xl">
+                        <h2 className="font-display font-black text-5xl md:text-8xl text-neutral-900 uppercase leading-none tracking-tight">
                             {motorcycle.model}
                         </h2>
                     </div>
                     {/* Botón volver */}
-                    <div className="absolute top-6 left-4 sm:left-8 z-10">
+                    <div className="absolute top-20 md:top-24 left-4 sm:left-8 z-10">
                         <button
-                            onClick={() => navigate(-1)}
+                            onClick={goBack}
                             className="flex items-center text-white/70 hover:text-white text-sm bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-white/20 transition-all"
                         >
                             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -216,7 +242,7 @@ export default function MotorcyclePage() {
                 {/* Navigation Bar inside Hero */}
                 <div className="relative z-30 pt-24 px-4 sm:px-8 lg:px-12 flex items-center justify-between">
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={goBack}
                         className="flex items-center transition-colors font-medium text-sm backdrop-blur-md px-5 py-2.5 rounded-full"
                         style={{ color: '#666666', backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}
                     >
@@ -226,11 +252,15 @@ export default function MotorcyclePage() {
 
                     <div className="flex items-center gap-3">
                         {motorcycle && <CompareButton motorcycle={motorcycle} />}
-                        <button className="w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center text-[#999999] hover:text-ibiza-red hover:border-ibiza-red/30 transition-all" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>
-                            <Heart className="w-5 h-5" />
-                        </button>
-                        <button className="w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center text-[#999999] hover:text-ibiza-red hover:border-ibiza-red/30 transition-all" style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}>
-                            <Share2 className="w-5 h-5" />
+                        {/* El corazon no tenia funcion (no hay favoritos): se quito. Compartir usa la hoja nativa del celular o copia el enlace. */}
+                        <button
+                            type="button"
+                            onClick={handleShare}
+                            aria-label="Compartir esta moto"
+                            className="h-10 px-3 rounded-full backdrop-blur-md flex items-center justify-center gap-2 text-[#777] hover:text-ibiza-brand hover:border-ibiza-brand/30 transition-all text-xs font-semibold"
+                            style={{ backgroundColor: '#f7f7f7', border: '1px solid #ececec' }}
+                        >
+                            {shareCopied ? <><CheckCircle2 className="w-4 h-4" /> Enlace copiado</> : <Share2 className="w-5 h-5" />}
                         </button>
                     </div>
                 </div>
@@ -283,6 +313,20 @@ export default function MotorcyclePage() {
                                     {formatPrice(price)}
                                 </span>
                             </div>
+                            {hasPrice && (
+                                <p className="mt-2 text-sm text-[#555]" title={CUOTA_NOTA}>
+                                    o desde <strong className="text-ibiza-brand">{formatPrice(cuotaEstimada(price))}</strong> al mes*
+                                </p>
+                            )}
+                            {motorcycle.bono && year === motorcycle.bono.anio && (
+                                <p className="mt-3 inline-flex flex-wrap items-center gap-x-2 rounded-full bg-ibiza-brand/10 text-ibiza-brand text-xs font-bold px-3 py-1.5">
+                                    {motorcycle.bono.tipo === 'contado' ? 'Bono de contado' : 'Bono de marca'} {formatPrice(motorcycle.bono.monto)}
+                                    <span className="font-medium text-ibiza-brand/80">
+                                        {motorcycle.bono.tipo === 'contado' ? '· solo pagando de contado' : ''}{BONOS_MES ? ` · ${BONOS_MES}` : ''}
+                                    </span>
+                                </p>
+                            )}
+                            {hasPrice && <p className="mt-2 text-[11px] text-[#999] max-w-md">*{CUOTA_NOTA}</p>}
 
                             {/* Selector de año modelo: solo si la lista oficial trae mas de uno */}
                             {years.length > 1 && (
@@ -639,7 +683,7 @@ export default function MotorcyclePage() {
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                                    <Button size="lg" className="bg-white text-ibiza-red hover:bg-white/90 font-display font-bold rounded-full px-10 shadow-xl">
+                                    <Button size="lg" className="bg-white text-ibiza-brand hover:bg-white/90 font-display font-bold rounded-full px-10 shadow-xl">
                                         Comprar por WhatsApp
                                     </Button>
                                 </a>
@@ -730,8 +774,8 @@ export default function MotorcyclePage() {
 
                             {quoteSubmitted ? (
                                 <div className="text-center py-8">
-                                    <div className="w-16 h-16 bg-ibiza-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <CheckCircle2 className="w-8 h-8 text-ibiza-red" />
+                                    <div className="w-16 h-16 bg-ibiza-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <CheckCircle2 className="w-8 h-8 text-ibiza-brand" />
                                     </div>
                                     <h4 className="font-display font-bold text-[#111111] text-lg mb-2">¡Cotización enviada!</h4>
                                     <p className="text-[#666666] text-sm">Te responderemos por WhatsApp en minutos.</p>
@@ -747,7 +791,7 @@ export default function MotorcyclePage() {
                                             value={quoteForm.name}
                                             onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })}
                                             placeholder="Ej: Juan García"
-                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-brand"
                                         />
                                     </div>
                                     <div>
@@ -760,7 +804,7 @@ export default function MotorcyclePage() {
                                             value={quoteForm.phone}
                                             onChange={e => setQuoteForm({ ...quoteForm, phone: e.target.value })}
                                             placeholder="300 123 4567"
-                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-brand"
                                         />
                                     </div>
                                     <div>
@@ -771,7 +815,7 @@ export default function MotorcyclePage() {
                                             value={quoteForm.city}
                                             onChange={e => setQuoteForm({ ...quoteForm, city: e.target.value })}
                                             placeholder="Ej: Armenia"
-                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-red"
+                                            className="bg-[#f7f7f7] border-[#e8e8e8] text-[#111111] placeholder:text-[#999999] rounded-xl focus:border-ibiza-brand"
                                         />
                                     </div>
                                     {/* Checkbox consentimiento */}
@@ -780,7 +824,7 @@ export default function MotorcyclePage() {
                                             type="checkbox"
                                             checked={quotePrivacyAccepted}
                                             onChange={e => setQuotePrivacyAccepted(e.target.checked)}
-                                            className="mt-0.5 w-4 h-4 rounded border-[#e8e8e8] bg-[#f7f7f7] accent-ibiza-red cursor-pointer shrink-0"
+                                            className="mt-0.5 w-4 h-4 rounded border-[#e8e8e8] bg-[#f7f7f7] accent-ibiza-brand cursor-pointer shrink-0"
                                         />
                                         <span className="text-[11px] text-[#999999] leading-relaxed group/check:text-[#666666]">
                                             He leído y acepto la{' '}
@@ -794,7 +838,7 @@ export default function MotorcyclePage() {
                                     <Button
                                         type="submit"
                                         disabled={!quotePrivacyAccepted}
-                                        className="w-full bg-ibiza-red hover:bg-ibiza-red/90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-display font-bold rounded-2xl h-13 text-base mt-1 group"
+                                        className="w-full bg-ibiza-brand hover:bg-ibiza-brand/90 disabled:opacity-40 disabled:cursor-not-allowed text-white font-display font-bold rounded-2xl h-13 text-base mt-1 group"
                                     >
                                         <MessageCircle className="w-5 h-5 mr-2" />
                                         Enviar cotización por WhatsApp
@@ -818,7 +862,7 @@ export default function MotorcyclePage() {
                     >
                         <button
                             onClick={(e) => { e.stopPropagation(); setEnlargedImage(null); setLightboxZoomed(false); }}
-                            className="fixed top-6 right-6 p-2 bg-white/10 hover:bg-ibiza-red text-white rounded-full transition-colors z-20"
+                            className="fixed top-6 right-6 p-2 bg-white/10 hover:bg-ibiza-brand text-white rounded-full transition-colors z-20"
                         >
                             <X className="w-6 h-6" />
                         </button>

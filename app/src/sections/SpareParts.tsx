@@ -31,7 +31,7 @@ export default function SpareParts() {
           <Reveal delay={0.16} direction="fade">
             <div
               className="mx-auto mt-5"
-              style={{ width: 56, height: 2, background: '#E31937', borderRadius: 2 }}
+              style={{ width: 56, height: 2, background: '#CC4A12', borderRadius: 2 }}
             />
           </Reveal>
 
@@ -94,14 +94,14 @@ export default function SpareParts() {
           style={{ background: '#000', borderRadius: 16 }}
         >
           {/* Hairline accent rule */}
-          <div className="absolute top-0 left-0" style={{ width: 56, height: 3, background: '#E31937' }} />
+          <div className="absolute top-0 left-0" style={{ width: 56, height: 3, background: '#CC4A12' }} />
 
           <div className="relative p-10 md:p-14 text-center">
             <h3
               className="font-display"
               style={{ fontSize: 'clamp(28px, 4vw, 44px)', letterSpacing: '-0.5px', lineHeight: 1.0, color: '#fff' }}
             >
-              ¿NO ENCUENTRAS EL <span style={{ color: '#E31937' }}>REPUESTO</span> QUE NECESITAS?
+              ¿NO ENCUENTRAS EL <span style={{ color: '#CC4A12' }}>REPUESTO</span> QUE NECESITAS?
             </h3>
             <p
               className="mx-auto mt-5 mb-8"

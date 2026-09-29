@@ -37,10 +37,10 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {/* Title */}
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-ibiza-red/10 rounded-xl flex items-center justify-center">
-            <Shield className="w-5 h-5 text-ibiza-red" />
+          <div className="w-10 h-10 bg-ibiza-brand/10 rounded-xl flex items-center justify-center">
+            <Shield className="w-5 h-5 text-ibiza-brand" />
           </div>
-          <span className="text-ibiza-red text-xs font-bold tracking-widest uppercase">Legal</span>
+          <span className="text-ibiza-brand text-xs font-bold tracking-widest uppercase">Legal</span>
         </div>
         <h1 className="font-display font-black text-3xl sm:text-4xl text-white mb-2">
           Política de Tratamiento<br />de Datos Personales
@@ -132,7 +132,7 @@ export default function PrivacyPage() {
             <h2 className="text-white font-display font-bold text-xl mb-3">7. Cómo ejercer sus derechos</h2>
             <p>
               Para ejercer cualquiera de sus derechos, puede enviarnos un correo a{' '}
-              <a href={`mailto:${EMAIL}`} className="text-ibiza-red hover:underline">{EMAIL}</a>{' '}
+              <a href={`mailto:${EMAIL}`} className="text-ibiza-brand hover:underline">{EMAIL}</a>{' '}
               indicando su nombre completo, número de identificación, descripción de la solicitud y
               número de contacto. Daremos respuesta en un plazo máximo de <strong className="text-white">10 días hábiles</strong>.
             </p>
@@ -160,12 +160,12 @@ export default function PrivacyPage() {
           </section></Reveal>
 
           {/* Contact CTA */}
-          <Reveal delay={0.05}><div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-2xl p-6 mt-4">
+          <Reveal delay={0.05}><div className="bg-ibiza-brand/10 border border-ibiza-brand/20 rounded-2xl p-6 mt-4">
             <p className="text-white font-semibold mb-1">¿Tiene preguntas sobre esta política?</p>
             <p className="text-white/60 text-sm mb-3">Escríbanos y le respondemos en menos de 24 horas.</p>
             <a
               href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 bg-ibiza-red hover:bg-ibiza-red/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 bg-ibiza-brand hover:bg-ibiza-brand/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
             >
               {EMAIL}
             </a>

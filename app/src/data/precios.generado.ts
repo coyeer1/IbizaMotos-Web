@@ -1,7 +1,7 @@
 // GENERADO por scripts/actualizar-precios.mjs a partir de la lista oficial en Google Sheets.
 // No editar a mano: el proximo "ACTUALIZAR PRECIOS" lo sobrescribe.
 // id de la moto -> { "año modelo": precio }. La web muestra por defecto el año mas nuevo.
-export const PRECIOS_ACTUALIZADO = '2026-09-25';
+export const PRECIOS_ACTUALIZADO = '2026-09-29';
 
 export const PRECIOS: Record<string, Record<string, number>> = {
   "1": {
@@ -340,10 +340,6 @@ export const PRECIOS: Record<string, Record<string, number>> = {
   "90": {
     "2026": 10290000
   },
-  "91": {
-    "2026": 6990000,
-    "2027": 6990000
-  },
   "92": {
     "2026": 12290000,
     "2027": 12390000
@@ -593,5 +589,160 @@ export const PRECIOS: Record<string, Record<string, number>> = {
   },
   "158": {
     "2027": 13590000
+  }
+};
+
+// Bonos de marca del mes (columna BONO DE MARCA del Sheet, con su origen verificado).
+export const BONOS_MES = 'septiembre 2026';
+export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; anio: number }> = {
+  "1": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "2": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "3": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "4": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "5": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "6": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "7": {
+    "monto": 500000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "8": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "9": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "10": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "11": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "12": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "17": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "18": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "19": {
+    "monto": 800000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "28": {
+    "monto": 200000,
+    "tipo": "contado",
+    "anio": 2027
+  },
+  "30": {
+    "monto": 200000,
+    "tipo": "contado",
+    "anio": 2027
+  },
+  "87": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "88": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "92": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "106": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "107": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "110": {
+    "monto": 800000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "111": {
+    "monto": 800000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "113": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "118": {
+    "monto": 500000,
+    "tipo": "contado",
+    "anio": 2027
+  },
+  "145": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "154": {
+    "monto": 600000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "155": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "156": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
   }
 };

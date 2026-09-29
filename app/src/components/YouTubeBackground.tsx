@@ -52,9 +52,11 @@ const LOW_QUALITY = ['tiny', 'small', 'medium'];
 interface Props {
     videoId: string;
     poster: React.ReactNode;
+    /** Capa que solo se ve con el video (p. ej. degradado oscuro para leer encima). */
+    videoOverlay?: React.ReactNode;
 }
 
-export default function YouTubeBackground({ videoId, poster }: Props) {
+export default function YouTubeBackground({ videoId, poster, videoOverlay }: Props) {
     const hostRef = useRef<HTMLDivElement>(null);
     const [revealed, setRevealed] = useState(false);
 
@@ -117,11 +119,18 @@ export default function YouTubeBackground({ videoId, poster }: Props) {
             <div
                 ref={hostRef}
                 aria-hidden
-                className="absolute top-1/2 left-1/2 [&>iframe]:w-full [&>iframe]:h-full"
-                style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', transform: 'translate(-50%, -50%) scale(1.15)', pointerEvents: 'none' }}
+                className="absolute top-1/2 left-1/2 transition-opacity duration-700 delay-300 [&>iframe]:w-full [&>iframe]:h-full"
+                style={{ width: '177.78vh', height: '56.25vw', minWidth: '100%', minHeight: '100%', transform: 'translate(-50%, -50%) scale(1.15)', pointerEvents: 'none', opacity: revealed ? 1 : 0 }}
             />
+            {videoOverlay && (
+                <div className="absolute inset-0 pointer-events-none transition-opacity duration-700 delay-300" style={{ opacity: revealed ? 1 : 0 }}>
+                    {videoOverlay}
+                </div>
+            )}
+            {/* Relevo en dos tiempos: la foto se va a oscuro y luego entra el video.
+                Fundirlos a la vez superponia dos encuadres distintos (se veia como un glitch). */}
             <div
-                className="absolute inset-0 transition-opacity duration-1000 pointer-events-none"
+                className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
                 style={{ opacity: revealed ? 0 : 1 }}
             >
                 {poster}

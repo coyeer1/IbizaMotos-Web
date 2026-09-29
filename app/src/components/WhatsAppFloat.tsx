@@ -152,7 +152,7 @@ function WhatsAppFloatInner({ liftedByConsentBar }: WhatsAppFloatInnerProps) {
 
         {/* Notification dot */}
         {!menuOpen && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-ibiza-red border-2 border-[#080808] rounded-full flex items-center justify-center text-[8px] sm:text-[9px] font-black !text-white">
+          <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-ibiza-brand border-2 border-[#080808] rounded-full flex items-center justify-center text-[8px] sm:text-[9px] font-black !text-white">
             1
           </span>
         )}

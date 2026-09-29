@@ -225,7 +225,7 @@ function CompactCalculator({ initialPrice }: { initialPrice: number }) {
   return (
     <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 space-y-5">
       <div className="flex items-center gap-2 mb-1">
-        <Calculator className="w-5 h-5 text-ibiza-red" />
+        <Calculator className="w-5 h-5 text-ibiza-brand" />
         <h4 className="font-display font-bold text-gray-900">Calcula tu cuota</h4>
       </div>
 
@@ -276,7 +276,7 @@ function CompactCalculator({ initialPrice }: { initialPrice: number }) {
         </label>
         <input type="range" min={10} max={50} step={5} value={initialPct}
           onChange={e => setInitialPct(Number(e.target.value))}
-          className="w-full accent-ibiza-red" />
+          className="w-full accent-ibiza-brand" />
       </div>
 
       {/* Plazo */}
@@ -285,7 +285,7 @@ function CompactCalculator({ initialPrice }: { initialPrice: number }) {
         <div className="flex gap-2 flex-wrap">
           {TERMS.filter(t => t <= selectedFin.maxMonths).map(t => (
             <button key={t} onClick={() => setTerm(t)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${term === t ? 'bg-ibiza-red text-white' : 'bg-gray-200 text-gray-500 hover:text-gray-700'}`}>
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${term === t ? 'bg-ibiza-brand text-white' : 'bg-gray-200 text-gray-500 hover:text-gray-700'}`}>
               {t}m
             </button>
           ))}
@@ -359,7 +359,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
   return (
     <section ref={ref} className="py-24 bg-white relative overflow-hidden">
       {/* Ambient glows */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-ibiza-red/5 rounded-full blur-[150px] -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-ibiza-brand/5 rounded-full blur-[150px] -translate-y-1/2 pointer-events-none" />
       <div className="absolute top-1/2 right-0 w-64 h-64 bg-ibiza-gold/5 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -369,15 +369,15 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
           initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}>
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-ibiza-red flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-ibiza-brand flex items-center justify-center">
               <Calculator className="w-4 h-4 text-white" />
             </div>
-            <p className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase">
+            <p className="text-ibiza-brand font-display font-semibold text-sm tracking-widest uppercase">
               Financiamiento
             </p>
           </div>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-gray-900 mb-4">
-            CALCULA TU <span className="text-ibiza-red">CUOTA</span>
+            CALCULA TU <span className="text-ibiza-brand">CUOTA</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-sm">
             Simulación orientativa. Elige tu entidad, ajusta la cuota inicial y el plazo.
@@ -578,13 +578,13 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
                   type="number"
                   value={price}
                   onChange={e => setPrice(Math.max(1000000, Number(e.target.value)))}
-                  className="w-full bg-white border border-gray-200 text-gray-900 rounded-xl pl-8 pr-4 py-3.5 font-display font-bold text-lg focus:border-ibiza-red outline-none transition-colors"
+                  className="w-full bg-white border border-gray-200 text-gray-900 rounded-xl pl-8 pr-4 py-3.5 font-display font-bold text-lg focus:border-ibiza-brand outline-none transition-colors"
                   step={500000} min={1000000}
                 />
               </div>
               <input type="range" min={1000000} max={25000000} step={500000} value={price}
                 onChange={e => setPrice(Number(e.target.value))}
-                className="w-full mt-3 accent-ibiza-red" />
+                className="w-full mt-3 accent-ibiza-brand" />
               <div className="flex justify-between text-[10px] text-gray-400 mt-1">
                 <span>$1M</span><span>$12.5M</span><span>$25M</span>
               </div>
@@ -598,14 +598,14 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
               <div className="flex gap-2 flex-wrap mb-3">
                 {INITIAL_OPTIONS.map(pct => (
                   <button key={pct} onClick={() => setInitialPct(pct)}
-                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${initialPct === pct ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}>
+                    className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${initialPct === pct ? 'bg-ibiza-brand text-white shadow-[0_0_12px_rgba(204, 74, 18,0.3)]' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}>
                     {pct}%
                   </button>
                 ))}
               </div>
               <input type="range" min={10} max={50} step={5} value={initialPct}
                 onChange={e => setInitialPct(Number(e.target.value))}
-                className="w-full accent-ibiza-red" />
+                className="w-full accent-ibiza-brand" />
             </div>
 
             {/* Term */}
@@ -621,7 +621,7 @@ export default function FinancingCalculator({ initialPrice = 8000000, initialFin
                     <button key={t}
                       onClick={() => !disabled && setTerm(t)}
                       disabled={disabled}
-                      className={`py-3 rounded-xl text-sm font-bold transition-all flex flex-col items-center ${active ? 'bg-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.3)]' : disabled ? 'bg-gray-50 text-gray-300 border border-gray-100 cursor-not-allowed' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}>
+                      className={`py-3 rounded-xl text-sm font-bold transition-all flex flex-col items-center ${active ? 'bg-ibiza-brand text-white shadow-[0_0_12px_rgba(204, 74, 18,0.3)]' : disabled ? 'bg-gray-50 text-gray-300 border border-gray-100 cursor-not-allowed' : 'bg-gray-100 text-gray-500 border border-gray-200 hover:text-gray-700'}`}>
                       <span className="text-base">{t}</span>
                       <span className="text-[9px] tracking-wider">meses</span>
                     </button>

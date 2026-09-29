@@ -30,10 +30,10 @@ export default function DataDeletionPage() {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-ibiza-red/10 rounded-xl flex items-center justify-center">
-            <Trash2 className="w-5 h-5 text-ibiza-red" />
+          <div className="w-10 h-10 bg-ibiza-brand/10 rounded-xl flex items-center justify-center">
+            <Trash2 className="w-5 h-5 text-ibiza-brand" />
           </div>
-          <span className="text-ibiza-red text-xs font-bold tracking-widest uppercase">Legal</span>
+          <span className="text-ibiza-brand text-xs font-bold tracking-widest uppercase">Legal</span>
         </div>
         <h1 className="font-display font-black text-3xl sm:text-4xl text-white mb-2">
           Solicitud de eliminación<br />de datos personales
@@ -71,7 +71,7 @@ export default function DataDeletionPage() {
                 <p className="text-white font-bold mb-2">📧 Por correo electrónico</p>
                 <p className="text-sm mb-3">
                   Envía un correo a{' '}
-                  <a href={`mailto:${EMAIL}?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20datos`} className="text-ibiza-red hover:underline">{EMAIL}</a>{' '}
+                  <a href={`mailto:${EMAIL}?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20datos`} className="text-ibiza-brand hover:underline">{EMAIL}</a>{' '}
                   con el asunto <em>"Solicitud de eliminación de datos"</em>, incluyendo:
                 </p>
                 <ul className="list-disc list-inside text-sm space-y-1 pl-2">
@@ -125,18 +125,18 @@ export default function DataDeletionPage() {
               Si interactuaste con nosotros a través de WhatsApp, Instagram o Facebook Messenger,
               Meta también conserva metadatos de la conversación bajo sus propias políticas. Para
               solicitar eliminación directamente a Meta, visita{' '}
-              <a href="https://www.facebook.com/help/contact/1638046109617856" target="_blank" rel="noopener noreferrer" className="text-ibiza-red hover:underline">
+              <a href="https://www.facebook.com/help/contact/1638046109617856" target="_blank" rel="noopener noreferrer" className="text-ibiza-brand hover:underline">
                 el centro de ayuda de Facebook
               </a>.
             </p>
           </section></Reveal>
 
-          <Reveal delay={0.05}><div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-2xl p-6 mt-4">
+          <Reveal delay={0.05}><div className="bg-ibiza-brand/10 border border-ibiza-brand/20 rounded-2xl p-6 mt-4">
             <p className="text-white font-semibold mb-1">¿Dudas adicionales?</p>
             <p className="text-white/60 text-sm mb-3">Escríbenos y te respondemos en menos de 24 horas.</p>
             <a
               href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 bg-ibiza-red hover:bg-ibiza-red/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 bg-ibiza-brand hover:bg-ibiza-brand/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
             >
               {EMAIL}
             </a>

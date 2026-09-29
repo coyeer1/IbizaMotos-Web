@@ -1,367 +1,139 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useMemo } from 'react';
+import { ArrowRight, BadgePercent, Wallet } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useMotorcycles } from '@/hooks/useMotorcycles';
 import { getQuoteWhatsApp } from '@/lib/config';
-import { useNavigate } from 'react-router-dom';
+import { BONOS_MES } from '@/data/precios.generado';
 import Reveal from '@/components/Reveal';
+import type { Motorcycle } from '@/types';
 
-// ─── Tokens (match the hero) ──────────────────────────────────────────────
-const T = {
-  text: '#000000',
-  muted: '#999999',
-  border: '#e8e8e8',
-  hairline: '#f0f0f0',
-  pill: '#f5f5f5',
-  red: '#E31937',
-  display: "'Bebas Neue', sans-serif",
-  body: "'DM Sans', sans-serif",
-};
+/*
+ * Bonos del mes. TODO sale de la lista oficial (columna BONO DE MARCA del Sheet, via
+ * ACTUALIZAR PRECIOS, solo cuando el detalle dice de donde sale el bono). Nada de
+ * descuentos, regalos ni cuentas regresivas inventadas, y nunca bonos de una financiera
+ * especifica: el asesor tiene que poder sostener lo que dice la web.
+ */
 
-// stagger helper
-const anim = (delayMs: number, dur = 0.5, name = 'fadeUp') =>
-  ({ animation: `${name} ${dur}s both`, animationDelay: `${delayMs}ms` } as React.CSSProperties);
+const MAX = 4;
+const pesos = (v: number) => '$' + new Intl.NumberFormat('es-CO').format(v);
 
-// Promos data — edit here to change the featured deal
-const promos = [
-  {
-    motorcycleId: '5',
-    discountPercent: 12,
-    badge: 'OFERTA DEL MES',
-    tagline: 'Precio de lanzamiento — solo hasta agotar existencias',
-    extraPerks: ['SOAT incluido', 'Kit de mantenimiento gratis', 'Matrícula bonificada'],
-  },
-  {
-    motorcycleId: '3',
-    discountPercent: 8,
-    badge: 'MEJOR PRECIO',
-    tagline: 'La moto de trabajo más económica del Eje Cafetero',
-    extraPerks: ['Garantía extendida 3 años', 'Primer mantenimiento gratis'],
-  },
-  {
-    motorcycleId: '2',
-    discountPercent: 10,
-    badge: 'HOT DEAL',
-    tagline: 'Financiación 0% interés los primeros 3 meses',
-    extraPerks: ['Casco de regalo', '0% interés 3 meses', 'Entrega inmediata'],
-  },
-];
-
-// Countdown to end of month
-function useCountdown() {
-  const getSecondsLeft = () => {
-    const now = new Date();
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
-    return Math.floor((endOfMonth.getTime() - now.getTime()) / 1000);
-  };
-
-  const [seconds, setSeconds] = useState(getSecondsLeft);
-
-  useEffect(() => {
-    const timer = setInterval(() => setSeconds(getSecondsLeft()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const d = Math.floor(seconds / 86400);
-  const h = Math.floor((seconds % 86400) / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-  return { d, h, m, s };
-}
-
-function CountdownUnit({ value, label }: { value: number; label: string }) {
-  return (
-    <div className="flex flex-col items-center min-w-[52px]">
-      <div
-        className="w-12 h-12 flex items-center justify-center rounded-lg"
-        style={{ background: T.pill, border: `1px solid ${T.border}` }}
-      >
-        <span
-          className="leading-none"
-          style={{ fontFamily: T.display, fontSize: 26, color: T.text, letterSpacing: '0.02em' }}
-        >
-          {String(value).padStart(2, '0')}
-        </span>
-      </div>
-      <span
-        className="mt-1 uppercase"
-        style={{ fontSize: 9, letterSpacing: '0.15em', color: T.muted, fontWeight: 600 }}
-      >
-        {label}
-      </span>
-    </div>
-  );
+/** Las de mayor bono de marca, sin repetir marca mientras haya de otras. */
+function elegir(motos: Motorcycle[]): Motorcycle[] {
+  const conBono = motos
+    .filter((m) => m.bono && m.bono.anio === m.year && m.price > 0)
+    .sort((a, b) => (b.bono!.monto - a.bono!.monto) || (a.price - b.price));
+  const elegidas: Motorcycle[] = [];
+  const marcas = new Set<string>();
+  for (const m of conBono) {
+    if (elegidas.length === MAX) break;
+    if (!marcas.has(m.brand)) { elegidas.push(m); marcas.add(m.brand); }
+  }
+  for (const m of conBono) {
+    if (elegidas.length === MAX) break;
+    if (!elegidas.includes(m)) elegidas.push(m);
+  }
+  return elegidas;
 }
 
 export default function PromosBanner() {
   const { motorcycles } = useMotorcycles();
-  const { d, h, m, s } = useCountdown();
   const navigate = useNavigate();
-  const [activePromo, setActivePromo] = useState(0);
+  const ofertas = useMemo(() => elegir(motorcycles), [motorcycles]);
+  const total = useMemo(() => motorcycles.filter((m) => m.bono && m.bono.anio === m.year).length, [motorcycles]);
 
-  const promo = promos[activePromo];
-  const moto = motorcycles.find(mo => mo.id === promo.motorcycleId);
-
-  if (!moto) return null;
-
-  const discountedPrice = Math.round(moto.price * (1 - promo.discountPercent / 100));
-  const savings = moto.price - discountedPrice;
+  if (!ofertas.length) return null;
 
   return (
-    <section
-      className="py-16 sm:py-20 overflow-hidden bg-white"
-      style={{ fontFamily: T.body, color: T.text }}
-    >
+    <section className="py-16 sm:py-20 bg-white font-body text-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Section header */}
-        <div className="mb-8">
-          <Reveal direction="up">
-            <span
-              className="uppercase"
-              style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600 }}
-            >
-              Promociones
-            </span>
-          </Reveal>
-          <Reveal delay={0.08} direction="up">
-            <h2
-              style={{
-                fontFamily: T.display,
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
-                lineHeight: 0.95,
-                letterSpacing: '-0.5px',
-                color: T.text,
-                marginTop: 6,
-              }}
-            >
-              Ofertas del mes
-            </h2>
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <Reveal direction="up">
+              <span className="uppercase text-[11px] tracking-[0.15em] font-semibold text-ibiza-brand">
+                Bonos {BONOS_MES ? `de ${BONOS_MES}` : 'del mes'}
+              </span>
+            </Reveal>
+            <Reveal delay={0.08} direction="up">
+              <h2 className="font-display mt-1.5 leading-[0.95]" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)' }}>
+                Ofertas del mes
+              </h2>
+            </Reveal>
+          </div>
+          <Reveal delay={0.12} direction="up">
+            <p className="text-sm text-neutral-500 max-w-md">
+              {total} motos tienen bono este mes. Estos son los más altos.
+            </p>
           </Reveal>
         </div>
 
-        {/* Promo tabs */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {promos.map((p, i) => {
-            const mo = motorcycles.find(mo => mo.id === p.motorcycleId);
-            const active = activePromo === i;
-            return (
-              <Reveal key={i} delay={Math.min(i, 6) * 0.08} direction="up">
-              <button
-                onClick={() => setActivePromo(i)}
-                className="transition-all duration-200 active:scale-95"
-                style={{
-                  fontFamily: T.body,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  borderRadius: 8,
-                  padding: '8px 16px',
-                  background: active ? T.text : '#fff',
-                  color: active ? '#fff' : T.muted,
-                  border: active ? '1px solid #000' : `1px solid ${T.border}`,
-                }}
-              >
-                {mo?.brand} {mo?.model}
-              </button>
-              </Reveal>
-            );
-          })}
-        </div>
-
-        {/* Main promo card */}
-        <Reveal direction="up">
-        <motion.div
-          key={activePromo}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="relative overflow-hidden bg-white"
-          style={{ borderRadius: 16, border: `1px solid ${T.border}` }}
-        >
-          {/* Solid red hairline accent (flattened from old gradient) */}
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: T.red }} />
-
-          <div className="relative grid lg:grid-cols-2 gap-0 min-h-[400px]">
-
-            {/* Left: Info */}
-            <div className="p-8 md:p-12 flex flex-col justify-between">
-              {/* Badges */}
-              <div className="flex items-center gap-3 mb-6">
-                <span
-                  className="uppercase"
-                  style={{
-                    ...anim(80),
-                    background: T.red,
-                    color: '#fff',
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: '0.2em',
-                    padding: '6px 12px',
-                    borderRadius: 20,
-                  }}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {ofertas.map((m, i) => (
+            <Reveal key={m.id} delay={i * 0.06} direction="up">
+              <article className="group h-full flex flex-col rounded-2xl border border-neutral-200 bg-white overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+                <button
+                  type="button"
+                  onClick={() => navigate(`/moto/${m.id}`)}
+                  className="relative aspect-[4/3] bg-neutral-50 flex items-center justify-center p-6"
+                  aria-label={`Ver ${m.brand} ${m.model}`}
                 >
-                  {promo.badge}
-                </span>
-                <span
-                  className="uppercase"
-                  style={{
-                    ...anim(140),
-                    background: T.pill,
-                    color: '#555',
-                    fontSize: 10,
-                    fontWeight: 600,
-                    letterSpacing: '0.12em',
-                    padding: '6px 12px',
-                    borderRadius: 20,
-                    border: `1px solid ${T.border}`,
-                  }}
-                >
-                  -{promo.discountPercent}% off
-                </span>
-              </div>
-
-              <div>
-                <p
-                  className="uppercase"
-                  style={{ ...anim(180), fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600, marginBottom: 6 }}
-                >
-                  {moto.brand}
-                </p>
-                <h3
-                  style={{
-                    ...anim(220, 0.55),
-                    fontFamily: T.display,
-                    fontSize: 'clamp(2.5rem, 5vw, 3.6rem)',
-                    lineHeight: 0.95,
-                    letterSpacing: '-0.5px',
-                    color: T.text,
-                    marginBottom: 12,
-                  }}
-                >
-                  {moto.model}
-                </h3>
-                <p style={{ ...anim(280), fontSize: 14, color: '#666', lineHeight: 1.6, maxWidth: 360, marginBottom: 24 }}>
-                  {promo.tagline}
-                </p>
-
-                {/* Perks */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {promo.extraPerks.map((perk, i) => (
-                    <span
-                      key={i}
-                      className="flex items-center"
-                      style={{
-                        ...anim(330 + i * 60),
-                        gap: 8,
-                        fontSize: 12,
-                        color: '#555',
-                        background: T.pill,
-                        border: `1px solid ${T.border}`,
-                        padding: '6px 12px',
-                        borderRadius: 8,
-                      }}
+                  <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-ibiza-brand px-3 py-1 text-[11px] font-bold text-white">
+                    <BadgePercent className="w-3.5 h-3.5" /> Bono {pesos(m.bono!.monto)}
+                  </span>
+                  {m.images?.[0] && (
+                    <img
+                      src={m.images[0]}
+                      alt={`${m.brand} ${m.model}`}
+                      loading="lazy"
+                      decoding="async"
+                      className="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                </button>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="uppercase text-[11px] tracking-[0.15em] font-semibold text-neutral-400">{m.brand}</p>
+                  <h3 className="font-display text-3xl leading-none mt-1">{m.model}</h3>
+                  <p className="mt-3 text-xs uppercase tracking-[0.12em] text-neutral-400">Precio modelo {m.year}</p>
+                  <p className="text-2xl font-bold">{pesos(m.price)}</p>
+                  <ul className="mt-3 space-y-1.5 text-[13px] text-neutral-600">
+                    <li className="flex items-center gap-2">
+                      <BadgePercent className="w-4 h-4 text-ibiza-brand shrink-0" />
+                      {m.bono!.tipo === 'contado' ? 'Bono de contado' : 'Bono de marca'} {pesos(m.bono!.monto)} · modelo {m.bono!.anio}
+                    </li>
+                    {m.bono!.tipo === 'contado' && (
+                      <li className="flex items-center gap-2 text-neutral-500">
+                        <Wallet className="w-4 h-4 shrink-0" /> Aplica pagando de contado
+                      </li>
+                    )}
+                  </ul>
+                  <div className="mt-auto pt-5 flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/moto/${m.id}`)}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 h-11 rounded-lg bg-black text-white text-sm font-semibold hover:bg-ibiza-brand transition-colors"
                     >
-                      <span style={{ width: 5, height: 5, borderRadius: 999, background: T.red, display: 'inline-block' }} />
-                      {perk}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Pricing */}
-                <div className="flex items-end gap-4 mb-8" style={anim(520)}>
-                  <div>
-                    <p className="uppercase" style={{ fontSize: 10, letterSpacing: '0.2em', color: '#bbb', marginBottom: 4 }}>
-                      Precio especial
-                    </p>
-                    <p style={{ fontSize: 36, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>
-                      ${new Intl.NumberFormat('es-CO').format(discountedPrice)}
-                    </p>
-                  </div>
-                  <div className="pb-1">
-                    <p style={{ color: '#bbb', textDecoration: 'line-through', fontSize: 17 }}>
-                      ${new Intl.NumberFormat('es-CO').format(moto.price)}
-                    </p>
-                    <p style={{ color: T.red, fontSize: 12, fontWeight: 700 }}>
-                      Ahorras ${new Intl.NumberFormat('es-CO').format(savings)}
-                    </p>
-                  </div>
-                </div>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-3" style={anim(580)}>
-                  <Button
-                    onClick={() => navigate(`/moto/${moto.id}`)}
-                    className="group h-12 px-6 rounded-lg font-semibold text-white transition-transform duration-200 hover:scale-[1.02] active:scale-95"
-                    style={{ background: T.red, fontFamily: T.body }}
-                  >
-                    Ver oferta
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  <a
-                    href={getQuoteWhatsApp(moto.brand, moto.model)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="outline"
-                      className="h-12 px-6 rounded-lg font-semibold transition-colors duration-200 hover:bg-black hover:text-white"
-                      style={{ background: 'transparent', color: T.text, border: '1px solid #d0d0d0', fontFamily: T.body }}
+                      Ver moto <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <a
+                      href={getQuoteWhatsApp(m.brand, `${m.model} modelo ${m.year} (bono ${m.bono!.tipo === 'contado' ? 'de contado' : 'de marca'} de ${pesos(m.bono!.monto)})`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center h-11 px-4 rounded-lg border border-neutral-300 text-sm font-semibold hover:border-black transition-colors"
                     >
                       Cotizar
-                    </Button>
-                  </a>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
 
-            {/* Right: Image + Countdown */}
-            <div
-              className="relative flex flex-col items-center justify-center p-8 lg:p-12"
-              style={{ background: T.pill }}
-            >
-              {/* Motorcycle image — float motion preserved */}
-              <motion.div
-                animate={{ y: [-8, 8, -8] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative w-full max-w-sm mb-8 flex justify-center"
-              >
-                {moto.images?.[0] && (
-                  <img
-                    src={moto.images[0]}
-                    alt={moto.model}
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-56 max-w-full object-contain relative z-10"
-                    style={{ filter: 'drop-shadow(0 22px 30px rgba(0,0,0,0.18))' }}
-                  />
-                )}
-              </motion.div>
-
-              {/* Countdown */}
-              <div className="text-center">
-                <div className="mb-3">
-                  <span
-                    className="uppercase"
-                    style={{ fontSize: 11, letterSpacing: '0.15em', color: T.muted, fontWeight: 600 }}
-                  >
-                    Oferta termina en
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CountdownUnit value={d} label="días" />
-                  <span style={{ color: '#ccc', fontWeight: 600, fontSize: 20, marginBottom: 16 }}>:</span>
-                  <CountdownUnit value={h} label="horas" />
-                  <span style={{ color: '#ccc', fontWeight: 600, fontSize: 20, marginBottom: 16 }}>:</span>
-                  <CountdownUnit value={m} label="min" />
-                  <span style={{ color: '#ccc', fontWeight: 600, fontSize: 20, marginBottom: 16 }}>:</span>
-                  <CountdownUnit value={s} label="seg" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-        </Reveal>
+        <p className="mt-6 text-xs text-neutral-400 max-w-3xl">
+          Bonos de marca de la lista oficial de precios{BONOS_MES ? ` de ${BONOS_MES}` : ''}, válidos para el año modelo
+          indicado, sujetos a disponibilidad de unidades y a las condiciones de la marca, y no acumulables salvo que tu
+          asesor lo confirme. Los bonos de contado no aplican financiando. Si financias, tu asesor te dice qué beneficios
+          tiene cada financiera.
+        </p>
       </div>
     </section>
   );

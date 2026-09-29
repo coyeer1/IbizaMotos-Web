@@ -91,11 +91,11 @@ export default function FinancingPage() {
 
         {/* ── HERO FINANCIACIÓN (gancho + asesor, sin números) ── */}
         <div className="text-center max-w-3xl mx-auto pt-2">
-          <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-ibiza-red bg-ibiza-red/10 border border-ibiza-red/20 rounded-full px-4 py-2 mb-6">
+          <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-ibiza-brand bg-ibiza-brand/10 border border-ibiza-brand/20 rounded-full px-4 py-2 mb-6">
             <TrendingUp className="w-4 h-4" /> Financiación
           </span>
           <h1 className="font-display font-black text-4xl md:text-6xl text-[#111111] mb-5 leading-[0.95]">
-            FINANCIAMOS TU <span className="text-ibiza-red">MOTO NUEVA</span>
+            FINANCIAMOS TU <span className="text-ibiza-brand">MOTO NUEVA</span>
           </h1>
           <p className="text-[#666666] text-lg mb-3">
             Trabajamos con 8 financieras aliadas para conseguirte el mejor plan.
@@ -171,10 +171,10 @@ export default function FinancingPage() {
               { step: '04', icon: <Star className="w-6 h-6" />, title: '¡Estrenas tu moto!', desc: 'Firmás el contrato, pagás la cuota inicial y coordinamos la entrega de tu moto nueva, según disponibilidad de inventario y trámites.' },
             ].map(({ step, icon, title, desc }, i) => (
               <Reveal key={step} delay={i * 0.1}><div className="relative bg-[#f7f7f7] rounded-2xl p-6 border border-[#e8e8e8] text-center">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-ibiza-red text-white font-display font-black text-sm w-8 h-8 rounded-full flex items-center justify-center">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-ibiza-brand text-white font-display font-black text-sm w-8 h-8 rounded-full flex items-center justify-center">
                   {step}
                 </div>
-                <div className="w-12 h-12 bg-ibiza-red/10 rounded-xl flex items-center justify-center text-ibiza-red mx-auto mb-4 mt-2">
+                <div className="w-12 h-12 bg-ibiza-brand/10 rounded-xl flex items-center justify-center text-ibiza-brand mx-auto mb-4 mt-2">
                   {icon}
                 </div>
                 <h3 className="font-display font-bold text-[#111111] mb-2">{title}</h3>
@@ -189,7 +189,7 @@ export default function FinancingPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="bg-gradient-to-r from-ibiza-red/[0.04] to-ibiza-gold/[0.03] rounded-3xl p-8 md:p-12 border border-ibiza-red/20"
+          className="bg-gradient-to-r from-ibiza-brand/[0.04] to-ibiza-gold/[0.03] rounded-3xl p-8 md:p-12 border border-ibiza-brand/20"
         >
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -203,14 +203,14 @@ export default function FinancingPage() {
                   'Aprobaciones rápidas incluso para clientes sin historial crediticio',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-[#666666] text-sm">
-                    <CheckCircle2 className="w-5 h-5 text-ibiza-red shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-ibiza-brand shrink-0 mt-0.5" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
             <div className="flex flex-col items-center gap-5">
-              <TrendingUp className="w-24 h-24 text-ibiza-red/30" />
+              <TrendingUp className="w-24 h-24 text-ibiza-brand/30" />
               <div className="text-center">
                 <p className="font-display font-black text-6xl text-[#111111]">95%</p>
                 <p className="text-[#666666] mt-1">de solicitudes aprobadas</p>
@@ -249,7 +249,7 @@ export default function FinancingPage() {
                 >
                   <span className="font-display font-semibold text-[#111111] pr-4">{faq.q}</span>
                   {openFaq === i
-                    ? <ChevronUp className="w-5 h-5 text-ibiza-red shrink-0" />
+                    ? <ChevronUp className="w-5 h-5 text-ibiza-brand shrink-0" />
                     : <ChevronDown className="w-5 h-5 text-[#999999] shrink-0" />}
                 </button>
                 {openFaq === i && (

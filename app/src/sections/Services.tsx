@@ -11,7 +11,7 @@ const T = {
   border: '#e8e8e8',
   hairline: '#f0f0f0',
   pill: '#f5f5f5',
-  red: '#E31937',
+  red: '#CC4A12',
   display: "'Bebas Neue', sans-serif",
   body: "'DM Sans', sans-serif",
 };
@@ -155,7 +155,7 @@ export default function Services() {
                 className="group flex flex-col items-center text-center transition-transform duration-200 hover:-translate-y-1"
               >
                 <div
-                  className="flex flex-col items-center justify-center transition-colors duration-200 group-hover:border-[#E31937]"
+                  className="flex flex-col items-center justify-center transition-colors duration-200 group-hover:border-[#CC4A12]"
                   style={{
                     width: 92,
                     height: 92,
@@ -165,7 +165,7 @@ export default function Services() {
                     marginBottom: 10,
                   }}
                 >
-                  <Icon className="w-5 h-5 mb-1 text-[#bbb] transition-colors duration-200 group-hover:text-[#E31937]" />
+                  <Icon className="w-5 h-5 mb-1 text-[#bbb] transition-colors duration-200 group-hover:text-[#CC4A12]" />
                   <span style={{ fontFamily: T.display, fontSize: 30, lineHeight: 1, color: T.text }}>
                     {value}
                   </span>
@@ -203,7 +203,7 @@ export default function Services() {
                   >
                     {service.title}
                   </h3>
-                  <service.Icon className="w-5 h-5 text-[#bbb] transition-colors duration-200 group-hover:text-[#E31937] shrink-0 ml-3" />
+                  <service.Icon className="w-5 h-5 text-[#bbb] transition-colors duration-200 group-hover:text-[#CC4A12] shrink-0 ml-3" />
                 </div>
 
                 <p style={{ fontSize: 14, color: '#666', fontWeight: 300, lineHeight: 1.65, marginBottom: 18 }}>
@@ -230,7 +230,7 @@ export default function Services() {
                   <ul className="flex flex-wrap gap-x-4 gap-y-2">
                     {service.includes.map((item, i) => (
                       <li key={i} className="flex items-center gap-2" style={{ fontSize: 12, color: '#555' }}>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#E31937] shrink-0" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#CC4A12] shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -305,7 +305,7 @@ export default function Services() {
                     className="flex items-center justify-center flex-shrink-0"
                     style={{ width: 40, height: 40, borderRadius: 10, background: T.pill }}
                   >
-                    <Icon className="w-5 h-5 text-[#E31937]" />
+                    <Icon className="w-5 h-5 text-[#CC4A12]" />
                   </div>
                   <div>
                     <p style={{ fontWeight: 600, fontSize: 15, color: T.text }}>{title}</p>
@@ -321,7 +321,7 @@ export default function Services() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="w-full bg-[#E31937] text-white hover:bg-[#E31937] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
+              <Button className="w-full bg-[#CC4A12] text-white hover:bg-[#CC4A12] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
                 <Phone className="w-5 h-5 mr-2" />
                 Escribir por WhatsApp
               </Button>
@@ -379,7 +379,7 @@ export default function Services() {
                       textAlign: 'left',
                     }}
                   >
-                    <Icon className="w-5 h-5 mr-3 shrink-0 text-[#E31937]" />
+                    <Icon className="w-5 h-5 mr-3 shrink-0 text-[#CC4A12]" />
                     {label}
                   </button>
                 ))}
@@ -440,7 +440,7 @@ export default function Services() {
               rel="noopener noreferrer"
               className="w-full"
             >
-              <Button className="w-full bg-[#E31937] text-white hover:bg-[#E31937] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
+              <Button className="w-full bg-[#CC4A12] text-white hover:bg-[#CC4A12] hover:scale-[1.02] active:scale-95 transition-transform duration-200 font-semibold rounded-lg h-12 shadow-none">
                 <Phone className="w-5 h-5 mr-2" />
                 Escríbenos por WhatsApp
               </Button>

@@ -116,10 +116,10 @@ export const BRAND_THEMES: Record<string, BrandTheme> = {
 };
 
 export const DEFAULT_THEME: BrandTheme = {
-  primary: '#d7263d',
+  primary: '#CC4A12',
   secondary: '#8B0000',
   bg: '#080808',
-  glowRgb: '215, 38, 61',
+  glowRgb: '204, 74, 18',
   tagline: 'El placer en dos ruedas',
   description: '',
   founded: '',

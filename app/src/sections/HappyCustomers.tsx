@@ -189,7 +189,7 @@ export default function HappyCustomers() {
               className="font-display text-5xl md:text-6xl text-black mb-4"
               style={{ lineHeight: 0.95, letterSpacing: '-0.5px' }}
             >
-              Clientes que ya rodaron <span style={{ color: '#E31937' }}>con nosotros</span>
+              Clientes que ya rodaron <span style={{ color: '#CC4A12' }}>con nosotros</span>
             </h2>
           </Reveal>
           <Reveal delay={0.16} direction="up">
@@ -278,7 +278,7 @@ export default function HappyCustomers() {
                   {/* Stars */}
                   <div className="flex gap-1 mb-6">
                     {Array.from({ length: current.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4" style={{ fill: '#E31937', color: '#E31937' }} />
+                      <Star key={i} className="w-4 h-4" style={{ fill: '#CC4A12', color: '#CC4A12' }} />
                     ))}
                   </div>
 
@@ -294,11 +294,11 @@ export default function HappyCustomers() {
                     </h3>
                     <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm" style={{ color: '#999' }}>
                       <span className="flex items-center gap-1.5">
-                        <Bike className="w-4 h-4" style={{ color: '#E31937' }} />
+                        <Bike className="w-4 h-4" style={{ color: '#CC4A12' }} />
                         <span style={{ fontWeight: 500, color: '#555' }}>{current.motorcycle}</span>
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4" style={{ color: '#E31937' }} />
+                        <MapPin className="w-4 h-4" style={{ color: '#CC4A12' }} />
                         {current.city}
                       </span>
                     </div>
@@ -318,7 +318,7 @@ export default function HappyCustomers() {
                 className="transition-all duration-300 rounded-full"
                 style={
                   i === currentIndex
-                    ? { width: 36, height: 8, background: '#E31937' }
+                    ? { width: 36, height: 8, background: '#CC4A12' }
                     : { width: 8, height: 8, background: '#d8d8d8' }
                 }
               />

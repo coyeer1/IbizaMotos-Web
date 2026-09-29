@@ -64,7 +64,7 @@ export default function BlogPage() {
         <BookOpen className="w-16 h-16 text-[#999999]" />
         <h1 className="font-display font-black text-3xl text-[#111111]">Artículo no encontrado</h1>
         <p className="text-[#999999]">El artículo que buscas no existe o fue eliminado.</p>
-        <Button onClick={() => navigate('/')} className="bg-ibiza-red hover:bg-ibiza-red/90 text-white font-bold rounded-xl">
+        <Button onClick={() => navigate('/')} className="bg-ibiza-brand hover:bg-ibiza-brand/90 text-white font-bold rounded-xl">
           Volver al inicio
         </Button>
       </div>
@@ -128,7 +128,7 @@ export default function BlogPage() {
             <span className="w-1 h-1 rounded-full bg-[#cccccc]" />
             <span>{post.date}</span>
             <span className="w-1 h-1 rounded-full bg-[#cccccc]" />
-            <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{viewCount.toLocaleString()} vistas</span>
+            {viewCount >= 50 && <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" />{viewCount.toLocaleString()} vistas</span>}
           </div>
 
           {/* Title */}
@@ -137,7 +137,7 @@ export default function BlogPage() {
           </h1>
 
           {/* Excerpt (lead) */}
-          <p className="text-[#444444] text-lg md:text-xl leading-relaxed border-l-2 border-ibiza-red pl-5 mb-10">
+          <p className="text-[#444444] text-lg md:text-xl leading-relaxed border-l-2 border-ibiza-brand pl-5 mb-10">
             {post.excerpt}
           </p>
 
@@ -161,9 +161,9 @@ export default function BlogPage() {
                     recordLike(post.id);
                   }
                 }}
-                className={`flex items-center gap-1.5 text-sm font-bold transition-colors ${liked ? 'text-ibiza-red cursor-default' : 'text-[#999999] hover:text-ibiza-red'}`}
+                className={`flex items-center gap-1.5 text-sm font-bold transition-colors ${liked ? 'text-ibiza-brand cursor-default' : 'text-[#999999] hover:text-ibiza-brand'}`}
               >
-                <Heart className={`w-5 h-5 transition-all ${liked ? 'fill-ibiza-red scale-110' : ''}`} />
+                <Heart className={`w-5 h-5 transition-all ${liked ? 'fill-ibiza-brand scale-110' : ''}`} />
                 {likeCount}
               </button>
               <button
@@ -177,7 +177,7 @@ export default function BlogPage() {
           </div>
 
           {/* WhatsApp CTA */}
-          <div className="mt-12 rounded-2xl bg-gradient-to-r from-ibiza-red/10 to-transparent border border-ibiza-red/20 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-5">
+          <div className="mt-12 rounded-2xl bg-gradient-to-r from-ibiza-brand/10 to-transparent border border-ibiza-brand/20 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-5">
             <div className="flex-1">
               <p className="text-[#111111] font-display font-bold text-lg mb-1">¿Tienes dudas? Consúltanos</p>
               <p className="text-[#444444] text-sm">Nuestros asesores están disponibles en WhatsApp para ayudarte.</p>
@@ -207,7 +207,7 @@ export default function BlogPage() {
               <h2 className="font-display font-bold text-2xl text-[#111111]">Más artículos</h2>
               <Link
                 to="/#blog"
-                className="text-xs text-ibiza-red font-bold flex items-center gap-1 hover:gap-2 transition-all"
+                className="text-xs text-ibiza-brand font-bold flex items-center gap-1 hover:gap-2 transition-all"
               >
                 Ver todos <ChevronRight className="w-4 h-4" />
               </Link>
@@ -223,7 +223,7 @@ export default function BlogPage() {
                 >
                 <Link
                   to={`/blog/${rel.id}`}
-                  className="group bg-[#f7f7f7] rounded-2xl overflow-hidden border border-[#e8e8e8] hover:border-ibiza-red/30 hover:bg-[#ffffff] transition-all duration-300"
+                  className="group bg-[#f7f7f7] rounded-2xl overflow-hidden border border-[#e8e8e8] hover:border-ibiza-brand/30 hover:bg-[#ffffff] transition-all duration-300"
                 >
                   <div className="relative h-40 overflow-hidden">
                     <img
@@ -242,7 +242,7 @@ export default function BlogPage() {
                   </div>
                   <div className="p-4">
                     <p className="text-[11px] text-[#999999] mb-1">{rel.date}</p>
-                    <h4 className="font-display font-bold text-sm text-[#111111] leading-snug group-hover:text-ibiza-red transition-colors duration-300 line-clamp-2">
+                    <h4 className="font-display font-bold text-sm text-[#111111] leading-snug group-hover:text-ibiza-brand transition-colors duration-300 line-clamp-2">
                       {rel.title}
                     </h4>
                   </div>

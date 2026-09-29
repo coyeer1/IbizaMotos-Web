@@ -148,7 +148,7 @@ export const SUCURSALES: Sucursal[] = [
     ciudad: 'Santa Rosa de Cabal', departamento: 'Risaralda',
     direccion: 'Cra 14 #18-13 Local comercial',
     fotos: [],
-    color: '#d7263d',
+    color: '#CC4A12',
     // Aprox.: esquina de la direccion segun OpenStreetMap. Cambiar por las exactas
     // y agregar placeUrl cuando exista la ficha en Google Maps.
     lat: 4.869773, lng: -75.622176,

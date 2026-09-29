@@ -176,18 +176,18 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
 
           <div className="flex flex-col gap-1.5 text-sm text-[#666666]">
             <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 mt-0.5 text-ibiza-red flex-shrink-0" />
+              <MapPin className="w-4 h-4 mt-0.5 text-ibiza-brand flex-shrink-0" />
               <span className="leading-snug">{s.direccion}, {s.ciudad}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-ibiza-red flex-shrink-0" />
-              <a href={`tel:+57${s.telefono}`} className="hover:text-ibiza-red transition-colors font-medium">
+              <Phone className="w-4 h-4 text-ibiza-brand flex-shrink-0" />
+              <a href={`tel:+57${s.telefono}`} className="hover:text-ibiza-brand transition-colors font-medium">
                 {s.telefono}
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-ibiza-red flex-shrink-0" />
-              <a href={`mailto:${s.correo}`} className="hover:text-ibiza-red transition-colors truncate text-xs">
+              <Mail className="w-4 h-4 text-ibiza-brand flex-shrink-0" />
+              <a href={`mailto:${s.correo}`} className="hover:text-ibiza-brand transition-colors truncate text-xs">
                 {s.correo}
               </a>
             </div>
@@ -199,7 +199,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
               href={getMapsUrl(s)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border-2 border-[#e8e8e8] text-[#666666] text-sm font-semibold hover:border-ibiza-red hover:text-ibiza-red transition-all duration-200"
+              className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border-2 border-[#e8e8e8] text-[#666666] text-sm font-semibold hover:border-ibiza-brand hover:text-ibiza-brand transition-all duration-200"
             >
               <Navigation className="w-4 h-4" />
               Cómo llegar
@@ -392,11 +392,11 @@ export default function SucursalesPage() {
       <div className="bg-white py-14 px-4 text-center border-b border-[#ececec]">
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div className="flex items-center justify-center gap-2 mb-3">
-            <Store className="w-5 h-5 text-ibiza-red" />
-            <span className="text-ibiza-red font-display text-xs tracking-widest uppercase">Red de distribución</span>
+            <Store className="w-5 h-5 text-ibiza-brand" />
+            <span className="text-ibiza-brand font-display text-xs tracking-widest uppercase">Red de distribución</span>
           </div>
           <h1 className="font-display font-black text-4xl md:text-5xl text-[#111111] mb-3">
-            Nuestras <span className="text-ibiza-red">Sucursales</span>
+            Nuestras <span className="text-ibiza-brand">Sucursales</span>
           </h1>
           <p className="text-[#666666] max-w-lg mx-auto text-base">
             <span className="text-[#111111] font-bold">20 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
@@ -414,7 +414,7 @@ export default function SucursalesPage() {
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Buscar por ciudad, marca o asesor…"
-            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#e8e8e8] bg-white text-sm text-[#111111] placeholder-[#999999] focus:outline-none focus:ring-2 focus:ring-ibiza-red/30 focus:border-ibiza-red transition-all"
+            className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#e8e8e8] bg-white text-sm text-[#111111] placeholder-[#999999] focus:outline-none focus:ring-2 focus:ring-ibiza-brand/30 focus:border-ibiza-brand transition-all"
           />
           {searchQuery && (
             <button
@@ -438,8 +438,8 @@ export default function SucursalesPage() {
                 onClick={() => setCiudadActiva(ciudad)}
                 className={`px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 flex-shrink-0 border ${
                   ciudadActiva === ciudad
-                    ? 'bg-ibiza-red text-white border-ibiza-red shadow scale-105'
-                    : 'bg-white text-[#666666] border-[#e8e8e8] hover:border-ibiza-red hover:text-ibiza-red'
+                    ? 'bg-ibiza-brand text-white border-ibiza-brand shadow scale-105'
+                    : 'bg-white text-[#666666] border-[#e8e8e8] hover:border-ibiza-brand hover:text-ibiza-brand'
                 }`}
               >
                 {ciudad}
@@ -471,7 +471,7 @@ export default function SucursalesPage() {
           <div className="text-center py-16 text-[#999999]">
             <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
             <p className="font-medium">Sin resultados para "{searchQuery}"</p>
-            <button onClick={() => setSearchQuery('')} className="mt-2 text-ibiza-red text-sm hover:underline">
+            <button onClick={() => setSearchQuery('')} className="mt-2 text-ibiza-brand text-sm hover:underline">
               Limpiar búsqueda
             </button>
           </div>
@@ -494,11 +494,11 @@ export default function SucursalesPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center justify-center gap-2 mb-1">
-              <Map className="w-5 h-5 text-ibiza-red" />
-              <span className="text-ibiza-red font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
+              <Map className="w-5 h-5 text-ibiza-brand" />
+              <span className="text-ibiza-brand font-display text-xs tracking-widest uppercase">Mapa de sucursales</span>
             </div>
             <h2 className="font-display font-black text-2xl md:text-3xl text-[#111111]">
-              Encuéntranos en el <span className="text-ibiza-red">mapa</span>
+              Encuéntranos en el <span className="text-ibiza-brand">mapa</span>
             </h2>
             <p className="text-[#666666] text-sm mt-1">Haz clic en cualquier punto para ver la sucursal</p>
           </motion.div>

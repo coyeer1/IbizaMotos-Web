@@ -83,10 +83,10 @@ export function ImageUploader({ urls, onChange, bucketName = 'motorcycles', fold
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
-          className="w-24 h-24 bg-white/[0.02] hover:bg-white/[0.05] border border-dashed border-white/20 hover:border-ibiza-red/50 rounded-xl flex flex-col items-center justify-center gap-2 text-white/40 hover:text-white transition-all cursor-pointer"
+          className="w-24 h-24 bg-white/[0.02] hover:bg-white/[0.05] border border-dashed border-white/20 hover:border-ibiza-brand/50 rounded-xl flex flex-col items-center justify-center gap-2 text-white/40 hover:text-white transition-all cursor-pointer"
         >
           {uploading ? (
-            <Loader2 className="w-5 h-5 animate-spin text-ibiza-red" />
+            <Loader2 className="w-5 h-5 animate-spin text-ibiza-brand" />
           ) : (
             <ImagePlus className="w-6 h-6" />
           )}
@@ -121,7 +121,7 @@ export function ImageUploader({ urls, onChange, bucketName = 'motorcycles', fold
             value={urls}
             onChange={(e) => onChange(e.target.value)}
             rows={3}
-            className="w-full px-3 py-2.5 mt-2 bg-white/[0.03] border border-white/[0.06] rounded-xl text-white text-xs font-mono outline-none focus:border-ibiza-red resize-none"
+            className="w-full px-3 py-2.5 mt-2 bg-white/[0.03] border border-white/[0.06] rounded-xl text-white text-xs font-mono outline-none focus:border-ibiza-brand resize-none"
             placeholder="Pega las URLs de las imágenes aquí, una por línea..."
           />
         )}

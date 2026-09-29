@@ -80,7 +80,7 @@ function ComparatorBar() {
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#141416] border border-ibiza-red/30 rounded-2xl px-5 py-3 shadow-[0_0_30px_rgba(227,25,55,0.2)] flex items-center gap-4"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#141416] border border-ibiza-brand/30 rounded-2xl px-5 py-3 shadow-[0_0_30px_rgba(204, 74, 18,0.2)] flex items-center gap-4"
           >
             <div className="flex -space-x-2">
               {selected.map(m => (
@@ -98,7 +98,7 @@ function ComparatorBar() {
             </span>
             <Button
               onClick={() => setOpen(true)}
-              className="bg-ibiza-red hover:bg-ibiza-red/90 text-white font-bold rounded-xl px-4 h-9 text-xs group"
+              className="bg-ibiza-brand hover:bg-ibiza-brand/90 text-white font-bold rounded-xl px-4 h-9 text-xs group"
             >
               <BarChart2 className="w-4 h-4 mr-1.5" />
               Comparar
@@ -175,14 +175,14 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
             {/* Header */}
             <div className="sticky top-0 bg-[#0d0d0f]/95 backdrop-blur-xl z-10 flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
               <div className="flex items-center gap-3">
-                <BarChart2 className="w-5 h-5 text-ibiza-red" />
+                <BarChart2 className="w-5 h-5 text-ibiza-brand" />
                 <h3 className="font-display font-bold text-white text-lg">Comparar Motos</h3>
                 <span className="text-xs text-gray-500">{selected.length} seleccionadas</span>
               </div>
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleClear}
-                  className="text-xs text-gray-500 hover:text-ibiza-red transition-colors flex items-center gap-1"
+                  className="text-xs text-gray-500 hover:text-ibiza-brand transition-colors flex items-center gap-1"
                 >
                   <X className="w-3.5 h-3.5" />
                   Limpiar
@@ -216,7 +216,7 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
                         </div>
                       )}
                     </div>
-                    <p className="text-ibiza-red text-[10px] font-bold tracking-widest uppercase">{moto.brand}</p>
+                    <p className="text-ibiza-brand text-[10px] font-bold tracking-widest uppercase">{moto.brand}</p>
                     <p className="font-display font-bold text-white text-base leading-tight">{moto.model}</p>
                     <p className="font-display font-black text-ibiza-gold text-lg">
                       ${new Intl.NumberFormat('es-CO').format(moto.price)}
@@ -311,7 +311,7 @@ function ComparatorModal({ open, onClose }: { open: boolean; onClose: () => void
                   <div key={moto.id} className="flex flex-col gap-2">
                     <Button
                       onClick={() => { navigate(`/moto/${moto.id}`); handleClose(); }}
-                      className="w-full bg-ibiza-red hover:bg-ibiza-red/90 text-white font-bold rounded-xl h-10 text-xs group"
+                      className="w-full bg-ibiza-brand hover:bg-ibiza-brand/90 text-white font-bold rounded-xl h-10 text-xs group"
                     >
                       Ver detalles
                       <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
@@ -350,10 +350,10 @@ export function CompareButton({ motorcycle, asRow = false }: { motorcycle: Motor
         disabled={maxReached}
         className={`w-full flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-bold tracking-wide transition-all duration-300 border ${
           active
-            ? 'bg-ibiza-red/10 border-ibiza-red/40 text-ibiza-red'
+            ? 'bg-ibiza-brand/10 border-ibiza-brand/40 text-ibiza-brand'
             : maxReached
             ? 'bg-white/[0.02] border-white/[0.04] text-white/15 cursor-not-allowed'
-            : 'bg-white/[0.03] border-white/[0.06] text-white/40 hover:border-ibiza-red/30 hover:text-ibiza-red hover:bg-ibiza-red/5'
+            : 'bg-white/[0.03] border-white/[0.06] text-white/40 hover:border-ibiza-brand/30 hover:text-ibiza-brand hover:bg-ibiza-brand/5'
         }`}
       >
         {active
@@ -372,10 +372,10 @@ export function CompareButton({ motorcycle, asRow = false }: { motorcycle: Motor
       title={maxReached ? 'Máximo 3 motos' : active ? 'Quitar del comparador' : 'Agregar al comparador'}
       className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 border ${
         active
-          ? 'bg-ibiza-red border-ibiza-red text-white shadow-[0_0_12px_rgba(227,25,55,0.4)]'
+          ? 'bg-ibiza-brand border-ibiza-brand text-white shadow-[0_0_12px_rgba(204, 74, 18,0.4)]'
           : maxReached
           ? 'bg-white/[0.02] border-white/[0.04] text-white/10 cursor-not-allowed'
-          : 'bg-white/[0.04] border-white/[0.06] text-white/30 hover:border-ibiza-red/40 hover:text-ibiza-red hover:bg-ibiza-red/10'
+          : 'bg-white/[0.04] border-white/[0.06] text-white/30 hover:border-ibiza-brand/40 hover:text-ibiza-brand hover:bg-ibiza-brand/10'
       }`}
     >
       {active ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}

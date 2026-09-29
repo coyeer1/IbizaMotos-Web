@@ -30,7 +30,7 @@ All secrets live in `.env.local` (gitignored). Required vars:
 
 ### Stack
 - **React 19 + TypeScript + Vite** — SPA, no SSR
-- **Tailwind CSS** — custom brand colors: `ibiza-red` (#d7263d), `ibiza-gold` (#f9c846), `ibiza-black` (#000000)
+- **Tailwind CSS** — custom brand colors: `ibiza-brand` (#CC4A12, orange of the logo, safe under white text), `ibiza-flame` (#F58634, decorative only), `ibiza-gold` (#f9c846), `ibiza-black` (#000000)
 - **Framer Motion** — page/step transitions; always use `AnimatePresence mode="wait"` for step-based UIs
 - **Supabase** — only used for the appointments table (`workshop_appointments`). Auth uses `signInWithPassword` to bypass RLS (admin only).
 - **React Router v6** — client-side routing with `base: '/'` in vite.config.ts (changed from `'./'` for Vercel deployment)

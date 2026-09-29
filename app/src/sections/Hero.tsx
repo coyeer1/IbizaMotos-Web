@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 import { motorcycles } from '@/data/motorcycles';
+import { cuotaEstimada, CUOTA_NOTA } from '@/lib/cuota';
 
 // ─── Tokens del hero (no afectan al resto del sitio) ───────────────────────
 const T = {
@@ -9,7 +10,7 @@ const T = {
   muted: '#999999',
   border: '#e8e8e8',
   pill: '#f5f5f5',
-  red: '#E31937',
+  red: '#CC4A12',
   display: "'Bebas Neue', sans-serif",
   body: "'DM Sans', sans-serif",
 };
@@ -63,6 +64,8 @@ export default function Hero() {
   const slide = SLIDES[idx];
   const moto = motorcycles.find((m) => m.model === slide.model);
   const price = moto ? fmtCOP(moto.price) : '';
+  // Lo que compra la gente es la cuota, no el precio de contado.
+  const cuota = moto && moto.price > 0 ? fmtCOP(cuotaEstimada(moto.price)) : '';
 
   // Cambio de slide: sale el actual (out), luego entra el nuevo (in)
   const goTo = useCallback((next: number) => {
@@ -177,29 +180,39 @@ export default function Hero() {
 
             {/* Precio */}
             <div style={{ ...anim(440), marginTop: 28 }}>
-              <p style={{ fontSize: 10, letterSpacing: '0.25em', color: '#bbb' }}>DESDE</p>
-              <p style={{ fontSize: 34, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>{price}</p>
+              {cuota ? (
+                <>
+                  <p style={{ fontSize: 10, letterSpacing: '0.25em', color: '#999' }}>ESTRÉNALA DESDE</p>
+                  <p style={{ fontSize: 34, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>
+                    {cuota}<span style={{ fontSize: 16, fontWeight: 600, color: T.red }}> al mes*</span>
+                  </p>
+                  <p style={{ fontSize: 13, color: '#777', marginTop: 4 }}>o {price} de contado</p>
+                </>
+              ) : (
+                <p style={{ fontSize: 34, fontWeight: 700, color: T.text, lineHeight: 1.05 }}>{price}</p>
+              )}
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap" style={{ ...anim(490), gap: 12, marginTop: 28 }}>
-              <a href={getBrandSalesWhatsApp(slide.brand)} target="_blank" rel="noopener noreferrer">
-                <button
-                  className="transition-transform duration-200 hover:scale-[1.02] active:scale-95"
-                  style={{
-                    background: '#000',
-                    color: '#fff',
-                    borderRadius: 8,
-                    padding: '13px 26px',
-                    fontSize: 14,
-                    fontWeight: 600,
-                  }}
-                >
-                  Cotizar por WhatsApp
-                </button>
+              <a
+                href={getBrandSalesWhatsApp(slide.brand)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block transition-transform duration-200 hover:scale-[1.02] active:scale-95"
+                style={{
+                  background: '#000',
+                  color: '#fff',
+                  borderRadius: 8,
+                  padding: '13px 26px',
+                  fontSize: 14,
+                  fontWeight: 600,
+                }}
+              >
+                Cotizar por WhatsApp
               </a>
               <button
-                onClick={() => navigate(`/marca/${slide.brand.toLowerCase()}`)}
+                onClick={() => navigate('/financiamiento')}
                 className="transition-colors duration-200 hover:bg-black hover:text-white"
                 style={{
                   background: 'transparent',
@@ -211,9 +224,10 @@ export default function Hero() {
                   fontWeight: 600,
                 }}
               >
-                Ver modelos →
+                Simular mi cuota →
               </button>
             </div>
+            {cuota && <p style={{ ...anim(540), fontSize: 11, color: '#aaa', marginTop: 16, maxWidth: 420, lineHeight: 1.5 }}>*{CUOTA_NOTA}</p>}
           </div>
         </div>
 
@@ -271,13 +285,13 @@ export default function Hero() {
 
       {/* ── FRANJA INFERIOR — señales de confianza ── */}
       <div
-        className="hidden lg:flex absolute bottom-0 left-0 right-0 items-center"
-        style={{ borderTop: `1px solid #f0f0f0`, padding: '16px 80px', gap: 40 }}
+        className="relative lg:absolute lg:bottom-0 left-0 right-0 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 px-6 py-4 lg:px-20"
+        style={{ borderTop: `1px solid #f0f0f0` }}
       >
-        {['20 sucursales', '6 marcas oficiales', 'Crédito en 24h'].map((item, i) => (
-          <span key={item} className="flex items-center" style={{ gap: 40 }}>
-            {i > 0 && <span style={{ width: 1, height: 14, background: '#e0e0e0', marginRight: 40 }} />}
-            <span style={{ fontSize: 12, color: '#aaa' }}>{item}</span>
+        {['20 sucursales', '6 marcas oficiales', '8 financieras aliadas'].map((item) => (
+          <span key={item} className="flex items-center gap-2">
+            <span style={{ width: 6, height: 6, borderRadius: 999, background: T.red }} />
+            <span style={{ fontSize: 12, color: '#777', fontWeight: 500 }}>{item}</span>
           </span>
         ))}
       </div>

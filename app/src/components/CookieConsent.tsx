@@ -57,7 +57,7 @@ export default function CookieConsent({ visible, onDecide }: CookieConsentProps)
           <button
             type="button"
             onClick={() => decidir('granted')}
-            className="px-4 py-2 rounded-lg text-sm font-bold bg-ibiza-red text-white hover:bg-ibiza-red/90"
+            className="px-4 py-2 rounded-lg text-sm font-bold bg-ibiza-brand text-white hover:bg-ibiza-brand/90"
           >
             Aceptar
           </button>

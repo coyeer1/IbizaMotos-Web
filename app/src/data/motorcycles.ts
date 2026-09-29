@@ -1,5 +1,5 @@
 import type { Motorcycle, Brand, Category, Testimonial, Service, Branch, SparePart } from '@/types';
-import { PRECIOS } from './precios.generado';
+import { PRECIOS, BONOS } from './precios.generado';
 
 export const brands: Brand[] = [
   { id: '1', name: 'Suzuki', logo: '/brands/Suzuki.png', slug: 'suzuki' },
@@ -1422,7 +1422,7 @@ const catalogoBase: Motorcycle[] = [
     year: 2026,
     price: 7290000,
     category: 'Scooters',
-    description: "La Suzuki XOOM 110 es el scooter de entrada ideal para la movilidad urbana. Diseño moderno y compacto, motor de 110cc eficiente, maletero bajo el asiento y peso muy ligero para maniobrar fácilmente en el tráfico de la ciudad. El scooter más accesible de Suzuki.",
+    description: "La Hero XOOM 110 es el scooter de entrada ideal para la movilidad urbana. Diseño moderno y compacto, motor de 110cc eficiente, maletero bajo el asiento y peso muy ligero para maniobrar fácilmente en el tráfico de la ciudad. El scooter más accesible de Hero.",
     specifications: {
       engine: "110cc, 4 tiempos, monocilíndrico",
       power: "8.5 HP @ 7,500 RPM",
@@ -2793,7 +2793,7 @@ const catalogoBase: Motorcycle[] = [
     year: 2026,
     price: 10190000,
     category: 'Urban Sport',
-    description: "La Hero X-Blade 160 es la naked más estilizada del portafolio Hero. Diseño de cuña agresivo inspirado en las supersport japonesas, motor de 163cc con FI, frenos de disco doble y colores exclusivos de edición limitada. La moto para los que quieren diferenciarse de la multitud.",
+    description: "La Honda X-Blade 160 es una de las naked más estilizadas del portafolio Honda. Diseño de cuña agresivo inspirado en las supersport japonesas, motor de 163cc con FI, frenos de disco doble y colores exclusivos de edición limitada. La moto para los que quieren diferenciarse de la multitud.",
     specifications: {
       engine: "163cc, 4 tiempos, OHC, inyección electrónica",
       power: "15.3 HP @ 8,500 RPM",
@@ -2814,35 +2814,6 @@ const catalogoBase: Motorcycle[] = [
     images: ["/moto_images/x-blade-160/xblade160-beige.webp"],
     videoUrl: 'https://www.youtube.com/embed/hUg-EF3KBPk?autoplay=0&rel=0',
     stock: 'available',
-  },
-  {
-    id: '91',
-    brand: 'Hero',
-    model: "XOOM 110",
-    year: 2026,
-    price: 6990000,
-    category: 'Scooters',
-    description: "La Hero XOOM 110 es el scooter moderno de la gama Hero con motor de inyección. Diseño contemporáneo con colores vivos, motor 110cc eficiente y ligero, maletero bajo el asiento y conectividad Bluetooth con la app Hero. El scooter perfecto para la generación digital.",
-    specifications: {
-      engine: "110cc, 4 tiempos, OHC, inyección electrónica",
-      power: "8.15 HP @ 7,000 RPM",
-      torque: "9.1 Nm @ 5,000 RPM",
-      transmission: "Automática (CVT)",
-      weight: "107 kg",
-      fuelCapacity: "5.2 litros",
-      colors: ["Azul","Negro"],
-    },
-    imagesByColor: {
-          "Azul": [
-                "/moto_images/xoom-110/xoom110DiagAzul.webp"
-          ],
-          "Negro": [
-                "/moto_images/xoom-110/xoom110DiagNegra.webp"
-          ]
-    },
-    images: ["/moto_images/xoom-110/xoom110DiagAzul.webp"],
-    stock: 'available',
-    videoUrl: 'https://www.youtube.com/embed/L8WBysfLU-g',
   },
   {
     id: '92',
@@ -4552,7 +4523,7 @@ export const motorcycles: Motorcycle[] = catalogoBase.map((m) => {
   const porAnio = PRECIOS[m.id];
   const anios = porAnio ? Object.keys(porAnio).map(Number).sort((a, b) => b - a) : [];
   if (!anios.length) return m;
-  return { ...m, year: anios[0], price: porAnio[String(anios[0])], pricesByYear: porAnio };
+  return { ...m, year: anios[0], price: porAnio[String(anios[0])], pricesByYear: porAnio, ...(BONOS[m.id] && { bono: BONOS[m.id] }) };
 });
 
 export const testimonials: Testimonial[] = [

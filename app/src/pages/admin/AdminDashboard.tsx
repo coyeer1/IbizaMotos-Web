@@ -148,7 +148,7 @@ export default function AdminDashboard() {
         .marca{font-weight:800;font-size:18px;margin-top:8px;text-transform:uppercase}
         .ciudad{color:#555;font-size:13px}
         .asesor{font-weight:700;font-size:14px;margin-top:4px}
-        .cta{color:#E31937;font-size:11px;font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
+        .cta{color:#CC4A12;font-size:11px;font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
       </style></head>
       <body><div class="grid">${cards}</div>
       <script>window.onload=function(){setTimeout(function(){window.print()},300)}</script>
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 text-white/30 hover:text-ibiza-red text-sm font-medium transition-colors"
+            className="flex items-center gap-2 text-white/30 hover:text-ibiza-brand text-sm font-medium transition-colors"
           >
             <LogOut className="w-4 h-4" />
             Cerrar sesión
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === tab.id ? 'bg-ibiza-red text-white shadow-sm' : 'text-white/30 hover:text-white/60'}`}
+              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab === tab.id ? 'bg-ibiza-brand text-white shadow-sm' : 'text-white/30 hover:text-white/60'}`}
             >
               {tab.label}
             </button>
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
                   <button
                     key={f}
                     onClick={() => setApptFilter(f)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${apptFilter === f ? 'bg-ibiza-red text-white' : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:text-white/60'}`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${apptFilter === f ? 'bg-ibiza-brand text-white' : 'bg-white/[0.03] text-white/30 border border-white/[0.06] hover:text-white/60'}`}
                   >
                     {f === 'all' ? 'Todas' : STATUS_CONFIG[f].label}
                     {f !== 'all' && (
@@ -256,7 +256,7 @@ export default function AdminDashboard() {
 
             {apptLoading ? (
               <div className="flex justify-center py-20">
-                <div className="w-10 h-10 border-4 border-ibiza-red/30 border-t-ibiza-red rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-ibiza-brand/30 border-t-ibiza-brand rounded-full animate-spin" />
               </div>
             ) : (() => {
               const filtered = apptFilter === 'all'
@@ -278,8 +278,8 @@ export default function AdminDashboard() {
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                           {/* Date + time badge */}
-                          <div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-xl px-4 py-3 text-center shrink-0 min-w-[90px]">
-                            <p className="font-display font-black text-ibiza-red text-lg leading-none">{appt.appt_date.slice(8)}</p>
+                          <div className="bg-ibiza-brand/10 border border-ibiza-brand/20 rounded-xl px-4 py-3 text-center shrink-0 min-w-[90px]">
+                            <p className="font-display font-black text-ibiza-brand text-lg leading-none">{appt.appt_date.slice(8)}</p>
                             <p className="text-white/40 text-[10px] uppercase tracking-wider mt-0.5">
                               {['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][parseInt(appt.appt_date.slice(5,7)) - 1]}
                             </p>
@@ -475,7 +475,7 @@ export default function AdminDashboard() {
                           <p className="text-white/25 text-xs mt-2">{[r.cliente_nombre, r.cliente_telefono].filter(Boolean).join(' · ')}</p>
                         )}
                       </div>
-                      <button onClick={() => deleteReview(r.id)} className="text-white/20 hover:text-ibiza-red transition-colors shrink-0" title="Eliminar">
+                      <button onClick={() => deleteReview(r.id)} className="text-white/20 hover:text-ibiza-brand transition-colors shrink-0" title="Eliminar">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -496,7 +496,7 @@ export default function AdminDashboard() {
               </div>
               <button
                 onClick={printAllQRs}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ibiza-red text-white text-sm font-semibold hover:bg-ibiza-red/90 transition-colors shrink-0"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ibiza-brand text-white text-sm font-semibold hover:bg-ibiza-brand/90 transition-colors shrink-0"
               >
                 <Printer className="w-4 h-4" /> Imprimir todos
               </button>

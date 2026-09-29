@@ -32,10 +32,10 @@ export default function TermsPage() {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 bg-ibiza-red/10 rounded-xl flex items-center justify-center">
-            <FileText className="w-5 h-5 text-ibiza-red" />
+          <div className="w-10 h-10 bg-ibiza-brand/10 rounded-xl flex items-center justify-center">
+            <FileText className="w-5 h-5 text-ibiza-brand" />
           </div>
-          <span className="text-ibiza-red text-xs font-bold tracking-widest uppercase">Legal</span>
+          <span className="text-ibiza-brand text-xs font-bold tracking-widest uppercase">Legal</span>
         </div>
         <h1 className="font-display font-black text-3xl sm:text-4xl text-white mb-2">
           Términos y Condiciones<br />de Uso
@@ -105,7 +105,7 @@ export default function TermsPage() {
             <ul className="list-disc list-inside space-y-1.5 pl-2">
               <li>Acepta que su mensaje y datos de contacto sean recibidos por un asesor humano o por un sistema automatizado de atención (chatbot).</li>
               <li>Acepta recibir respuestas, cotizaciones, recordatorios y mensajes transaccionales relacionados con su consulta.</li>
-              <li>Puede solicitar el cese de comunicaciones de marketing en cualquier momento respondiendo "BAJA" o escribiendo a <a href={`mailto:${EMAIL}`} className="text-ibiza-red hover:underline">{EMAIL}</a>.</li>
+              <li>Puede solicitar el cese de comunicaciones de marketing en cualquier momento respondiendo "BAJA" o escribiendo a <a href={`mailto:${EMAIL}`} className="text-ibiza-brand hover:underline">{EMAIL}</a>.</li>
               <li>La interacción con nuestros canales se rige adicionalmente por los términos de cada plataforma (Meta / WhatsApp / Instagram / Facebook).</li>
             </ul>
           </section></Reveal>
@@ -135,7 +135,7 @@ export default function TermsPage() {
             <h2 className="text-white font-display font-bold text-xl mb-3">9. Datos personales</h2>
             <p>
               El tratamiento de datos personales se rige por nuestra{' '}
-              <Link to="/privacidad" className="text-ibiza-red hover:underline">Política de Tratamiento de Datos Personales</Link>,
+              <Link to="/privacidad" className="text-ibiza-brand hover:underline">Política de Tratamiento de Datos Personales</Link>,
               conforme a la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia.
             </p>
           </section></Reveal>
@@ -158,12 +158,12 @@ export default function TermsPage() {
             </p>
           </section></Reveal>
 
-          <Reveal delay={0.05}><div className="bg-ibiza-red/10 border border-ibiza-red/20 rounded-2xl p-6 mt-4">
+          <Reveal delay={0.05}><div className="bg-ibiza-brand/10 border border-ibiza-brand/20 rounded-2xl p-6 mt-4">
             <p className="text-white font-semibold mb-1">¿Tienes preguntas sobre estos términos?</p>
             <p className="text-white/60 text-sm mb-3">Escríbenos y te respondemos en menos de 24 horas.</p>
             <a
               href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 bg-ibiza-red hover:bg-ibiza-red/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 bg-ibiza-brand hover:bg-ibiza-brand/90 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
             >
               {EMAIL}
             </a>

@@ -1,12 +1,10 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Send, MapPin, Phone, Mail, ChevronRight, ExternalLink } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { MapPin, Phone, Mail, ChevronRight, ExternalLink } from 'lucide-react';
 import { brands } from '@/data/motorcycles';
-import { getGeneralWhatsApp, getWhatsAppUrl } from '@/lib/config';
-import { ANALYTICS_CONFIGURED, revokeConsent, trackContact } from '@/lib/analytics';
+import { getGeneralWhatsApp } from '@/lib/config';
+import { scrollToSectionWhenReady } from '@/lib/scrollToSection';
+import { ANALYTICS_CONFIGURED, revokeConsent } from '@/lib/analytics';
 
 const navLinks = [
   { name: 'Inicio', href: '#inicio' },
@@ -50,28 +48,13 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      // Open WhatsApp with the email for future newsletter
-      trackContact(window.location.pathname);
-      window.open(getWhatsAppUrl(`Hola, quiero suscribirme al newsletter. Mi correo es: ${email}`), '_blank');
-      setIsSubscribed(true);
-      setTimeout(() => {
-        setIsSubscribed(false);
-        setEmail('');
-      }, 3000);
-    }
-  };
-
+  // Fuera de la home, navega a "/" y el Navbar hace el scroll cuando la seccion exista.
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (location.pathname !== '/') navigate('/', { state: { targetSection: href } });
+    else scrollToSectionWhenReady(href);
   };
 
   return (
@@ -117,7 +100,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-ibiza-red hover:bg-ibiza-red transition-all duration-200 hover:scale-[1.08]"
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-ibiza-brand hover:bg-ibiza-brand transition-all duration-200 hover:scale-[1.08]"
                   title={social.name}
                 >
                   {social.icon}
@@ -134,7 +117,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
-              <span className="w-7 h-px bg-ibiza-red" />
+              <span className="w-7 h-px bg-ibiza-brand" />
               Navegación
             </h3>
             <ul className="space-y-3">
@@ -146,9 +129,9 @@ export default function Footer() {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-white/60 hover:!text-ibiza-red transition-colors duration-200 flex items-center gap-2 group text-sm"
+                    className="text-white/60 hover:!text-ibiza-brand transition-colors duration-200 flex items-center gap-2 group text-sm"
                   >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-red" />
+                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-brand" />
                     {link.name}
                   </a>
                 </li>
@@ -164,7 +147,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
-              <span className="w-7 h-px bg-ibiza-red" />
+              <span className="w-7 h-px bg-ibiza-brand" />
               Marcas
             </h3>
             <ul className="space-y-3">
@@ -172,9 +155,9 @@ export default function Footer() {
                 <li key={brand.id}>
                   <Link
                     to={`/marca/${brand.slug}`}
-                    className="text-white/60 hover:!text-ibiza-red transition-colors duration-200 flex items-center gap-2 group text-sm"
+                    className="text-white/60 hover:!text-ibiza-brand transition-colors duration-200 flex items-center gap-2 group text-sm"
                   >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-red" />
+                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200 text-ibiza-brand" />
                     {brand.name}
                   </Link>
                 </li>
@@ -182,7 +165,7 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Contact & Newsletter column */}
+          {/* Contact column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -190,55 +173,37 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <h3 className="font-display text-2xl tracking-wide mb-6 flex items-center gap-3">
-              <span className="w-7 h-px bg-ibiza-red" />
+              <span className="w-7 h-px bg-ibiza-brand" />
               Contacto
             </h3>
             <ul className="space-y-4 mb-8">
               <li className="flex items-start gap-3 text-white/60 text-sm">
-                <MapPin className="w-5 h-5 text-ibiza-red flex-shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-ibiza-brand flex-shrink-0 mt-0.5" />
                 <span>Av. 30 de Agosto #48-60, Pereira</span>
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
-                <Phone className="w-5 h-5 text-ibiza-red flex-shrink-0" />
+                <Phone className="w-5 h-5 text-ibiza-brand flex-shrink-0" />
                 <a href="tel:+573052884546" className="hover:text-white transition-colors duration-200">(+57) 305 288 4546</a>
               </li>
               <li className="flex items-center gap-3 text-white/60 text-sm">
-                <Mail className="w-5 h-5 text-ibiza-red flex-shrink-0" />
+                <Mail className="w-5 h-5 text-ibiza-brand flex-shrink-0" />
                 <a href="mailto:ibizamotossas@gmail.com" className="hover:text-white transition-colors duration-200">ibizamotossas@gmail.com</a>
               </li>
             </ul>
 
-            {/* Newsletter */}
+            {/* Antes habia un "newsletter" que no guardaba nada (abria WhatsApp con el correo). */}
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-              <p className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-1">Newsletter</p>
-              <p className="text-white/60 text-xs mb-3 font-light">Recibe ofertas exclusivas y novedades</p>
-              {isSubscribed ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-white/10 text-white px-4 py-3 rounded-lg text-sm text-center"
-                >
-                  ¡Gracias por suscribirte!
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <Input
-                    type="email"
-                    placeholder="Tu correo electrónico"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-black/40 border-white/10 !text-white placeholder:!text-white/40 rounded-lg text-sm"
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    size="icon"
-                    className="bg-ibiza-red hover:bg-ibiza-red !text-white rounded-lg flex-shrink-0 transition-transform duration-200 hover:scale-[1.05] active:scale-95"
-                  >
-                    <Send className="w-4 h-4" />
-                  </Button>
-                </form>
-              )}
+              <p className="text-[11px] uppercase tracking-[0.15em] text-white/40 mb-1">¿Buscas moto?</p>
+              <p className="text-white/60 text-xs mb-3 font-light">Te asesoramos por WhatsApp o en la sucursal más cercana.</p>
+              <div className="flex flex-wrap gap-2">
+                <a href={getGeneralWhatsApp()} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center h-10 px-4 rounded-lg bg-ibiza-brand !text-white text-sm font-semibold hover:brightness-110 transition">
+                  Escríbenos
+                </a>
+                <Link to="/sucursales" className="inline-flex items-center h-10 px-4 rounded-lg border border-white/15 !text-white/80 text-sm font-semibold hover:border-white/40 transition">
+                  Ver sucursales
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -258,7 +223,7 @@ export default function Footer() {
                   href="https://chillinc.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="!text-white/50 hover:!text-ibiza-red transition-colors duration-200 font-medium"
+                  className="!text-white/50 hover:!text-ibiza-brand transition-colors duration-200 font-medium"
                 >
                   chillinc.app
                 </a>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Hero from '@/sections/Hero';
 import Reveal from '@/components/Reveal';
 import { useSEO } from '@/hooks/useSEO';
+import { WORKSHOP_BOOKING_ENABLED } from '@/lib/config';
 
 // Secciones below-the-fold — se descargan solo cuando el usuario llega a ellas
 const Brands          = lazy(() => import('@/sections/Brands'));
@@ -14,6 +15,7 @@ const SpareParts      = lazy(() => import('@/sections/SpareParts'));
 const Services        = lazy(() => import('@/sections/Services'));
 const Blog            = lazy(() => import('@/sections/Blog'));
 const HappyCustomers  = lazy(() => import('@/sections/HappyCustomers'));
+const TallerStrip     = lazy(() => import('@/sections/TallerStrip'));
 
 function ScrollProgress() {
     const barRef = useRef<HTMLDivElement>(null);
@@ -38,7 +40,7 @@ function ScrollProgress() {
         <div className="fixed top-0 left-0 right-0 z-[100] h-[3px] pointer-events-none">
             <div
                 ref={barRef}
-                className="h-full bg-ibiza-red origin-left"
+                className="h-full bg-ibiza-brand origin-left"
                 style={{ transform: 'scaleX(0)', willChange: 'transform' }}
             />
         </div>
@@ -62,15 +64,11 @@ export default function Home() {
             <Hero />
 
             <Suspense fallback={<div style={{ minHeight: '300vh' }} aria-hidden />}>
-                {/* Promotions Banner */}
+                {/* Bonos reales del mes (lista oficial) */}
                 <PromosBanner />
 
-                {/* Brands scroll — logos animados */}
-                <Reveal>
-                    <Brands onBrandClick={(brand) => {
-                        navigate(`/marca/${brand.toLowerCase()}`);
-                    }} />
-                </Reveal>
+                {/* Confianza temprano: clientes reales */}
+                <Reveal><HappyCustomers /></Reveal>
 
                 {/* Categories showcase */}
                 <Reveal><Categories /></Reveal>
@@ -81,17 +79,21 @@ export default function Home() {
                 {/* Financing Teaser → /financiamiento */}
                 <Reveal><FinancingTeaser /></Reveal>
 
+                {/* Logos de marcas oficiales */}
+                <Reveal>
+                    <Brands onBrandClick={(brand) => {
+                        navigate(`/marca/${brand.toLowerCase()}`);
+                    }} />
+                </Reveal>
+
                 {/* Spare Parts */}
                 <Reveal><SpareParts /></Reveal>
 
-                {/* Services */}
-                <Reveal><Services /></Reveal>
+                {/* Taller: seccion completa solo si el agendamiento esta activo */}
+                <Reveal>{WORKSHOP_BOOKING_ENABLED ? <Services /> : <TallerStrip />}</Reveal>
 
                 {/* Blog */}
                 <Reveal><Blog /></Reveal>
-
-                {/* Clientes Felices */}
-                <Reveal><HappyCustomers /></Reveal>
             </Suspense>
         </>
     );

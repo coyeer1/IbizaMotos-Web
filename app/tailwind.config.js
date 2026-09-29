@@ -42,7 +42,11 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         ibiza: {
-          red: '#E31937',
+          // Naranja del logo (jaguar en llamas). `brand` es la version oscura que
+          // aguanta texto blanco encima (contraste 4.6:1); `flame` es el tono vivo
+          // del logo, solo para decoracion (degradados, barras, brillos).
+          brand: '#CC4A12',
+          flame: '#F58634',
           gold: '#f9c846',
           black: '#000000',
           white: '#ffffff',

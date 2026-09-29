@@ -27,11 +27,12 @@ const PrivacyPage      = lazy(() => import('@/pages/PrivacyPage'));
 const TermsPage        = lazy(() => import('@/pages/TermsPage'));
 const DataDeletionPage = lazy(() => import('@/pages/DataDeletionPage'));
 
-// Spinner minimalista mientras carga la página
+// Spinner minimalista mientras carga la página. Fondo blanco como las páginas:
+// uno negro hacía parpadear blanco→negro→blanco al entrar.
 function PageLoader() {
   return (
-    <div className="min-h-screen bg-ibiza-black flex items-center justify-center">
-      <div className="w-8 h-8 border-2 border-ibiza-red border-t-transparent rounded-full animate-spin" />
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-ibiza-brand border-t-transparent rounded-full animate-spin" />
     </div>
   );
 }
@@ -50,7 +51,7 @@ function AppContent() {
     <div className="min-h-screen bg-ibiza-black">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-ibiza-red focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-ibiza-brand focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold"
       >
         Ir al contenido principal
       </a>

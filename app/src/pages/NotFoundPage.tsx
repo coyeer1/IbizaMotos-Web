@@ -37,7 +37,7 @@ export default function NotFoundPage() {
           className="mb-6"
         >
           <p className="font-display font-black text-[160px] leading-none select-none"
-            style={{ WebkitTextStroke: '2px rgba(215,38,61,0.4)', color: 'transparent' }}
+            style={{ WebkitTextStroke: '2px rgba(204, 74, 18,0.4)', color: 'transparent' }}
           >
             404
           </p>
@@ -75,7 +75,7 @@ export default function NotFoundPage() {
           </Button>
           <Button
             onClick={() => navigate('/')}
-            className="bg-ibiza-red hover:bg-ibiza-red/90 text-white rounded-xl gap-2"
+            className="bg-ibiza-brand hover:bg-ibiza-brand/90 text-white rounded-xl gap-2"
           >
             <Home className="w-4 h-4" />
             Ir al inicio
@@ -104,7 +104,7 @@ export default function NotFoundPage() {
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className="text-xs text-[#999999] hover:text-ibiza-red transition-colors px-3 py-1.5 rounded-lg border border-[#e8e8e8] bg-white hover:border-ibiza-red/20"
+                className="text-xs text-[#999999] hover:text-ibiza-brand transition-colors px-3 py-1.5 rounded-lg border border-[#e8e8e8] bg-white hover:border-ibiza-brand/20"
               >
                 {label}
               </button>

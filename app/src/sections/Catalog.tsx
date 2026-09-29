@@ -162,7 +162,7 @@ const MotoCard = ({
             <div className="flex gap-1.5 items-center">
               {cc && (
                 <span className="flex items-center gap-1 text-[10px] font-bold px-2.5 py-1.5 rounded-lg shadow-md bg-white text-gray-900 border border-gray-200">
-                  <Gauge className="w-3 h-3" style={{ color: dk ? dk.primary : '#d7263d' }} />{cc}cc
+                  <Gauge className="w-3 h-3" style={{ color: dk ? dk.primary : '#CC4A12' }} />{cc}cc
                 </span>
               )}
               {hp && (
@@ -178,7 +178,7 @@ const MotoCard = ({
             className="absolute bottom-0 left-0 right-0 h-[2px] z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{ background: dk
               ? `linear-gradient(to right, transparent, ${dk.primary}, transparent)`
-              : 'linear-gradient(to right, transparent, rgba(215,38,61,0.4), transparent)'
+              : 'linear-gradient(to right, transparent, rgba(204, 74, 18,0.4), transparent)'
             }}
           />
         </div>
@@ -190,7 +190,7 @@ const MotoCard = ({
           <div className="flex items-center gap-2 mb-2">
             <span
               className="text-[11px] font-bold tracking-[0.15em] uppercase"
-              style={{ color: dk ? dk.primary : '#d7263d' }}
+              style={{ color: dk ? dk.primary : '#CC4A12' }}
             >
               {motorcycle.brand}
             </span>
@@ -218,7 +218,7 @@ const MotoCard = ({
                     }`}
                     style={{
                       backgroundColor: colorMap[color] || '#555',
-                      border: selectedColor === color ? `3px solid ${dk ? dk.primary : '#d7263d'}` : undefined,
+                      border: selectedColor === color ? `3px solid ${dk ? dk.primary : '#CC4A12'}` : undefined,
                       boxShadow: selectedColor === color ? `0 0 0 1px ${dk ? 'white' : 'white'}` : undefined,
                     }}
                     title={color}
@@ -256,7 +256,7 @@ const MotoCard = ({
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
               style={dk ? { backgroundColor: '#f9fafb', border: '1px solid #e8e8e8' } : { backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? dk.primary : '#d7263d'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? dk.primary : '#d7263d'; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 25px rgba(${dk?.glowRgb ?? '215,38,61'},0.4)`; }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? dk.primary : '#CC4A12'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? dk.primary : '#CC4A12'; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 25px rgba(${dk?.glowRgb ?? '204, 74, 18'},0.4)`; }}
               onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? '#f9fafb' : '#f9fafb'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? '#e8e8e8' : '#e5e7eb'; (e.currentTarget as HTMLDivElement).style.boxShadow = ''; }}
             >
               <ArrowRight className={`w-5 h-5 group-hover:translate-x-0.5 transition-all duration-300 ${dk ? 'text-gray-400 group-hover:text-white' : 'text-gray-400 group-hover:text-white'}`} />
@@ -320,7 +320,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
   if (loading) {
     return (
       <section id="catalogo" className="py-24 min-h-[50vh] flex justify-center items-center" style={{ backgroundColor: dk ? '#ffffff' : '#f9fafb' }}>
-        <div className="text-xl animate-pulse font-display font-medium" style={{ color: dk?.primary ?? '#d7263d' }}>Cargando inventario...</div>
+        <div className="text-xl animate-pulse font-display font-medium" style={{ color: dk?.primary ?? '#CC4A12' }}>Cargando inventario...</div>
       </section>
     );
   }
@@ -351,7 +351,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                 initial={{ opacity: 0, y: 20 }}
                 animate={isVisible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
-                className="text-ibiza-red font-display font-semibold text-sm tracking-widest uppercase mb-3"
+                className="text-ibiza-brand font-display font-semibold text-sm tracking-widest uppercase mb-3"
               >
                 🏍️ Catálogo
               </motion.p>
@@ -388,7 +388,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
               onClick={() => setShowFilters(!showFilters)}
               className="rounded-xl px-4"
               style={showFilters
-                ? { backgroundColor: dk?.primary ?? '#d7263d', color: '#fff', borderColor: dk?.primary ?? '#d7263d' }
+                ? { backgroundColor: dk?.primary ?? '#CC4A12', color: '#fff', borderColor: dk?.primary ?? '#CC4A12' }
                 : dk ? { backgroundColor: '#fff', borderColor: '#e8e8e8', color: '#666666' } : {}
               }
             >
@@ -402,7 +402,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
           <button
             onClick={() => setSelectedBrand('all')}
             className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${selectedBrand === 'all'
-              ? 'bg-ibiza-red text-white shadow-[0_4px_14px_rgba(215,38,61,0.3)]'
+              ? 'bg-ibiza-brand text-white shadow-[0_4px_14px_rgba(204, 74, 18,0.3)]'
               : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
               }`}
           >
@@ -413,7 +413,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
               key={brand.id}
               onClick={() => setSelectedBrand(selectedBrand === brand.name ? 'all' : brand.name)}
               className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2.5 ${selectedBrand === brand.name
-                ? 'bg-ibiza-red text-white shadow-[0_4px_14px_rgba(215,38,61,0.3)]'
+                ? 'bg-ibiza-brand text-white shadow-[0_4px_14px_rgba(204, 74, 18,0.3)]'
                 : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
                 }`}
             >
@@ -469,7 +469,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
                       onClick={clearFilters}
                       variant="outline"
                       className="w-full rounded-xl"
-                      style={{ color: dk?.primary ?? '#d7263d', borderColor: dk ? `rgba(${dk.glowRgb},0.3)` : 'rgba(215,38,61,0.2)', backgroundColor: dk ? `rgba(${dk.glowRgb},0.08)` : 'rgba(215,38,61,0.05)' }}
+                      style={{ color: dk?.primary ?? '#CC4A12', borderColor: dk ? `rgba(${dk.glowRgb},0.3)` : 'rgba(204, 74, 18,0.2)', backgroundColor: dk ? `rgba(${dk.glowRgb},0.08)` : 'rgba(204, 74, 18,0.05)' }}
                     >
                       <X className="w-4 h-4 mr-2" /> Limpiar
                     </Button>
@@ -511,7 +511,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
             <Button
               onClick={clearFilters}
               className="text-white rounded-xl px-8"
-              style={{ backgroundColor: dk?.primary ?? '#d7263d' }}
+              style={{ backgroundColor: dk?.primary ?? '#CC4A12' }}
             >
               Limpiar filtros
             </Button>

@@ -31,7 +31,7 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-[#080808] flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-ibiza-red/5 rounded-full blur-[150px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-ibiza-brand/5 rounded-full blur-[150px]" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -71,7 +71,7 @@ export default function AdminLogin() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Ingresa tu contraseña"
-                  className="w-full pl-12 pr-12 py-4 bg-white/[0.03] border border-white/[0.06] rounded-xl text-white placeholder:text-white/20 focus:border-ibiza-red focus:ring-1 focus:ring-ibiza-red outline-none transition-all"
+                  className="w-full pl-12 pr-12 py-4 bg-white/[0.03] border border-white/[0.06] rounded-xl text-white placeholder:text-white/20 focus:border-ibiza-brand focus:ring-1 focus:ring-ibiza-brand outline-none transition-all"
                   autoFocus
                 />
                 <button
@@ -100,7 +100,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={isLoading || !password}
-              className="w-full py-4 bg-ibiza-red hover:bg-ibiza-red/90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-display font-bold uppercase tracking-wider rounded-xl transition-all shadow-[0_0_30px_rgba(227,25,55,0.2)] hover:shadow-[0_0_40px_rgba(227,25,55,0.4)] flex items-center justify-center gap-2"
+              className="w-full py-4 bg-ibiza-brand hover:bg-ibiza-brand/90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-display font-bold uppercase tracking-wider rounded-xl transition-all shadow-[0_0_30px_rgba(204, 74, 18,0.2)] hover:shadow-[0_0_40px_rgba(204, 74, 18,0.4)] flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

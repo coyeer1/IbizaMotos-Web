@@ -58,7 +58,7 @@ export default function BrandPage() {
             <div className="min-h-screen bg-white pt-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 mb-4">
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={() => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/'))}
                         className="inline-flex items-center gap-1.5 text-[#666666] hover:text-[#111111] transition-colors duration-200 mb-6 group"
                     >
                         <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform duration-200" />
@@ -130,9 +130,9 @@ export default function BrandPage() {
                 <div className="absolute inset-x-0 bottom-0 h-44" style={{ background: `linear-gradient(to top, #ffffff 0%, transparent 100%)` }} />
 
                 {/* Botón volver */}
-                <div className="absolute top-6 left-4 sm:left-8 z-30">
+                <div className="absolute top-20 md:top-24 left-4 sm:left-8 z-30">
                     <button
-                        onClick={() => navigate(-1)}
+                        onClick={() => ((window.history.state?.idx ?? 0) > 0 ? navigate(-1) : navigate('/'))}
                         className="flex items-center gap-2 text-white/70 hover:text-white text-sm bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 hover:border-white/25 transition-all"
                     >
                         <ChevronLeft className="w-4 h-4" />

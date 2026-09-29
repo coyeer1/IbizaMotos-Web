@@ -6,7 +6,7 @@ import Reveal from '@/components/Reveal';
 const T = {
   border: '#e8e8e8',
   pill: '#f5f5f5',
-  red: '#E31937',
+  red: '#CC4A12',
   body: "'DM Sans', sans-serif",
 };
 
@@ -38,7 +38,7 @@ const BrandLogo = ({ name, logo, onClick }: BrandLogoProps) => {
           alt={`Logo ${name}`}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-contain grayscale opacity-50 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+          className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
         />
       </div>
     </div>
@@ -72,8 +72,8 @@ export default function Brands({ onBrandClick }: BrandsProps) {
       {/* Infinite scroll container */}
       <div className="relative">
         {/* Gradient fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(to right, #f5f5f5, transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(to left, #f5f5f5, transparent)' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #f5f5f5, transparent)' }} />
+        <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #f5f5f5, transparent)' }} />
 
         {/* Scrolling row */}
         <div
@@ -100,32 +100,6 @@ export default function Brands({ onBrandClick }: BrandsProps) {
         </div>
       </div>
 
-      {/* Second row - reverse direction */}
-      <div className="relative mt-6">
-        <div className="absolute left-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(to right, #f5f5f5, transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(to left, #f5f5f5, transparent)' }} />
-
-        <div
-          className={`flex animate-infinite-scroll-reverse hover:[animation-play-state:paused] transition-opacity duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-        >
-          {[...brands].reverse().map((brand, index) => (
-            <BrandLogo
-              key={`reverse-first-${index}`}
-              name={brand.name}
-              logo={brand.logo}
-              onClick={() => onBrandClick?.(brand.name)}
-            />
-          ))}
-          {[...brands].reverse().map((brand, index) => (
-            <BrandLogo
-              key={`reverse-second-${index}`}
-              name={brand.name}
-              logo={brand.logo}
-              onClick={() => onBrandClick?.(brand.name)}
-            />
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

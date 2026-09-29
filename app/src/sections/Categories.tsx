@@ -54,7 +54,7 @@ const AUTOPLAY_DELAY = 3500;
 const T = {
   text: '#000000',
   muted: '#999999',
-  red: '#E31937',
+  red: '#CC4A12',
   display: "'Bebas Neue', sans-serif",
   body: "'DM Sans', sans-serif",
 };
@@ -288,7 +288,7 @@ export default function Categories() {
               aria-label={`Ir a ${CATEGORIES[i].name}`}
               className={`rounded-full transition-all duration-300 ${
                 i === activeIndex
-                  ? 'w-6 h-2 bg-[#E31937]'
+                  ? 'w-6 h-2 bg-[#CC4A12]'
                   : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
               }`}
             />
