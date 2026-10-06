@@ -107,13 +107,17 @@ const nuevos = {}; const avisos = []; const sinPareja = []; const usados = new S
 // Bonos publicables del año mas nuevo. Reglas (pedidas por el negocio: la web no puede
 // prometer nada que el asesor no sostenga):
 //  - Solo el BONO DE MARCA, y solo si el detalle dice de donde sale (bono de marca,
-//    bono <marca>, bono dealer/PDV, bono de contado). Un monto sin explicacion no sale.
+//    bono <marca>, bono dealer/PDV, bono de contado, descuento nacional). Un monto sin explicacion no sale.
+//  - Bonos por zona o condicionados (inventario) no salen: la web atiende Eje Cafetero y Neiva.
 //  - "Bono de contado" se publica como tal: no aplica financiando.
 //  - Los bonos de financiera NO se publican: van atados a una financiera y a condiciones.
 //  - Se descartan filas que la hoja marca como dudosas (dato de otro mes, pendiente).
 //  - El texto interno (comisiones, circulares) nunca sale: solo monto y tipo.
 const DUDOSO = /pendiente|dato de (enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)|no aparece/i;
-const ORIGEN_MARCA = /bono de marca|bono (akt|hero|suzuki|honda|bajaj|vento)\b|bono dealer|bono de contado/i;
+const ORIGEN_MARCA = /bono de marca|bono (akt|hero|suzuki|honda|bajaj|vento)\b|bono dealer|bono de contado|descuento nacional/i;
+// Bonos que no valen para todos los clientes de la web (que cubre Eje Cafetero Y Neiva)
+// o que dependen de algo que la web no sabe (inventario): no se publican.
+const CONDICIONADO = /\bzona\b|si no hay inventario|solo se le da si/i;
 const bonos = {};
 for (const m of motorcycles) {
   const nombre = mapeo[m.id];
@@ -135,7 +139,7 @@ for (const m of motorcycles) {
   nuevos[m.id] = porAnio;
   const anioNuevo = Math.max(...deLaMoto.map((f) => f.anio));
   const fila = deLaMoto.find((f) => f.anio === anioNuevo);
-  if (fila.bonoMarca && !DUDOSO.test(fila.detalle) && ORIGEN_MARCA.test(fila.detalle)) {
+  if (fila.bonoMarca && !DUDOSO.test(fila.detalle) && !CONDICIONADO.test(fila.detalle) && ORIGEN_MARCA.test(fila.detalle)) {
     bonos[m.id] = { monto: fila.bonoMarca, tipo: /bono de contado/i.test(fila.detalle) ? 'contado' : 'marca', anio: anioNuevo };
   }
 }
