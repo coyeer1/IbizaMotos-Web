@@ -155,7 +155,11 @@
     "155": "AK 125 TTR CBS  Gr/Ng 27 PT",
     "156": "AK 200 TTR ABS V/N 27 PT",
     "157": "Rapid 125 ROJA",
-    "158": "XPULSE 200 PRO 4V 2.0"
+    "158": "XPULSE 200 PRO 4V 2.0",
+    "159": "CB125 HORNET",
+    "160": "NAVI RALLY 2.0",
+    "161": "BOXER CT 100 KS (Boxer Racing)",
+    "162": "RE TORITOS PUERTAS FIBRA TITAN 236 CC"
   },
   "_nota_repetidos": "Filas del Sheet que son la MISMA moto que otra ya publicada (nombre viejo o duplicado). No se publican aparte; el valor es el id de la moto que ya las representa.",
   "repetidos": {
@@ -165,6 +169,7 @@
     "PULSAR NS 200 FI ABS UG": "75",
     "GIXXER FI": "29",
     "V-STROM 800DE TRAVEL": "45",
-    "Alpina 300 EFI ABS": "96"
+    "Alpina 300 EFI ABS": "96",
+    "PCX 160 FP": "57"
   }
 }
