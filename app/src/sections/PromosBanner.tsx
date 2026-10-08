@@ -66,14 +66,15 @@ export default function PromosBanner() {
           </Reveal>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Celular: carrusel horizontal (tarjetas al 80% para que se vea que hay mas). Escritorio: grilla. */}
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible">
           {ofertas.map((m, i) => (
-            <Reveal key={m.id} delay={i * 0.06} direction="up">
+            <Reveal key={m.id} delay={i * 0.06} direction="up" className="snap-start shrink-0 w-[80%] sm:w-auto">
               <article className="group h-full flex flex-col rounded-2xl border border-neutral-200 bg-white overflow-hidden transition-shadow hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
                 <button
                   type="button"
                   onClick={() => navigate(`/moto/${m.id}`)}
-                  className="relative aspect-[4/3] bg-neutral-50 flex items-center justify-center p-6"
+                  className="relative aspect-[16/10] sm:aspect-[4/3] bg-neutral-50 flex items-center justify-center p-4 sm:p-6"
                   aria-label={`Ver ${m.brand} ${m.model}`}
                 >
                   <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-ibiza-brand px-3 py-1 text-[11px] font-bold text-white">
@@ -89,10 +90,10 @@ export default function PromosBanner() {
                     />
                   )}
                 </button>
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
                   <p className="uppercase text-[11px] tracking-[0.15em] font-semibold text-neutral-400">{m.brand}</p>
-                  <h3 className="font-display text-3xl leading-none mt-1">{m.model}</h3>
-                  <p className="mt-3 text-xs uppercase tracking-[0.12em] text-neutral-400">Precio modelo {m.year}</p>
+                  <h3 className="font-display text-2xl sm:text-3xl leading-none mt-1">{m.model}</h3>
+                  <p className="mt-2 sm:mt-3 text-xs uppercase tracking-[0.12em] text-neutral-400">Precio modelo {m.year}</p>
                   <p className="text-2xl font-bold">{pesos(m.price)}</p>
                   <ul className="mt-3 space-y-1.5 text-[13px] text-neutral-600">
                     <li className="flex items-center gap-2">
@@ -105,7 +106,7 @@ export default function PromosBanner() {
                       </li>
                     )}
                   </ul>
-                  <div className="mt-auto pt-5 flex gap-2">
+                  <div className="mt-auto pt-4 sm:pt-5 flex gap-2">
                     <button
                       type="button"
                       onClick={() => navigate(`/moto/${m.id}`)}

@@ -133,7 +133,7 @@ export default function Hero() {
                   style={{
                     ...anim(140 + i * 60, 0.5),
                     fontFamily: T.display,
-                    fontSize: 'clamp(56px, 8vw, 90px)',
+                    fontSize: 'clamp(44px, 8vw, 90px)',
                     lineHeight: 0.92,
                     letterSpacing: '-1px',
                     color: T.text,
@@ -144,8 +144,9 @@ export default function Hero() {
               ))}
             </h1>
 
-            {/* Tagline */}
+            {/* Tagline (oculta en celular: empujaba la cuota y el boton fuera de la primera pantalla) */}
             <p
+              className="hidden sm:block"
               style={{
                 ...anim(330),
                 fontSize: 15,
@@ -233,7 +234,7 @@ export default function Hero() {
 
         {/* ── COLUMNA DERECHA — moto ── */}
         <div
-          className="order-1 lg:order-2 relative flex flex-col items-center justify-center pt-24 lg:pt-0 px-4"
+          className="order-1 lg:order-2 relative flex flex-col items-center justify-center pt-20 lg:pt-0 px-4"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -251,7 +252,7 @@ export default function Hero() {
               height: 'auto',
               aspectRatio: '580 / 435',
               maxWidth: 580,
-              maxHeight: '52svh',
+              maxHeight: 'min(52svh, 62vw)', // en celular la moto no se come la primera pantalla
               objectFit: 'contain',
               objectPosition: 'center',
               display: 'block',
@@ -260,7 +261,7 @@ export default function Hero() {
           />
 
           {/* Selector de modelos */}
-          <div className="flex justify-center" style={{ marginTop: 28, gap: 28, animation: 'fadeIn 0.4s both', animationDelay: '600ms' }}>
+          <div className="flex justify-center" style={{ marginTop: 16, gap: 28, animation: 'fadeIn 0.4s both', animationDelay: '600ms' }}>
             {SLIDES.map((s, i) => (
               <button
                 key={s.model}

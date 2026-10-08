@@ -55,15 +55,15 @@ export default function SpareParts() {
               Selecciona tu marca para consultar
             </p>
           </Reveal>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:justify-center">
             {brands.map((brand, i) => (
               <Reveal key={brand.id} delay={Math.min(i, 6) * 0.08} direction="up">
               <a
                 href={getBrandPartsWhatsApp(brand.name)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 bg-white transition-all duration-200 hover:scale-[1.02]"
-                style={{ border: '1px solid #e8e8e8', borderRadius: 10, padding: '14px 22px' }}
+                className="group flex items-center gap-2 sm:gap-3 bg-white transition-all duration-200 hover:scale-[1.02] px-3 py-3 sm:px-[22px] sm:py-[14px] h-full"
+                style={{ border: '1px solid #e8e8e8', borderRadius: 10 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#000'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; }}
               >
@@ -72,7 +72,7 @@ export default function SpareParts() {
                   alt={brand.name}
                   loading="lazy"
                   decoding="async"
-                  className="h-8 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  className="h-7 sm:h-8 w-auto max-w-[72px] object-contain"
                 />
                 <span
                   className="font-body transition-colors duration-200"

@@ -109,7 +109,7 @@ const MotoCard = ({
       >
 
         {/* ── IMAGE AREA ── */}
-        <div className="relative h-72 overflow-hidden rounded-[14px] m-4 mb-0">
+        <div className="relative h-36 sm:h-72 overflow-hidden rounded-[14px] m-2 sm:m-4 mb-0">
           {/* Background — fondo claro uniforme para todas las fotos */}
           <div
             className="absolute inset-0 rounded-xl"
@@ -127,7 +127,7 @@ const MotoCard = ({
           )}
 
           {/* The motorcycle image */}
-          <div className="absolute inset-0 flex items-center justify-center p-5">
+          <div className="absolute inset-0 flex items-center justify-center p-2 sm:p-5">
             {activeImage ? (
               <img
                 src={activeImage}
@@ -145,7 +145,7 @@ const MotoCard = ({
           </div>
 
           {/* Top info overlay */}
-          <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-start z-20">
+          <div className="absolute top-0 left-0 right-0 p-3 hidden sm:flex justify-between items-start z-20">
             <div className="flex flex-col gap-1.5">
               <span className="flex items-center gap-1 text-[10px] font-bold px-3 py-1.5 rounded-lg tracking-widest shadow-md bg-white text-gray-900 border border-gray-200">
                 {motorcycle.year}
@@ -184,37 +184,37 @@ const MotoCard = ({
         </div>
 
         {/* ── CONTENT AREA ── */}
-        <div className="relative px-6 pb-6 pt-5 flex-1 flex flex-col z-20">
+        <div className="relative px-3 pb-3 pt-3 sm:px-6 sm:pb-6 sm:pt-5 flex-1 flex flex-col z-20">
 
           {/* Brand tag */}
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-1 sm:mb-2">
             <span
               className="text-[11px] font-bold tracking-[0.15em] uppercase"
               style={{ color: dk ? dk.primary : '#CC4A12' }}
             >
               {motorcycle.brand}
             </span>
-            <span className={dk ? 'text-gray-200' : 'text-gray-200'}>|</span>
-            <span className={`text-[11px] tracking-wider uppercase ${dk ? 'text-gray-400' : 'text-gray-400'}`}>
+            <span className={`hidden sm:inline ${dk ? 'text-gray-200' : 'text-gray-200'}`}>|</span>
+            <span className={`hidden sm:inline text-[11px] tracking-wider uppercase ${dk ? 'text-gray-400' : 'text-gray-400'}`}>
               {motorcycle.category}
             </span>
           </div>
 
           {/* Model Name */}
-          <h3 className={`font-display font-bold text-[28px] leading-tight tracking-tight mb-3 ${dk ? 'text-gray-900' : 'text-gray-900'}`}>
+          <h3 className={`font-display font-bold text-[21px] sm:text-[28px] leading-tight tracking-tight mb-2 sm:mb-3 ${dk ? 'text-gray-900' : 'text-gray-900'}`}>
             {motorcycle.model}
           </h3>
 
           {/* Color Picker */}
           {colorKeys.length > 0 && (
-            <div className="flex items-center gap-2 mb-4" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-2 mb-2 sm:mb-4" onClick={e => e.stopPropagation()}>
               <div className="flex gap-1.5">
                 {colorKeys.slice(0, 6).map((color) => (
                   <button
                     key={color}
                     onClick={(e) => handleColorClick(e, color)}
                     className={`rounded-full transition-all duration-200 flex-shrink-0 ${
-                      selectedColor === color ? 'w-7 h-7 scale-110' : 'w-5 h-5 border-2 shadow-sm hover:scale-110'
+                      selectedColor === color ? 'w-6 h-6 sm:w-7 sm:h-7 scale-110' : 'w-5 h-5 border-2 shadow-sm hover:scale-110'
                     }`}
                     style={{
                       backgroundColor: colorMap[color] || '#555',
@@ -231,7 +231,7 @@ const MotoCard = ({
                 )}
               </div>
               {selectedColor && (
-                <span className={`text-[10px] font-medium ${dk ? 'text-gray-500' : 'text-gray-500'}`}>{selectedColor}</span>
+                <span className={`hidden sm:inline text-[11px] font-medium ${dk ? 'text-gray-500' : 'text-gray-500'}`}>{selectedColor}</span>
               )}
             </div>
           )}
@@ -239,11 +239,11 @@ const MotoCard = ({
           <div className="flex-1" />
 
           {/* Price & Action */}
-          <div className="flex items-end justify-between pt-5 mt-auto">
+          <div className="flex items-end justify-between pt-2 sm:pt-5 mt-auto">
             <div>
-              <p className={`text-[10px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>{motorcycle.price > 0 ? 'Desde' : 'Precio'}</p>
+              <p className={`text-[11px] font-medium tracking-widest uppercase mb-1 ${dk ? 'text-gray-400' : 'text-gray-400'}`}>{motorcycle.price > 0 ? 'Desde' : 'Precio'}</p>
               <p
-                className="font-display font-black text-[28px] leading-none tracking-tight transition-colors duration-500"
+                className="font-display font-black text-[22px] sm:text-[28px] leading-none tracking-tight transition-colors duration-500"
                 style={{ color: '#111' }}
                 onMouseEnter={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = dk.primary; }}
                 onMouseLeave={e => { if (dk) (e.currentTarget as HTMLParagraphElement).style.color = '#111'; }}
@@ -254,7 +254,7 @@ const MotoCard = ({
 
             {/* CTA Arrow */}
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+              className="hidden sm:flex w-12 h-12 rounded-xl items-center justify-center transition-all duration-300"
               style={dk ? { backgroundColor: '#f9fafb', border: '1px solid #e8e8e8' } : { backgroundColor: '#f9fafb', border: '1px solid #e5e7eb' }}
               onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? dk.primary : '#CC4A12'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? dk.primary : '#CC4A12'; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 25px rgba(${dk?.glowRgb ?? '204, 74, 18'},0.4)`; }}
               onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = dk ? '#f9fafb' : '#f9fafb'; (e.currentTarget as HTMLDivElement).style.borderColor = dk ? '#e8e8e8' : '#e5e7eb'; (e.currentTarget as HTMLDivElement).style.boxShadow = ''; }}
@@ -264,7 +264,7 @@ const MotoCard = ({
           </div>
 
           {/* Compare button */}
-          <div className="mt-3 pt-3 border-t" style={{ borderColor: '#ececec' }} onClick={e => e.stopPropagation()}>
+          <div className="hidden sm:block mt-3 pt-3 border-t" style={{ borderColor: '#ececec' }} onClick={e => e.stopPropagation()}>
             <CompareButton motorcycle={motorcycle} asRow />
           </div>
         </div>
@@ -488,7 +488,7 @@ export default function Catalog({ onViewDetails, selectedBrand, setSelectedBrand
         </div>
 
         {/* ── CARDS GRID ── */}
-        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-6">
           {filteredMotorcycles.map((motorcycle, index) => (
             <MotoCard
               key={motorcycle.id}

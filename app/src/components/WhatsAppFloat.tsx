@@ -55,12 +55,13 @@ function WhatsAppFloatInner({ liftedByConsentBar }: WhatsAppFloatInnerProps) {
   // el resto. En movil la barra es mas alta (texto + fila de botones en
   // columna, `flex-col`); desde `sm:` es una sola fila (`sm:flex-row`), mas
   // baja.
+  // En la ficha, en celular, la barra inferior ya trae WhatsApp: la burbuja se oculta (solo tapaba contenido).
   const bottomClass = liftedByConsentBar
     ? (isMotoPage ? 'bottom-[224px] sm:bottom-[188px]' : 'bottom-[168px] sm:bottom-[100px]')
     : (isMotoPage ? 'bottom-20 sm:bottom-28' : 'bottom-6');
 
   return (
-    <div className={`fixed right-4 sm:right-6 z-[60] ${bottomClass} transition-[bottom] duration-300 ease-out flex flex-col items-end gap-2`}>
+    <div className={`fixed right-4 sm:right-6 z-[60] ${bottomClass} transition-[bottom] duration-300 ease-out ${isMotoPage ? 'hidden sm:flex' : 'flex'} flex-col items-end gap-2`}>
 
       {/* ── Context menu (shown when menuOpen) ── */}
       <AnimatePresence>

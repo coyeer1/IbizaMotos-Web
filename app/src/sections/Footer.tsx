@@ -67,14 +67,15 @@ export default function Footer() {
 
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* Celular: Navegacion y Marcas lado a lado (antes era una sola columna larguisima). */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-12">
           {/* Brand column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-1"
+            className="col-span-2 lg:col-span-1"
           >
             {/* Real logo */}
             <div className="mb-6">
@@ -167,6 +168,7 @@ export default function Footer() {
 
           {/* Contact column */}
           <motion.div
+            className="col-span-2 lg:col-span-1"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -119,7 +119,7 @@ function TarjetaSucursal({ s }: { s: Sucursal }) {
       >
         {/* Foto principal */}
         <div
-          className={`relative h-48 bg-[#f5f5f5] overflow-hidden ${tienefotos ? 'cursor-pointer group' : ''}`}
+          className={`relative h-32 sm:h-48 bg-[#f5f5f5] overflow-hidden ${tienefotos ? 'cursor-pointer group' : ''}`}
           onClick={() => tienefotos && setLightbox(fotoIdx)}
         >
           {tienefotos ? (
@@ -459,7 +459,7 @@ export default function SucursalesPage() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
           >
             {sucursalesFiltradas.map(s => (
               <TarjetaSucursal key={s.id} s={s} />

@@ -136,7 +136,8 @@ export default function Blog() {
         )}
 
         {/* Posts grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Celular: carrusel horizontal en vez de 5 tarjetas apiladas. */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar -mx-4 px-4 pb-2 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible">
           {displayPosts
             .filter(p => activeCategory !== 'Todos' || p.id !== featured.id)
             .map((post, i) => (
@@ -144,6 +145,7 @@ export default function Blog() {
                 key={post.id}
                 delay={Math.min(i, 6) * 0.08}
                 direction="up"
+                className="snap-start shrink-0 w-[78%] sm:w-auto"
               >
               <article
                 onClick={() => navigate(`/blog/${post.id}`)}

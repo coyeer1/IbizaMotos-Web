@@ -196,7 +196,7 @@ export default function MotorcyclePage() {
 
             {/* ── VIDEO HERO ── */}
             {videoId && (
-                <section className="relative w-full h-[60vh] md:h-screen overflow-hidden bg-[#0a0a0a]">
+                <section className="relative w-full h-[42vh] md:h-screen overflow-hidden bg-[#0a0a0a]">
                     <YouTubeBackground
                         key={videoId}
                         videoId={videoId}
@@ -212,7 +212,8 @@ export default function MotorcyclePage() {
                     {/* Degradado inferior a blanco (une el video con la ficha) */}
                     <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent 55%, #ffffff 100%)' }} />
                     {/* Texto overlay inferior */}
-                    <div className="absolute bottom-10 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
+                    {/* En celular el nombre ya va justo debajo, en la ficha: aqui solo en escritorio. */}
+                    <div className="hidden md:block absolute bottom-10 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none">
                         <span className="text-[10px] font-bold tracking-[0.3em] uppercase block mb-1" style={{ color: brandColor }}>{motorcycle.brand}</span>
                         <h2 className="font-display font-black text-5xl md:text-8xl text-neutral-900 uppercase leading-none tracking-tight">
                             {motorcycle.model}
