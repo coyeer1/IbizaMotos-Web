@@ -5,14 +5,14 @@ import { getWhatsAppUrl } from '@/lib/config';
 
 // Dimensiones basadas en las proporciones reales de cada imagen
 const FINANCIERAS_LOGOS = [
-  { id: 'progreser',    logo: '/financieras/progreser.png',    name: 'Progreser',      w: 40, h: 40 },
-  { id: 'bancobogota',  logo: '/financieras/banco-bogota.png', name: 'Banco de Bogotá',w: 76, h: 56 },
-  { id: 'sufi',         logo: '/financieras/sufi.png',         name: 'SUFI',           w: 72, h: 22 },
-  { id: 'brilla',       logo: '/financieras/brilla.png',       name: 'Brilla',         w: 72, h: 26 },
-  { id: 'addi',         logo: '/financieras/addi.webp',         name: 'ADDI',           w: 60, h: 42 },
-  { id: 'venfi',        logo: '/financieras/venfi.png',        name: 'Venfi',          w: 76, h: 30 },
-  { id: 'sistecredito', logo: '/financieras/sistecredito.png', name: 'Sistecredito',   w: 48, h: 48 },
-  { id: 'crediorbe',    logo: '/financieras/crediorbe.png',    name: 'CrediorBe',      w: 84, h: 17 },
+  { id: 'progreser',    logo: '/financieras/v2/progreser.webp',    name: 'Progreser' },
+  { id: 'bancobogota',  logo: '/financieras/v2/bancobogota.webp', name: 'Banco de Bogotá' },
+  { id: 'sufi',         logo: '/financieras/v2/sufi.webp',         name: 'SUFI' },
+  { id: 'brilla',       logo: '/financieras/v2/brilla.webp',       name: 'Brilla' },
+  { id: 'addi',         logo: '/financieras/v2/addi.webp',         name: 'ADDI' },
+  { id: 'venfi',        logo: '/financieras/v2/venfi.webp',        name: 'Venfi' },
+  { id: 'sistecredito', logo: '/financieras/v2/sistecredito.webp', name: 'Sistecredito' },
+  { id: 'crediorbe',    logo: '/financieras/v2/crediorbe.webp',    name: 'Galgo (CrediOrbe)' },
 ];
 
 const STATS = [
@@ -88,18 +88,18 @@ export default function FinancingTeaser() {
               Financieras aliadas
             </p>
           </Reveal>
-          <div className="flex flex-wrap justify-center items-center gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {FINANCIERAS_LOGOS.map((f, i) => (
               <Reveal key={f.id} delay={Math.min(i, 6) * 0.08} direction="up">
               <div
-                className="flex items-center justify-center bg-white cursor-pointer transition-all duration-200 hover:scale-[1.02]"
-                style={{ minWidth: 'clamp(60px, 15vw, 80px)', border: '1px solid #e8e8e8', borderRadius: 10, padding: '12px 16px' }}
+                className="flex items-center justify-center bg-white cursor-pointer transition-all duration-200 hover:scale-[1.02] h-20 px-3"
+                style={{ border: '1px solid #e8e8e8', borderRadius: 10 }}
                 onClick={() => navigate(`/financiamiento?financiera=${f.id}`)}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#000'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#e8e8e8'; }}
                 title={`Financiar con ${f.name}`}
               >
-                <div style={{ width: f.w, height: f.h, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="w-[130px] h-[52px] flex items-center justify-center">
                   <img
                     src={f.logo}
                     alt={f.name}

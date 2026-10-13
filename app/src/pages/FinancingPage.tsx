@@ -38,14 +38,14 @@ const faqs = [
 
 // Financieras aliadas (logos en /public/financieras)
 const FINANCIERAS_LOGOS = [
-  { id: 'progreser',    logo: '/financieras/progreser.png',    name: 'Progreser' },
-  { id: 'bancobogota',  logo: '/financieras/banco-bogota.png', name: 'Banco de Bogotá' },
-  { id: 'sufi',         logo: '/financieras/sufi.png',         name: 'SUFI' },
-  { id: 'brilla',       logo: '/financieras/brilla.png',       name: 'Brilla' },
-  { id: 'addi',         logo: '/financieras/addi.webp',        name: 'ADDI' },
-  { id: 'venfi',        logo: '/financieras/venfi.png',        name: 'Venfi' },
-  { id: 'sistecredito', logo: '/financieras/sistecredito.png', name: 'Sistecredito' },
-  { id: 'crediorbe',    logo: '/financieras/crediorbe.png',    name: 'CrediorBe' },
+  { id: 'progreser',    logo: '/financieras/v2/progreser.webp',    name: 'Progreser' },
+  { id: 'bancobogota',  logo: '/financieras/v2/bancobogota.webp', name: 'Banco de Bogotá' },
+  { id: 'sufi',         logo: '/financieras/v2/sufi.webp',         name: 'SUFI' },
+  { id: 'brilla',       logo: '/financieras/v2/brilla.webp',       name: 'Brilla' },
+  { id: 'addi',         logo: '/financieras/v2/addi.webp',        name: 'ADDI' },
+  { id: 'venfi',        logo: '/financieras/v2/venfi.webp',        name: 'Venfi' },
+  { id: 'sistecredito', logo: '/financieras/v2/sistecredito.webp', name: 'Sistecredito' },
+  { id: 'crediorbe',    logo: '/financieras/v2/crediorbe.webp',    name: 'Galgo (CrediOrbe)' },
 ];
 
 export default function FinancingPage() {
@@ -133,12 +133,12 @@ export default function FinancingPage() {
             <h2 className="font-display font-bold text-2xl md:text-3xl text-[#111111]">Financieras que manejamos</h2>
             <p className="text-[#999999] mt-2">Comparamos las opciones por ti para conseguirte el mejor plan.</p>
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-3 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
             {FINANCIERAS_LOGOS.map((f) => (
               <div
                 key={f.id}
                 className="flex items-center justify-center bg-white rounded-xl border border-[#e8e8e8] transition-transform duration-200 hover:scale-[1.03]"
-                style={{ minWidth: 'clamp(96px, 20vw, 132px)', height: 74, padding: '14px 22px' }}
+                style={{ height: 84, padding: '12px 16px' }}
                 title={f.name}
               >
                 <img

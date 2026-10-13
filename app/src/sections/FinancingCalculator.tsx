@@ -17,7 +17,7 @@ const FINANCIERAS = [
     id: 'progreser',
     name: 'Progreser',
     shortName: 'PROGRESER',
-    logo: '/financieras/progreser.png',
+    logo: '/financieras/v2/progreser.webp',
     color: '#1a5276',
     bg: '#eaf0fb',
     monthlyRate: 1.83,
@@ -31,7 +31,7 @@ const FINANCIERAS = [
     id: 'bancobogota',
     name: 'Banco de Bogotá',
     shortName: 'BCO. BOGOTÁ',
-    logo: '/financieras/banco-bogota.png',
+    logo: '/financieras/v2/bancobogota.webp',
     color: '#c0392b',
     bg: '#fdf0ef',
     monthlyRate: 1.26,
@@ -45,7 +45,7 @@ const FINANCIERAS = [
     id: 'sufi',
     name: 'SUFI',
     shortName: 'SUFI',
-    logo: '/financieras/sufi.png',
+    logo: '/financieras/v2/sufi.webp',
     color: '#f59e0b',
     bg: '#fffbeb',
     monthlyRate: 1.73,
@@ -59,7 +59,7 @@ const FINANCIERAS = [
     id: 'brilla',
     name: 'Brilla',
     shortName: 'BRILLA',
-    logo: '/financieras/brilla.png',
+    logo: '/financieras/v2/brilla.webp',
     color: '#e87722',
     bg: '#fff7ed',
     monthlyRate: 1.81,
@@ -73,7 +73,7 @@ const FINANCIERAS = [
     id: 'addi',
     name: 'ADDI',
     shortName: 'ADDI',
-    logo: '/financieras/addi.webp',
+    logo: '/financieras/v2/addi.webp',
     color: '#7c3aed',
     bg: '#f5f3ff',
     monthlyRate: 1.83,
@@ -87,7 +87,7 @@ const FINANCIERAS = [
     id: 'venfi',
     name: 'Venfi',
     shortName: 'VENFI',
-    logo: '/financieras/venfi.png',
+    logo: '/financieras/v2/venfi.webp',
     color: '#0891b2',
     bg: '#ecfeff',
     monthlyRate: 1.80,
@@ -101,7 +101,7 @@ const FINANCIERAS = [
     id: 'sistecredito',
     name: 'Sistecredito',
     shortName: 'SISTECREDITO',
-    logo: '/financieras/sistecredito.png',
+    logo: '/financieras/v2/sistecredito.webp',
     color: '#15803d',
     bg: '#f0fdf4',
     monthlyRate: 1.90,
@@ -113,9 +113,9 @@ const FINANCIERAS = [
   },
   {
     id: 'crediorbe',
-    name: 'CrediorBe',
+    name: 'Galgo (CrediOrbe)',
     shortName: 'CREDIORBE',
-    logo: '/financieras/crediorbe.png',
+    logo: '/financieras/v2/crediorbe.webp',
     color: '#1e40af',
     bg: '#eff6ff',
     monthlyRate: 3.72,
@@ -147,20 +147,9 @@ function formatCOP(value: number) {
 //   Calculado como: dado el aspect ratio real, w×h ≈ 2800 con max-w 108, max-h 54.
 //   Escala xs/sm/lg = factor sobre md.
 // Dentro de la caja blanca 72px de alto.
-// Max-height 52px para dejar padding arriba/abajo.
-// Logos de texto (Sufi, Brilla) más contenidos; logos cuadrados llenan más.
-// Caja blanca 72px alto. Logos de texto vívido reducidos al 55-65% del ancho.
-// Logos corporativos/cuadrados pueden usar más altura.
-const LOGO_SIZES: Record<string, { w: number; h: number }> = {
-  progreser:    { w: 60,  h: 52  },
-  bancobogota:  { w: 84,  h: 52  },
-  sufi:         { w: 58,  h: 18  },  // reducido al máximo — texto vívido
-  brilla:       { w: 56,  h: 20  },  // reducido al máximo — texto vívido
-  addi:         { w: 68,  h: 48  },
-  venfi:        { w: 80,  h: 32  },
-  sistecredito: { w: 56,  h: 56  },
-  crediorbe:    { w: 92,  h: 19  },
-};
+// Los logos de /financieras/v2 vienen recortados e igualados en peso visual dentro de un
+// mismo lienzo 600x240 (5:2). Por eso todos usan la misma caja y se ven del mismo tamano.
+const LOGO_BOX = { w: 110, h: 44 };
 
 const SCALE: Record<string, number> = { xs: 0.55, sm: 0.75, md: 1, lg: 1.35 };
 
@@ -173,7 +162,7 @@ function FinancieraLogo({
   size?: 'xs' | 'sm' | 'md' | 'lg';
   inverted?: boolean;
 }) {
-  const base = LOGO_SIZES[fin.id] ?? { w: 90, h: 36 };
+  const base = LOGO_BOX;
   const s = SCALE[size] ?? 1;
   const w = Math.round(base.w * s);
   const h = Math.round(base.h * s);
