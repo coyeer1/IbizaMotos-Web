@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { MapPin, Phone, Mail, X, ChevronLeft, ChevronRight, Store, Navigation, Map, Search } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 
-import { SUCURSALES, type Sucursal } from '@/data/sucursales';
+import { SUCURSALES, SUCURSALES_ABIERTAS, type Sucursal } from '@/data/sucursales';
 
 
 const CIUDADES = Array.from(new Set(SUCURSALES.map(s => s.ciudad)));
@@ -363,8 +363,8 @@ export default function SucursalesPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useSEO({
-    title: 'Nuestras 20 Sucursales en Pereira, Eje Cafetero y Neiva | Ibiza Motos',
-    description: 'Encuentra tu sucursal Ibiza Motos más cercana: 20 puntos en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Direcciones, teléfonos y mapa.',
+    title: `Nuestras ${SUCURSALES_ABIERTAS} Sucursales en Pereira, Eje Cafetero y Neiva | Ibiza Motos`,
+    description: `Encuentra tu sucursal Ibiza Motos más cercana: ${SUCURSALES_ABIERTAS} puntos en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchiná y Neiva. Direcciones, teléfonos y mapa.`,
     path: '/sucursales',
   });
 
@@ -399,7 +399,7 @@ export default function SucursalesPage() {
             Nuestras <span className="text-ibiza-brand">Sucursales</span>
           </h1>
           <p className="text-[#666666] max-w-lg mx-auto text-base">
-            <span className="text-[#111111] font-bold">20 puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
+            <span className="text-[#111111] font-bold">{SUCURSALES_ABIERTAS} puntos de venta</span> en Risaralda, Quindío, Caldas y Huila.
             Encuentra el más cercano a ti.
           </p>
         </motion.div>

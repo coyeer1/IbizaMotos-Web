@@ -24,8 +24,11 @@ function cargarTS(entrada, nombre) {
 const seo = await cargarTS('src/lib/seoTexts.ts', 'seoTexts');
 const datos = await cargarTS('src/data/motorcycles.ts', 'motorcycles');
 const blog = await cargarTS('src/data/blogPosts.ts', 'blogPosts');
+const sedes = await cargarTS('src/data/sucursales.ts', 'sucursales');
 
 const { SITE, FALLBACK_IMAGE } = seo;
+// El numero publico de puntos sale de los datos, no escrito a mano (ver sucursales.ts).
+const { SUCURSALES_ABIERTAS } = sedes;
 
 const escaparAttr = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -131,12 +134,12 @@ function escribir(ruta, html) {
 // que Meta necesita poder leer sin JS. Igual deben quedar en el sitemap: ver
 // RUTAS_SOLO_SITEMAP mas abajo.
 const FIJAS = [
-  ['/sucursales',        'Nuestras 20 sucursales | Ibiza Motos Eje Cafetero',      'Encuentra tu sede mas cercana: Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchina y Neiva. Direccion, telefono y horario de cada una.'],
+  ['/sucursales',        `Nuestras ${SUCURSALES_ABIERTAS} sucursales | Ibiza Motos Eje Cafetero`,      'Encuentra tu sede mas cercana: Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya, Montenegro, Viterbo, Chinchina y Neiva. Direccion, telefono y horario de cada una.'],
   ['/financiamiento',    'Financia tu moto | 8 entidades | Ibiza Motos',           'Simula la cuota de tu moto con Progreser, Banco de Bogota, SUFI, Brilla, Addi, Venfi, Sistecredito o Crediorbe. Aprobacion rapida en Pereira y el Eje Cafetero.'],
   ['/citas',             'Servicio tecnico de motos | Ibiza Motos',                'Conoce nuestro servicio tecnico especializado para Suzuki, Honda, Bajaj, AKT, Hero y Vento en el Eje Cafetero.'],
-  ['/opinion',           'Califica a tu asesor | Ibiza Motos',                     'Cuentanos como te atendieron. Tu opinion nos ayuda a mejorar el servicio en las 20 sucursales.'],
+  ['/opinion',           'Califica a tu asesor | Ibiza Motos',                     `Cuentanos como te atendieron. Tu opinion nos ayuda a mejorar el servicio en las ${SUCURSALES_ABIERTAS} sucursales.`],
   ['/terminos',          'Terminos y condiciones | Ibiza Motos',                   'Condiciones de uso del sitio web de Ibiza Motos S.A.S.'],
-  ['/marca/todas',       'Todas las marcas de motos | Ibiza Motos',                'Suzuki, Honda, Bajaj, AKT, Hero y Vento en un solo concesionario, con 20 sucursales en el Eje Cafetero y Neiva.'],
+  ['/marca/todas',       'Todas las marcas de motos | Ibiza Motos',                `Suzuki, Honda, Bajaj, AKT, Hero y Vento en un solo concesionario, con ${SUCURSALES_ABIERTAS} sucursales en el Eje Cafetero y Neiva.`],
 ];
 
 // Rutas que existen como HTML estatico servido por rewrite (ver vercel.json)

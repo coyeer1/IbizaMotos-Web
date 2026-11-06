@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MapPin, Phone, Mail, ChevronRight, ExternalLink } from 'lucide-react';
 import { brands } from '@/data/motorcycles';
+import { SUCURSALES_ABIERTAS } from '@/data/sucursales';
 import { getGeneralWhatsApp } from '@/lib/config';
 import { scrollToSectionWhenReady } from '@/lib/scrollToSection';
 import { ANALYTICS_CONFIGURED, revokeConsent } from '@/lib/analytics';
@@ -89,7 +90,7 @@ export default function Footer() {
             </div>
             
             <p className="!text-white/60 mb-6 leading-relaxed text-sm font-light">
-              20 sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
+              {SUCURSALES_ABIERTAS} sucursales en Pereira, Dosquebradas, Santa Rosa de Cabal, Quimbaya,
               Montenegro, Viterbo, Chinchiná y Neiva. Suzuki, Honda, Bajaj, AKT, Hero y Vento.
             </p>
 

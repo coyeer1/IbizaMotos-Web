@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getBrandSalesWhatsApp } from '@/lib/config';
 import { motorcycles } from '@/data/motorcycles';
+import { SUCURSALES_ABIERTAS } from '@/data/sucursales';
 import { cuotaEstimada, CUOTA_NOTA } from '@/lib/cuota';
 
 // ─── Tokens del hero (no afectan al resto del sitio) ───────────────────────
@@ -289,7 +290,7 @@ export default function Hero() {
         className="relative lg:absolute lg:bottom-0 left-0 right-0 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 px-6 py-4 lg:px-20"
         style={{ borderTop: `1px solid #f0f0f0` }}
       >
-        {['20 sucursales', '6 marcas oficiales', '8 financieras aliadas'].map((item) => (
+        {[`${SUCURSALES_ABIERTAS} sucursales`, '6 marcas oficiales', '8 financieras aliadas'].map((item) => (
           <span key={item} className="flex items-center gap-2">
             <span style={{ width: 6, height: 6, borderRadius: 999, background: T.red }} />
             <span style={{ fontSize: 12, color: '#777', fontWeight: 500 }}>{item}</span>

@@ -46,7 +46,6 @@ export const SUCURSALES: Sucursal[] = [
     color: '#cc0000',
     lat: 4.815440, lng: -75.700313,
     placeUrl: 'https://maps.app.goo.gl/XVx4D95gzgi7hFuN9',
-    estado: 'cerrado-temporal',
   },
   {
     id: 3, marca: 'AKT', asesor: 'Stefania Villa',
@@ -65,7 +64,9 @@ export const SUCURSALES: Sucursal[] = [
     id: 4, marca: 'Hero', asesor: 'Karen Galves',
     telefono: '3013722506', correo: 'ibizamotosasesor6@gmail.com',
     ciudad: 'Pereira', departamento: 'Risaralda',
-    direccion: 'Calle 26 #36-56',
+    // La base oficial dice "calle 26 # 6-58" (antes figuraba 36-56, que cae en otro
+    // sector de la Calle 26). La ficha de Maps del local lee "Cl. 26 # 6-36".
+    direccion: 'Calle 26 #6-58',
     fotos: [
       '/sucursales/4/foto-fachada-1.webp',
       '/sucursales/4/foto-fachada-2.webp',
@@ -76,6 +77,17 @@ export const SUCURSALES: Sucursal[] = [
     color: '#8b0000',
     lat: 4.815606, lng: -75.700032,
     placeUrl: 'https://maps.app.goo.gl/4fMMKW8z8Fyv6y2i8',
+  },
+  {
+    id: 25, marca: 'Multimarca', asesor: 'Andre Orozco',
+    telefono: '3013722506', correo: 'asesoribizamotos10@gmail.com',
+    ciudad: 'Pereira', departamento: 'Risaralda',
+    direccion: 'Calle 26 #6-58',
+    fotos: [],
+    color: '#CC4A12',
+    // Mismo local que la Hero de Pereira (id 4): en la base comparten direccion. El pin
+    // va ~5 m al lado para que los dos marcadores se puedan abrir en el mapa.
+    lat: 4.815566, lng: -75.699992,
   },
   // ── Dosquebradas ─────────────────────────────────────────────────────────────
   {
@@ -154,8 +166,8 @@ export const SUCURSALES: Sucursal[] = [
     lat: 4.869773, lng: -75.622176,
   },
   {
-    id: 21, marca: 'Honda', asesor: 'Melanny Lopez',
-    telefono: '3243942165', correo: 'asesordigitalibizamotos1@gmail.com',
+    id: 21, marca: 'Honda', asesor: 'Jefferson Suárez Bartolo',
+    telefono: '3105197509', correo: 'hondaibizamotos@gmail.com',
     ciudad: 'Santa Rosa de Cabal', departamento: 'Risaralda',
     direccion: 'Cra 11 #15-27',
     fotos: [],
@@ -167,7 +179,7 @@ export const SUCURSALES: Sucursal[] = [
   },
   // ── Quimbaya ─────────────────────────────────────────────────────────────────
   {
-    id: 12, marca: 'Honda', asesor: 'Ingrid Giraldo',
+    id: 12, marca: 'Honda', asesor: 'Daniela Bautista Caro',
     telefono: '3024055077', correo: 'ibizamotoshondaquimbaya@gmail.com',
     ciudad: 'Quimbaya', departamento: 'Quindío',
     direccion: 'Calle 19 #4-56 Esquina',
@@ -308,3 +320,11 @@ export const SUCURSALES: Sucursal[] = [
     lat: 2.926184, lng: -75.285672,
   },
 ];
+
+/**
+ * Puntos abiertos al publico: el numero que la web dice tener ("N sucursales").
+ * Se calcula solo, para que no vuelva a quedar desfasado al abrir o cerrar un punto.
+ * No cuenta los `cerrado-temporal`. Los dos HTML estaticos (index.html y
+ * public/eliminacion-datos.html) lo llevan escrito a mano: hay que cambiarlos ahi.
+ */
+export const SUCURSALES_ABIERTAS = SUCURSALES.filter(s => s.estado !== 'cerrado-temporal').length;
