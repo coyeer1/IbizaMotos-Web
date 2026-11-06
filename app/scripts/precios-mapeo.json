@@ -79,6 +79,7 @@
     "77": "PULSAR N 250 FI ABS",
     "78": "PULSAR RS 200  ABS",
     "79": "PULSAR NS 400Z",
+    "80": "TUK TUK",
     "81": "ECO 100",
     "82": "ECO CW",
     "83": "ECO SP",
@@ -112,7 +113,6 @@
     "113": "JET EVO",
     "114": "PULSAR N 125 CARBURADA",
     "115": "DR160X",
-    "80": "TUK TUK",
     "116": "GN 160",
     "117": "GSX125",
     "118": "VIVA FI ABS",
@@ -159,7 +159,11 @@
     "159": "CB125 HORNET",
     "160": "NAVI RALLY 2.0",
     "161": "BOXER CT 100 KS (Boxer Racing)",
-    "162": "RE TORITOS PUERTAS FIBRA TITAN 236 CC"
+    "162": "RE TORITOS PUERTAS FIBRA TITAN 236 CC",
+    "163": "HUNK 125R REDVOL",
+    "164": "HUNK 150 XT REDVOL",
+    "165": "HUNK 160 4V REDVOL",
+    "166": "AK125NKD+ (NUEVA)"
   },
   "_nota_repetidos": "Filas del Sheet que son la MISMA moto que otra ya publicada (nombre viejo o duplicado). No se publican aparte; el valor es el id de la moto que ya las representa.",
   "repetidos": {

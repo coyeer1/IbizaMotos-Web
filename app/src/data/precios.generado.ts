@@ -1,7 +1,7 @@
 // GENERADO por scripts/actualizar-precios.mjs a partir de la lista oficial en Google Sheets.
 // No editar a mano: el proximo "ACTUALIZAR PRECIOS" lo sobrescribe.
 // id de la moto -> { "año modelo": precio }. La web muestra por defecto el año mas nuevo.
-export const PRECIOS_ACTUALIZADO = '2026-10-06';
+export const PRECIOS_ACTUALIZADO = '2026-11-06';
 
 export const PRECIOS: Record<string, Record<string, number>> = {
   "1": {
@@ -178,8 +178,8 @@ export const PRECIOS: Record<string, Record<string, number>> = {
     "2027": 7050000
   },
   "49": {
-    "2026": 12690000,
-    "2027": 12790000
+    "2026": 12490000,
+    "2027": 12590000
   },
   "50": {
     "2025": 17800000,
@@ -366,7 +366,7 @@ export const PRECIOS: Record<string, Record<string, number>> = {
     "2027": 12990000
   },
   "97": {
-    "2026": 7990000,
+    "2026": 8490000,
     "2027": 7990000
   },
   "98": {
@@ -610,14 +610,26 @@ export const PRECIOS: Record<string, Record<string, number>> = {
   },
   "162": {
     "2027": 19799000
+  },
+  "163": {
+    "2027": 7990000
+  },
+  "164": {
+    "2027": 8990000
+  },
+  "165": {
+    "2027": 10990000
+  },
+  "166": {
+    "2027": 5490000
   }
 };
 
 // Bonos de marca del mes (columna BONO DE MARCA del Sheet, con su origen verificado).
-export const BONOS_MES = 'octubre 2026';
+export const BONOS_MES = 'noviembre 2026';
 export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; anio: number }> = {
   "1": {
-    "monto": 400000,
+    "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   },
@@ -627,12 +639,12 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
     "anio": 2027
   },
   "3": {
-    "monto": 600000,
+    "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   },
   "4": {
-    "monto": 400000,
+    "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   },
@@ -642,7 +654,7 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
     "anio": 2027
   },
   "6": {
-    "monto": 600000,
+    "monto": 400000,
     "tipo": "marca",
     "anio": 2027
   },
@@ -651,12 +663,32 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
     "tipo": "marca",
     "anio": 2027
   },
+  "8": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "9": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "10": {
+    "monto": 1000000,
+    "tipo": "marca",
+    "anio": 2027
+  },
   "11": {
-    "monto": 400000,
+    "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   },
   "12": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "17": {
     "monto": 400000,
     "tipo": "marca",
     "anio": 2027
@@ -671,38 +703,53 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
     "tipo": "marca",
     "anio": 2027
   },
-  "28": {
-    "monto": 200000,
-    "tipo": "marca",
-    "anio": 2027
-  },
-  "30": {
-    "monto": 200000,
-    "tipo": "marca",
-    "anio": 2027
-  },
   "48": {
     "monto": 151000,
     "tipo": "marca",
     "anio": 2027
   },
-  "86": {
+  "80": {
     "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   },
-  "87": {
+  "82": {
     "monto": 300000,
     "tipo": "marca",
     "anio": 2027
   },
+  "83": {
+    "monto": 300000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "84": {
+    "monto": 300000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "86": {
+    "monto": 300000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "87": {
+    "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
   "88": {
-    "monto": 1000000,
+    "monto": 400000,
     "tipo": "marca",
     "anio": 2027
   },
   "92": {
-    "monto": 1000000,
+    "monto": 500000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "102": {
+    "monto": 200000,
     "tipo": "marca",
     "anio": 2027
   },
@@ -812,7 +859,17 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
     "anio": 2027
   },
   "145": {
-    "monto": 1000000,
+    "monto": 1500000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "146": {
+    "monto": 1500000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "147": {
+    "monto": 1500000,
     "tipo": "marca",
     "anio": 2027
   },
@@ -828,6 +885,11 @@ export const BONOS: Record<string, { monto: number; tipo: 'marca' | 'contado'; a
   },
   "156": {
     "monto": 400000,
+    "tipo": "marca",
+    "anio": 2027
+  },
+  "166": {
+    "monto": 500000,
     "tipo": "marca",
     "anio": 2027
   }
